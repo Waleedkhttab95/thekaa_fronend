@@ -1,0 +1,8 @@
+{
+  "HomePage": {
+    "base": "base"
+  },
+  "LocaleSwitcher": {
+    "switchLocale": "switch language"
+  }
+}
