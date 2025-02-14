@@ -5,6 +5,7 @@ import Link from 'next/link';
 import ThemeSwitcher from '@/app/components/atoms/ThemeSwitcher';
 
 export default function HomePage() {
+
   const t = useTranslations('HomePage');
   return (
     <div>

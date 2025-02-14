@@ -4,6 +4,7 @@ import { routing } from '@/i18n/routing';
 import { Locales } from '@/types/locales.enum';
 import ProvidersLayout from '@/app/components/layouts/ProvidersLayout';
 import '../global.css'
+import { NextIntlClientProvider } from 'next-intl';
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -28,9 +29,11 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body >
-        <ProvidersLayout messages={messages} locale={locale}>
-          {children}
-        </ProvidersLayout>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <ProvidersLayout>
+            {children}
+          </ProvidersLayout>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
