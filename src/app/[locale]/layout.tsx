@@ -1,34 +1,36 @@
-import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-
+import { Locales } from '@/types/locales.enum';
+import ProvidersLayout from '@/app/components/layouts/ProvidersLayout';
+import '../global.css'
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
-export default async function LocaleLayout({
+export default async function RootLayout({
   children,
   params
 }: Props) {
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale as Locales)) {
     notFound();
   }
-
+  setRequestLocale(locale);
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
-  setRequestLocale(locale);
-
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider messages={messages}>
+    <html lang={locale}
+      dir={locale === Locales.ar ? 'rtl' : 'ltr'}
+      suppressHydrationWarning
+    >
+      <body >
+        <ProvidersLayout messages={messages} locale={locale}>
           {children}
-        </NextIntlClientProvider>
+        </ProvidersLayout>
       </body>
     </html>
   );

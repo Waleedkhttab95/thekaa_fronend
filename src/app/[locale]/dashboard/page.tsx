@@ -1,5 +1,5 @@
-import ThemeSwitcher from "@/components/atoms/ThemeSwitcher";
-import StudentsList from "@/components/molecules/student";
+import ThemeSwitcher from "@/app/components/atoms/ThemeSwitcher";
+import StudentsList from "@/app/components/molecules/student";
 import { STUDENTS_QUERY } from "@/config/qr.constants";
 import { getStudents } from "@/services/students";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
