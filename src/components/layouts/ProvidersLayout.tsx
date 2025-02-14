@@ -2,6 +2,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState } from 'react';
+import { ThemeProvider } from "next-themes";
 
 export default function ProvidersLayout({
   children
@@ -11,20 +12,18 @@ export default function ProvidersLayout({
   const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
-        // For better UX and performance
-        staleTime: 5 * 60 * 1000, // 5 minutes
         refetchOnWindowFocus: false,
         retry: 1,
-      },
-      mutations: {
-        retry: 1,
+        retryOnMount: false,
       }
-    },
+    }
   }));
-
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <ThemeProvider attribute="class">
+
+        {children}
+      </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
