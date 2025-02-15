@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
-
+import tailwindRtl from "tailwindcss-rtl";
 export default {
   darkMode: ["selector"],
   content: [
@@ -58,5 +58,5 @@ export default {
       },
     },
   },
-  plugins: [tailwindcssAnimate],
+  plugins: [tailwindcssAnimate, tailwindRtl],
 } satisfies Config;
