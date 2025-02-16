@@ -20,6 +20,7 @@ export default function StudentsList() {
         // other properties
       });
     } catch (error) {
+      // showing a toaster message
       console.error('Failed to create student:', error);
     }
   };
@@ -30,9 +31,8 @@ export default function StudentsList() {
     <div>
       <button
         onClick={handleCreateStudent}
-        disabled={mutations.create.isPending}
       >
-        {mutations.create.isPending ? 'Adding...' : 'Add Student'}
+        {'Add Student'}
       </button>
 
       <ul>
