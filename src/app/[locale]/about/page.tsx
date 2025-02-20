@@ -1,6 +1,6 @@
-import LocaleSwitcher from '@/app/components/atoms/LocaleSwitcher'
-import ClientComp from '@/app/components/atoms/client'
-import ServerComp from '@/app/components/atoms/server'
+import LocaleSwitcher from '@/components/atoms/LocaleSwitcher'
+import ClientComp from '@/components/atoms/client'
+import ServerComp from '@/components/atoms/server'
 import React from 'react'
 
 const AboutPage = () => {

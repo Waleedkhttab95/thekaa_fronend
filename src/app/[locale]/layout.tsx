@@ -2,7 +2,7 @@ import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Locales } from '@/types/locales.enum';
-import ProvidersLayout from '@/app/components/layouts/ProvidersLayout';
+import ProvidersLayout from '@/components/layouts/ProvidersLayout';
 import '../global.css'
 import { NextIntlClientProvider } from 'next-intl';
 type Props = {

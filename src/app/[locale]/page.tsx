@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl';
 import { Link as LocalizedLink } from '@/i18n/routing';
-import LocaleSwitcher from '@/app/components/atoms/LocaleSwitcher';
+import LocaleSwitcher from '@/components/atoms/LocaleSwitcher';
 import Link from 'next/link';
-import ThemeSwitcher from '@/app/components/atoms/ThemeSwitcher';
+import ThemeSwitcher from '@/components/atoms/ThemeSwitcher';
 
 export default function HomePage() {
 
