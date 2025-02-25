@@ -2,7 +2,9 @@
   "HomePage": {
     "base": "قاعدة"
   },
+  "Thekaa": "ذكاء",
   "LocaleSwitcher": {
-    "switchLocale": "تغيير اللغة"
+    "switchLocale": "English",
+    "switchLocale-sm": "E"
   }
 }
