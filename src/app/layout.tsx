@@ -4,6 +4,7 @@ import ProvidersLayout from "@/components/layouts/ProvidersLayout";
 import "./global.css";
 import { NextIntlClientProvider } from "next-intl";
 import { ibmPlexSansArabic, pingAR, tajawal } from "@/config/fonts";
+import MainLayout from "@/components/layouts/MainLayout";
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -20,12 +21,13 @@ export default async function RootLayout({ children }: Props) {
       suppressHydrationWarning
     >
       <body
-        className={`${pingAR.className} ${ibmPlexSansArabic.className} ${tajawal.className}`}
+        className={`${pingAR.className} ${ibmPlexSansArabic.className} ${tajawal.className} bg-blue-200`}
       >
         <NextIntlClientProvider messages={messages}>
           <ProvidersLayout>
-            {children}
-
+            <MainLayout>
+              {children}
+            </MainLayout>
           </ProvidersLayout>
         </NextIntlClientProvider>
       </body>
