@@ -9,6 +9,11 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        pingar: ['"Ping AR + LT"', "sans-serif"],
+        ibm: ['"IBM Plex Sans Arabic"', "sans-serif"],
+        tajawal: ["Tajawal", "sans-serif"],
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

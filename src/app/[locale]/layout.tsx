@@ -5,10 +5,12 @@ import { Locales } from '@/types/locales.enum';
 import ProvidersLayout from '@/components/layouts/ProvidersLayout';
 import '../global.css'
 import { NextIntlClientProvider } from 'next-intl';
+import { ibmPlexSansArabic, pingAR, tajawal } from '@/config/fonts';
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
+
 export default async function RootLayout({
   children,
   params
@@ -28,10 +30,16 @@ export default async function RootLayout({
       dir={locale === Locales.ar ? 'rtl' : 'ltr'}
       suppressHydrationWarning
     >
-      <body >
+      <body
+        className={`${pingAR.className} ${ibmPlexSansArabic.className} ${tajawal.className}`}
+
+      >
         <NextIntlClientProvider messages={messages} locale={locale}>
           <ProvidersLayout>
             {children}
+            <h1 className="font-tajawal font-bold">بيزووو</h1>
+            <h1 className="font-pingar font-medium">بيزووو</h1>
+            <h1 className="font-ibm font-regular">بيزووو</h1>
           </ProvidersLayout>
         </NextIntlClientProvider>
       </body>
