@@ -6,9 +6,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 export default function TestPage() {
 
   return (
-    <div className="min-h-screen p-4 bg-blue-300">
+    <div className="min-h-screen p-4 bg-indigo-400">
       <div className="container mx-auto flex justify-center items-center min-h-screen">
-            <Card variant="default" className="w-full max-w-2xl pt-4">
+            <Card variant="transparent" className="w-full max-w-2xl pt-4">
 
                 <CardHeader>
                     <CardDescription>سؤال 1 من 5</CardDescription>

@@ -12,7 +12,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = "default", ...props }, ref) => {
     const variantStyles = {
       default: "bg-card border shadow",
-      transparent: "bg-card/50 backdrop-blur-sm border border-muted/30"
+      transparent: "bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.5)] backdrop-blur-sm border border-muted/30"
     }
 
     return (
@@ -62,7 +62,6 @@ const CardDescription = React.forwardRef<HTMLDivElement, CardComponentProps>(
       ref={ref}
       className={cn(
         "text-sm",
-        variant === "transparent" ? "text-muted-foreground/90" : "text-muted-foreground",
         className
       )}
       {...props}
