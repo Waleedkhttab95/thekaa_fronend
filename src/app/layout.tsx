@@ -1,8 +1,9 @@
 import { getLocale, getMessages } from "next-intl/server";
 import { Locales } from "@/types/locales.enum";
-import ProvidersLayout from "@/app/components/layouts/ProvidersLayout";
+import ProvidersLayout from "@/components/layouts/ProvidersLayout";
 import "./global.css";
 import { NextIntlClientProvider } from "next-intl";
+import { ibmPlexSansArabic, pingAR, tajawal } from "@/config/fonts";
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -18,9 +19,14 @@ export default async function RootLayout({ children }: Props) {
       dir={locale === Locales.ar ? "rtl" : "ltr"}
       suppressHydrationWarning
     >
-      <body>
+      <body
+        className={`${pingAR.className} ${ibmPlexSansArabic.className} ${tajawal.className}`}
+      >
         <NextIntlClientProvider messages={messages}>
-          <ProvidersLayout>{children}</ProvidersLayout>
+          <ProvidersLayout>
+            {children}
+
+          </ProvidersLayout>
         </NextIntlClientProvider>
       </body>
     </html>

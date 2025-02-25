@@ -19,7 +19,9 @@ export default function HomePage() {
       <LocalizedLink href="/about">About</LocalizedLink>
       {/* using next/link for non-localized routes */}
       <Link href='/dashboard'> dashboard</Link>
-
+      <h1 className="font-tajawal font-bold">بيزووو</h1>
+      <h1 className="font-pingar font-medium">بيزووو</h1>
+      <h1 className="font-ibm font-regular">بيزووو</h1>
     </div>
   );
 }
