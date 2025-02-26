@@ -11,15 +11,15 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = "default", ...props }, ref) => {
     const variantStyles = {
-      default: "bg-card border shadow",
-      transparent: "bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.5)] backdrop-blur-sm border border-muted/30"
+      default: "bg-card border",
+      transparent: "bg-card-transparent backdrop-blur-sm border border-muted/30"
     }
 
     return (
       <div
         ref={ref}
         className={cn(
-          "rounded-xl text-card-foreground",
+          "rounded-[40px] text-card-foreground",
           variantStyles[variant],
           className
         )}
