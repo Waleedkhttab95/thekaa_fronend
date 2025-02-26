@@ -21,7 +21,7 @@ export default async function RootLayout({ children }: Props) {
       suppressHydrationWarning
     >
       <body
-        className={`${pingAR.className} ${ibmPlexSansArabic.className} ${tajawal.className} bg-blue-200`}
+        className={`${pingAR.className} ${ibmPlexSansArabic.className} ${tajawal.className} `}
       >
         <NextIntlClientProvider messages={messages}>
           <ProvidersLayout>
