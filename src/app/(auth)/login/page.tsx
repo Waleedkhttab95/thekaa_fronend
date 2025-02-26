@@ -1,12 +1,11 @@
-import AuthButton from "@/components/atoms/AuthButton";
+import { Button } from "@/components/atoms/button";
+import GoogleButton from "@/components/atoms/GoogleButton";
 
 const LoginPage = () => {
   return (
     <div className="flex flex-col">
-      <AuthButton authButtonType="basic">
-        تسجيل الدخول
-      </AuthButton>
-      <AuthButton authButtonType="google" />
+      <Button>تسجيل الدخول</Button>
+      <GoogleButton />
     </div>
   );
 };
