@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import ThemeSwitcher from '@/components/atoms/ThemeSwitcher';
+// import ThemeSwitcher from '@/components/atoms/ThemeSwitcher';
 
 export default function HomePage() {
 
@@ -9,7 +9,7 @@ export default function HomePage() {
     <div>
       <h1 className='text-red-600 dark:text-yellow-400'>{t('base')}</h1>
       <br />
-      <ThemeSwitcher />
+      {/* <ThemeSwitcher /> */}
       <br />
       {/* using next/link for non-localized routes */}
       <Link href='/dashboard'> dashboard</Link>
