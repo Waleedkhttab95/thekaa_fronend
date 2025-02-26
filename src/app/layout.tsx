@@ -1,7 +1,7 @@
 import { getLocale, getMessages } from "next-intl/server";
 import { Locales } from "@/types/locales.enum";
 import ProvidersLayout from "@/components/layouts/ProvidersLayout";
-import "./global.css";
+import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { ibmPlexSansArabic, pingAR, tajawal } from "@/config/fonts";
 type Props = {
