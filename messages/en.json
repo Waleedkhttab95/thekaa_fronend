@@ -29,7 +29,9 @@
     "dontHaveAccount": "Don't Have An Account?",
     "createAnAccount": "Create An Account!"
   },
+  "Thekaa": "Thekaa",
   "LocaleSwitcher": {
-    "switchLocale": "switch language"
+    "switchLocale": "عربي",
+    "switchLocale-sm": "ع"
   }
 }

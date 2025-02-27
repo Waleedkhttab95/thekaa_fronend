@@ -2,9 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .flex-center {
+    @apply flex justify-center items-center;
 }
+}
+::-webkit-scrollbar {
+  width: 10px; /* Scrollbar width */
+}
+::-webkit-scrollbar-track {
+  background: rgba(27, 27, 27, 0.3); /* Dark gray/black with transparency */
+  backdrop-filter: blur(8px); /* Blur effect */
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(122, 75, 114, 0.8); /* Purple with transparency */
+  backdrop-filter: blur(4px); /* Blur effect */
+  border-radius: 6px;
+  border: 1px solid rgba(232, 163, 197, 0.3); /* Soft pink border */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 163, 197, 0.7); /* Soft pink on hover */
+}
+* {
+  scrollbar-width: thin; /* Thin scrollbar */
+  scrollbar-color: rgba(122, 75, 114, 0.8) rgba(27, 27, 27, 0.3); /* Thumb and track colors */
+}
+
+/* Optional: Add blur effect for Firefox */
+html {
+  background: linear-gradient(135deg, 
+    #66d1f0,
+    #e8a3c5,
+    #7a4b72,
+    #1b1b1b
+  ) fixed;
+  background-attachment: fixed;
+}
+
+body{
+  background : linear-gradient(135deg, 
+  #66d1f0, /* Light cyan-blue */
+  /* #f9f9f9, Near white */
+  #e8a3c5, /* Soft pink */
+  #7a4b72, /* Purple */
+  #1b1b1b  /* Dark gray/black */
+  );  
+  background-image:  url('/assets/images/bg.svg');
+  background-size: cover;
+}
+
 
 @layer base {
   :root {
@@ -66,20 +115,10 @@ body {
 
 @layer base {
   * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-
-
-@layer base {
-  * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
   }
-}
+ }
+

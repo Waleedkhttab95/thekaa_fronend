@@ -30,7 +30,9 @@
     "createAnAccount": "انشىء حسابك الآن!"
   },
 
+  "Thekaa": "ذكاء",
   "LocaleSwitcher": {
-    "switchLocale": "تغيير اللغة"
+    "switchLocale": "English",
+    "switchLocale-sm": "E"
   }
 }
