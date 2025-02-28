@@ -2,7 +2,37 @@
   "HomePage": {
     "base": "قاعدة"
   },
+  "LoginPage": {
+    "welcomeText": "أهلاً بك في ذكاء!👋",
+    "description": "عالم التعليم الممتع بانتظار طفلك, ادخل بيانات لتتمكن من الدخول.",
+    "formInputs": {
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "ادخل عنوان بريدك الإلكتروني"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "ادخل رقم الموبايل"
+      },
+      "rememberMe": {
+        "label": "تذكرني"
+      }
+    },
+    "formErrors": {
+      "emailRequired": "أدخل بريدك الإلكتروني",
+      "emailInvalid": "ادخل بريد الكتروني صحيح",
+      "passwordRequired": "أدخل كلمة المرور"
+    },
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "loginButton": "تسجيل الدخول",
+    "continueWith": "أو الاستمرار بواسطة",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "createAnAccount": "انشىء حسابك الآن!"
+  },
+
+  "Thekaa": "ذكاء",
   "LocaleSwitcher": {
-    "switchLocale": "تغيير اللغة"
+    "switchLocale": "English",
+    "switchLocale-sm": "E"
   }
 }

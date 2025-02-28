@@ -2,7 +2,36 @@
   "HomePage": {
     "base": "base"
   },
+  "LoginPage": {
+    "welcomeText": "Welcome To Thekaa!👋",
+    "description": "The world of fun learning awaits your child. Enter your details to log in.",
+    "formInputs": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter Your Email Address"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter Your Password"
+      },
+      "rememberMe": {
+        "label": "Remember Me"
+      }
+    },
+    "formErrors": {
+      "emailRequired": "Enter Your Email Address",
+      "emailInvalid": "Invalid Email Address",
+      "passwordRequired": "Enter Your Password"
+    },
+    "forgotPassword": "ْDid You Forget Your Password?",
+    "loginButton": "Login",
+    "continueWith": "Or Continue With",
+    "dontHaveAccount": "Don't Have An Account?",
+    "createAnAccount": "Create An Account!"
+  },
+  "Thekaa": "Thekaa",
   "LocaleSwitcher": {
-    "switchLocale": "switch language"
+    "switchLocale": "عربي",
+    "switchLocale-sm": "ع"
   }
 }

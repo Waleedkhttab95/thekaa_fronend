@@ -23,9 +23,11 @@ export default function ProvidersLayout({
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="system"
+      // defaultTheme="system"
       enableSystem={true}
       disableTransitionOnChange
+      forcedTheme='light'
+
     >
       <QueryClientProvider client={queryClient}>
         {children}
