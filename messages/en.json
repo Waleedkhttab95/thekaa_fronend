@@ -29,6 +29,39 @@
     "dontHaveAccount": "Don't Have An Account?",
     "createAnAccount": "Create An Account!"
   },
+  "SignUpPage": {
+    "welcomeText": "Start Your Learning Journry With Thekaa👋",
+    "description": "To Create An Account For Your Kid, We need Basic Information From You.",
+    "alreadyHaveAnAccount": "Already Have An Account?",
+    "login": "Login",
+    "continueWith": "Or Continue With",
+    "formInputs": {
+      "parentName": {
+        "label": "Parent Name",
+        "placeholder": "Enter Parent Name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter Your Email"
+      },
+      "phoneNumber": {
+        "label": "Parent Phone Number",
+        "placeholder": "Enter Parent Phone Number"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter Password"
+      },
+      "confirmPassword": {
+        "label": "Confirm Password",
+        "placeholder": "Enter Password Again"
+      },
+      "acceptTerms": {
+        "label": "I Accept Terms of Service And Privacy policy"
+      }
+    },
+    "signUpButton": "Create An Account"
+  },
   "Thekaa": "Thekaa",
   "LocaleSwitcher": {
     "switchLocale": "عربي",

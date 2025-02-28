@@ -29,7 +29,39 @@
     "dontHaveAccount": "ليس لديك حساب؟",
     "createAnAccount": "انشىء حسابك الآن!"
   },
-
+  "SignUpPage": {
+    "welcomeText": "ابدأ رحلة التعلم مع ذكاء👋",
+    "description": "لإنشاء حساب لطفلك, نحتاج إلى بعض المعلومات الأساسية منك كولي أمر.",
+    "alreadyHaveAnAccount": "لديك حساب بالفعل على ذكاء؟",
+    "login": "تسجيل الدخول",
+    "continueWith": "أو الإستمرار بواسطة",
+    "formInputs": {
+      "parentName": {
+        "label": "اسم ولي الأمر",
+        "placeholder": "ادخل اسم ولي الأمر"
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "ادخل عنوان بريدك الإلكتروني"
+      },
+      "phoneNumber": {
+        "label": "رقم جوال ولي الأمر",
+        "placeholder": "ادخل رقم جوال ولي الأمر"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "ادخل كلمة المرور"
+      },
+      "confirmPassword": {
+        "label": "تأكيد كلمة المرور",
+        "placeholder": "ادخل كلمة المرور مرة أخرى"
+      },
+      "acceptTerms": {
+        "label": "أوافق على الشروط و الأحكام و سياسة الخصوصية"
+      }
+    },
+    "signUpButton": "أنشئ حساب"
+  },
   "Thekaa": "ذكاء",
   "LocaleSwitcher": {
     "switchLocale": "English",

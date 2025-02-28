@@ -1,15 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import Link from "next/link";
-import Image from "next/image";
-
+import { getSignUpSchema } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-import { Button } from "@/components/atoms/button";
 import {
   Form,
   FormControl,
@@ -17,52 +13,43 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/atoms/form";
-import { Input } from "@/components/atoms/input";
-import GoogleButton from "../atoms/GoogleButton";
-import { getLoginSchema } from "@/lib/schemas";
-import { useLocale, useTranslations } from "next-intl";
+} from "../atoms/form";
+import { Input } from "../atoms/input";
+import Image from "next/image";
+import { Button } from "../atoms/button";
 import { CardDescription } from "../molecules/card";
-import { Checkbox } from "../atoms/checkbox";
+import GoogleButton from "../atoms/GoogleButton";
 import EyeSlashed from "../../../public/eye-slash.svg";
+import { Checkbox } from "../atoms/checkbox";
 
-export function LoginForm() {
-  const t = useTranslations("LoginPage");
+const SignUpForm = () => {
+  const t = useTranslations("SignUpPage");
   const locale = useLocale();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const form = useForm<z.infer<ReturnType<typeof getLoginSchema>>>({
-    resolver: zodResolver(getLoginSchema(t)),
+  const form = useForm<z.infer<ReturnType<typeof getSignUpSchema>>>({
+    resolver: zodResolver(getSignUpSchema(t)),
     defaultValues: {
+      parentName: "",
       email: "",
+      phoneNumber: "",
       password: "",
-      rememberMe: false,
+      confirmPassword: "",
+      acceptTerms: false,
     },
   });
-
-  const emailValue = form.getValues("email");
-  const passwordValue = form.getValues("password");
-
-  useEffect(() => {
-    if (emailValue) {
-      form.clearErrors("email");
-    }
-  }, [emailValue, form]);
-
-  useEffect(() => {
-    if (passwordValue) {
-      form.clearErrors("password");
-    }
-  }, [passwordValue, form]);
 
   useEffect(() => {
     form.clearErrors();
   }, [locale, form]);
 
-  function onSubmit(data: z.infer<ReturnType<typeof getLoginSchema>>) {
+  function onSubmit(data: z.infer<ReturnType<typeof getSignUpSchema>>) {
     console.log(data);
   }
+
+  //todo: add type inference to local usage
 
   return (
     <Form {...form}>
@@ -72,6 +59,22 @@ export function LoginForm() {
       >
         <FormField
           control={form.control}
+          name="parentName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("formInputs.parentName.label")}</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder={t("formInputs.parentName.placeholder")}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -79,6 +82,22 @@ export function LoginForm() {
               <FormControl>
                 <Input
                   placeholder={t("formInputs.email.placeholder")}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("formInputs.phoneNumber.label")}</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder={t("formInputs.phoneNumber.placeholder")}
                   {...field}
                 />
               </FormControl>
@@ -113,10 +132,37 @@ export function LoginForm() {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem className="relative">
+              <FormLabel>{t("formInputs.confirmPassword.label")}</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder={t("formInputs.confirmPassword.placeholder")}
+                  type={showConfirmPassword ? "text" : "password"}
+                  {...field}
+                />
+              </FormControl>
+              <Image
+                className="absolute top-[32px] end-4 cursor-pointer"
+                src={EyeSlashed}
+                alt="eye-slashed"
+                width={24}
+                height={24}
+                onClick={() => {
+                  setShowConfirmPassword((prev) => !prev);
+                }}
+              />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <div className="flex justify-between items-center">
           <FormField
             control={form.control}
-            name="rememberMe"
+            name="acceptTerms"
             render={({ field }) => (
               <FormItem className="flex items-center justify-center">
                 <FormControl>
@@ -128,17 +174,14 @@ export function LoginForm() {
                 </FormControl>
                 <FormMessage />
                 <FormLabel className="pb-2 ms-1">
-                  {t("formInputs.rememberMe.label")}
+                  {t("formInputs.acceptTerms.label")}
                 </FormLabel>
               </FormItem>
             )}
           />
-          <p className="cursor-pointer hover:underline">
-            <Link href={'/recover-password'}>{t("forgotPassword")}</Link>
-          </p>
         </div>
         <div className="w-full flex flex-col gap-y-4 mt-6">
-          <Button type="submit">{t("loginButton")}</Button>
+          <Button type="submit">{t("signUpButton")}</Button>
           <CardDescription className="relative flex items-center gap-x-2 w-full text-center text-sm">
             <span className="flex-1 h-px bg-[#E7E4E5]"></span>
             <span className="px-2">{t("continueWith")}</span>
@@ -149,4 +192,5 @@ export function LoginForm() {
       </form>
     </Form>
   );
-}
+};
+export default SignUpForm;
