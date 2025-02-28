@@ -27,7 +27,7 @@ export function ImageChoiceQuestion({
             <div
               key={choice.id}
               onClick={() => onSelectAnswer(choice.id)}
-              className={`flex w-[456px] h-[355] flex-col md:flex-row cursor-pointer rounded-[20px] overflow-hidden border-[7px] transition-all ${
+              className={`flex w-[250px] h-[355] md:w-[456px] flex-col md:flex-row cursor-pointer rounded-[20px] overflow-hidden border-[7px] self-center transition-all ${
                 selectedAnswer === choice.id
                   ? "border-[#23F6F0]"
                   : "border-transparent"

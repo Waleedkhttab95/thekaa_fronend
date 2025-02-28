@@ -16,8 +16,10 @@ import {
   CardTitle,
 } from "@/components/molecules/card";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function TestPage() {
+  const t = useTranslations("testPage");
   const questions = mockQuestions as Question[];
   const [answer, setAnswer] = useState("");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -55,55 +57,54 @@ export default function TestPage() {
   };
 
   return (
-    <div className="p-4 bg-blue-300">
-      <div className="container mx-auto flex justify-center items-center min-h-screen">
-        {isCompleted ? (
-          <ExamCompletion />
-        ) : (
-          <Card
-            variant="default"
-            className="w-[1141px] max-h-[770] max-w-full p-8"
-          >
-            <CardHeader>
-              <CardDescription>
-                سؤال {currentQuestionIndex + 1} من {questions.length}
-              </CardDescription>
-              <CardTitle className="font-pingar font-bold text-2xl">
-                إختبار تحديد المستوى
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex justify-center">
-              <Questions
-                question={currentQuestion}
-                selectedAnswer={selectedAnswers[currentQuestion.id]}
-                onSelectAnswer={handleAnswerSelect}
-                answer={answer}
-                setAnswer={setAnswer}
-              />
-            </CardContent>
-            <CardFooter className="flex justify-end">
-              <Button
-                onClick={handleNext}
-                disabled={
-                  currentQuestion.type === "fill"
-                    ? !answer.trim()
-                    : !selectedAnswers[currentQuestion.id]
-                }
-                className="text-[16px] font-pingar font-bold w-[193px] h-[56px] flex flex-row justify-center items-center text-start"
-              >
-                {isLastQuestion ? "إنهاء الإختبار" : "التالي"}
-                <Image
-                  src={arrow}
-                  alt="arrow"
-                  width={17.5}
-                  height={11.5}
-                  color="white"
-                ></Image>
-              </Button>
-            </CardFooter>
-          </Card>
-        )}
-      </div>
-    </div>
+    <>
+      {isCompleted ? (
+        <ExamCompletion />
+      ) : (
+        <Card
+          variant="default"
+          className="w-[1141px] max-h-[770] max-w-full p-8 flex flex-col justify-center self-center mx-auto"
+        >
+          <CardHeader>
+            <CardDescription>
+              {t("question")} {currentQuestionIndex + 1} {t("of")}{" "}
+              {questions.length}
+            </CardDescription>
+            <CardTitle className="font-pingar font-bold text-2xl">
+              {t("placementTest")}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="flex justify-center">
+            <Questions
+              question={currentQuestion}
+              selectedAnswer={selectedAnswers[currentQuestion.id]}
+              onSelectAnswer={handleAnswerSelect}
+              answer={answer}
+              setAnswer={setAnswer}
+            />
+          </CardContent>
+          <CardFooter className="flex justify-end">
+            <Button
+              onClick={handleNext}
+              disabled={
+                currentQuestion.type === "fill"
+                  ? !answer.trim()
+                  : !selectedAnswers[currentQuestion.id]
+              }
+              className="text-[16px] font-pingar font-bold w-[193px] h-[56px] flex flex-row justify-center items-center text-start"
+            >
+              {isLastQuestion ? <> {t("finishExam")}</> : <>{t("next")}</>}
+              <Image
+                src={arrow}
+                alt="arrow"
+                width={17.5}
+                height={11.5}
+                color="white"
+              ></Image>
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+    </>
   );
 }
