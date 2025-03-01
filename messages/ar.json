@@ -1,0 +1,98 @@
+{
+  "HomePage": {
+    "base": "قاعدة"
+  },
+  "LoginPage": {
+    "welcomeText": "أهلاً بك في ذكاء!👋",
+    "description": "عالم التعليم الممتع بانتظار طفلك, ادخل بيانات لتتمكن من الدخول.",
+    "formInputs": {
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "ادخل عنوان بريدك الإلكتروني"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "ادخل رقم الموبايل"
+      },
+      "rememberMe": {
+        "label": "تذكرني"
+      }
+    },
+    "formErrors": {
+      "emailRequired": "أدخل بريدك الإلكتروني",
+      "emailInvalid": "ادخل بريد الكتروني صحيح",
+      "passwordRequired": "أدخل كلمة المرور"
+    },
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "loginButton": "تسجيل الدخول",
+    "continueWith": "أو الاستمرار بواسطة",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "createAnAccount": "انشىء حسابك الآن!"
+  },
+  "SignUpPage": {
+    "welcomeText": "ابدأ رحلة التعلم مع ذكاء👋",
+    "description": "لإنشاء حساب لطفلك, نحتاج إلى بعض المعلومات الأساسية منك كولي أمر.",
+    "alreadyHaveAnAccount": "لديك حساب بالفعل على ذكاء؟",
+    "login": "تسجيل الدخول",
+    "continueWith": "أو الإستمرار بواسطة",
+    "formInputs": {
+      "parentName": {
+        "label": "اسم ولي الأمر",
+        "placeholder": "ادخل اسم ولي الأمر"
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "ادخل عنوان بريدك الإلكتروني"
+      },
+      "phoneNumber": {
+        "label": "رقم جوال ولي الأمر",
+        "placeholder": "ادخل رقم جوال ولي الأمر"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "ادخل كلمة المرور"
+      },
+      "confirmPassword": {
+        "label": "تأكيد كلمة المرور",
+        "placeholder": "ادخل كلمة المرور مرة أخرى"
+      },
+      "acceptTerms": {
+        "label": "أوافق على الشروط و الأحكام و سياسة الخصوصية"
+      }
+    },
+    "formErrors": {
+      "parentNameRequired": "ادخل اسم ولي الأمر",
+      "parentNameCantBeOneCharacter": "لا يمكن إدخال اسم من حرف واحد",
+      "emailRequired": "ادخل عنوان بريدك الإلكتروني",
+      "emailInvalid": "ادخل عنوان بريد صحيح",
+      "phoneNumberRequired": "ادخل رقم الهاتف ولي الأمر",
+      "phoneNumberInvalid": "ادخل رقم هاتف صحيح",
+      "passwordMinLength": "كلمة المرور يجب أن تكون من 8 خانات على الأقل",
+      "passwordUpperCase": "كملة المرور يجب أن تحتوي على حرف كبير واحد على الأقل",
+      "passwordLowerCase": "كلمةالمرور يجب أن تحتوي على حرف صغير واحد على الأقل",
+      "passwordDigit": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
+      "passwordSpecialCharacter": "كلمة المرور يجب أن تحتوي على رمز مميز واحد على الأقل @ $ ! % * ? &",
+      "confirmPasswordRequired": "ادخل كلمة المرور مرة أخرى",
+      "passwordsMustMatch": "يجب أن تتطابق مع كلمة المرور المدخلة أعلاه",
+      "acceptTermsRequired": "يجب عليك الموافقة على شروط الخدمة و الاستخدام"
+    },
+    "signUpButton": "أنشئ حساب"
+  },
+  "Thekaa": "ذكاء",
+  "LocaleSwitcher": {
+    "switchLocale": "English",
+    "switchLocale-sm": "E"
+  },
+  "testPage": {
+    "errorLoading": "...خطأ في التحميل",
+    "question": "سؤال",
+    "of": "من",
+    "placementTest": "إختبار تحديد المستوى",
+    "finishExam": "إنهاء الإختبار",
+    "next": "التالي",
+    "levelLoading": "جار تحميل مستوى الطالب",
+    "goToDashboard": "الانتقال إلى لوحة التحكم",
+    "done": "تم استكمال ملف الطالب بنجاح",
+    "levelMessage": "نحن نعمل على تقييم أداء محمد بدقة باستخدام الذكاء الاصطناعي، وذلك لتقديم تجربة تعلم مخصصة تناسب احتياجاته تماماً 🚀"
+  }
+}
