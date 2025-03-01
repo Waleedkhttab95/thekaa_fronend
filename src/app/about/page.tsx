@@ -1,7 +1,6 @@
-import LocaleSwitcher from '@/components/atoms/LocaleSwitcher'
-import ClientComp from '@/components/atoms/client'
-import ServerComp from '@/components/atoms/server'
-import React from 'react'
+import ClientComp from "@/components/atoms/client";
+import ServerComp from "@/components/atoms/server";
+import React from "react";
 
 const AboutPage = () => {
   return (
@@ -9,10 +8,8 @@ const AboutPage = () => {
       page
       <ServerComp />
       <ClientComp />
-      <LocaleSwitcher />
     </div>
+  );
+};
 
-  )
-}
-
-export default AboutPage
+export default AboutPage;
