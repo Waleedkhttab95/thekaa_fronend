@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { ImagesAndText } from "@/types/question.types";
-import oil from "../../../public/oil.png";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -45,7 +44,7 @@ export function ImagesAndChoicesQuestion({
                 {choice.id}
               </div>
               <Image
-                src={oil}
+                src={"/oil.png"}
                 alt={choice.text}
                 width={113}
                 height={88}
