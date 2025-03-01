@@ -7,10 +7,11 @@ import robotIcon from "../../../public/robot-icon.svg";
 import complete from "../../../public/complete.svg";
 import arrow from "../../../public/arrow.svg";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export function ExamCompletion() {
   const t = useTranslations("testPage");
+  const locale = useLocale();
   const [state, setState] = useState<"analyzing" | "completed">("analyzing");
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export function ExamCompletion() {
                 <Button
                   onClick={() => {}}
                   variant="default"
-                  className="w-[264px] h-[56px] font-bold bg-gray-900 hover:bg-gray-800 text-[#E7FEFD] mt-12"
+                  className="w-[264px] h-[56px] font-bold bg-gray-900 hover:bg-gray-800 text-[#E7FEFD] mt-12 select-none"
                 >
                   {t("goToDashboard")}
                   <Image
@@ -52,6 +53,7 @@ export function ExamCompletion() {
                     width={17.5}
                     height={11.5}
                     color="white"
+                    className={locale === "en" ? "scale-x-[-1]" : ""}
                   ></Image>
                 </Button>
               </Link>
