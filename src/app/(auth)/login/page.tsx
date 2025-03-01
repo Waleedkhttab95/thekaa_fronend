@@ -1,7 +1,10 @@
-import AuthLayout from "@/components/layouts/AuthLayout";
-import { CardDescription, CardTitle } from "@/components/molecules/card";
-import { LoginForm } from "@/components/organisms/LoginForm";
+import Link from "next/link";
+
 import { useTranslations } from "next-intl";
+
+import AuthLayout from "@/components/layouts/AuthLayout";
+import { LoginForm } from "@/components/organisms/LoginForm";
+import { CardDescription, CardTitle } from "@/components/molecules/card";
 
 const LoginPage = () => {
   const t = useTranslations("LoginPage");
@@ -16,7 +19,7 @@ const LoginPage = () => {
             {t("dontHaveAccount")}
           </CardDescription>{" "}
           <CardTitle className="text-lg cursor-pointer ms-1 hover:underline">
-            {t("createAnAccount")}
+            <Link href={"/sign-up"}>{t("createAnAccount")}</Link>
           </CardTitle>
         </>
       }
