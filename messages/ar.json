@@ -60,6 +60,22 @@
         "label": "أوافق على الشروط و الأحكام و سياسة الخصوصية"
       }
     },
+    "formErrors": {
+      "parentNameRequired": "ادخل اسم ولي الأمر",
+      "parentNameCantBeOneCharacter": "لا يمكن إدخال اسم من حرف واحد",
+      "emailRequired": "ادخل عنوان بريدك الإلكتروني",
+      "emailInvalid": "ادخل عنوان بريد صحيح",
+      "phoneNumberRequired": "ادخل رقم الهاتف ولي الأمر",
+      "phoneNumberInvalid": "ادخل رقم هاتف صحيح",
+      "passwordMinLength": "كلمة المرور يجب أن تكون من 8 خانات على الأقل",
+      "passwordUpperCase": "كملة المرور يجب أن تحتوي على حرف كبير واحد على الأقل",
+      "passwordLowerCase": "كلمةالمرور يجب أن تحتوي على حرف صغير واحد على الأقل",
+      "passwordDigit": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
+      "passwordSpecialCharacter": "كلمة المرور يجب أن تحتوي على رمز مميز واحد على الأقل @ $ ! % * ? &",
+      "confirmPasswordRequired": "ادخل كلمة المرور مرة أخرى",
+      "passwordsMustMatch": "يجب أن تتطابق مع كلمة المرور المدخلة أعلاه",
+      "acceptTermsRequired": "يجب عليك الموافقة على شروط الخدمة و الاستخدام"
+    },
     "signUpButton": "أنشئ حساب"
   },
   "Thekaa": "ذكاء",

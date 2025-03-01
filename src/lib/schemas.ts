@@ -11,11 +11,35 @@ export const getLoginSchema = (t: (key: string) => string) =>
   });
 
 export const getSignUpSchema = (t: (key: string) => string) =>
-  z.object({
-    parentName: z.string().nonempty(),
-    email: z.string().nonempty().email(),
-    phoneNumber: z.string().nonempty(), //todo: search how to handle phone numbers in schema
-    password: z.string().nonempty(), //todo: handle using regex to make it a strong password
-    confirmPassword: z.string().nonempty(), //todo: handle confirm password validation
-    acceptTerms: z.boolean().default(false), //todo: make it required true
-  });
+  z
+    .object({
+      parentName: z
+        .string()
+        .nonempty(t("formErrors.parentNameRequired"))
+        .min(1, t("formErrors.parentNameCantBeOneCharacter")),
+      email: z
+        .string()
+        .nonempty(t("formErrors.emailRequired"))
+        .email(t("formErrors.emailInvalid")),
+      phoneNumber: z
+        .string()
+        .nonempty(t("formErrors.phoneNumberRequired"))
+        .regex(/^\+?[1-9]\d{1,14}$/, t("formErrors.phoneNumberInvalid")),
+      password: z
+        .string()
+        .min(8, t("formErrors.passwordMinLength"))
+        .regex(/[A-Z]/, t("formErrors.passwordUpperCase"))
+        .regex(/[a-z]/, t("formErrors.passwordLowerCase"))
+        .regex(/\d/, t("formErrors.passwordDigit"))
+        .regex(/[@$!%*?&]/, t("formErrors.passwordSpecialCharacter")),
+      confirmPassword: z
+        .string()
+        .nonempty(t("formErrors.confirmPasswordRequired")),
+      acceptTerms: z.literal(true, {
+        errorMap: () => ({ message: t("formErrors.acceptTermsRequired") }),
+      }),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: t("formErrors.passwordsMustMatch"),
+      path: ["confirmPassword"],
+    });
