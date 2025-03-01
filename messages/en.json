@@ -33,5 +33,17 @@
   "LocaleSwitcher": {
     "switchLocale": "عربي",
     "switchLocale-sm": "ع"
+  },
+  "testPage": {
+    "errorLoading": "Error Loading...",
+    "question": "Question",
+    "of": "of",
+    "placementTest": "Placement Test",
+    "finishExam": "Finish Exam",
+    "next": "Next",
+    "levelLoading": "Placing student level",
+    "goToDashboard": "Go to Dashboard",
+    "done": "Completed the student data successfully",
+    "levelMessage": "We are working on accurately evaluating Mohammad's performance using artificial intelligence, so that you can learn his basic specifications experience 🚀"
   }
 }
