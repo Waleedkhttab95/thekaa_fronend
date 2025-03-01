@@ -91,7 +91,7 @@ const SignUpForm = () => {
         />
         <FormField
           control={form.control}
-          name="email"
+          name="phoneNumber"
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("formInputs.phoneNumber.label")}</FormLabel>
