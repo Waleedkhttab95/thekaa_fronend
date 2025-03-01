@@ -4,8 +4,8 @@ export const getLoginSchema = (t: (key: string) => string) =>
   z.object({
     email: z
       .string()
-      .nonempty(t("formErrors.emailRequired"))
-      .email(t("formErrors.emailInvalid")),
+      .email(t("formErrors.emailInvalid"))
+      .nonempty(t("formErrors.emailRequired")),
     password: z.string().nonempty(t("formErrors.passwordRequired")),
     rememberMe: z.boolean().default(false),
   });
@@ -15,16 +15,16 @@ export const getSignUpSchema = (t: (key: string) => string) =>
     .object({
       parentName: z
         .string()
-        .nonempty(t("formErrors.parentNameRequired"))
-        .min(1, t("formErrors.parentNameCantBeOneCharacter")),
+        .min(1, t("formErrors.parentNameCantBeOneCharacter"))
+        .nonempty(t("formErrors.parentNameRequired")),
       email: z
         .string()
-        .nonempty(t("formErrors.emailRequired"))
-        .email(t("formErrors.emailInvalid")),
+        .email(t("formErrors.emailInvalid"))
+        .nonempty(t("formErrors.emailRequired")),
       phoneNumber: z
         .string()
-        .nonempty(t("formErrors.phoneNumberRequired"))
-        .regex(/^\+?[1-9]\d{1,14}$/, t("formErrors.phoneNumberInvalid")),
+        .regex(/^\+?[1-9]\d{1,14}$/, t("formErrors.phoneNumberInvalid"))
+        .nonempty(t("formErrors.phoneNumberRequired")),
       password: z
         .string()
         .min(8, t("formErrors.passwordMinLength"))

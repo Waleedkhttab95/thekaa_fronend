@@ -22,13 +22,15 @@ export function ImagesAndChoicesQuestion({
 
         <div className="w-full max-w-lg flex flex-col gap-4">
           {question.choices.map((choice) => (
-            <button
+            <div
               key={choice.id}
-              onClick={() => onSelectAnswer(choice.id)}
-              className={`flex items-center w-full h-full xl:w-[541px] xl:h-[108px] gap-4 p-3 border-2 rounded-[20px] cursor-pointer transition-all ${
+              onClick={() =>
+                selectedAnswer === choice.id || onSelectAnswer(choice.id)
+              }
+              className={`flex items-center w-full h-full xl:w-[541px] xl:h-[108px] gap-4 p-3 border-2 rounded-[20px] transition-all select-none ${
                 selectedAnswer === choice.id
-                  ? "border-[#23F6F0]"
-                  : "border-gray-300"
+                  ? "border-[#23F6F0] bg-[#23F6F0]/10 ring-1 ring-[#23F6F0] cursor-default"
+                  : "hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
               }`}
             >
               <div
@@ -50,7 +52,7 @@ export function ImagesAndChoicesQuestion({
               />
 
               <span className="text-lg font-semibold">{choice.text}</span>
-            </button>
+            </div>
           ))}
         </div>
       </div>

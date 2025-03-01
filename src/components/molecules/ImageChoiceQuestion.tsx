@@ -1,5 +1,4 @@
 import { Choice, ImageChoice } from "@/types/question.types";
-import { QuestionOption } from "./questionOption";
 import Image from "next/image";
 
 interface Props {
@@ -27,9 +26,9 @@ export function ImageChoiceQuestion({
             <div
               key={choice.id}
               onClick={() => onSelectAnswer(choice.id)}
-              className={`flex w-[250px] h-[355] md:w-[456px] flex-col md:flex-row cursor-pointer rounded-[20px] overflow-hidden border-[7px] self-center transition-all ${
+              className={`flex w-[250px] h-[355] md:w-[456px] flex-col md:flex-row cursor-pointer rounded-[20px] overflow-hidden border-[8px] self-center transition-all ${
                 selectedAnswer === choice.id
-                  ? "border-[#23F6F0]"
+                  ? "border-[#23F6F0] bg-gray-400-900 opacity-75 cursor-default"
                   : "border-transparent"
               }`}
             >
@@ -39,7 +38,6 @@ export function ImageChoiceQuestion({
                 width={456}
                 height={355}
                 className="object-cover"
-                onClick={() => onSelectAnswer(choice.id)}
               />
               {selectedAnswer === choice.id && <div className=""></div>}
             </div>
