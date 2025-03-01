@@ -1,4 +1,3 @@
-import oil from "../../../public/oil.png";
 import { Question } from "@/types/question.types";
 import { TextChoiceQuestion } from "../molecules/textChoiceQuestion";
 import { ImageChoiceQuestion } from "../molecules/ImageChoiceQuestion";
@@ -44,7 +43,7 @@ export function Questions({
           question={question}
           selectedAnswer={selectedAnswer}
           onSelectAnswer={onSelectAnswer}
-          img={oil}
+          img={"/oil.png"}
         />
       );
     case "fill":
