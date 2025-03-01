@@ -29,6 +29,55 @@
     "dontHaveAccount": "Don't Have An Account?",
     "createAnAccount": "Create An Account!"
   },
+  "SignUpPage": {
+    "welcomeText": "Start Your Learning Journry With Thekaa👋",
+    "description": "To Create An Account For Your Kid, We need Basic Information From You.",
+    "alreadyHaveAnAccount": "Already Have An Account?",
+    "login": "Login",
+    "continueWith": "Or Continue With",
+    "formInputs": {
+      "parentName": {
+        "label": "Parent Name",
+        "placeholder": "Enter Parent Name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter Your Email"
+      },
+      "phoneNumber": {
+        "label": "Parent Phone Number",
+        "placeholder": "Enter Parent Phone Number"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter Password"
+      },
+      "confirmPassword": {
+        "label": "Confirm Password",
+        "placeholder": "Enter Password Again"
+      },
+      "acceptTerms": {
+        "label": "I Accept Terms of Service And Privacy policy"
+      }
+    },
+    "formErrors": {
+      "parentNameRequired": "Enter the parent's name",
+      "parentNameCantBeOneCharacter": "The name cannot be a single character",
+      "emailRequired": "Enter your email address",
+      "emailInvalid": "Enter a valid email address",
+      "phoneNumberRequired": "Enter the parent's phone number",
+      "phoneNumberInvalid": "Enter a valid phone number",
+      "passwordMinLength": "Password must be at least 8 characters long",
+      "passwordUpperCase": "Password must contain at least one uppercase letter",
+      "passwordLowerCase": "Password must contain at least one lowercase letter",
+      "passwordDigit": "Password must contain at least one digit",
+      "passwordSpecialCharacter": "Password must contain at least one special character @ $ ! % * ? &",
+      "confirmPasswordRequired": "Enter the password again",
+      "passwordsMustMatch": "Passwords must match",
+      "acceptTermsRequired": "You must agree to the Terms of Service and Usage"
+    },
+    "signUpButton": "Create An Account"
+  },
   "Thekaa": "Thekaa",
   "LocaleSwitcher": {
     "switchLocale": "عربي",

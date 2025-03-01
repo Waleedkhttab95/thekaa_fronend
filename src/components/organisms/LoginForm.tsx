@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
+import Link from "next/link";
 import Image from "next/image";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -132,7 +134,7 @@ export function LoginForm() {
             )}
           />
           <p className="cursor-pointer hover:underline">
-            {t("forgotPassword")}
+            <Link href={'/recover-password'}>{t("forgotPassword")}</Link>
           </p>
         </div>
         <div className="w-full flex flex-col gap-y-4 mt-6">
