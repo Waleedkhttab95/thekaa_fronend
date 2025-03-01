@@ -60,6 +60,22 @@
         "label": "I Accept Terms of Service And Privacy policy"
       }
     },
+    "formErrors": {
+      "parentNameRequired": "Enter the parent's name",
+      "parentNameCantBeOneCharacter": "The name cannot be a single character",
+      "emailRequired": "Enter your email address",
+      "emailInvalid": "Enter a valid email address",
+      "phoneNumberRequired": "Enter the parent's phone number",
+      "phoneNumberInvalid": "Enter a valid phone number",
+      "passwordMinLength": "Password must be at least 8 characters long",
+      "passwordUpperCase": "Password must contain at least one uppercase letter",
+      "passwordLowerCase": "Password must contain at least one lowercase letter",
+      "passwordDigit": "Password must contain at least one digit",
+      "passwordSpecialCharacter": "Password must contain at least one special character @ $ ! % * ? &",
+      "confirmPasswordRequired": "Enter the password again",
+      "passwordsMustMatch": "Passwords must match",
+      "acceptTermsRequired": "You must agree to the Terms of Service and Usage"
+    },
     "signUpButton": "Create An Account"
   },
   "Thekaa": "Thekaa",
