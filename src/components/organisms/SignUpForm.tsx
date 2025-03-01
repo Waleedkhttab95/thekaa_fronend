@@ -4,7 +4,7 @@ import { getSignUpSchema } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
   Form,
@@ -40,17 +40,41 @@ const SignUpForm = () => {
     },
   });
 
-  const formValues = useWatch({
-    control: form.control,
-  });
+  const parentNameFormValue = form.getValues("parentName");
+  const emailFormValue = form.getValues("email");
+  const phoneNumberValue = form.getValues("phoneNumber");
+  const passwordValue = form.getValues("password");
+  const confirmPasswordValue = form.getValues("confirmPassword");
+  const acceptTermsValue = form.getValues("acceptTerms");
 
   useEffect(() => {
-    Object.keys(formValues).forEach((fieldName) => {
-      if (formValues[fieldName as keyof typeof formValues]) {
-        form.clearErrors(fieldName as keyof typeof formValues);
-      }
-    });
-  }, [formValues, form]);
+    if (parentNameFormValue) {
+      form.clearErrors("parentName");
+    }
+    if (emailFormValue) {
+      form.clearErrors("email");
+    }
+    if (phoneNumberValue) {
+      form.clearErrors("phoneNumber");
+    }
+    if (passwordValue) {
+      form.clearErrors("password");
+    }
+    if (confirmPasswordValue) {
+      form.clearErrors("confirmPassword");
+    }
+    if (acceptTermsValue) {
+      form.clearErrors("acceptTerms");
+    }
+  }, [
+    parentNameFormValue,
+    emailFormValue,
+    phoneNumberValue,
+    passwordValue,
+    confirmPasswordValue,
+    acceptTermsValue,
+    form,
+  ]);
 
   useEffect(() => {
     form.clearErrors();
@@ -174,7 +198,7 @@ const SignUpForm = () => {
             control={form.control}
             name="acceptTerms"
             render={({ field }) => (
-              <FormItem className="flex items-center justify-center relative">
+              <FormItem className="flex items-center justify-center">
                 <FormControl>
                   <Checkbox
                     className="w-6 h-6 bg-white"
@@ -182,7 +206,6 @@ const SignUpForm = () => {
                     onCheckedChange={field.onChange}
                   />
                 </FormControl>
-                <FormMessage className="absolute top-8" />
                 <FormLabel className="pb-2 ms-1">
                   {t("formInputs.acceptTerms.label")}
                 </FormLabel>
