@@ -17,9 +17,11 @@ import {
 } from "@/components/molecules/card";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 export default function TestPage() {
   const t = useTranslations("testPage");
+  const locale = useLocale();
   const questions = mockQuestions as Question[];
   const [answer, setAnswer] = useState("");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -91,15 +93,16 @@ export default function TestPage() {
                   ? !answer.trim()
                   : !selectedAnswers[currentQuestion.id]
               }
-              className="text-[16px] font-pingar font-bold w-[193px] h-[56px] flex flex-row justify-center items-center text-start"
+              className="text-[16px] font-pingar font-bold w-[193px] h-[56px] flex flex-row justify-center items-center text-start select-none"
             >
-              {isLastQuestion ? <> {t("finishExam")}</> : <>{t("next")}</>}
+              {isLastQuestion ? <>{t("finishExam")}</> : <>{t("next")}</>}
               <Image
                 src={arrow}
                 alt="arrow"
                 width={17.5}
                 height={11.5}
                 color="white"
+                className={locale === "en" ? "scale-x-[-1]" : ""}
               ></Image>
             </Button>
           </CardFooter>
