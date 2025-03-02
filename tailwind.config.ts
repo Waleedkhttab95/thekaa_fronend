@@ -10,9 +10,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        pingar: ['"Ping AR + LT"', "sans-serif"],
-        ibm: ['"IBM Plex Sans Arabic"', "sans-serif"],
-        tajawal: ["Tajawal", "sans-serif"],
+        pingar: ["var(--font-pingar)", "sans-serif"],
+        ibm: ["var(--font-ibm)", "sans-serif"],
+        tajawal: ["var(--font-tajawal)", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background))",
