@@ -9,6 +9,25 @@ type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata() {
+  const locale = await getLocale() as keyof typeof metadataTranslations;
+  const metadataTranslations = {
+    en: {
+      title: {
+        template: '%s | Thekaa',
+        default: 'Home'
+      }
+    },
+    ar: {
+      title: {
+        default: "ذكاء | الصفحة الرئيسية",
+        template: '%s | ذكاء'
+      }
+    },
+  };
+  return metadataTranslations[locale]
+}
 export default async function RootLayout({ children }: Props) {
   const locale = await getLocale();
   // Providing all messages to the client
