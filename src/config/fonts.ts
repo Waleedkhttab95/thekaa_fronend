@@ -18,15 +18,19 @@ export const pingAR = localFont({
       style: "normal",
     },
   ],
+  display: "swap",
+  variable: "--font-pingar",
 });
 export const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
   weight: ["400", "500", "700"],
   subsets: ["arabic"],
   display: "swap",
+  variable: "--font-ibm",
 });
 
 export const tajawal = Tajawal({
   weight: ["400", "500", "700"],
   subsets: ["arabic"],
   display: "swap",
+  variable: "--font-tajawal",
 });

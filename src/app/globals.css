@@ -32,6 +32,7 @@
   background: rgba(27, 27, 27, 0.3); /* Match the track background */
 }
 
+
 body{
   background : linear-gradient(135deg, 
   #66d1f0, /* Light cyan-blue */
@@ -39,15 +40,15 @@ body{
   #e8a3c5, /* Soft pink */
   #7a4b72, /* Purple */
   #1b1b1b  /* Dark gray/black */
-  ) fixed;  
-
-  overflow-x: hidden;
-}
-.main-layout{
-  background-image:  url('/assets/images/bg.svg');
+  ) ;
+  background-image:  url('/assets/images/bg.webp');
   background-size: cover;
   background-attachment: fixed;
+  background-color: transparent;
+  font-family: var(--font-pingar);
+ 
 }
+
 
 
 @layer base {
