@@ -1,20 +1,21 @@
-import SignUpPage from "@/components/pages/SignUpPage";
 import { getLocale } from "next-intl/server";
+
+import VerifyAccountPage from "@/components/pages/VerifyAccountPage";
 
 export async function generateMetadata() {
   const locale = (await getLocale()) as keyof typeof metadataTranslations;
 
   const metadataTranslations = {
     en: {
-      title: "Sign up",
+      title: "Verify Account",
     },
-    ar: { title: "إنشاء حساب" },
+    ar: { title: "التحقق من الحساب" },
   };
 
   return metadataTranslations[locale];
 }
 
-const SignUp = () => {
-  return <SignUpPage />;
+const VerifyAccount = () => {
+  return <VerifyAccountPage />;
 };
-export default SignUp;
+export default VerifyAccount;

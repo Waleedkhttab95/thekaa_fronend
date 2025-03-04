@@ -9,8 +9,8 @@ import {
 } from "../molecules/card";
 
 type AuthLayoutProps = {
-  headerTitle: string;
-  headerSubTitle: string;
+  headerTitle: ReactNode;
+  headerSubTitle?: string;
   footerTitle?: ReactNode;
   className?: string;
   children: ReactNode;
@@ -30,9 +30,7 @@ const AuthLayout = ({
     >
       <CardHeader className="justify-center items-center gap-y-2 mb-11">
         <CardTitle className="text-[28px]">{headerTitle}</CardTitle>
-        <CardDescription className="text-lg">
-          {headerSubTitle}
-        </CardDescription>
+        <CardDescription className="text-lg">{headerSubTitle}</CardDescription>
       </CardHeader>
       <CardContent>{children}</CardContent>
       {footerTitle && <CardFooter>{footerTitle}</CardFooter>}
