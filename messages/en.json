@@ -96,6 +96,15 @@
     "requiredEmail": "Enter Your Email Address",
     "send": "Send"
   },
+  "RecoveryCodePage": {
+    "title": "Recovery Code Sent!",
+    "subTitle": "We have sent the 4-digit recovery code to the following email:",
+    "subSubTitle": "Enter it below to reset your password",
+    "didNotGetCode": "Didn't receive the code? You can resend the code after 25 seconds, ",
+    "sendCodeAgain": "Resend Code",
+    "wrongCode": "⚠ The verification code is incorrect. Please try again. Make sure the digits are entered correctly.",
+    "verify": "Verify"
+  },
   "Thekaa": "Thekaa",
   "LocaleSwitcher": {
     "switchLocale": "عربي",

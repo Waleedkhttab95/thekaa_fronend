@@ -18,8 +18,10 @@ import {
 import { Input } from "@/components/atoms/input";
 import { getRecoverPasswordSchema } from "@/lib/schemas";
 import { useLocale, useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 export const RecoverPasswordForm = () => {
+  const router = useRouter();
   const t = useTranslations("RecoverPasswordPage");
   const locale = useLocale();
 
@@ -38,6 +40,7 @@ export const RecoverPasswordForm = () => {
     data: z.infer<ReturnType<typeof getRecoverPasswordSchema>>
   ) {
     console.log(data);
+    router.push("/recovery-code");
   }
 
   return (

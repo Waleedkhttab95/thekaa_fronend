@@ -10,6 +10,7 @@ interface AuthHeaderProps {
   title: string;
   subtitle: string;
   subtitle2?: string;
+  email?: string;
 }
 
 const AuthHeader: React.FC<AuthHeaderProps> = ({
@@ -20,6 +21,7 @@ const AuthHeader: React.FC<AuthHeaderProps> = ({
   title,
   subtitle,
   subtitle2,
+  email,
 }) => {
   return (
     <div className="flex flex-col justify-center items-center">
@@ -35,6 +37,11 @@ const AuthHeader: React.FC<AuthHeaderProps> = ({
         <CardDescription className="text-forcedGray text-lg">
           {subtitle}
         </CardDescription>
+        {email && (
+          <CardDescription className="text-forcedGray">
+            {email}
+          </CardDescription>
+        )}
         {subtitle2 && (
           <CardDescription className="text-forcedGray text-lg">
             {subtitle2}

@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
-
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
 
 import { CardDescription, CardTitle } from "../molecules/card";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../atoms/input-otp";
 import { Button } from "../atoms/button";
+import { useRouter } from "next/navigation";
 
-const VerifyAccountForm = () => {
-  const t = useTranslations("VerifyAccountPage");
+const RecoveryCodeForm = () => {
+  const router = useRouter();
+  const t = useTranslations("RecoveryCodePage");
   const [value, setValue] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -19,6 +20,7 @@ const VerifyAccountForm = () => {
     if (value === "1234") {
       setIsValid(true);
       setIsError(false);
+      router.push("/new-password");
       return;
     }
     setIsError(true);
@@ -50,18 +52,21 @@ const VerifyAccountForm = () => {
         })}
       >
         {isError && (
-          <p className="text-destructive text-center mb-2 w-[400px]">{t("wrongCode")}</p>
+          <p className="text-destructive text-center mb-2 w-[400px]">
+            {t("wrongCode")}
+          </p>
         )}
         {!isError && <CardDescription>{t("didNotGetCode")}</CardDescription>}
-        <CardTitle className="hover: underline cursor-pointer">
+        <CardTitle className="hover:underline cursor-pointer">
           {t("sendCodeAgain")}
         </CardTitle>
       </div>
       <Button className="w-full mt-6">{t("verify")}</Button>
       {isValid && (
-        <p className="absolute top-4 bg-green-500 text-white">Valid Code</p>
+        <p className="absolute top-4 bg-green-500 text-white">validCode</p>
       )}
     </div>
   );
 };
-export default VerifyAccountForm;
+
+export default RecoveryCodeForm;
