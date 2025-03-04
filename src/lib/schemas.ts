@@ -43,3 +43,20 @@ export const getSignUpSchema = (t: (key: string) => string) =>
       message: t("formErrors.passwordsMustMatch"),
       path: ["confirmPassword"],
     });
+
+export const getStudentAddSchema = (t: (key: string) => string) => [
+  z.object({
+    studentName: z.string().nonempty(t("formErrors.studentNameRequired")),
+  }),
+  z.object({
+    age: z.coerce
+      .number({
+        invalid_type_error: t("formErrors.studentAgeInvalid"),
+      })
+      .min(5, t("formErrors.studentAgeInvalid")),
+  }),
+  z.object({
+    educationLevel: z.string().nonempty(t("formErrors.educationLevelRequired")),
+  }),
+  z.object({ subject: z.string().nonempty(t("formErrors.subjectRequired")) }),
+];
