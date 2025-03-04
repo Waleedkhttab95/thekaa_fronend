@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { ChangeEvent, useMemo, useState } from 'react'
 import {
   Form,
   FormControl,
@@ -91,6 +91,13 @@ const AddStudentForm = ({ finish }: props) => {
                     <Input
                       placeholder={currentStepData.placeholder}
                       {...formField}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        const value = currentStepData.type === 'number'
+                          ? Number(e.target.value)
+                          : e.target.value;
+                        formField.onChange(value);
+                      }}
+                      value={formField.value ?? ''}
                       type={currentStepData.type}
                     />
                   ) : (
@@ -132,13 +139,13 @@ const AddStudentForm = ({ finish }: props) => {
                 color="white"
                 className="ltr:scale-x-[-1]"
               />
-              <span>{t("previous")}</span>
+              <span className='pt-1'>{t("previous")}</span>
 
             </Button>
           )}
 
           <Button type="submit" className={"md:w-[109px]"}>
-            <span>{t("next")}</span>
+            <span className='pt-1'>{t("next")}</span>
             <Image
               src={'/arrow.svg'}
               alt="arrow"
