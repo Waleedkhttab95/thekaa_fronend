@@ -20,7 +20,11 @@ import { Button } from "../atoms/button";
 import { CardDescription } from "../molecules/card";
 import EyeSlashed from "../../../public/eye-slash.svg";
 
-const NewPasswordForm = () => {
+const NewPasswordForm = ({
+  setIsSuccess,
+}: {
+  setIsSuccess: (success: boolean) => void;
+}) => {
   const t = useTranslations("NewPasswordPage");
   const locale = useLocale();
 
@@ -51,6 +55,7 @@ const NewPasswordForm = () => {
   function onSubmit(data: z.infer<ReturnType<typeof getNewPasswordSchema>>) {
     console.log(data);
     form.reset();
+    setIsSuccess(true);
   }
 
   return (

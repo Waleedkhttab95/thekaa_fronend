@@ -126,7 +126,10 @@
     "numberOfCharacters": "At least 8 characters",
     "oneNumber": "At least one number",
     "oneSpecialCharacter": "At least one special character",
-    "changePassword": "Change Password"
+    "changePassword": "Change Password",
+    "congrats": "Congratulations!",
+    "successMassage": "Your password has been successfully changed, and you can now log in to your account!",
+    "login": "Login"
   },
   "Thekaa": "Thekaa",
   "LocaleSwitcher": {

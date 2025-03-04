@@ -1,11 +1,20 @@
-import AuthLayout from "../layouts/AuthLayout";
-import AuthHeader from "../molecules/AuthHeader";
-import NewPasswordForm from "../organisms/NewPasswordForm";
-import KeyIcon from "../../../public/key.svg";
+"use client";
+
+import { useState } from "react";
+
 import { useTranslations } from "next-intl";
+
+import AuthLayout from "../layouts/AuthLayout";
+import NewPasswordForm from "../organisms/NewPasswordForm";
+import AuthHeader from "../molecules/AuthHeader";
+import KeyIcon from "../../../public/key.svg";
+import SuccessfulNewPassword from "../organisms/SuccessfulNewPassword";
 
 const NewPasswordPage = () => {
   const t = useTranslations("NewPasswordPage");
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  if (isSuccess) return <SuccessfulNewPassword />;
   return (
     <AuthLayout
       headerTitle={
@@ -19,7 +28,7 @@ const NewPasswordPage = () => {
         />
       }
     >
-      <NewPasswordForm />
+      <NewPasswordForm setIsSuccess={setIsSuccess} />
     </AuthLayout>
   );
 };

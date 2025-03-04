@@ -126,7 +126,10 @@
     "numberOfCharacters": "8 أحرف على الأقل",
     "oneNumber": "رقم واحد على الأقل",
     "oneSpecialCharacter": "رمز واحد على الأقل",
-    "changePassword": "تغيير كلمة المرور"
+    "changePassword": "تغيير كلمة المرور",
+    "congrats": "تهانينا!",
+    "successMassage": "لقد تم تغيير كلمة المرور بنجاح و يمكنك الآن تسجيل الدخول إلى حسابك!",
+    "login": "تسجيل الدخول"
   },
   "Thekaa": "ذكاء",
   "LocaleSwitcher": {
