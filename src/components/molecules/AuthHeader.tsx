@@ -38,12 +38,10 @@ const AuthHeader: React.FC<AuthHeaderProps> = ({
           {subtitle}
         </CardDescription>
         {email && (
-          <CardDescription className="text-forcedGray">
-            {email}
-          </CardDescription>
+          <CardDescription className="text-forcedGray">{email}</CardDescription>
         )}
         {subtitle2 && (
-          <CardDescription className="text-forcedGray text-lg">
+          <CardDescription className="text-forcedGray text-lg text-center">
             {subtitle2}
           </CardDescription>
         )}
