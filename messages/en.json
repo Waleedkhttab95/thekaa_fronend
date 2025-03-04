@@ -78,6 +78,15 @@
     },
     "signUpButton": "Create An Account"
   },
+  "VerifyAccountPage": {
+    "title": "Account Verification",
+    "subTitle": "Check your email 📩",
+    "subSubTitle": "We have sent you a 4-digit verification code. Enter it to complete account creation.",
+    "didNotGetCode": "Didn't receive the code? You can resend it after 25 seconds, ",
+    "sendCodeAgain": "Resend Code",
+    "verify": "Verify",
+    "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly."
+  },
   "Thekaa": "Thekaa",
   "LocaleSwitcher": {
     "switchLocale": "عربي",

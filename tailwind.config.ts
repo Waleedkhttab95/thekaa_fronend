@@ -17,6 +17,7 @@ export default {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        forcedGray: "#6C6063",
         card: {
           DEFAULT: "hsl(var(--card))",
           transparent: "hsla(var(--card-transparent))",

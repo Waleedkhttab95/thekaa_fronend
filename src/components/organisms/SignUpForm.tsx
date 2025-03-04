@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { getSignUpSchema } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
@@ -23,6 +24,7 @@ import EyeSlashed from "../../../public/eye-slash.svg";
 import { Checkbox } from "../atoms/checkbox";
 
 const SignUpForm = () => {
+  const router = useRouter();
   const t = useTranslations("SignUpPage");
   const locale = useLocale();
 
@@ -47,6 +49,7 @@ const SignUpForm = () => {
   function onSubmit(data: z.infer<ReturnType<typeof getSignUpSchema>>) {
     console.log(data);
     form.reset();
+    router.push("/sign-up/verify-account");
   }
 
   return (
