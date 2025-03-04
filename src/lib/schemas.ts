@@ -43,3 +43,8 @@ export const getSignUpSchema = (t: (key: string) => string) =>
       message: t("formErrors.passwordsMustMatch"),
       path: ["confirmPassword"],
     });
+
+export const getRecoverPasswordSchema = (t: (key: string) => string) =>
+  z.object({
+    email: z.string().email(t("invalidEmail")).nonempty(t("requiredEmail")),
+  });

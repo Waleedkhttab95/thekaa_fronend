@@ -1,4 +1,6 @@
+import RecoveryCodePage from "@/components/pages/RecoveryCodePage";
+
 const RecoveryCode = () => {
-  return <div>RecoveryCode</div>;
+  return <RecoveryCodePage />;
 };
 export default RecoveryCode;
