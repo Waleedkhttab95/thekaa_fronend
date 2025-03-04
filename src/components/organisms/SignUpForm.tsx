@@ -49,7 +49,7 @@ const SignUpForm = () => {
   function onSubmit(data: z.infer<ReturnType<typeof getSignUpSchema>>) {
     console.log(data);
     form.reset();
-    router.push("/sign-up/verify-account");
+    router.push("/verify-account");
   }
 
   return (
