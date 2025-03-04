@@ -1,16 +1,17 @@
-import VerifyAccountHeader from "../molecules/AuthHeader";
+import { useTranslations } from "next-intl";
+
 import AuthLayout from "../layouts/AuthLayout";
 import VerifyAccountForm from "../organisms/VerifyAccountForm";
+import AuthHeader from "../molecules/AuthHeader";
 
 import AuthorizedLogo from "../../../public/authorized.svg";
-import { useTranslations } from "next-intl";
 
 const VerifyAccountPage = () => {
   const t = useTranslations("VerifyAccountPage");
   return (
     <AuthLayout
       headerTitle={
-        <VerifyAccountHeader
+        <AuthHeader
           imageSrc={AuthorizedLogo}
           imageAlt="authorized"
           imageW={53}

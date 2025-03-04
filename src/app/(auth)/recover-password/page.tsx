@@ -1,4 +1,6 @@
+import RecoverPasswordPage from "@/components/pages/RecoverPasswordPage";
+
 const RecoverPassword = () => {
-  return <div>RecoverPassword</div>;
+  return <RecoverPasswordPage />;
 };
 export default RecoverPassword;

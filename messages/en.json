@@ -87,6 +87,15 @@
     "verify": "Verify",
     "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly."
   },
+  "RecoverPasswordPage": {
+    "title": "Recover Password",
+    "subTitle": "Enter your email to send your password recovery code!",
+    "inputLabel": "Email",
+    "inputPlaceholder": "Enter your email address",
+    "invalidEmail": "Enter a Valid Email Address",
+    "requiredEmail": "Enter Your Email Address",
+    "send": "Send"
+  },
   "Thekaa": "Thekaa",
   "LocaleSwitcher": {
     "switchLocale": "عربي",
