@@ -28,8 +28,6 @@ export const getSignUpSchema = (t: (key: string) => string) =>
       password: z
         .string()
         .min(8, t("formErrors.passwordMinLength"))
-        .regex(/[A-Z]/, t("formErrors.passwordUpperCase"))
-        .regex(/[a-z]/, t("formErrors.passwordLowerCase"))
         .regex(/\d/, t("formErrors.passwordDigit"))
         .regex(/[@$!%*?&]/, t("formErrors.passwordSpecialCharacter")),
       confirmPassword: z
@@ -48,3 +46,20 @@ export const getRecoverPasswordSchema = (t: (key: string) => string) =>
   z.object({
     email: z.string().email(t("invalidEmail")).nonempty(t("requiredEmail")),
   });
+
+export const getNewPasswordSchema = (t: (key: string) => string) =>
+  z
+    .object({
+      newPassword: z
+        .string()
+        .min(8, t("formErrors.passwordMinLength"))
+        .regex(/\d/, t("formErrors.passwordDigit"))
+        .regex(/[@$!%*?&]/, t("formErrors.passwordSpecialCharacter")),
+      confirmNewPassword: z
+        .string()
+        .nonempty(t("formErrors.confirmPasswordRequired")),
+    })
+    .refine((data) => data.newPassword === data.confirmNewPassword, {
+      message: t("formErrors.passwordsMustMatch"),
+      path: ["confirmNewPassword"],
+    });
