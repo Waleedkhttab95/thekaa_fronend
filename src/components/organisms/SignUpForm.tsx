@@ -40,42 +40,6 @@ const SignUpForm = () => {
     },
   });
 
-  const parentNameFormValue = form.getValues("parentName");
-  const emailFormValue = form.getValues("email");
-  const phoneNumberValue = form.getValues("phoneNumber");
-  const passwordValue = form.getValues("password");
-  const confirmPasswordValue = form.getValues("confirmPassword");
-  const acceptTermsValue = form.getValues("acceptTerms");
-
-  useEffect(() => {
-    if (parentNameFormValue) {
-      form.clearErrors("parentName");
-    }
-    if (emailFormValue) {
-      form.clearErrors("email");
-    }
-    if (phoneNumberValue) {
-      form.clearErrors("phoneNumber");
-    }
-    if (passwordValue) {
-      form.clearErrors("password");
-    }
-    if (confirmPasswordValue) {
-      form.clearErrors("confirmPassword");
-    }
-    if (acceptTermsValue) {
-      form.clearErrors("acceptTerms");
-    }
-  }, [
-    parentNameFormValue,
-    emailFormValue,
-    phoneNumberValue,
-    passwordValue,
-    confirmPasswordValue,
-    acceptTermsValue,
-    form,
-  ]);
-
   useEffect(() => {
     form.clearErrors();
   }, [locale, form]);
