@@ -121,5 +121,52 @@
     "goToDashboard": "Go to Dashboard",
     "done": "Completed the student data successfully",
     "levelMessage": "We are working on accurately evaluating Mohammad's performance using artificial intelligence, so that you can learn his basic specifications experience 🚀"
+  },
+  "addStudentPage": {
+    "studentInfo": "Student Information",
+    "addStudentInfo": "Enter Student Information",
+    "addStudentInfoToThekaa": "Add Your Child to Thekaa Platform!",
+    "addStudentInfoToThekaaDescription": "You can add more than one child to your account to start their fun learning journey on Thekaa. We will ask you for some basic information about them.",
+    "startAddNewStudent": "Start Adding a New Student",
+    "studentName": "Student Name",
+    "studentNamePlaceholder": "Enter student name",
+    "studentAge": "Student Age",
+    "studentAgePlaceholder": "Enter student age",
+    "studentLevel": "Student Level",
+    "studentLevelPlaceholder": "Select student level",
+    "start": "Start",
+    "skip": "Skip",
+    "previous": "Previous",
+    "next": "Next",
+    "formData": {
+      "studentName": {
+        "label": "What is the student's name?",
+        "placeholder": "Enter the student's full name"
+      },
+      "age": {
+        "label": "How old is the student?",
+        "placeholder": "Enter student age"
+      },
+      "subject": {
+        "label": "What subject does the student want to study? 📚",
+        "placeholder": "Select a subject"
+      },
+      "educationLevel": {
+        "label": "What educational level is the student in? 🎓",
+        "placeholder": "Select educational level"
+      }
+    },
+    "addStudentButton": "Add Student",
+    "studentAddedSuccessfully": "Student information has been added successfully",
+    "StartLevelExam": "Do you want to start the placement test now?",
+    "formErrors": {
+      "studentNameRequired": "Enter the student's name",
+      "studentNameInvalid": "Enter a valid name, avoiding numbers and symbols",
+      "studentNameMinLength": "The name must be at least 3 characters long",
+      "studentNameMaxLength": "The name must be at most 40 characters long",
+      "studentAgeInvalid": "Enter a valid age",
+      "educationLevelRequired": "Select an educational level",
+      "subjectRequired": "Select a subject"
+    }
   }
 }

@@ -121,5 +121,52 @@
     "goToDashboard": "الانتقال إلى لوحة التحكم",
     "done": "تم استكمال ملف الطالب بنجاح",
     "levelMessage": "نحن نعمل على تقييم أداء محمد بدقة باستخدام الذكاء الاصطناعي، وذلك لتقديم تجربة تعلم مخصصة تناسب احتياجاته تماماً 🚀"
+  },
+  "addStudentPage": {
+    "studentInfo": "معلومات الطالب",
+    "addStudentInfo": "أدخل معلومات الطالب",
+    "addStudentInfoToThekaa": "أضف طفلك إلى منصة ذكاء!",
+    "addStudentInfoToThekaaDescription": "يمكنك إضافة أكثر من طفل لحسابك ليبدأ رحلة التعلم الممتعة في ذكاء. سنطلب منك بعض المعلومات الأساسية عنه.",
+    "startAddNewStudent": "إبدأ بإضافة طالب جديد",
+    "studentName": "اسم الطالب",
+    "studentNamePlaceholder": "ادخل اسم الطالب",
+    "studentAge": "عمر الطالب",
+    "studentAgePlaceholder": "ادخل عمر الطالب",
+    "studentLevel": "مستوى الطالب",
+    "studentLevelPlaceholder": "اختر مستوى الطالب",
+    "start": "بدء",
+    "skip": "تخطي",
+    "previous": "السابق",
+    "next": "التالي",
+    "formData": {
+      "studentName": {
+        "label": "ما إسم الطالب؟",
+        "placeholder": "أدخل الاسم الكامل للطالب"
+      },
+      "age": {
+        "label": "كم عمر الطالب",
+        "placeholder": "ادخل عمر الطالب"
+      },
+      "subject": {
+        "label": "ما المادة التي يريد الطالب دراستها؟ 📚",
+        "placeholder": "اختر مادة"
+      },
+      "educationLevel": {
+        "label": "في أي مرحلة دراسية يدرس الطالب؟ 🎓",
+        "placeholder": "اختر المرحلة الدراسية"
+      }
+    },
+    "addStudentButton": "إضافة الطالب",
+    "studentAddedSuccessfully": "تم إضافة معلومات الطالب بنجاح",
+    "StartLevelExam": "هل تريد بدء إمتحان تحديد المستوى الآن؟",
+    "formErrors": {
+      "studentNameRequired": "ادخل اسم الطالب",
+      "studentNameInvalid": "ادخل اسم صحيح ، تجنب الأرقام والرموز",
+      "studentNameMinLength": "الاسم يجب أن يكون من 3 أحرف على الأقل",
+      "studentNameMaxLength": "الاسم يجب أن يكون من 40 حرف على الأكثر",
+      "studentAgeInvalid": "ادخل عمر صحيح",
+      "educationLevelRequired": "اختر مستوى التعليم",
+      "subjectRequired": "اختر المادة"
+    }
   }
 }
