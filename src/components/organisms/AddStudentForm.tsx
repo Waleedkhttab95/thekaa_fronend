@@ -18,12 +18,12 @@ import {
 } from '../atoms/select';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { getStudentAddSchema } from '@/lib/schemas';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { getFromSteps } from '@/data/addStudent';
 import { IStudentData } from '@/types/student.type';
+import { getStudentAddSchema } from '@/validations/studentsSchemas';
 type props = {
   finish: () => void
 }
