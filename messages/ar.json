@@ -68,8 +68,6 @@
       "phoneNumberRequired": "ادخل رقم الهاتف ولي الأمر",
       "phoneNumberInvalid": "ادخل رقم هاتف صحيح",
       "passwordMinLength": "كلمة المرور يجب أن تكون من 8 خانات على الأقل",
-      "passwordUpperCase": "كملة المرور يجب أن تحتوي على حرف كبير واحد على الأقل",
-      "passwordLowerCase": "كلمةالمرور يجب أن تحتوي على حرف صغير واحد على الأقل",
       "passwordDigit": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
       "passwordSpecialCharacter": "كلمة المرور يجب أن تحتوي على رمز مميز واحد على الأقل @ $ ! % * ? &",
       "confirmPasswordRequired": "ادخل كلمة المرور مرة أخرى",
@@ -104,6 +102,34 @@
     "sendCodeAgain": "أعد إرسال الرمز",
     "wrongCode": "⚠ رمز التحقق غير صحيح يرجى المحاولة مرة أخرى. تأكد من إدخال الأرقام بشكل صحيح",
     "verify": "تحقق"
+  },
+  "NewPasswordPage": {
+    "title": "قم بادخال كلمة مرور جديدة!",
+    "subTitle": "تهانينا! لقد تم قبول طلب تغيير كلمة المرور الخاصة بك, والآن قم بإدخال كلمة مرور قوية ولا تشاركها مع أي شخص!",
+    "formInputs": {
+      "newPasswordLabel": "كلمة المرور الجديدة",
+      "newPasswordPlaceholder": "ادخل كلمة المرور الجديدة",
+      "confirmNewPasswordLabel": "تأكيد كلمو المرور الجديدة",
+      "confirmNewPasswordPlaceholder": "ادخل كلمة المرور مرة أخرى"
+    },
+    "formErrors": {
+      "passwordMinLength": "كلمة المرور يجب أن تكون من 8 خانات على الأقل",
+      "passwordDigit": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
+      "passwordSpecialCharacter": "كلمة المرور يجب أن تحتوي على رمز مميز واحد على الأقل @ $ ! % * ? &",
+      "confirmPasswordRequired": "ادخل كلمة المرور مرة أخرى",
+      "passwordsMustMatch": "يجب أن تتطابق مع كلمة المرور المدخلة أعلاه"
+    },
+    "passwordStrength": "قوة الكلمة",
+    "weak": "ضعيفة",
+    "mid": "متوسطة",
+    "strong": "قوية",
+    "numberOfCharacters": "8 أحرف على الأقل",
+    "oneNumber": "رقم واحد على الأقل",
+    "oneSpecialCharacter": "رمز واحد على الأقل",
+    "changePassword": "تغيير كلمة المرور",
+    "congrats": "تهانينا!",
+    "successMassage": "لقد تم تغيير كلمة المرور بنجاح و يمكنك الآن تسجيل الدخول إلى حسابك!",
+    "login": "تسجيل الدخول"
   },
   "Thekaa": "ذكاء",
   "LocaleSwitcher": {

@@ -24,7 +24,7 @@ const AuthHeader: React.FC<AuthHeaderProps> = ({
   email,
 }) => {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center w-[490px]">
       <Image
         src={imageSrc}
         alt={imageAlt}
@@ -34,16 +34,14 @@ const AuthHeader: React.FC<AuthHeaderProps> = ({
       />
       <div className="flex flex-col items-center gap-3">
         <CardTitle>{title}</CardTitle>
-        <CardDescription className="text-forcedGray text-lg">
+        <CardDescription className="text-forcedGray text-lg text-center">
           {subtitle}
         </CardDescription>
         {email && (
-          <CardDescription className="text-forcedGray">
-            {email}
-          </CardDescription>
+          <CardDescription className="text-forcedGray">{email}</CardDescription>
         )}
         {subtitle2 && (
-          <CardDescription className="text-forcedGray text-lg">
+          <CardDescription className="text-forcedGray text-lg text-center">
             {subtitle2}
           </CardDescription>
         )}

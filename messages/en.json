@@ -68,8 +68,6 @@
       "phoneNumberRequired": "Enter the parent's phone number",
       "phoneNumberInvalid": "Enter a valid phone number",
       "passwordMinLength": "Password must be at least 8 characters long",
-      "passwordUpperCase": "Password must contain at least one uppercase letter",
-      "passwordLowerCase": "Password must contain at least one lowercase letter",
       "passwordDigit": "Password must contain at least one digit",
       "passwordSpecialCharacter": "Password must contain at least one special character @ $ ! % * ? &",
       "confirmPasswordRequired": "Enter the password again",
@@ -104,6 +102,34 @@
     "sendCodeAgain": "Resend Code",
     "wrongCode": "⚠ The verification code is incorrect. Please try again. Make sure the digits are entered correctly.",
     "verify": "Verify"
+  },
+  "NewPasswordPage": {
+    "title": "Enter a New Password!",
+    "subTitle": "Congratulations! Your password change request has been accepted. Now, enter a strong password and do not share it with anyone!",
+    "formInputs": {
+      "newPasswordLabel": "New Password",
+      "newPasswordPlaceholder": "Enter the new password",
+      "confirmNewPasswordLabel": "Confirm New Password",
+      "confirmNewPasswordPlaceholder": "Enter the password again"
+    },
+    "formErrors": {
+      "passwordMinLength": "The password must be at least 8 characters long",
+      "passwordDigit": "The password must contain at least one digit",
+      "passwordSpecialCharacter": "The password must contain at least one special character: @ $ ! % * ? &",
+      "confirmPasswordRequired": "Please confirm the password again",
+      "passwordsMustMatch": "Passwords must match"
+    },
+    "passwordStrength": "Password Strength",
+    "weak": "Weak",
+    "mid": "Mid",
+    "strong": "Strong",
+    "numberOfCharacters": "At least 8 characters",
+    "oneNumber": "At least one number",
+    "oneSpecialCharacter": "At least one special character",
+    "changePassword": "Change Password",
+    "congrats": "Congratulations!",
+    "successMassage": "Your password has been successfully changed, and you can now log in to your account!",
+    "login": "Login"
   },
   "Thekaa": "Thekaa",
   "LocaleSwitcher": {
