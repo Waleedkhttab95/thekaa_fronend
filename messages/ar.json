@@ -109,6 +109,8 @@
     "studentLevelPlaceholder": "اختر مستوى الطالب",
     "start": "بدء",
     "skip": "تخطي",
+    "previous": "السابق",
+    "next": "التالي",
     "formData": {
       "studentName": {
         "label": "ما إسم الطالب؟",
@@ -132,7 +134,9 @@
     "StartLevelExam": "هل تريد بدء إمتحان تحديد المستوى الآن؟",
     "formErrors": {
       "studentNameRequired": "ادخل اسم الطالب",
+      "studentNameInvalid": "ادخل اسم صحيح ، تجنب الأرقام والرموز",
       "studentNameMinLength": "الاسم يجب أن يكون من 3 أحرف على الأقل",
+      "studentNameMaxLength": "الاسم يجب أن يكون من 40 حرف على الأكثر",
       "studentAgeInvalid": "ادخل عمر صحيح",
       "educationLevelRequired": "اختر مستوى التعليم",
       "subjectRequired": "اختر المادة"

@@ -1,6 +1,7 @@
+import { TFunctionType } from "@/types/common.type";
 import { z } from "zod";
 
-export const getLoginSchema = (t: (key: string) => string) =>
+export const getLoginSchema = (t: TFunctionType) =>
   z.object({
     email: z
       .string()
@@ -10,7 +11,7 @@ export const getLoginSchema = (t: (key: string) => string) =>
     rememberMe: z.boolean().default(false),
   });
 
-export const getSignUpSchema = (t: (key: string) => string) =>
+export const getSignUpSchema = (t: TFunctionType) =>
   z
     .object({
       parentName: z
@@ -44,16 +45,17 @@ export const getSignUpSchema = (t: (key: string) => string) =>
       path: ["confirmPassword"],
     });
 
-export const getStudentAddSchema = (t: (key: string) => string) => [
+export const getStudentAddSchema = (t: TFunctionType) => [
   z.object({
-    studentName: z.string().nonempty(t("formErrors.studentNameRequired")),
+    studentName: z
+      .string()
+      .nonempty(t("formErrors.studentNameRequired"))
+      .regex(/^[\p{L}\s]+$/u, t("formErrors.studentNameInvalid"))
+      .min(3, t("formErrors.studentNameMinLength"))
+      .max(40, t("formErrors.studentNameMaxLength")),
   }),
   z.object({
-    age: z.coerce
-      .number({
-        invalid_type_error: t("formErrors.studentAgeInvalid"),
-      })
-      .min(5, t("formErrors.studentAgeInvalid")),
+    age: z.number().min(5, t("formErrors.studentAgeInvalid")),
   }),
   z.object({
     educationLevel: z.string().nonempty(t("formErrors.educationLevelRequired")),

@@ -10,7 +10,7 @@ export const getFromSteps = (t: TFunctionType) => [
   {
     name: "age",
     label: t("formData.age.label"),
-    type: "text",
+    type: "number",
     placeholder: t("formData.age.placeholder"),
   },
   {

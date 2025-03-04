@@ -75,7 +75,9 @@ const AddStudentForm = ({ finish }: props) => {
   const currentStepData = steps[currentStep];
   return (
     <Form {...form} key={currentStep}>
-      <form onSubmit={form.handleSubmit(onSubmit)} >
+      <form onSubmit={form.handleSubmit(onSubmit)} onKeyDown={(e) => {
+        if (e.key === "Enter") e.preventDefault();
+      }} >
         <div className='space-y-2 mb-10 max-h-[80px]'>
           <FormLabel>{currentStepData.label}</FormLabel>
           <FormField
@@ -85,12 +87,13 @@ const AddStudentForm = ({ finish }: props) => {
             render={({ field: formField }) => (
               <FormItem>
                 <FormControl>
-                  {currentStepData.type === 'text' ? (
+                  {currentStepData.type !== 'select' ? (
                     <Input
                       placeholder={currentStepData.placeholder}
                       {...formField}
+                      type={currentStepData.type}
                     />
-                  ) : currentStepData.type === 'select' && (
+                  ) : (
                     <Select
                       onValueChange={formField.onChange}
                       defaultValue={formField.value?.toString()}
@@ -129,13 +132,13 @@ const AddStudentForm = ({ finish }: props) => {
                 color="white"
                 className="ltr:scale-x-[-1]"
               />
-              <span>السابق</span>
+              <span>{t("previous")}</span>
 
             </Button>
           )}
 
           <Button type="submit" className={"md:w-[109px]"}>
-            <span>التالي</span>
+            <span>{t("next")}</span>
             <Image
               src={'/arrow.svg'}
               alt="arrow"

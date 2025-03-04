@@ -17,7 +17,7 @@ const getOuterSteps = (t: TFunctionType, setCurrentStep: setCurrentStepFnType) =
     description: t('addStudentInfoToThekaaDescription'),
     icon: "/assets/images/student.svg",
     content: (
-      <Button className='w-full md:w-[50%] flex font-bold mx-auto ' onClick={() => setCurrentStep((curr: number) => curr + 1)}>
+      <Button className='w-full md:w-[55%] flex font-bold mx-auto ' onClick={() => setCurrentStep((curr: number) => curr + 1)}>
         <Image src="/assets/images/icons/plus.svg" width={19} height={19} alt={t("startAddNewStudent")} />
         <span >{t("startAddNewStudent")}</span>
       </Button>
