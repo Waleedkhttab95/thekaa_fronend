@@ -45,6 +45,7 @@ export const getSignUpSchema = (t: TFunctionType) =>
       path: ["confirmPassword"],
     });
 
+
 export const getStudentAddSchema = (t: TFunctionType) => [
   z.object({
     studentName: z
@@ -62,3 +63,9 @@ export const getStudentAddSchema = (t: TFunctionType) => [
   }),
   z.object({ subject: z.string().nonempty(t("formErrors.subjectRequired")) }),
 ];
+
+export const getRecoverPasswordSchema = (t: (key: string) => string) =>
+  z.object({
+    email: z.string().email(t("invalidEmail")).nonempty(t("requiredEmail")),
+  });
+

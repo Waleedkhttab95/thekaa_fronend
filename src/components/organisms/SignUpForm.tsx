@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { getSignUpSchema } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
@@ -23,6 +24,7 @@ import EyeSlashed from "../../../public/eye-slash.svg";
 import { Checkbox } from "../atoms/checkbox";
 
 const SignUpForm = () => {
+  const router = useRouter();
   const t = useTranslations("SignUpPage");
   const locale = useLocale();
 
@@ -40,42 +42,6 @@ const SignUpForm = () => {
     },
   });
 
-  const parentNameFormValue = form.getValues("parentName");
-  const emailFormValue = form.getValues("email");
-  const phoneNumberValue = form.getValues("phoneNumber");
-  const passwordValue = form.getValues("password");
-  const confirmPasswordValue = form.getValues("confirmPassword");
-  const acceptTermsValue = form.getValues("acceptTerms");
-
-  useEffect(() => {
-    if (parentNameFormValue) {
-      form.clearErrors("parentName");
-    }
-    if (emailFormValue) {
-      form.clearErrors("email");
-    }
-    if (phoneNumberValue) {
-      form.clearErrors("phoneNumber");
-    }
-    if (passwordValue) {
-      form.clearErrors("password");
-    }
-    if (confirmPasswordValue) {
-      form.clearErrors("confirmPassword");
-    }
-    if (acceptTermsValue) {
-      form.clearErrors("acceptTerms");
-    }
-  }, [
-    parentNameFormValue,
-    emailFormValue,
-    phoneNumberValue,
-    passwordValue,
-    confirmPasswordValue,
-    acceptTermsValue,
-    form,
-  ]);
-
   useEffect(() => {
     form.clearErrors();
   }, [locale, form]);
@@ -83,6 +49,7 @@ const SignUpForm = () => {
   function onSubmit(data: z.infer<ReturnType<typeof getSignUpSchema>>) {
     console.log(data);
     form.reset();
+    router.push("/verify-account");
   }
 
   return (
