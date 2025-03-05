@@ -15,14 +15,16 @@ const VerifyAccountForm = () => {
   const [isValid, setIsValid] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const onComplete = () => {
+  const handleComplete = () => {
+    if (value !== "1234") {
+      setIsError(true);
+      setIsValid(false);
+    }
     if (value === "1234") {
       setIsValid(true);
       setIsError(false);
       return;
     }
-    setIsError(true);
-    setIsValid(false);
   };
 
   return (
@@ -34,7 +36,6 @@ const VerifyAccountForm = () => {
           setValue(value);
           setIsError(false);
         }}
-        onComplete={onComplete}
       >
         <InputOTPGroup>
           <InputOTPSlot index={0} error={isError} />
@@ -46,18 +47,22 @@ const VerifyAccountForm = () => {
       <div
         className={clsx("mt-6", {
           "flex flex-col items-center": isError,
-          "flex justify-center items-center": !isError,
+          "flex flex-col xl:flex-row justify-center items-center": !isError,
         })}
       >
         {isError && (
-          <p className="text-destructive text-center mb-2 w-[400px]">{t("wrongCode")}</p>
+          <p className="text-destructive text-center mb-2 w-[300px] xl:w-[400px]">
+            {t("wrongCode")}
+          </p>
         )}
         {!isError && <CardDescription>{t("didNotGetCode")}</CardDescription>}
         <CardTitle className="hover: underline cursor-pointer">
           {t("sendCodeAgain")}
         </CardTitle>
       </div>
-      <Button className="w-full mt-6">{t("verify")}</Button>
+      <Button className="w-full mt-6" onClick={handleComplete}>
+        {t("verify")}
+      </Button>
       {isValid && (
         <p className="absolute top-4 bg-green-500 text-white">Valid Code</p>
       )}

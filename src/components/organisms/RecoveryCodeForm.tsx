@@ -48,11 +48,11 @@ const RecoveryCodeForm = () => {
       <div
         className={clsx("mt-6", {
           "flex flex-col items-center": isError,
-          "flex justify-center items-center": !isError,
+          "flex flex-col xl:flex-row justify-center items-center": !isError,
         })}
       >
         {isError && (
-          <p className="text-destructive text-center mb-2 w-[400px]">
+          <p className="text-destructive text-center mb-2 w-[300px] xl:w-[400px]">
             {t("wrongCode")}
           </p>
         )}

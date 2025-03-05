@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import {
@@ -12,9 +11,9 @@ import {
 import SuccessIcon from "../../../public/successful-new-password.svg";
 import { useTranslations } from "next-intl";
 import { Button } from "../atoms/button";
+import Link from "next/link";
 
 const SuccessfulNewPassword = () => {
-  const router = useRouter();
   const t = useTranslations("NewPasswordPage");
   return (
     <Card className="flex flex-col justify-center items-center py-28 px-28">
@@ -26,9 +25,9 @@ const SuccessfulNewPassword = () => {
         <CardDescription>{t("successMassage")}</CardDescription>
       </CardContent>
       <CardFooter>
-        <Button className="w-64 mt-12" onClick={() => router.push("/login")}>
-          {t("login")}
-        </Button>
+        <Link href={"/login"}>
+          <Button className="w-64 mt-12">{t("login")}</Button>
+        </Link>
       </CardFooter>
     </Card>
   );
