@@ -28,7 +28,7 @@ const AuthLayout = ({
       className={`xl:w-[787px] flex flex-col justify-center items-center py-14 px-5 xl:px-0 ${className}`}
       variant="transparent"
     >
-      <CardHeader className="justify-center items-center gap-y-2 mb-11">
+      <CardHeader className="justify-center items-center gap-y-2 mb-11 text-center">
         <CardTitle className="text-[28px]">{headerTitle}</CardTitle>
         <CardDescription className="text-lg">{headerSubTitle}</CardDescription>
       </CardHeader>

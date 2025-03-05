@@ -33,7 +33,7 @@ const AuthHeader: React.FC<AuthHeaderProps> = ({
         className="mb-3"
       />
       <div className="flex flex-col items-center gap-3 max-w-full">
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="text-center">{title}</CardTitle>
         <CardDescription className="text-forcedGray text-lg text-center max-w-md">
           {subtitle}
         </CardDescription>

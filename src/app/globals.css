@@ -8,7 +8,7 @@
   }
 
   .auth-form-width {
-    @apply w-[350px] xl:w-[487px];
+    @apply xl:w-[487px];
   }
 }
 ::-webkit-scrollbar {
