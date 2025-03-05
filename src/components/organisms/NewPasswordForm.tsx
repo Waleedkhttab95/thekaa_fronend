@@ -46,8 +46,8 @@ const NewPasswordForm = ({
 
   const evaluatePasswordStrength = (password: string) => {
     let strength = 0;
-    if (password.length >= 8) strength += 1;
-    if (/\d/.test(password)) strength += 1;
+    if (password.length >= 1) strength += 1;
+    if (/\d/.test(password) && password.length >= 8) strength += 1;
     if (/[@$!%*?&]/.test(password)) strength += 1;
     setPasswordStrength(strength);
   };
@@ -120,7 +120,6 @@ const NewPasswordForm = ({
           )}
         />
 
-        {/* Password Strength Indicator */}
         <div className="flex justify-between items-center mt-4">
           <CardDescription className="text-lg text-forcedGray mb-1">
             {t("passwordStrength")}
@@ -139,7 +138,7 @@ const NewPasswordForm = ({
             ></div>
           </div>
           <span
-            className={`text-sm mt-1 ${
+            className={`text-sm mt-1 px-2 min-w-14 text-center ${
               passwordStrength === 1
                 ? "text-red-500"
                 : passwordStrength === 2

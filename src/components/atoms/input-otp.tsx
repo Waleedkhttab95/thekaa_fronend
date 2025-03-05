@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const InputOTP = React.forwardRef<
   React.ComponentRef<typeof OTPInput>,
   React.ComponentPropsWithoutRef<typeof OTPInput>
->(({ className, containerClassName, ...props }, ref) => (
+>(({ className, containerClassName, onChange, ...props }, ref) => (
   <OTPInput
     ref={ref}
     containerClassName={cn(
@@ -17,6 +17,9 @@ const InputOTP = React.forwardRef<
       containerClassName
     )}
     className={cn("disabled:cursor-not-allowed", className)}
+    onChange={(value) => {
+      if (onChange) onChange(value.replace(/\s/g, ""));
+    }}
     {...props}
   />
 ));
