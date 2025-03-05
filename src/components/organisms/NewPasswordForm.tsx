@@ -62,7 +62,7 @@ const NewPasswordForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-[487px] flex flex-col gap-y-2"
+        className="auth-form-width flex flex-col gap-y-2"
       >
         <FormField
           control={form.control}

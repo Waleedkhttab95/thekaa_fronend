@@ -68,7 +68,7 @@ export function LoginForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-[487px] flex flex-col gap-y-2"
+        className="auth-form-width flex flex-col gap-y-2"
       >
         <FormField
           control={form.control}
@@ -134,7 +134,7 @@ export function LoginForm() {
             )}
           />
           <p className="cursor-pointer hover:underline">
-            <Link href={'/recover-password'}>{t("forgotPassword")}</Link>
+            <Link href={"/recover-password"}>{t("forgotPassword")}</Link>
           </p>
         </div>
         <div className="w-full flex flex-col gap-y-4 mt-6">
