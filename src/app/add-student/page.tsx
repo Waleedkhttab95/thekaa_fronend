@@ -1,17 +1,17 @@
-import LoginPage from "@/components/pages/LoginPage";
+import AddStudentPage from "@/components/pages/AddStudentPage";
 import { getLocale } from "next-intl/server";
 
 export async function generateMetadata() {
   const locale = await getLocale() as keyof typeof metadataTranslations;
   const metadataTranslations = {
     en: {
-      title: 'login'
+      title: 'Student Add'
     },
-    ar: { title: "تسجيل الدخول" },
+    ar: { title: "إضافة طالب" },
   };
   return metadataTranslations[locale]
 }
-const Login = () => {
-  return <LoginPage />;
+const AddStudent = () => {
+  return <AddStudentPage />;
 };
-export default Login;
+export default AddStudent;

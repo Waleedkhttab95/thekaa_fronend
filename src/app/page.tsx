@@ -1,8 +1,19 @@
 import { useTranslations } from 'next-intl';
+import { getLocale } from 'next-intl/server';
 import Link from 'next/link';
 // import ThemeSwitcher from '@/components/atoms/ThemeSwitcher';
 
-export default function HomePage() {
+
+export async function generateMetadata() {
+  const locale = await getLocale() as keyof typeof metadataTranslations;
+  const metadataTranslations = {
+    en: {
+      title: 'Home | Thekaa'
+    },
+    ar: { title: "ذكاء | الرئيسية" },
+  };
+  return metadataTranslations[locale]
+} export default function HomePage() {
 
   const t = useTranslations('HomePage');
   return (

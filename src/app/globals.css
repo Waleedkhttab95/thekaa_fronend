@@ -5,17 +5,24 @@
 @layer components {
   .flex-center {
     @apply flex justify-center items-center;
-}
+  }
+
+  .auth-form-width {
+    @apply xl:w-[487px];
+  }
 }
 ::-webkit-scrollbar {
   width: 10px; /* Scrollbar width */
-  background-color: rgba(27, 27, 27, 0.3); /* Dark gray/black with transparency */
-  
+  background-color: rgba(
+    27,
+    27,
+    27,
+    0.3
+  ); /* Dark gray/black with transparency */
 }
 ::-webkit-scrollbar-track {
   background: rgba(27, 27, 27, 0.3); /* Dark gray/black with transparency */
   backdrop-filter: blur(8px); /* Blur effect */
-
 }
 
 ::-webkit-scrollbar-thumb {
@@ -32,23 +39,20 @@
   background: rgba(27, 27, 27, 0.3); /* Match the track background */
 }
 
-body{
-  background : linear-gradient(135deg, 
-  #66d1f0, /* Light cyan-blue */
-  /* #f9f9f9, Near white */
-  #e8a3c5, /* Soft pink */
-  #7a4b72, /* Purple */
-  #1b1b1b  /* Dark gray/black */
-  ) fixed;  
-
-  overflow-x: hidden;
-}
-.main-layout{
-  background-image:  url('/assets/images/bg.svg');
+body {
+  background: linear-gradient(
+    135deg,
+    #66d1f0,
+    /* Light cyan-blue */ /* #f9f9f9, Near white */ #e8a3c5,
+    /* Soft pink */ #7a4b72,
+    /* Purple */ #1b1b1b /* Dark gray/black */
+  );
+  background-image: url("/assets/images/bg.webp");
   background-size: cover;
   background-attachment: fixed;
+  background-color: transparent;
+  font-family: var(--font-pingar);
 }
-
 
 @layer base {
   :root {
@@ -115,5 +119,4 @@ body{
   body {
     @apply bg-background text-foreground;
   }
- }
-
+}

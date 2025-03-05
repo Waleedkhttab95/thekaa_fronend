@@ -68,8 +68,6 @@
       "phoneNumberRequired": "Enter the parent's phone number",
       "phoneNumberInvalid": "Enter a valid phone number",
       "passwordMinLength": "Password must be at least 8 characters long",
-      "passwordUpperCase": "Password must contain at least one uppercase letter",
-      "passwordLowerCase": "Password must contain at least one lowercase letter",
       "passwordDigit": "Password must contain at least one digit",
       "passwordSpecialCharacter": "Password must contain at least one special character @ $ ! % * ? &",
       "confirmPasswordRequired": "Enter the password again",
@@ -77,6 +75,61 @@
       "acceptTermsRequired": "You must agree to the Terms of Service and Usage"
     },
     "signUpButton": "Create An Account"
+  },
+  "VerifyAccountPage": {
+    "title": "Account Verification",
+    "subTitle": "Check your email 📩",
+    "subSubTitle": "We have sent you a 4-digit verification code. Enter it to complete account creation.",
+    "didNotGetCode": "Didn't receive the code? You can resend it after 25 seconds, ",
+    "sendCodeAgain": "Resend Code",
+    "verify": "Verify",
+    "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly."
+  },
+  "RecoverPasswordPage": {
+    "title": "Recover Password",
+    "subTitle": "Enter your email to send your password recovery code!",
+    "inputLabel": "Email",
+    "inputPlaceholder": "Enter your email address",
+    "invalidEmail": "Enter a Valid Email Address",
+    "requiredEmail": "Enter Your Email Address",
+    "send": "Send"
+  },
+  "RecoveryCodePage": {
+    "title": "Recovery Code Sent!",
+    "subTitle": "We have sent the 4-digit recovery code to the following email:",
+    "subSubTitle": "Enter it below to reset your password",
+    "didNotGetCode": "Didn't receive the code? You can resend it after 25 seconds, ",
+    "sendCodeAgain": "Resend Code",
+    "wrongCode": "⚠ The verification code is incorrect. Please try again. Make sure the digits are entered correctly.",
+    "verify": "Verify"
+  },
+  "NewPasswordPage": {
+    "title": "Enter a New Password!",
+    "subTitle": "Congratulations! Your password change request has been accepted. Now, enter a strong password and do not share it with anyone!",
+    "formInputs": {
+      "newPasswordLabel": "New Password",
+      "newPasswordPlaceholder": "Enter the new password",
+      "confirmNewPasswordLabel": "Confirm New Password",
+      "confirmNewPasswordPlaceholder": "Enter the password again"
+    },
+    "formErrors": {
+      "passwordMinLength": "The password must be at least 8 characters long",
+      "passwordDigit": "The password must contain at least one digit",
+      "passwordSpecialCharacter": "The password must contain at least one special character: @ $ ! % * ? &",
+      "confirmPasswordRequired": "Please confirm the password again",
+      "passwordsMustMatch": "Passwords must match"
+    },
+    "passwordStrength": "Password Strength",
+    "weak": "Weak",
+    "mid": "Mid",
+    "strong": "Strong",
+    "numberOfCharacters": "At least 8 characters",
+    "oneNumber": "At least one number",
+    "oneSpecialCharacter": "At least one special character",
+    "changePassword": "Change Password",
+    "congrats": "Congratulations!",
+    "successMassage": "Your password has been successfully changed, and you can now log in to your account!",
+    "login": "Login"
   },
   "Thekaa": "Thekaa",
   "LocaleSwitcher": {
@@ -94,5 +147,52 @@
     "goToDashboard": "Go to Dashboard",
     "done": "Completed the student data successfully",
     "levelMessage": "We are working on accurately evaluating Mohammad's performance using artificial intelligence, so that you can learn his basic specifications experience 🚀"
+  },
+  "addStudentPage": {
+    "studentInfo": "Student Information",
+    "addStudentInfo": "Enter Student Information",
+    "addStudentInfoToThekaa": "Add Your Child to Thekaa Platform!",
+    "addStudentInfoToThekaaDescription": "You can add more than one child to your account to start their fun learning journey on Thekaa. We will ask you for some basic information about them.",
+    "startAddNewStudent": "Start Adding a New Student",
+    "studentName": "Student Name",
+    "studentNamePlaceholder": "Enter student name",
+    "studentAge": "Student Age",
+    "studentAgePlaceholder": "Enter student age",
+    "studentLevel": "Student Level",
+    "studentLevelPlaceholder": "Select student level",
+    "start": "Start",
+    "skip": "Skip",
+    "previous": "Previous",
+    "next": "Next",
+    "formData": {
+      "studentName": {
+        "label": "What is the student's name?",
+        "placeholder": "Enter the student's full name"
+      },
+      "age": {
+        "label": "How old is the student?",
+        "placeholder": "Enter student age"
+      },
+      "subject": {
+        "label": "What subject does the student want to study? 📚",
+        "placeholder": "Select a subject"
+      },
+      "educationLevel": {
+        "label": "What educational level is the student in? 🎓",
+        "placeholder": "Select educational level"
+      }
+    },
+    "addStudentButton": "Add Student",
+    "studentAddedSuccessfully": "Student information has been added successfully",
+    "StartLevelExam": "Do you want to start the placement test now?",
+    "formErrors": {
+      "studentNameRequired": "Enter the student's name",
+      "studentNameInvalid": "Enter a valid name, avoiding numbers and symbols",
+      "studentNameMinLength": "The name must be at least 3 characters long",
+      "studentNameMaxLength": "The name must be at most 40 characters long",
+      "studentAgeInvalid": "Enter a valid age",
+      "educationLevelRequired": "Select an educational level",
+      "subjectRequired": "Select a subject"
+    }
   }
 }
