@@ -9,4 +9,5 @@ export interface IStudentData {
   age: number;
   educationLevel: string;
   subject: string;
+  avatar?: string;
 }

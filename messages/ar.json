@@ -168,5 +168,51 @@
       "educationLevelRequired": "اختر مستوى التعليم",
       "subjectRequired": "اختر المادة"
     }
+  },
+  "editStudentPage": {
+    "fileManagment": "إدارة الملف",
+    "confirmDeleteMessage": "هل أنت متأكد من أنك تريد حذف الطالب ؟",
+    "formData": {
+      "studentName": {
+        "label": "إسم الطالب",
+        "placeholder": "أدخل الاسم الكامل للطالب"
+      },
+      "age": {
+        "label": "عمر الطالب",
+        "placeholder": "ادخل عمر الطالب"
+      },
+      "subject": {
+        "label": "المادة التي يدرسها",
+        "placeholder": "اختر مادة"
+      },
+      "educationLevel": {
+        "label": "المرحلة الدراسية",
+        "placeholder": "اختر المرحلة الدراسية"
+      }
+    },
+    "chooseDifferentImage": "اختر صورة آخرى",
+    "studentDeletedSuccessfully": "تم حذف ملف الطالب",
+    "saveChanges": "حفظ التغييرات",
+    "EditStudentPicture": "تعديل صورة الطالب",
+    "cropDescription": "قص واضبط صورة الطالب",
+    "zoom": "تكبير",
+    "deleteStudentFile": "حذف ملف الطالب",
+    "formErrors": {
+      "studentNameRequired": "ادخل اسم الطالب",
+      "studentNameInvalid": "ادخل اسم صحيح ، تجنب الأرقام والرموز",
+      "studentNameMinLength": "الاسم يجب أن يكون من 3 أحرف على الأقل",
+      "studentNameMaxLength": "الاسم يجب أن يكون من 40 حرف على الأكثر",
+      "studentAgeInvalid": "ادخل عمر صحيح",
+      "educationLevelRequired": "اختر مستوى التعليم",
+      "subjectRequired": "اختر المادة",
+      "avatarRequired": "الرجاء إدخال صورة"
+    }
+  },
+  "common": {
+    "delete": "حذف",
+    "confirmDelete": "تأكيد الحذف",
+    "cancel": "إلغاء",
+    "success": "نجاح",
+    "returnToDashboard": "العودة إلى لوحة التحكم"
   }
 }
