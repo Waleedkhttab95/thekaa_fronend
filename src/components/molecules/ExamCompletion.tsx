@@ -38,7 +38,7 @@ export function ExamCompletion() {
         ) : (
           <div className="w-full h-full flex flex-col justify-center items-center gap-3">
             <Image src={complete} alt="Completed" width={80} height={80} />
-            <h2 className="font-pingar font-medium text-[28px]">{t("done")}</h2>
+            <h2 className="font-pingar font-bold text-[28px]">{t("done")}</h2>
             <CardFooter>
               <Link href={"/dashboard"}>
                 <Button
@@ -53,7 +53,7 @@ export function ExamCompletion() {
                     width={17.5}
                     height={11.5}
                     color="white"
-                    className={locale === "en" ? "scale-x-[-1]" : ""}
+                    className={"ltr:scale-x-[-1]"}
                   ></Image>
                 </Button>
               </Link>
