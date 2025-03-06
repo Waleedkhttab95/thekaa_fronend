@@ -35,7 +35,7 @@ const ConfirmDeleteDialog = (
           <DialogTitle className='text-center'>{ConfirmMessage}</DialogTitle>
         </div>
 
-        <DialogFooter className="my-4 flex gap-2">
+        <DialogFooter className="my-4 flex-col md:flex-row gap-2">
           <Button className='flex-1' variant="destructive_outline" onClick={() => ConfirmDelete()}>{t("confirmDelete")}</Button>
           <Button className='flex-1' onClick={() => setIsOpen(false)}>
             {t("cancel")}
