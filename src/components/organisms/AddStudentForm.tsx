@@ -31,6 +31,7 @@ const AddStudentForm = ({ finish }: props) => {
   const t = useTranslations("addStudentPage")
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<IStudentData>({
+    id: '123',
     studentName: '',
     age: 0,
     educationLevel: '',

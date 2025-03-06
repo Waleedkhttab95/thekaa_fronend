@@ -19,6 +19,7 @@ import { Slider } from "@/components/atoms/slider"
 
 import Cropper, { Area, Point } from "react-easy-crop"
 import { useTranslations } from "next-intl"
+import { getAvatarInitials } from "@/utils/avatar"
 type props = {
   avatar: string;
   avatarFallback: string;
@@ -59,14 +60,7 @@ export default function AvatarEditorWithCrop({
     fileInputRef.current?.click()
   }
 
-  const getInitials = () => {
-    const nameParts = avatarFallback.trim().split(" ");
-    const initials = nameParts
-      .map((part) => part.charAt(0).toUpperCase())
-      .slice(0, 2)
-      .join("");
-    return initials || "??";
-  }
+
   const createImage = (url: string): Promise<HTMLImageElement> =>
     new Promise((resolve, reject) => {
       const image = new window.Image()
@@ -125,7 +119,7 @@ export default function AvatarEditorWithCrop({
         <div className="relative w-[123px] h-[123px] rounded-full overflow-hidden shadow-xl">
           <Avatar className="w-full h-full">
             <AvatarImage src={avatar || "/placeholder.svg?height=160&width=160"} alt="Profile picture" />
-            <AvatarFallback className="text-3xl">{getInitials()}</AvatarFallback>
+            <AvatarFallback className="text-3xl">{getAvatarInitials(avatarFallback)}</AvatarFallback>
           </Avatar>
 
           <TooltipProvider>
@@ -134,6 +128,7 @@ export default function AvatarEditorWithCrop({
                 <button
                   className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity"
                   onClick={triggerFileInput}
+                  type="button"
                 >
                   <PencilLineIcon className="size-[19px] text-white" />
                 </button>

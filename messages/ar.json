@@ -208,11 +208,16 @@
       "avatarRequired": "الرجاء إدخال صورة"
     }
   },
+  "SonsStudentsManagementPage": {
+    "title": "من يذاكر الآن؟",
+    "manageSonsFiles": "إدارة ملفات الأبناء"
+  },
   "common": {
     "delete": "حذف",
     "confirmDelete": "تأكيد الحذف",
     "cancel": "إلغاء",
     "success": "نجاح",
+    "addition": "إضافة",
     "returnToDashboard": "العودة إلى لوحة التحكم"
   }
 }

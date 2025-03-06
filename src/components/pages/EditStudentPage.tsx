@@ -7,6 +7,7 @@ import ConfirmDeleteDialog from '../organisms/ConfirmDeleteDialog'
 import { useTranslations } from 'next-intl'
 import SuccessDialog from '../organisms/SuccessDialog'
 const studentData: IStudentData = {
+  id: '123',
   studentName: 'محمد',
   age: 10,
   educationLevel: '',

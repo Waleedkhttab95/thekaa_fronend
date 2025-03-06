@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form'
 import { IStudentData } from '@/types/student.type'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { getStudentEditSchema } from '@/validations/studentsSchemas'
-import { z } from 'zod'
 import { Button } from '../atoms/button'
 import { getEditStudentFormFields } from '@/data/student'
 import { Input } from '../atoms/input'
@@ -25,7 +24,7 @@ const EditStudentInfoFrom = ({
 }: props) => {
   const t = useTranslations('editStudentPage')
 
-  const form = useForm<z.infer<ReturnType<typeof getStudentEditSchema>>>({
+  const form = useForm<IStudentData>({
     resolver: zodResolver(getStudentEditSchema(t)),
     defaultValues: studentData
   })
@@ -39,9 +38,9 @@ const EditStudentInfoFrom = ({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className='space-y-3 mb-10'>
-          <AvatarEditorWithCrop avatar={form.watch('avatar')}
+          <AvatarEditorWithCrop avatar={form.watch('avatar') || ''}
             onAvatarChange={onAvatarChange}
-            avatarFallback={form.watch('studentName')}
+            avatarFallback={form.watch('studentName') || ''}
           />
           {getEditStudentFormFields(t).map((field: {
             name: string;
