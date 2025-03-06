@@ -1,7 +1,6 @@
 'use client'
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../atoms/avatar'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../atoms/tooltip'
 import { PencilLineIcon } from 'lucide-react'
 import { getAvatarInitials } from '@/utils/avatar'
 import { IStudentData } from '@/types/student.type'

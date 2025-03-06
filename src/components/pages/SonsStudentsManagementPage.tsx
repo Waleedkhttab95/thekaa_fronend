@@ -45,19 +45,20 @@ const SonsStudentsManagementPage = () => {
         <CardTitle className='text-3xl  text-center mb-5'>{t("title")}</CardTitle>
       </CardHeader>
       <CardContent>
-        <SonsFilesList isOpen={isEdited} onOpenChange={onEditedChange} sons={sons} />
+        <SonsFilesList isOpen={isEdited} sons={sons} />
       </CardContent>
       <CardFooter>
         <Button className='w-full md:w-[50%] mx-auto'
           onClick={() => onEditedChange()}
         >
-          <span>{t("manageSonsFiles")}</span>
           <Image
             src="/assets/images/icons/edit-profile.svg"
             width={21}
             height={20}
             alt={t("manageSonsFiles")}
           />
+          <span>{t("manageSonsFiles")}</span>
+
         </Button>
       </CardFooter>
     </Card>
