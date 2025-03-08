@@ -218,6 +218,8 @@
     "cancel": "إلغاء",
     "success": "نجاح",
     "addition": "إضافة",
-    "returnToDashboard": "العودة إلى لوحة التحكم"
+    "edit": "تعديل",
+    "returnToDashboard": "العودة إلى لوحة التحكم",
+    "done": "تم"
   }
 }

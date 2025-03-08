@@ -123,7 +123,8 @@ export default function AvatarEditorWithCrop({
           </Avatar>
 
           <TooltipProvider>
-            <Tooltip >
+            <Tooltip
+              delayDuration={50}>
               <TooltipTrigger asChild>
                 <button
                   className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity"

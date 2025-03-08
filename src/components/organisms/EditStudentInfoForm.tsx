@@ -12,6 +12,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import AvatarEditorWithCrop from './AvatarWithEdit'
+import { ROUTES } from '@/config/routes'
+import { useRouter } from 'next/navigation'
 
 type props = {
   deleteStudent: () => void;
@@ -23,6 +25,7 @@ const EditStudentInfoFrom = ({
   deleteStudent
 }: props) => {
   const t = useTranslations('editStudentPage')
+  const router = useRouter();
 
   const form = useForm<IStudentData>({
     resolver: zodResolver(getStudentEditSchema(t)),
@@ -30,6 +33,7 @@ const EditStudentInfoFrom = ({
   })
   const onSubmit = (data: IStudentData) => {
     console.log(data)
+    router.push(ROUTES.SONS_FILES)
   }
   const onAvatarChange = (newAvatar: string) => {
     form.setValue('avatar', newAvatar)

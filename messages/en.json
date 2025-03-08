@@ -208,11 +208,18 @@
       "avatarRequired": "Please upload an image"
     }
   },
+  "SonsStudentsManagementPage": {
+    "title": "Who's Studying Now?",
+    "manageSonsFiles": "Manage Sons Files"
+  },
   "common": {
     "delete": "Delete",
     "confirmDelete": "Confirm Deletion",
     "cancel": "Cancel",
     "success": "Success",
-    "returnToDashboard": "Return To Dashboard"
+    "addition": "Addition",
+    "returnToDashboard": "Return To Dashboard",
+    "edit": "Edit",
+    "done": "Done"
   }
 }

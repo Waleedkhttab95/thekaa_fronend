@@ -1,10 +1,11 @@
 'use client'
 import React from 'react'
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../atoms/dialog'
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from '../atoms/dialog'
 import { Button } from '../atoms/button'
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/config/routes';
 
 type props = {
   isOpen: boolean;
@@ -22,18 +23,16 @@ const SuccessDialog = (
   const router = useRouter()
   const returnToDashboard = () => {
     setIsOpen(false)
-    router.replace('/dashboard')
+    router.replace(ROUTES.DASHBOARD)
   }
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}
     >
-      <DialogContent className="md:h-[280px] md:w-[65vw] rounded w-[95vw]"
+      <DialogContent className="md:h-[300px] md:w-[65vw]  rounded w-[95vw]"
         onPointerDownOutside={(e) => e.preventDefault()}
-
+        hideCloseButton={true}
       >
-        <DialogHeader >
-        </DialogHeader>
-        <div >
+        <div className='mt-8' >
           <Image
             src="/assets/images/icons/success.svg"
             width={61}
@@ -44,7 +43,7 @@ const SuccessDialog = (
           <DialogTitle className='text-center text-2xl'>{successMessage}</DialogTitle>
         </div>
 
-        <DialogFooter className="my-4">
+        <DialogFooter  >
           <Button className='md:w-[50%] w-full mx-auto' onClick={() => returnToDashboard()}>
             {t("returnToDashboard")}
           </Button>

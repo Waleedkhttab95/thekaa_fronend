@@ -6,18 +6,16 @@ import { IStudentData } from '@/types/student.type'
 import ConfirmDeleteDialog from '../organisms/ConfirmDeleteDialog'
 import { useTranslations } from 'next-intl'
 import SuccessDialog from '../organisms/SuccessDialog'
-const studentData: IStudentData = {
-  id: '123',
-  studentName: 'محمد',
-  age: 10,
-  educationLevel: '',
-  subject: 'العلوم',
-  avatar: ""
-}
+import { useParams } from 'next/navigation'
+import { sons } from './SonsStudentsManagementPage'
+
 const EditStudentPage = () => {
   const t = useTranslations("editStudentPage");
   const [isConfirmDeleteDialogOpen, setIsConfirmDeleteOpen] = useState(false)
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false)
+  const params = useParams();
+
+  const studentData: IStudentData = sons.find((student: IStudentData) => student.id === params.id) as IStudentData;
 
   const confirmDeleteStudent = () => {
     setIsConfirmDeleteOpen(false);
