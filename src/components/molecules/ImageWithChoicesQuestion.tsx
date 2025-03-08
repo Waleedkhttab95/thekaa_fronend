@@ -6,7 +6,7 @@ interface Props {
   question: ImageWithTextChoices;
   selectedAnswer: string | null;
   onSelectAnswer: (answerId: string) => void;
-  img: any;
+  img: string;
 }
 
 export function ImageWithChoicesQuestion({
@@ -16,10 +16,10 @@ export function ImageWithChoicesQuestion({
   img,
 }: Props) {
   return (
-    <div className="w-full h-full flex flex-col gap-8 text-start justify-center items-start">
+    <div className="w-full h-full flex flex-col gap-8 text-start justify-center">
       <h2 className="text-xl font-pingar font-bold">{question.question}</h2>
 
-      <div className="w-full h-full flex flex-col md:flex-row-reverse justify-center gap-12 items-center">
+      <div className="flex flex-col xl:flex-row-reverse justify-center gap-12 items-center">
         <Image
           src={img}
           alt="Main Question Image"
@@ -28,7 +28,7 @@ export function ImageWithChoicesQuestion({
           className="rounded-[20px] object-cover"
         />
 
-        <div className="w-[541px] max-w-full h-full flex flex-col">
+        <div className="xl:w-[541px] w-[75%] max-w-full h-full flex flex-col">
           {question.choices.map((choice) => (
             <QuestionOption
               key={choice.id}

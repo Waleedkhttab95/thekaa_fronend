@@ -21,7 +21,7 @@ export function ImageChoiceQuestion({
           </h2>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-center items-start gap-10 mt-8">
+        <div className="flex flex-col md:flex-row w-full justify-center items-start gap-10 mt-8">
           {question.choices.map((choice: Choice) => (
             <div
               key={choice.id}

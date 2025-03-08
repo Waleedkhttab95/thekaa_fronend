@@ -21,7 +21,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { getFromSteps } from '@/data/addStudent';
+import { getFromSteps } from '@/data/student';
 import { IStudentData } from '@/types/student.type';
 import { getStudentAddSchema } from '@/validations/studentsSchemas';
 type props = {
@@ -31,6 +31,7 @@ const AddStudentForm = ({ finish }: props) => {
   const t = useTranslations("addStudentPage")
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<IStudentData>({
+    id: '123',
     studentName: '',
     age: 0,
     educationLevel: '',
@@ -79,6 +80,7 @@ const AddStudentForm = ({ finish }: props) => {
         if (e.key === "Enter") e.preventDefault();
       }} >
         <div className='space-y-2 mb-10 max-h-[80px]'>
+
           <FormLabel>{currentStepData.label}</FormLabel>
           <FormField
             key={currentStepData.name}

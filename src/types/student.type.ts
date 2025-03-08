@@ -5,8 +5,10 @@ export interface IStudent {
 }
 
 export interface IStudentData {
+  id: string;
   studentName: string;
   age: number;
   educationLevel: string;
   subject: string;
+  avatar?: string;
 }
