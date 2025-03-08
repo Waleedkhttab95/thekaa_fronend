@@ -17,11 +17,9 @@ import {
 } from "@/components/molecules/card";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useLocale } from "next-intl";
 
 export default function TestPage() {
   const t = useTranslations("testPage");
-  const locale = useLocale();
   const questions = mockQuestions as Question[];
   const [answer, setAnswer] = useState("");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -65,7 +63,7 @@ export default function TestPage() {
       ) : (
         <Card
           variant="default"
-          className="xl:w-[1141px] max-h-[770] max-w-full p-8 flex flex-col justify-center self-center mx-auto"
+          className="xl:w-[1141px] md:w-[75%] w-[95%] max-h-[770] max-w-full p-8 flex flex-col justify-center self-center mx-auto"
         >
           <CardHeader>
             <CardDescription>
