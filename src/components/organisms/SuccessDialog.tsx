@@ -5,25 +5,26 @@ import { Button } from '../atoms/button'
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { ROUTES } from '@/config/routes';
 
 type props = {
   isOpen: boolean;
   successMessage: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  returnTo: string;
 }
 const SuccessDialog = (
   {
     successMessage,
     isOpen = false,
     setIsOpen,
+    returnTo
   }
     : props) => {
   const t = useTranslations("common");
   const router = useRouter()
   const returnToDashboard = () => {
     setIsOpen(false)
-    router.replace(ROUTES.DASHBOARD)
+    router.replace(returnTo)
   }
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}

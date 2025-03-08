@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl'
 import SuccessDialog from '../organisms/SuccessDialog'
 import { useParams } from 'next/navigation'
 import { sons } from './SonsStudentsManagementPage'
+import { ROUTES } from '@/config/routes'
 
 const EditStudentPage = () => {
   const t = useTranslations("editStudentPage");
@@ -46,6 +47,7 @@ const EditStudentPage = () => {
           isOpen={isSuccessDialogOpen}
           setIsOpen={setIsSuccessDialogOpen}
           successMessage={t("studentDeletedSuccessfully")}
+          returnTo={ROUTES.SONS_FILES}
         />
 
       </CardContent>
