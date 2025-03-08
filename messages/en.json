@@ -194,5 +194,58 @@
       "educationLevelRequired": "Select an educational level",
       "subjectRequired": "Select a subject"
     }
+  },
+  "editStudentPage": {
+    "fileManagment": "File Management",
+    "confirmDeleteMessage": "Are you sure you want to delete the student?",
+    "formData": {
+      "studentName": {
+        "label": "Student Name",
+        "placeholder": "Enter the student's full name"
+      },
+      "age": {
+        "label": "Student Age",
+        "placeholder": "Enter the student's age"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Select a subject"
+      },
+      "educationLevel": {
+        "label": "Education Level",
+        "placeholder": "Select education level"
+      }
+    },
+    "chooseDifferentImage": "Choose a different image",
+    "studentDeletedSuccessfully": "Student file has been deleted",
+    "saveChanges": "Save Changes",
+    "EditStudentPicture": "Edit Student Picture",
+    "cropDescription": "Crop and adjust the student's picture",
+    "zoom": "Zoom",
+    "deleteStudentFile": "Delete Student File",
+    "formErrors": {
+      "studentNameRequired": "Enter the student's name",
+      "studentNameInvalid": "Enter a valid name, avoid numbers and symbols",
+      "studentNameMinLength": "The name must be at least 3 characters long",
+      "studentNameMaxLength": "The name must be at most 40 characters long",
+      "studentAgeInvalid": "Enter a valid age",
+      "educationLevelRequired": "Select the education level",
+      "subjectRequired": "Select a subject",
+      "avatarRequired": "Please upload an image"
+    }
+  },
+  "SonsStudentsManagementPage": {
+    "title": "Who's Studying Now?",
+    "manageSonsFiles": "Manage Sons Files"
+  },
+  "common": {
+    "delete": "Delete",
+    "confirmDelete": "Confirm Deletion",
+    "cancel": "Cancel",
+    "success": "Success",
+    "addition": "Addition",
+    "returnToDashboard": "Return To Dashboard",
+    "edit": "Edit",
+    "done": "Done"
   }
 }
