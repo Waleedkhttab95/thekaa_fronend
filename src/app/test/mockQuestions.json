@@ -38,25 +38,6 @@
   },
   {
     "id": "4",
-    "type": "image-choice",
-    "question": "ما هي المادة التي لا تختلط مع المياه؟",
-    "questionNumber": 3,
-    "totalQuestions": 5,
-    "mainImage": "",
-    "choices": [
-      {
-        "id": "1",
-        "imageUrl": "/oil.png"
-      },
-      {
-        "id": "2",
-        "imageUrl": "/oil.png"
-      }
-    ],
-    "correctAnswer": "1"
-  },
-  {
-    "id": "5",
     "type": "text-choice",
     "question": "ما هي المادة التي لا تختلط مع المياه؟",
     "questionNumber": 5,
@@ -66,21 +47,6 @@
       { "id": "2", "text": "الملح" },
       { "id": "3", "text": "التراب" },
       { "id": "4", "text": "السكر" }
-    ],
-    "correctAnswer": "1"
-  },
-  {
-    "id": "6",
-    "type": "images-with-text-choices",
-    "question": "ما هي المادة التي لا تختلط مع المياه؟",
-    "questionNumber": 6,
-    "totalQuestions": 6,
-    "mainImage": "/sea.png",
-    "choices": [
-      { "id": "1", "text": "الزيت", "imageUrl": "/oil.png" },
-      { "id": "2", "text": "الملح", "imageUrl": "/oil.png" },
-      { "id": "3", "text": "التراب", "imageUrl": "/oil.png" },
-      { "id": "4", "text": "السكر", "imageUrl": "/oil.png" }
     ],
     "correctAnswer": "1"
   }
