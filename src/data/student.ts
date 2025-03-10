@@ -23,8 +23,34 @@ export const getFromSteps = (t: TFunctionType) => [
   {
     name: "subject",
     label: t("formData.subject.label"),
-    type: "select",
-    options: ["علوم", "رياضيات", "تكنولوجيا ", "لغة إنجليزية"],
+    type: "combo",
+    options: [
+      {
+        id: "english",
+        name: t("formData.subject.options.english"),
+        icon: "/assets/images/icons/en-subject.svg",
+      },
+      {
+        id: "physics",
+        name: t("formData.subject.options.physics"),
+        icon: "/assets/images/icons/physics-subject.svg",
+      },
+      {
+        id: "math",
+        name: t("formData.subject.options.math"),
+        icon: "/assets/images/icons/math-subject.svg",
+      },
+      {
+        id: "science",
+        name: t("formData.subject.options.science"),
+        icon: "/assets/images/icons/science-subject.svg",
+      },
+      {
+        id: "chemistry",
+        name: t("formData.subject.options.chemistry"),
+        icon: "/assets/images/icons/chemistry-subject.svg",
+      },
+    ],
     placeholder: t("formData.subject.placeholder"),
   },
 ];
@@ -53,11 +79,11 @@ export const getEditStudentFormFields = (t: TFunctionType) => [
     label: t("formData.subject.label"),
     type: "select",
     options: [
-      "العلوم",
-      "الرياضيات",
-      "الفيزياء",
-      "اللغة الإنجليزية",
-      "الكيمياء",
+      t("formData.subject.options.science"),
+      t("formData.subject.options.math"),
+      t("formData.subject.options.science"),
+      t("formData.subject.options.english"),
+      t("formData.subject.options.chemistry"),
     ],
     placeholder: t("formData.subject.placeholder"),
   },

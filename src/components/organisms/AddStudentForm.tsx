@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import {
   Form,
   FormControl,
@@ -7,15 +7,8 @@ import {
   FormLabel,
   FormMessage
 } from '../atoms/form';
-import { Input } from '../atoms/input';
 import { Button } from '../atoms/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '../atoms/select';
+
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
@@ -24,9 +17,11 @@ import { cn } from '@/lib/utils';
 import { getFromSteps } from '@/data/student';
 import { IStudentData } from '@/types/student.type';
 import { getStudentAddSchema } from '@/validations/studentsSchemas';
+import AddStudentFields from '../molecules/AddStudentFileds';
 type props = {
   finish: () => void
 }
+
 const AddStudentForm = ({ finish }: props) => {
   const t = useTranslations("addStudentPage")
   const [currentStep, setCurrentStep] = useState(0);
@@ -76,12 +71,14 @@ const AddStudentForm = ({ finish }: props) => {
   const currentStepData = steps[currentStep];
   return (
     <Form {...form} key={currentStep}>
-      <form onSubmit={form.handleSubmit(onSubmit)} onKeyDown={(e) => {
+      <form className='w-full' onSubmit={form.handleSubmit(onSubmit)} onKeyDown={(e) => {
         if (e.key === "Enter") e.preventDefault();
       }} >
-        <div className='space-y-2 mb-10 max-h-[80px]'>
+        <div className='space-y-2 mb-10 min-h-[80px]'>
 
-          <FormLabel>{currentStepData.label}</FormLabel>
+          <FormLabel className={
+            cn(currentStepData.name === 'subject' ? 'inline-block w-full text-center ' : '')
+          }>{currentStepData.label}</FormLabel>
           <FormField
             key={currentStepData.name}
             control={form.control}
@@ -89,43 +86,17 @@ const AddStudentForm = ({ finish }: props) => {
             render={({ field: formField }) => (
               <FormItem>
                 <FormControl>
-                  {currentStepData.type !== 'select' ? (
-                    <Input
-                      placeholder={currentStepData.placeholder}
-                      {...formField}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                        const value = currentStepData.type === 'number'
-                          ? Number(e.target.value)
-                          : e.target.value;
-                        formField.onChange(value);
-                      }}
-                      value={formField.value ?? ''}
-                      type={currentStepData.type}
-                    />
-                  ) : (
-                    <Select
-                      onValueChange={formField.onChange}
-                      defaultValue={formField.value?.toString()}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder={currentStepData.placeholder} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {currentStepData.options && currentStepData?.options.map(option => (
-                          <SelectItem key={option} value={option}>
-                            {option}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
+                  <AddStudentFields
+                    currentStepData={currentStepData}
+                    formField={formField}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
-        <div className="flex justify-between flex-col-reverse gap-3 md:flex-row">
+        <div className="flex justify-between flex-col-reverse gap-3 mb-8 md:flex-row">
           {(
             <Button
               type="button"
