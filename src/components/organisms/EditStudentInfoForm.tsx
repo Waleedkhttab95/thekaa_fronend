@@ -40,7 +40,7 @@ const EditStudentInfoFrom = ({
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='w-full'>
         <div className='space-y-3 mb-10'>
           <AvatarEditorWithCrop avatar={form.watch('avatar') || ''}
             onAvatarChange={onAvatarChange}

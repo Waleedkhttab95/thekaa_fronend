@@ -7,6 +7,7 @@ import { Dispatch, SetStateAction, useMemo, useState } from 'react';
 import { Button } from '../atoms/button';
 import Link from 'next/link';
 import { TFunctionType } from '@/types/common.type';
+import { cn } from '@/lib/utils';
 
 type setCurrentStepFnType = Dispatch<SetStateAction<number>>;
 
@@ -36,7 +37,7 @@ const getOuterSteps = (t: TFunctionType, setCurrentStep: setCurrentStepFnType) =
     description: t('StartLevelExam'),
     icon: "/assets/images/icons/complete.svg",
     content: (
-      <div className='flex justify-between items-center gap-5'>
+      <div className='w-full flex  flex-col md:flex-row justify-between items-center gap-2 md:gap-5'>
         <Link href="/test" className='block w-full' >
           <Button className='w-full'>
             {t("start")}
@@ -59,13 +60,15 @@ export default function AddStudentPage() {
   const outerSteps = useMemo(() => getOuterSteps(t, setCurrentStep), [t]);
   const currentStepData = outerSteps[currentStep];
   return (
-    <Card className={"px-2 md:px-12 flex flex-col justify-center min-h-[452px] lg:px-24 xl:w-[50%] md:w-[75%] w-[95%] mx-auto"}>
-      <CardHeader className="text-center mb-1">
+    <Card className={cn("px-2 md:px-12 flex flex-col justify-center min-h-[440px] lg:px-24 xl:w-fit xl:min-w-[50%] md:w-[75%] w-[95%] mx-auto",
+      currentStep === 0 ? 'xl:w-[50%]' : ''
+    )}>
+      <CardHeader className="text-center mb-1 py-8">
         <Image src={currentStepData.icon} className="mx-auto mb-3" width={48} height={67} alt={t("studentInfo")} />
         <CardTitle className="text-2xl font-bold mb-4">{currentStepData.title}</CardTitle>
         <CardDescription className="text-gray-500 text-lg">{currentStepData.description}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className='xl:min-w-max py-0'>
         {
           currentStepData.content
         }

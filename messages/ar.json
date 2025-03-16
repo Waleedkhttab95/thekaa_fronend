@@ -175,7 +175,14 @@
       },
       "subject": {
         "label": "ما المادة التي يريد الطالب دراستها؟ 📚",
-        "placeholder": "اختر مادة"
+        "placeholder": "اختر مادة",
+        "options": {
+          "english": "اللغة الإنجليزية",
+          "math": "الرياضيات",
+          "science": "العلوم",
+          "physics": "الفيزياء",
+          "chemistry": "الكيمياء"
+        }
       },
       "educationLevel": {
         "label": "في أي مرحلة دراسية يدرس الطالب؟ 🎓",
@@ -209,7 +216,14 @@
       },
       "subject": {
         "label": "المادة التي يدرسها",
-        "placeholder": "اختر مادة"
+        "placeholder": "اختر مادة",
+        "options": {
+          "english": "اللغة الإنجليزية",
+          "math": "الرياضيات",
+          "science": "العلوم",
+          "physics": "الفيزياء",
+          "chemistry": "الكيمياء"
+        }
       },
       "educationLevel": {
         "label": "المرحلة الدراسية",

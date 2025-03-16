@@ -175,7 +175,14 @@
       },
       "subject": {
         "label": "What subject does the student want to study? 📚",
-        "placeholder": "Select a subject"
+        "placeholder": "Select a subject",
+        "options": {
+          "english": "English",
+          "math": "Math",
+          "science": "Science",
+          "physics": "Physics",
+          "chemistry": "Chemistry"
+        }
       },
       "educationLevel": {
         "label": "What educational level is the student in? 🎓",
@@ -209,7 +216,14 @@
       },
       "subject": {
         "label": "Subject",
-        "placeholder": "Select a subject"
+        "placeholder": "Select a subject",
+        "options": {
+          "english": "English",
+          "math": "Math",
+          "science": "Science",
+          "physics": "Physics",
+          "chemistry": "Chemistry"
+        }
       },
       "educationLevel": {
         "label": "Education Level",
