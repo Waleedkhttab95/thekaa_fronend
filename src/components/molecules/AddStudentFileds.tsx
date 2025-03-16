@@ -74,7 +74,7 @@ const AddStudentFields = ({
             <RadioGroupItem value={option.id} id={option.id} className="sr-only" />
             <Label htmlFor={option.id} className="cursor-pointer block lg:size-[150px] mx-auto">
               <div
-                className={`flex flex-col items-center justify-center p-4 text-center h-full border rounded-md transition-all ${formField.value === option.id
+                className={`flex flex-col items-center justify-center p-4 text-center h-full border rounded-md select-none transition-all ${formField.value === option.id
                   ? "border-primary border-2 bg-primary/5"
                   : "border-border hover:border-primary/50"
                   }`}
