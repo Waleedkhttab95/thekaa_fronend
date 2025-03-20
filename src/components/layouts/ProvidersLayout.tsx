@@ -1,24 +1,27 @@
-'use client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { ThemeProvider } from 'next-themes';
-import { useState } from 'react';
+"use client";
+import { AuthProvider } from "@/context/AuthContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ThemeProvider } from "next-themes";
+import { useState } from "react";
 
 export default function ProvidersLayout({
-  children
+  children,
 }: {
-  children: React.ReactNode,
-
+  children: React.ReactNode;
 }) {
-  const [queryClient] = useState(() => new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        retry: 1,
-        retryOnMount: false,
-      }
-    }
-  }));
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            retry: 1,
+            retryOnMount: false,
+          },
+        },
+      })
+  );
 
   return (
     <ThemeProvider
@@ -26,13 +29,12 @@ export default function ProvidersLayout({
       // defaultTheme="system"
       enableSystem={true}
       disableTransitionOnChange
-      forcedTheme='light'
-
+      forcedTheme="light"
     >
       <QueryClientProvider client={queryClient}>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
         <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider >
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
