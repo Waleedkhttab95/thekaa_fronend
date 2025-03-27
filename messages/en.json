@@ -25,6 +25,7 @@
     },
     "forgotPassword": "ْDid You Forget Your Password?",
     "loginButton": "Login",
+    "loading": "loading...",
     "continueWith": "Or Continue With",
     "dontHaveAccount": "Don't Have An Account?",
     "createAnAccount": "Create An Account!"

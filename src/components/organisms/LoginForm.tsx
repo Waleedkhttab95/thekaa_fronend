@@ -25,12 +25,17 @@ import { useLocale, useTranslations } from "next-intl";
 import { CardDescription } from "../molecules/card";
 import { Checkbox } from "../atoms/checkbox";
 import EyeSlashed from "../../../public/eye-slash.svg";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
   const t = useTranslations("LoginPage");
   const locale = useLocale();
+  const router = useRouter();
+  const { login, isLoading } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const form = useForm<z.infer<ReturnType<typeof getLoginSchema>>>({
     resolver: zodResolver(getLoginSchema(t)),
@@ -60,8 +65,15 @@ export function LoginForm() {
     form.clearErrors();
   }, [locale, form]);
 
-  function onSubmit(data: z.infer<ReturnType<typeof getLoginSchema>>) {
-    console.log(data);
+  async function onSubmit(data: z.infer<ReturnType<typeof getLoginSchema>>) {
+    setError(null);
+    try {
+      await login({ email: data.email, password: data.password });
+      router.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+      setError("something went wrong");
+    }
   }
 
   return (
@@ -70,6 +82,7 @@ export function LoginForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="auth-form-width flex flex-col gap-y-2"
       >
+        {error && <p className="text-red-500">{error}</p>}
         <FormField
           control={form.control}
           name="email"
@@ -138,7 +151,9 @@ export function LoginForm() {
           </p>
         </div>
         <div className="w-full flex flex-col gap-y-4 mt-6">
-          <Button type="submit">{t("loginButton")}</Button>
+          <Button type="submit">
+            {isLoading ? t("loading") : t("loginButton")}
+          </Button>
           <CardDescription className="relative flex items-center gap-x-2 w-full text-center text-sm">
             <span className="flex-1 h-px bg-[#E7E4E5]"></span>
             <span className="px-2">{t("continueWith")}</span>
