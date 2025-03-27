@@ -233,13 +233,21 @@
     "fileManagment": "إدارة الملف",
     "confirmDeleteMessage": "هل أنت متأكد من أنك تريد حذف الطالب ؟",
     "formData": {
-      "studentName": {
-        "label": "إسم الطالب",
-        "placeholder": "أدخل الاسم الكامل للطالب"
+      "studentFirstName": {
+        "label": "الاسم الأول الطالب",
+        "placeholder": "ادخل الاسم الأول للطالب"
+      },
+      "studentLastName": {
+        "label": "الاسم الأخير للطالب",
+        "placeholder": "ادخل الاسم الأخير للطالب"
       },
       "age": {
         "label": "عمر الطالب",
         "placeholder": "ادخل عمر الطالب"
+      },
+      "phone": {
+        "label": "رقم هاتف الطالب",
+        "placeholder": "ادخل رقم الهاتف"
       },
       "subject": {
         "label": "المادة التي يدرسها",
@@ -265,14 +273,19 @@
     "zoom": "تكبير",
     "deleteStudentFile": "حذف ملف الطالب",
     "formErrors": {
-      "studentNameRequired": "ادخل اسم الطالب",
-      "studentNameInvalid": "ادخل اسم صحيح ، تجنب الأرقام والرموز",
+      "studentFirstNameRequired": "ادخل الاسم الأول الطالب",
+      "studentLastNameRequired": "ادخل الاسم الأخير الطالب",
+      "studentNameInvalid" : "ادخل اسم صحيح ، تجنب الأرقام والرموز",
       "studentNameMinLength": "الاسم يجب أن يكون من 3 أحرف على الأقل",
       "studentNameMaxLength": "الاسم يجب أن يكون من 40 حرف على الأكثر",
       "studentAgeInvalid": "ادخل عمر صحيح",
       "educationLevelRequired": "اختر مستوى التعليم",
       "subjectRequired": "اختر المادة",
-      "avatarRequired": "الرجاء إدخال صورة"
+      "avatarRequired": "الرجاء إدخال صورة",
+      "phoneRequired": "ادخل رقم الهاتف",
+      "phoneMinError": "رقم الهاتف يجب أن يكون على الأقل 10 أرقام",
+      "phoneMaxError": "رقم الهاتف يجب أن يكون أقل من 15 رقم",
+      "phoneInvalid": "ادخل رقم هاتف صحيح"
     }
   },
   "SonsStudentsManagementPage": {

@@ -21,7 +21,13 @@ export const useAxiosAuth = () => {
       (response) => response,
       async (error) => {
         const prevReq = error.config;
-        if (error.response && error.response.status === 401 && !prevReq.sent) {
+        const isLogoutRequest = prevReq.url?.includes("/auth/logout");
+        if (
+          error.response &&
+          error.response.status === 401 &&
+          !prevReq.sent &&
+          !isLogoutRequest
+        ) {
           prevReq.sent = true;
           try {
             await logout(axiosAuthClient);

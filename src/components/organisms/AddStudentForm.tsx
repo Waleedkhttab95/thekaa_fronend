@@ -18,20 +18,19 @@ import { getFromSteps } from '@/data/student';
 import { IStudentData } from '@/types/student.type';
 import { getStudentAddSchema } from '@/validations/studentsSchemas';
 import AddStudentFields from '../molecules/AddStudentFileds';
-import { useStudentMutations } from '@/hooks/rqs/students';
 type props = {
-  finish: () => void
+  onSubmit: (data: Partial<IStudentData>) => void;
+  isPending: boolean;
 }
 
-const AddStudentForm = ({ finish }: props) => {
+const AddStudentForm = ({ onSubmit: submitFormData, isPending }: props) => {
   const t = useTranslations("addStudentPage")
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState<IStudentData>({
-    _id: '123',
+  const [formData, setFormData] = useState<Partial<IStudentData>>({
     firstName: '',
     lastName: '',
     age: 0,
-    educationLevel: '',
+    grade: '',
     subject: '',
     phone: '',
     country: '',
@@ -39,14 +38,12 @@ const AddStudentForm = ({ finish }: props) => {
 
   });
   const steps = useMemo(() => getFromSteps(t), [t]);
-
   const form = useForm({
     resolver: zodResolver(getStudentAddSchema(t)[currentStep]),
     defaultValues: formData,
   });
-  const { isPending, mutateAsync } = useStudentMutations().create
   const onSubmit = (data: Partial<IStudentData>) => {
-    const updatedData = { ...formData, ...data };
+    const updatedData: Partial<IStudentData> = { ...formData, ...data };
     setFormData(updatedData);
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -63,18 +60,7 @@ const AddStudentForm = ({ finish }: props) => {
       form.reset(formData);
     }
   };
-  const submitFormData = async (data: IStudentData) => {
-    try {
-      // data api
-      console.log(data)
-      await mutateAsync(data)
-      finish()
-      console.log('Form submitted successfully');
-    } catch (error) {
-      // toast
-      console.log(error)
-    }
-  };
+
 
   const currentStepData = steps[currentStep];
   return (
@@ -107,7 +93,7 @@ const AddStudentForm = ({ finish }: props) => {
             />
           </div>
         ))}
-        <div className="flex justify-between flex-col-reverse gap-3 mb-8 md:flex-row">
+        <div className="flex justify-between flex-col-reverse mt-6 gap-3 mb-8 md:flex-row">
           {(
             <Button
               type="button"

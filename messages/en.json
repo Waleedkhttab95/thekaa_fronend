@@ -227,9 +227,13 @@
     "fileManagment": "File Management",
     "confirmDeleteMessage": "Are you sure you want to delete the student?",
     "formData": {
-      "studentName": {
-        "label": "Student Name",
-        "placeholder": "Enter the student's full name"
+      "studentFirstName": {
+        "label": "student's first name?",
+        "placeholder": "Enter the student's first name"
+      },
+      "studentLastName": {
+        "label": "student's last name?",
+        "placeholder": "Enter the student's last name"
       },
       "age": {
         "label": "Student Age",
@@ -246,6 +250,10 @@
           "chemistry": "Chemistry"
         }
       },
+      "phone": {
+        "label": "Student's phone?",
+        "placeholder": "Enter student phone"
+      },
       "educationLevel": {
         "label": "Education Level",
         "placeholder": "Select education level"
@@ -259,14 +267,14 @@
     "zoom": "Zoom",
     "deleteStudentFile": "Delete Student File",
     "formErrors": {
-      "studentNameRequired": "Enter the student's name",
+      "studentFirstNameRequired": "Enter student's first name",
+      "studentLastNameRequired": "Enter student's last name",
       "studentNameInvalid": "Enter a valid name, avoid numbers and symbols",
       "studentNameMinLength": "The name must be at least 3 characters long",
       "studentNameMaxLength": "The name must be at most 40 characters long",
       "studentAgeInvalid": "Enter a valid age",
       "educationLevelRequired": "Select the education level",
-      "subjectRequired": "Select a subject",
-      "avatarRequired": "Please upload an image"
+      "subjectRequired": "Select a subject"
     }
   },
   "SonsStudentsManagementPage": {

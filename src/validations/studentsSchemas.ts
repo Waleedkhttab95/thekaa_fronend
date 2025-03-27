@@ -33,20 +33,26 @@ export const getStudentAddSchema = (t: TFunctionType) => [
     country: z.string().nonempty(t("formErrors.countryRequired")),
   }),
   z.object({
-    educationLevel: z.string().nonempty(t("formErrors.educationLevelRequired")),
+    grade: z.string().nonempty(t("formErrors.educationLevelRequired")),
   }),
   z.object({ subject: z.string().nonempty(t("formErrors.subjectRequired")) }),
 ];
 export const getStudentEditSchema = (t: TFunctionType) =>
   z.object({
-    studentName: z
+    firstName: z
       .string()
-      .nonempty(t("formErrors.studentNameRequired"))
+      .nonempty(t("formErrors.studentFirstNameRequired"))
+      .regex(/^[\p{L}\s]+$/u, t("formErrors.studentNameInvalid"))
+      .min(3, t("formErrors.studentNameMinLength"))
+      .max(40, t("formErrors.studentNameMaxLength")),
+    lastName: z
+      .string()
+      .nonempty(t("formErrors.studentLastNameRequired"))
       .regex(/^[\p{L}\s]+$/u, t("formErrors.studentNameInvalid"))
       .min(3, t("formErrors.studentNameMinLength"))
       .max(40, t("formErrors.studentNameMaxLength")),
     age: z.number().min(5, t("formErrors.studentAgeInvalid")),
-    educationLevel: z.string().nonempty(t("formErrors.educationLevelRequired")),
+    grade: z.string().nonempty(t("formErrors.educationLevelRequired")),
     subject: z.string().nonempty(t("formErrors.subjectRequired")),
     // avatar: z.string().nonempty(t("formErrors.avatarRequired")),
     avatar: z.string(),

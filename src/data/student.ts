@@ -54,7 +54,7 @@ export const getFromSteps = (t: TFunctionType) => [
   ],
   [
     {
-      name: "educationLevel",
+      name: "grade",
       label: t("formData.educationLevel.label"),
       type: "select",
       options: ["إبتدائي", "إعدادي", "ثانوي", "جامعي"],
@@ -99,10 +99,16 @@ export const getFromSteps = (t: TFunctionType) => [
 ];
 export const getEditStudentFormFields = (t: TFunctionType) => [
   {
-    name: "studentName",
-    label: t("formData.studentName.label"),
+    name: "firstName",
+    label: t("formData.studentFirstName.label"),
     type: "text",
-    placeholder: t("formData.studentName.placeholder"),
+    placeholder: t("formData.studentFirstName.placeholder"),
+  },
+  {
+    name: "lastName",
+    label: t("formData.studentLastName.label"),
+    type: "text",
+    placeholder: t("formData.studentLastName.placeholder"),
   },
   {
     name: "age",
@@ -111,11 +117,18 @@ export const getEditStudentFormFields = (t: TFunctionType) => [
     placeholder: t("formData.age.placeholder"),
   },
   {
-    name: "educationLevel",
+    name: "grade",
     label: t("formData.educationLevel.label"),
     type: "select",
     options: ["إبتدائي", "إعدادي", "ثانوي", "جامعي"],
     placeholder: t("formData.educationLevel.placeholder"),
+  },
+  {
+    name: "phone",
+    label: t("formData.phone.label"),
+    type: "text",
+    placeholder: t("formData.phone.placeholder"),
+    options: [],
   },
   {
     name: "subject",

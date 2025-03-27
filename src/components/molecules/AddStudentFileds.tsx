@@ -16,7 +16,7 @@ import { getFromSteps } from '@/data/student';
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
 type props = {
-  formField: ControllerRenderProps<IStudentData, keyof IStudentData>
+  formField: ControllerRenderProps<Partial<IStudentData>, keyof Partial<IStudentData>>
   currentStepData: ReturnType<typeof getFromSteps>[number][number]
 }
 const AddStudentFields = ({
