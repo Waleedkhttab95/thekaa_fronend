@@ -17,7 +17,7 @@ import Image from 'next/image';
 import { useLocale } from 'next-intl';
 type props = {
   formField: ControllerRenderProps<IStudentData, keyof IStudentData>
-  currentStepData: ReturnType<typeof getFromSteps>[number]
+  currentStepData: ReturnType<typeof getFromSteps>[number][number]
 }
 const AddStudentFields = ({
   currentStepData,
@@ -51,7 +51,7 @@ const AddStudentFields = ({
           <SelectValue placeholder={currentStepData.placeholder} />
         </SelectTrigger>
         <SelectContent>
-          {currentStepData.options && currentStepData?.options.map(option => (
+          {currentStepData?.options.length > 0 && currentStepData?.options.map(option => (
             <SelectItem key={option as string} value={option as string}>
               {option as string}
             </SelectItem>

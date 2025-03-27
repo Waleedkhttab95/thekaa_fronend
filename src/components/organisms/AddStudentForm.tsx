@@ -18,6 +18,7 @@ import { getFromSteps } from '@/data/student';
 import { IStudentData } from '@/types/student.type';
 import { getStudentAddSchema } from '@/validations/studentsSchemas';
 import AddStudentFields from '../molecules/AddStudentFileds';
+import { useStudentMutations } from '@/hooks/rqs/students';
 type props = {
   finish: () => void
 }
@@ -26,11 +27,16 @@ const AddStudentForm = ({ finish }: props) => {
   const t = useTranslations("addStudentPage")
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<IStudentData>({
-    id: '123',
-    studentName: '',
+    _id: '123',
+    firstName: '',
+    lastName: '',
     age: 0,
     educationLevel: '',
-    subject: ''
+    subject: '',
+    phone: '',
+    country: '',
+    gender: ''
+
   });
   const steps = useMemo(() => getFromSteps(t), [t]);
 
@@ -38,6 +44,7 @@ const AddStudentForm = ({ finish }: props) => {
     resolver: zodResolver(getStudentAddSchema(t)[currentStep]),
     defaultValues: formData,
   });
+  const { isPending, mutateAsync } = useStudentMutations().create
   const onSubmit = (data: Partial<IStudentData>) => {
     const updatedData = { ...formData, ...data };
     setFormData(updatedData);
@@ -60,11 +67,12 @@ const AddStudentForm = ({ finish }: props) => {
     try {
       // data api
       console.log(data)
+      await mutateAsync(data)
       finish()
       console.log('Form submitted successfully');
     } catch (error) {
-      //toast
-      console.error('Error submitting form:', error);
+      // toast
+      console.log(error)
     }
   };
 
@@ -74,28 +82,31 @@ const AddStudentForm = ({ finish }: props) => {
       <form className='w-full' onSubmit={form.handleSubmit(onSubmit)} onKeyDown={(e) => {
         if (e.key === "Enter") e.preventDefault();
       }} >
-        <div className='space-y-2 mb-10 min-h-[80px]'>
 
-          <FormLabel className={
-            cn(currentStepData.name === 'subject' ? 'inline-block w-full text-center ' : '')
-          }>{currentStepData.label}</FormLabel>
-          <FormField
-            key={currentStepData.name}
-            control={form.control}
-            name={currentStepData.name as keyof IStudentData}
-            render={({ field: formField }) => (
-              <FormItem>
-                <FormControl>
-                  <AddStudentFields
-                    currentStepData={currentStepData}
-                    formField={formField}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+        {currentStepData.map((field, index) => (
+          <div className='space-y-1 mb-3 min-h-[80px]' key={`create student form -${index}`}>
+
+            <FormLabel className={
+              cn(field.name === 'subject' ? 'inline-block w-full text-center ' : '')
+            }>{field.label}</FormLabel>
+            <FormField
+              key={field.name}
+              control={form.control}
+              name={field.name as keyof IStudentData}
+              render={({ field: formField }) => (
+                <FormItem>
+                  <FormControl>
+                    <AddStudentFields
+                      currentStepData={field}
+                      formField={formField}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        ))}
         <div className="flex justify-between flex-col-reverse gap-3 mb-8 md:flex-row">
           {(
             <Button
@@ -117,7 +128,7 @@ const AddStudentForm = ({ finish }: props) => {
             </Button>
           )}
 
-          <Button type="submit" className={"md:w-[109px]"}>
+          <Button type="submit" className={"md:w-[109px]"} disabled={isPending}>
             <span className='pt-1'>{t("next")}</span>
             <Image
               src={'/arrow.svg'}
@@ -130,7 +141,7 @@ const AddStudentForm = ({ finish }: props) => {
           </Button>
         </div>
       </form>
-    </Form>)
+    </Form >)
 }
 
 export default AddStudentForm

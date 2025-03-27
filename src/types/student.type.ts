@@ -5,10 +5,14 @@ export interface IStudent {
 }
 
 export interface IStudentData {
-  id: string;
-  studentName: string;
+  _id: string;
+  firstName: string;
+  lastName: string;
   age: number;
   educationLevel: string;
   subject: string;
   avatar?: string;
+  country: string;
+  phone: string;
+  gender: string;
 }
