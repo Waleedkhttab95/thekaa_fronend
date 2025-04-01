@@ -22,7 +22,8 @@ import { CardDescription } from "../molecules/card";
 import GoogleButton from "../atoms/GoogleButton";
 import EyeSlashed from "../../../public/eye-slash.svg";
 import { Checkbox } from "../atoms/checkbox";
-
+import { useMutation } from "@tanstack/react-query";
+import { axiosClient } from "@/lib/axios";
 const SignUpForm = () => {
   const router = useRouter();
   const t = useTranslations("SignUpPage");
@@ -30,13 +31,14 @@ const SignUpForm = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<ReturnType<typeof getSignUpSchema>>>({
     resolver: zodResolver(getSignUpSchema(t)),
     defaultValues: {
       parentName: "",
       email: "",
-      phoneNumber: "",
+      parentPhone: "",
       password: "",
       confirmPassword: "",
     },
@@ -46,11 +48,58 @@ const SignUpForm = () => {
     form.clearErrors();
   }, [locale, form]);
 
-  function onSubmit(data: z.infer<ReturnType<typeof getSignUpSchema>>) {
-    console.log(data);
-    form.reset();
-    router.push("/verify-account");
-  }
+  const mutation = useMutation({
+    mutationFn: async (data: {
+      email: string;
+      password: string;
+      parentName: string;
+      parentPhone: string;
+    }) => {
+      const payload = {
+        email: data.email,
+        password: data.password,
+        parentName: data.parentName,
+        parentPhone: data.parentPhone,
+      };
+      return axiosClient.post("/auth/user/create", payload);
+    },
+    onMutate: () => {
+      setIsSubmitting(true);
+    },
+    onSuccess: (response) => {
+      if (response.status === 201) {
+        const email = response.data.email;
+        router.push(`/verify-account?email=${encodeURIComponent(email)}`);
+      } else {
+        console.error(
+          "User creation failed, unexpected status:",
+          response.status
+        );
+      }
+    },
+    onError: (error: { response: { status: number } }) => {
+      console.error("Sign-up failed:", error);
+
+      if (error.response?.status === 409) {
+        form.setError("email", {
+          type: "manual",
+          message: t("formErrors.emailAlreadyInUse"),
+        });
+      } else {
+        form.setError("email", {
+          type: "manual",
+          message: "something went wrong",
+        });
+      }
+    },
+    onSettled: () => {
+      setIsSubmitting(false);
+    },
+  });
+
+  const onSubmit = (data: z.infer<ReturnType<typeof getSignUpSchema>>) => {
+    mutation.mutate(data);
+  };
 
   return (
     <Form {...form}>
@@ -90,9 +139,10 @@ const SignUpForm = () => {
             </FormItem>
           )}
         />
+        {/* //todo: fix the number input format */}
         <FormField
           control={form.control}
-          name="phoneNumber"
+          name="parentPhone"
           render={({ field }) => (
             <FormItem>
               <FormLabel>{t("formInputs.phoneNumber.label")}</FormLabel>
@@ -181,7 +231,9 @@ const SignUpForm = () => {
           />
         </div>
         <div className="w-full flex flex-col gap-y-4 mt-6">
-          <Button type="submit">{t("signUpButton")}</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? t("loading") : t("signUpButton")}
+          </Button>
           <CardDescription className="relative flex items-center gap-x-2 w-full text-center text-sm">
             <span className="flex-1 h-px bg-[#E7E4E5]"></span>
             <span className="px-2">{t("continueWith")}</span>
@@ -193,4 +245,5 @@ const SignUpForm = () => {
     </Form>
   );
 };
+
 export default SignUpForm;

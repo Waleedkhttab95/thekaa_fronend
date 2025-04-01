@@ -11,6 +11,7 @@ type OtpFormProps = {
   isError: boolean;
   onChange: (value: string) => void;
   handleComplete: () => void;
+  isLoading?: boolean;
 };
 
 const OtpForm = ({
@@ -20,6 +21,7 @@ const OtpForm = ({
   isError,
   handleComplete,
   onChange,
+  isLoading = false,
 }: OtpFormProps) => {
   const t = useTranslations(pageContent);
   return (
@@ -48,8 +50,12 @@ const OtpForm = ({
           {t("sendCodeAgain")}
         </CardTitle>
       </div>
-      <Button className="w-full mt-6" onClick={handleComplete}>
-        {t("verify")}
+      <Button
+        className="w-full mt-6"
+        onClick={handleComplete}
+        disabled={isLoading || value.length !== 4}
+      >
+        {isLoading ? t("loading") : t("verify")}
       </Button>
       {isValid && (
         <p className="absolute top-4 bg-green-500 text-white">Valid Code</p>

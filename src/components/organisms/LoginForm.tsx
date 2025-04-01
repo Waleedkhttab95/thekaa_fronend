@@ -32,7 +32,7 @@ export function LoginForm() {
   const t = useTranslations("LoginPage");
   const locale = useLocale();
   const router = useRouter();
-  const { login, isLoading } = useAuth();
+  const { login, loginLoading } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -151,8 +151,8 @@ export function LoginForm() {
           </p>
         </div>
         <div className="w-full flex flex-col gap-y-4 mt-6">
-          <Button type="submit">
-            {isLoading ? t("loading") : t("loginButton")}
+          <Button type="submit" disabled={loginLoading}>
+            {loginLoading ? t("loading") : t("loginButton")}
           </Button>
           <CardDescription className="relative flex items-center gap-x-2 w-full text-center text-sm">
             <span className="flex-1 h-px bg-[#E7E4E5]"></span>

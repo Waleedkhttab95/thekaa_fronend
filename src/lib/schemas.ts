@@ -22,7 +22,7 @@ export const getSignUpSchema = (t: TFunctionType) =>
         .string()
         .email(t("formErrors.emailInvalid"))
         .nonempty(t("formErrors.emailRequired")),
-      phoneNumber: z
+      parentPhone: z
         .string()
         .regex(/^\+?[1-9]\d{1,14}$/, t("formErrors.phoneNumberInvalid"))
         .nonempty(t("formErrors.phoneNumberRequired")),

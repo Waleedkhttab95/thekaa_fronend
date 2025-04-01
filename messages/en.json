@@ -25,7 +25,7 @@
     },
     "forgotPassword": "ْDid You Forget Your Password?",
     "loginButton": "Login",
-    "loading": "loading...",
+    "loading": "loading . . .",
     "continueWith": "Or Continue With",
     "dontHaveAccount": "Don't Have An Account?",
     "createAnAccount": "Create An Account!"
@@ -73,9 +73,11 @@
       "passwordSpecialCharacter": "Password must contain at least one special character @ $ ! % * ? &",
       "confirmPasswordRequired": "Enter the password again",
       "passwordsMustMatch": "Passwords must match",
-      "acceptTermsRequired": "You must agree to the Terms of Service and Usage"
+      "acceptTermsRequired": "You must agree to the Terms of Service and Usage",
+      "emailAlreadyInUse": "There Email is already in use"
     },
-    "signUpButton": "Create An Account"
+    "signUpButton": "Create An Account",
+    "loading": "Creating The Account . . ."
   },
   "VerifyAccountPage": {
     "title": "Account Verification",
@@ -84,6 +86,7 @@
     "didNotGetCode": "Didn't receive the code? You can resend it after 25 seconds, ",
     "sendCodeAgain": "Resend Code",
     "verify": "Verify",
+    "loading": "Verifying . . .",
     "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly."
   },
   "RecoverPasswordPage": {
