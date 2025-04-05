@@ -4,42 +4,58 @@ import { STUDENTS_QUERY } from "@/config/qr.constants";
 import {
   createStudent,
   deleteStudent,
+  getStudentById,
   getStudents,
   updateStudent,
 } from "@/services/students";
-import { IStudent } from "@/types/student.type";
+import { IStudentData } from "@/types/student.type";
+import { AxiosInstance } from "axios";
 
 // Hooks
-export const useStudents = (page: number = 1, limit: number = 10) => {
+export const useStudents = (
+  axiosClient: AxiosInstance,
+  page: number = 1,
+  limit: number = 10
+) => {
   return useQuery({
     queryKey: [STUDENTS_QUERY, page, limit],
-    queryFn: () => getStudents(page, limit),
+    queryFn: () => getStudents(axiosClient, page, limit),
+    staleTime: 1000 * 60 * 5, /// Fresh for 5 mins
+  });
+};
+export const useStudent = (axiosClient: AxiosInstance, id: string) => {
+  return useQuery({
+    queryKey: [STUDENTS_QUERY, id],
+    queryFn: () => getStudentById(axiosClient, id),
     staleTime: 1000 * 60 * 5, /// Fresh for 5 mins
   });
 };
 
-export const useStudentMutations = () => {
+export const useStudentMutations = (axiosClient: AxiosInstance) => {
   const queryClient = useQueryClient();
 
   const createMutation = useMutation({
-    mutationFn: createStudent,
-    onMutate: () => {
+    mutationFn: (data: Partial<IStudentData>) =>
+      createStudent(axiosClient, data),
+    onMutate: async (newStudent: Partial<IStudentData>) => {
+      await queryClient.cancelQueries({ queryKey: [STUDENTS_QUERY] });
       // when request is start loadings
       const oldData =
-        queryClient.getQueryData<IStudent[]>([STUDENTS_QUERY]) || [];
-
-      queryClient.setQueryData(
-        [STUDENTS_QUERY],
-        (newStudent: Omit<IStudent, "id">) => {
-          return [
-            ...oldData,
-            {
-              id: "temp-id",
-              ...newStudent,
-            },
-          ];
-        }
-      );
+        queryClient.getQueryData<IStudentData[]>([STUDENTS_QUERY]) || [];
+      if (oldData.length > 0) {
+        queryClient.setQueryData([STUDENTS_QUERY], () => [
+          {
+            ...newStudent,
+          },
+          ...oldData,
+        ]);
+      } else {
+        queryClient.setQueryData([STUDENTS_QUERY], () => [
+          {
+            ...newStudent,
+          },
+        ]);
+      }
       return { oldData };
     },
     onError: (err, variables, context) => {
@@ -47,6 +63,7 @@ export const useStudentMutations = () => {
       if (context?.oldData) {
         queryClient.setQueryData([STUDENTS_QUERY], context);
       }
+
       console.error(`${err.name} | ${err.message}`);
     },
     onSettled: () => {
@@ -56,15 +73,18 @@ export const useStudentMutations = () => {
   });
 
   const updateMutation = useMutation({
-    mutationFn: updateStudent,
-    onMutate: () => {
+    mutationFn: (data: Partial<IStudentData>) =>
+      updateStudent(axiosClient, data),
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: [STUDENTS_QUERY] });
+
       // when request is start loadings
       const oldData =
-        queryClient.getQueryData<IStudent[]>([STUDENTS_QUERY]) || [];
+        queryClient.getQueryData<IStudentData[]>([STUDENTS_QUERY]) || [];
 
-      queryClient.setQueryData([STUDENTS_QUERY], (newStudent: IStudent) => {
+      queryClient.setQueryData([STUDENTS_QUERY], (newStudent: IStudentData) => {
         oldData.map((student) => {
-          if (student.id === newStudent.id) {
+          if (student._id === newStudent._id) {
             return {
               ...student,
               ...newStudent,
@@ -91,14 +111,16 @@ export const useStudentMutations = () => {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: deleteStudent,
-    onMutate: () => {
+    mutationFn: (id: string) => deleteStudent(axiosClient, id),
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: [STUDENTS_QUERY] });
+
       // when request is start loadings
       const oldData =
-        queryClient.getQueryData<IStudent[]>([STUDENTS_QUERY]) || [];
+        queryClient.getQueryData<IStudentData[]>([STUDENTS_QUERY]) || [];
 
-      queryClient.setQueryData([STUDENTS_QUERY], (newStudent: IStudent) => {
-        return oldData.filter((student) => student.id !== newStudent.id);
+      queryClient.setQueryData([STUDENTS_QUERY], (newStudent: IStudentData) => {
+        return oldData.filter((student) => student._id !== newStudent._id);
       });
       return { oldData };
     },

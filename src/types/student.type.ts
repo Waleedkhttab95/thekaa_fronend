@@ -1,14 +1,15 @@
-export interface IStudent {
-  id: string;
-  name: string;
-  // .. etc
-}
-
 export interface IStudentData {
-  id: string;
-  studentName: string;
+  _id: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
   age: number;
-  educationLevel: string;
+  grade: string;
   subject: string;
   avatar?: string;
+  country: string;
+  phone: string;
+  gender: string;
+  educationPlanId: string;
+  parentId: string;
 }

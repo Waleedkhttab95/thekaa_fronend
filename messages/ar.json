@@ -169,17 +169,37 @@
     "previous": "السابق",
     "next": "التالي",
     "formData": {
-      "studentName": {
-        "label": "ما إسم الطالب؟",
-        "placeholder": "أدخل الاسم الكامل للطالب"
+      "studentFirstName": {
+        "label": "ما الاسم الأول الطالب؟",
+        "placeholder": "ادخل الاسم الأول للطالب"
+      },
+      "studentLastName": {
+        "label": "ما الاسم الأخير للطالب؟",
+        "placeholder": "ادخل الاسم الأخير للطالب"
       },
       "age": {
-        "label": "كم عمر الطالب",
+        "label": "ما عمر الطالب؟",
         "placeholder": "ادخل عمر الطالب"
       },
+      "gender": {
+        "label": "ما جنس الطالب؟",
+        "placeholder": "اختر الجنس",
+        "options": {
+          "male": "ذكر",
+          "female": "أنثى"
+        }
+      },
+      "phone": {
+        "label": "ما رقم هاتف الطالب؟",
+        "placeholder": "ادخل رقم الهاتف"
+      },
+      "country": {
+        "label": "ما دولة الطالب؟",
+        "placeholder": "اختر الدولة"
+      },
       "subject": {
-        "label": "ما المادة التي يريد الطالب دراستها؟ 📚",
-        "placeholder": "اختر مادة",
+        "label": "📚ما المادة التي يريد الطالب دراستها؟",
+        "placeholder": "اختر المادة",
         "options": {
           "english": "اللغة الإنجليزية",
           "math": "الرياضيات",
@@ -189,34 +209,49 @@
         }
       },
       "educationLevel": {
-        "label": "في أي مرحلة دراسية يدرس الطالب؟ 🎓",
-        "placeholder": "اختر المرحلة الدراسية"
+        "label": "🎓ما هو المستوى التعليمي للطالب؟",
+        "placeholder": "اختر المستوى التعليمي"
       }
     },
     "addStudentButton": "إضافة الطالب",
     "studentAddedSuccessfully": "تم إضافة معلومات الطالب بنجاح",
     "StartLevelExam": "هل تريد بدء إمتحان تحديد المستوى الآن؟",
     "formErrors": {
-      "studentNameRequired": "ادخل اسم الطالب",
+      "studentFirstNameRequired": "ادخل الاسم الأول الطالب",
+      "studentLastNameRequired": "ادخل الاسم الأخير الطالب",
       "studentNameInvalid": "ادخل اسم صحيح ، تجنب الأرقام والرموز",
       "studentNameMinLength": "الاسم يجب أن يكون من 3 أحرف على الأقل",
       "studentNameMaxLength": "الاسم يجب أن يكون من 40 حرف على الأكثر",
       "studentAgeInvalid": "ادخل عمر صحيح",
       "educationLevelRequired": "اختر مستوى التعليم",
-      "subjectRequired": "اختر المادة"
+      "subjectRequired": "اختر المادة",
+      "phoneRequired": "ادخل رقم الهاتف",
+      "phoneMinError": "رقم الهاتف يجب أن يكون على الأقل 10 أرقام",
+      "phoneMaxError": "رقم الهاتف يجب أن يكون أقل من 15 رقم",
+      "phoneInvalid": "ادخل رقم هاتف صحيح",
+      "countryRequired": "اختر الدولة",
+      "genderRequired": "اختر الجنس"
     }
   },
   "editStudentPage": {
     "fileManagment": "إدارة الملف",
     "confirmDeleteMessage": "هل أنت متأكد من أنك تريد حذف الطالب ؟",
     "formData": {
-      "studentName": {
-        "label": "إسم الطالب",
-        "placeholder": "أدخل الاسم الكامل للطالب"
+      "studentFirstName": {
+        "label": "الاسم الأول الطالب",
+        "placeholder": "ادخل الاسم الأول للطالب"
+      },
+      "studentLastName": {
+        "label": "الاسم الأخير للطالب",
+        "placeholder": "ادخل الاسم الأخير للطالب"
       },
       "age": {
         "label": "عمر الطالب",
         "placeholder": "ادخل عمر الطالب"
+      },
+      "phone": {
+        "label": "رقم هاتف الطالب",
+        "placeholder": "ادخل رقم الهاتف"
       },
       "subject": {
         "label": "المادة التي يدرسها",
@@ -242,14 +277,19 @@
     "zoom": "تكبير",
     "deleteStudentFile": "حذف ملف الطالب",
     "formErrors": {
-      "studentNameRequired": "ادخل اسم الطالب",
-      "studentNameInvalid": "ادخل اسم صحيح ، تجنب الأرقام والرموز",
+      "studentFirstNameRequired": "ادخل الاسم الأول الطالب",
+      "studentLastNameRequired": "ادخل الاسم الأخير الطالب",
+      "studentNameInvalid" : "ادخل اسم صحيح ، تجنب الأرقام والرموز",
       "studentNameMinLength": "الاسم يجب أن يكون من 3 أحرف على الأقل",
       "studentNameMaxLength": "الاسم يجب أن يكون من 40 حرف على الأكثر",
       "studentAgeInvalid": "ادخل عمر صحيح",
       "educationLevelRequired": "اختر مستوى التعليم",
       "subjectRequired": "اختر المادة",
-      "avatarRequired": "الرجاء إدخال صورة"
+      "avatarRequired": "الرجاء إدخال صورة",
+      "phoneRequired": "ادخل رقم الهاتف",
+      "phoneMinError": "رقم الهاتف يجب أن يكون على الأقل 10 أرقام",
+      "phoneMaxError": "رقم الهاتف يجب أن يكون أقل من 15 رقم",
+      "phoneInvalid": "ادخل رقم هاتف صحيح"
     }
   },
   "SonsStudentsManagementPage": {

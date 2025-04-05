@@ -12,29 +12,26 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import AvatarEditorWithCrop from './AvatarWithEdit'
-import { ROUTES } from '@/config/routes'
-import { useRouter } from 'next/navigation'
 
 type props = {
   deleteStudent: () => void;
-  studentData: IStudentData
-
+  studentData: IStudentData | undefined
+  onSubmit: (data: IStudentData) => void
+  isPending: boolean
 }
 const EditStudentInfoFrom = ({
   studentData,
-  deleteStudent
+  deleteStudent,
+  isPending,
+  onSubmit
 }: props) => {
   const t = useTranslations('editStudentPage')
-  const router = useRouter();
 
   const form = useForm<IStudentData>({
     resolver: zodResolver(getStudentEditSchema(t)),
     defaultValues: studentData
   })
-  const onSubmit = (data: IStudentData) => {
-    console.log(data)
-    router.push(ROUTES.SONS_FILES)
-  }
+
   const onAvatarChange = (newAvatar: string) => {
     form.setValue('avatar', newAvatar)
   }
@@ -44,7 +41,7 @@ const EditStudentInfoFrom = ({
         <div className='space-y-3 mb-10'>
           <AvatarEditorWithCrop avatar={form.watch('avatar') || ''}
             onAvatarChange={onAvatarChange}
-            avatarFallback={form.watch('studentName') || ''}
+            avatarFallback={form.watch('firstName') || ''}
           />
           {getEditStudentFormFields(t).map((field: {
             name: string;
@@ -62,20 +59,40 @@ const EditStudentInfoFrom = ({
                 render={({ field: formField }) => (
                   <FormItem>
                     <FormControl>
-                      {field.type !== 'select' ? (
-                        <Input
-                          placeholder={field.placeholder}
-                          {...formField}
-                          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                            const value = field.type === 'number'
-                              ? Number(e.target.value)
-                              : e.target.value;
-                            formField.onChange(value);
-                          }}
-                          value={formField.value ?? ''}
-                          type={field.type}
-                        />
-                      ) : (
+                      {field.type !== 'select' ? field.type === 'number' ?
+                        (
+                          <Input
+                            placeholder={field.placeholder}
+                            {...formField}
+                            value={isNaN(formField.value as number) ? "" : formField.value}
+                            onBlur={(e) => {
+                              if (e.target.value === "") {
+                                formField.onChange(0)
+                              }
+                              formField.onBlur?.()
+                            }}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                              const parsed = parseFloat(e.target.value);
+                              const value = isNaN(parsed) ? "" : parsed;
+                              formField.onChange(value);
+                            }}
+                            type={field.type}
+                          />
+                        )
+                        : (
+                          <Input
+                            placeholder={field.placeholder}
+                            {...formField}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                              const value = field.type === 'number'
+                                ? Number(e.target.value)
+                                : e.target.value;
+                              formField.onChange(value);
+                            }}
+                            value={formField.value ?? ''}
+                            type={field.type}
+                          />
+                        ) : (
                         <Select
                           onValueChange={formField.onChange}
                           defaultValue={formField.value?.toString()}
@@ -105,6 +122,7 @@ const EditStudentInfoFrom = ({
               type="button"
               variant="destructive_outline"
               onClick={() => deleteStudent()}
+              disabled={isPending}
             >
               <Image
                 src="/assets/images/icons/trash.svg"
@@ -116,7 +134,7 @@ const EditStudentInfoFrom = ({
             </Button>
           )}
 
-          <Button type="submit" className='font-bold' >
+          <Button type="submit" className='font-bold' disabled={isPending}>
             {t("saveChanges")}
           </Button>
         </div>

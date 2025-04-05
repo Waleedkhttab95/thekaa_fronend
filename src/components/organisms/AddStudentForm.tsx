@@ -19,27 +19,31 @@ import { IStudentData } from '@/types/student.type';
 import { getStudentAddSchema } from '@/validations/studentsSchemas';
 import AddStudentFields from '../molecules/AddStudentFileds';
 type props = {
-  finish: () => void
+  onSubmit: (data: Partial<IStudentData>) => void;
+  isPending: boolean;
 }
 
-const AddStudentForm = ({ finish }: props) => {
+const AddStudentForm = ({ onSubmit: submitFormData, isPending }: props) => {
   const t = useTranslations("addStudentPage")
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState<IStudentData>({
-    id: '123',
-    studentName: '',
+  const [formData, setFormData] = useState<Partial<IStudentData>>({
+    firstName: '',
+    lastName: '',
     age: 0,
-    educationLevel: '',
-    subject: ''
+    grade: '',
+    subject: '',
+    phone: '',
+    country: '',
+    gender: ''
+
   });
   const steps = useMemo(() => getFromSteps(t), [t]);
-
   const form = useForm({
     resolver: zodResolver(getStudentAddSchema(t)[currentStep]),
     defaultValues: formData,
   });
   const onSubmit = (data: Partial<IStudentData>) => {
-    const updatedData = { ...formData, ...data };
+    const updatedData: Partial<IStudentData> = { ...formData, ...data };
     setFormData(updatedData);
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -56,17 +60,7 @@ const AddStudentForm = ({ finish }: props) => {
       form.reset(formData);
     }
   };
-  const submitFormData = async (data: IStudentData) => {
-    try {
-      // data api
-      console.log(data)
-      finish()
-      console.log('Form submitted successfully');
-    } catch (error) {
-      //toast
-      console.error('Error submitting form:', error);
-    }
-  };
+
 
   const currentStepData = steps[currentStep];
   return (
@@ -74,29 +68,32 @@ const AddStudentForm = ({ finish }: props) => {
       <form className='w-full' onSubmit={form.handleSubmit(onSubmit)} onKeyDown={(e) => {
         if (e.key === "Enter") e.preventDefault();
       }} >
-        <div className='space-y-2 mb-10 min-h-[80px]'>
 
-          <FormLabel className={
-            cn(currentStepData.name === 'subject' ? 'inline-block w-full text-center ' : '')
-          }>{currentStepData.label}</FormLabel>
-          <FormField
-            key={currentStepData.name}
-            control={form.control}
-            name={currentStepData.name as keyof IStudentData}
-            render={({ field: formField }) => (
-              <FormItem>
-                <FormControl>
-                  <AddStudentFields
-                    currentStepData={currentStepData}
-                    formField={formField}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="flex justify-between flex-col-reverse gap-3 mb-8 md:flex-row">
+        {currentStepData.map((field, index) => (
+          <div className='space-y-1 mb-3 min-h-[80px]' key={`create student form -${index}`}>
+
+            <FormLabel className={
+              cn(field.name === 'subject' ? 'inline-block w-full text-center ' : '')
+            }>{field.label}</FormLabel>
+            <FormField
+              key={field.name}
+              control={form.control}
+              name={field.name as keyof IStudentData}
+              render={({ field: formField }) => (
+                <FormItem>
+                  <FormControl>
+                    <AddStudentFields
+                      currentStepData={field}
+                      formField={formField}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        ))}
+        <div className="flex justify-between flex-col-reverse mt-6 gap-3 mb-8 md:flex-row">
           {(
             <Button
               type="button"
@@ -117,7 +114,7 @@ const AddStudentForm = ({ finish }: props) => {
             </Button>
           )}
 
-          <Button type="submit" className={"md:w-[109px]"}>
+          <Button type="submit" className={"md:w-[109px]"} disabled={isPending}>
             <span className='pt-1'>{t("next")}</span>
             <Image
               src={'/arrow.svg'}
@@ -130,7 +127,7 @@ const AddStudentForm = ({ finish }: props) => {
           </Button>
         </div>
       </form>
-    </Form>)
+    </Form >)
 }
 
 export default AddStudentForm

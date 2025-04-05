@@ -16,8 +16,8 @@ import { getFromSteps } from '@/data/student';
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
 type props = {
-  formField: ControllerRenderProps<IStudentData, keyof IStudentData>
-  currentStepData: ReturnType<typeof getFromSteps>[number]
+  formField: ControllerRenderProps<Partial<IStudentData>, keyof Partial<IStudentData>>
+  currentStepData: ReturnType<typeof getFromSteps>[number][number]
 }
 const AddStudentFields = ({
   currentStepData,
@@ -25,19 +25,35 @@ const AddStudentFields = ({
 }: props) => {
   const locale = useLocale();
 
-  if (currentStepData.type === 'number'
-    || currentStepData.type === 'text')
+  if (currentStepData.type === 'number')
+    return (
+      <Input
+        placeholder={currentStepData.placeholder}
+        {...formField}
+        value={isNaN(formField.value as number) ? "" : formField.value}
+        onBlur={(e) => {
+          if (e.target.value === "") {
+            formField.onChange(0)
+          }
+          formField.onBlur?.()
+        }}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          const parsed = parseFloat(e.target.value);
+          const value = isNaN(parsed) ? "" : parsed;
+          formField.onChange(value);
+        }}
+        type={currentStepData.type}
+      />
+    )
+  else if (currentStepData.type === 'text')
     return (
       <Input
         placeholder={currentStepData.placeholder}
         {...formField}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          const value = currentStepData.type === 'number'
-            ? Number(e.target.value)
-            : e.target.value;
+          const value = e.target.value;
           formField.onChange(value);
         }}
-        value={formField.value ?? ''}
         type={currentStepData.type}
       />
     )
@@ -51,7 +67,7 @@ const AddStudentFields = ({
           <SelectValue placeholder={currentStepData.placeholder} />
         </SelectTrigger>
         <SelectContent>
-          {currentStepData.options && currentStepData?.options.map(option => (
+          {currentStepData?.options.length > 0 && currentStepData?.options.map(option => (
             <SelectItem key={option as string} value={option as string}>
               {option as string}
             </SelectItem>
