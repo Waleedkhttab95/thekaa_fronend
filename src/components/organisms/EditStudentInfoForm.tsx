@@ -59,20 +59,40 @@ const EditStudentInfoFrom = ({
                 render={({ field: formField }) => (
                   <FormItem>
                     <FormControl>
-                      {field.type !== 'select' ? (
-                        <Input
-                          placeholder={field.placeholder}
-                          {...formField}
-                          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                            const value = field.type === 'number'
-                              ? Number(e.target.value)
-                              : e.target.value;
-                            formField.onChange(value);
-                          }}
-                          value={formField.value ?? ''}
-                          type={field.type}
-                        />
-                      ) : (
+                      {field.type !== 'select' ? field.type === 'number' ?
+                        (
+                          <Input
+                            placeholder={field.placeholder}
+                            {...formField}
+                            value={isNaN(formField.value as number) ? "" : formField.value}
+                            onBlur={(e) => {
+                              if (e.target.value === "") {
+                                formField.onChange(0)
+                              }
+                              formField.onBlur?.()
+                            }}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                              const parsed = parseFloat(e.target.value);
+                              const value = isNaN(parsed) ? "" : parsed;
+                              formField.onChange(value);
+                            }}
+                            type={field.type}
+                          />
+                        )
+                        : (
+                          <Input
+                            placeholder={field.placeholder}
+                            {...formField}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                              const value = field.type === 'number'
+                                ? Number(e.target.value)
+                                : e.target.value;
+                              formField.onChange(value);
+                            }}
+                            value={formField.value ?? ''}
+                            type={field.type}
+                          />
+                        ) : (
                         <Select
                           onValueChange={formField.onChange}
                           defaultValue={formField.value?.toString()}
