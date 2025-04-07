@@ -4,16 +4,9 @@ import { AxiosInstance } from "axios";
 const API_ROUTE = "student/student";
 
 export const getStudents = async (
-  axiosClient: AxiosInstance,
-  page: number,
-  limit: number
+  axiosClient: AxiosInstance
 ): Promise<IStudentData[]> => {
-  const { data } = await axiosClient.get(`/${API_ROUTE}`, {
-    params: {
-      page,
-      limit,
-    },
-  });
+  const { data } = await axiosClient.get(`/${API_ROUTE}/my-students`);
   return data;
 };
 
