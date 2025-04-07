@@ -12,14 +12,10 @@ import { IStudentData } from "@/types/student.type";
 import { AxiosInstance } from "axios";
 
 // Hooks
-export const useStudents = (
-  axiosClient: AxiosInstance,
-  page: number = 1,
-  limit: number = 10
-) => {
+export const useStudents = (axiosClient: AxiosInstance) => {
   return useQuery({
-    queryKey: [STUDENTS_QUERY, page, limit],
-    queryFn: () => getStudents(axiosClient, page, limit),
+    queryKey: [STUDENTS_QUERY],
+    queryFn: () => getStudents(axiosClient),
     staleTime: 1000 * 60 * 5, /// Fresh for 5 mins
   });
 };
