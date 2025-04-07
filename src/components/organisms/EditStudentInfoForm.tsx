@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import React, { ChangeEvent } from 'react'
+import React from 'react'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../atoms/form'
 import { useForm } from 'react-hook-form'
 import { IStudentData } from '@/types/student.type'
@@ -7,16 +8,15 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { getStudentEditSchema } from '@/validations/studentsSchemas'
 import { Button } from '../atoms/button'
 import { getEditStudentFormFields } from '@/data/student'
-import { Input } from '../atoms/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../atoms/select'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import AvatarEditorWithCrop from './AvatarWithEdit'
+import AddStudentFields from '../molecules/AddStudentFileds'
 
 type props = {
   deleteStudent: () => void;
   studentData: IStudentData | undefined
-  onSubmit: (data: IStudentData) => void
+  onSubmit: (data: Partial<IStudentData>) => void
   isPending: boolean
 }
 const EditStudentInfoFrom = ({
@@ -26,8 +26,7 @@ const EditStudentInfoFrom = ({
   onSubmit
 }: props) => {
   const t = useTranslations('editStudentPage')
-
-  const form = useForm<IStudentData>({
+  const form = useForm<Partial<IStudentData>>({
     resolver: zodResolver(getStudentEditSchema(t)),
     defaultValues: studentData
   })
@@ -43,15 +42,73 @@ const EditStudentInfoFrom = ({
             onAvatarChange={onAvatarChange}
             avatarFallback={form.watch('firstName') || ''}
           />
-          {getEditStudentFormFields(t).map((field: {
-            name: string;
-            label: string;
-            type: string;
-            placeholder: string;
-            options?: string[];
-          }) => (
-            <div key={`esf-input-${field?.name}`}>
-              <FormLabel className='text-base inline-block mb-1'>{field.label}</FormLabel>
+          {getEditStudentFormFields(t).map((field: any) => (
+            // <div key={`esf-input-${field?.name}`}>
+            //   <FormLabel className='text-base inline-block mb-1'>{field.label}</FormLabel>
+            //   <FormField
+            //     key={field.name}
+            //     control={form.control}
+            //     name={field.name as keyof IStudentData}
+            //     render={({ field: formField }) => (
+            //       <FormItem>
+            //         <FormControl>
+            //           {field.type !== 'select' ? field.type === 'number' ?
+            //             (
+            //               <Input
+            //                 placeholder={field.placeholder}
+            //                 {...formField}
+            //                 value={isNaN(formField.value as number) ? "" : formField.value}
+            //                 onBlur={(e) => {
+            //                   if (e.target.value === "") {
+            //                     formField.onChange(0)
+            //                   }
+            //                   formField.onBlur?.()
+            //                 }}
+            //                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            //                   const parsed = parseFloat(e.target.value);
+            //                   const value = isNaN(parsed) ? "" : parsed;
+            //                   formField.onChange(value);
+            //                 }}
+            //                 type={field.type}
+            //               />
+            //             )
+            //             : (
+            //               <Input
+            //                 placeholder={field.placeholder}
+            //                 {...formField}
+            //                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            //                   const value = field.type === 'number'
+            //                     ? Number(e.target.value)
+            //                     : e.target.value;
+            //                   formField.onChange(value);
+            //                 }}
+            //                 value={formField.value ?? ''}
+            //                 type={field.type}
+            //               />
+            //             ) : (
+            //             <Select
+            //               onValueChange={formField.onChange}
+            //               defaultValue={formField.value?.toString()}
+            //             >
+            //               <SelectTrigger>
+            //                 <SelectValue placeholder={field.placeholder} />
+            //               </SelectTrigger>
+            //               <SelectContent>
+            //                 {field.options && field?.options.map(option => (
+            //                   <SelectItem key={option} value={option}>
+            //                     {option}
+            //                   </SelectItem>
+            //                 ))}
+            //               </SelectContent>
+            //             </Select>
+            //           )}
+            //         </FormControl>
+            //         <FormMessage />
+            //       </FormItem>
+            //     )}
+            //   /></div>)
+            <div key={`esf-input-${field?.name}`} className='space-y-1 min-h-[80px]'>
+              <FormLabel >{field.label}</FormLabel>
               <FormField
                 key={field.name}
                 control={form.control}
@@ -59,61 +116,17 @@ const EditStudentInfoFrom = ({
                 render={({ field: formField }) => (
                   <FormItem>
                     <FormControl>
-                      {field.type !== 'select' ? field.type === 'number' ?
-                        (
-                          <Input
-                            placeholder={field.placeholder}
-                            {...formField}
-                            value={isNaN(formField.value as number) ? "" : formField.value}
-                            onBlur={(e) => {
-                              if (e.target.value === "") {
-                                formField.onChange(0)
-                              }
-                              formField.onBlur?.()
-                            }}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                              const parsed = parseFloat(e.target.value);
-                              const value = isNaN(parsed) ? "" : parsed;
-                              formField.onChange(value);
-                            }}
-                            type={field.type}
-                          />
-                        )
-                        : (
-                          <Input
-                            placeholder={field.placeholder}
-                            {...formField}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                              const value = field.type === 'number'
-                                ? Number(e.target.value)
-                                : e.target.value;
-                              formField.onChange(value);
-                            }}
-                            value={formField.value ?? ''}
-                            type={field.type}
-                          />
-                        ) : (
-                        <Select
-                          onValueChange={formField.onChange}
-                          defaultValue={formField.value?.toString()}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder={field.placeholder} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {field.options && field?.options.map(option => (
-                              <SelectItem key={option} value={option}>
-                                {option}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      )}
+                      <AddStudentFields
+                        currentStepData={field}
+                        formField={formField}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
-              /></div>)
+              />
+            </div>
+          )
           )}
         </div>
         <div className="flex justify-between flex-col gap-3 ">

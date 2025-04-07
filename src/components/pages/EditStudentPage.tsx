@@ -22,7 +22,7 @@ const EditStudentPage = () => {
   const { isPending: isUpdatePending, mutateAsync: mutateUpdateAsync, isError: isUpdateError, error: updateError } = useStudentMutations(axiosAuth).update
   const { isPending: isDeletePending, mutateAsync: mutateDeleteAsync, isError: isDeleteError, error: deleteError } = useStudentMutations(axiosAuth).delete
 
-  const onUpdateSubmit = async (data: IStudentData) => {
+  const onUpdateSubmit = async (data: Partial<IStudentData>) => {
     await mutateUpdateAsync(data)
   }
   const confirmDeleteStudent = async () => {
