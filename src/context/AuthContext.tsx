@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (credentials: { email: string; password: string }) => {
     setLoginLoading(true);
     try {
-      await axiosClient.post("/auth/auth/login", credentials);
+      await axiosClient.post("/auth/login", credentials);
       const { data } = await axiosClient.get("/auth/user");
       setUser(data);
       queryClient.invalidateQueries({ queryKey: ["user"] });
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Logout function
   const logout = async () => {
-    await axiosClient.post("/auth/auth/logout");
+    await axiosClient.post("/auth/logout");
     setUser(null);
     queryClient.invalidateQueries({ queryKey: ["user"] });
   };
