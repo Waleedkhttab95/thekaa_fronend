@@ -31,8 +31,14 @@ export const getFromSteps = (t: TFunctionType) => [
       type: "select",
       placeholder: t("formData.gender.placeholder"),
       options: [
-        t("formData.gender.options.male"),
-        t("formData.gender.options.female"),
+        {
+          id: "female",
+          name: t("formData.gender.options.male"),
+        },
+        {
+          id: "female",
+          name: t("formData.gender.options.female"),
+        },
       ],
     },
   ],
@@ -135,11 +141,11 @@ export const getEditStudentFormFields = (t: TFunctionType) => [
     label: t("formData.subject.label"),
     type: "select",
     options: [
-      t("formData.subject.options.science"),
-      t("formData.subject.options.math"),
-      t("formData.subject.options.science"),
-      t("formData.subject.options.english"),
-      t("formData.subject.options.chemistry"),
+      { id: "science", name: t("formData.subject.options.science") },
+      { id: "math", name: t("formData.subject.options.math") },
+      { id: "english", name: t("formData.subject.options.english") },
+      { id: "chemistry", name: t("formData.subject.options.chemistry") },
+      { id: "physics", name: t("formData.subject.options.physics") },
     ],
     placeholder: t("formData.subject.placeholder"),
   },

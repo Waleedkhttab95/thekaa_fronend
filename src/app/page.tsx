@@ -24,6 +24,7 @@ export async function generateMetadata() {
       <br />
       {/* using next/link for non-localized routes */}
       <Link href='/dashboard'> dashboard</Link>
+      <Link href='/sons-files'> Sons-files</Link>
       <h1 className="font-tajawal font-bold">بيزووو</h1>
       <h1 className="font-pingar font-medium">بيزووو</h1>
       <h1 className="font-pingar font-medium">بيزووو</h1>
