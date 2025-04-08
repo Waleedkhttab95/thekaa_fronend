@@ -18,7 +18,7 @@ const EditStudentPage = () => {
   const params = useParams();
   const studentId = params?.id?.toString() ?? "";
   const axiosAuth = useAxiosAuth()
-  const { data: studentData } = useStudent(axiosAuth, studentId);
+  const { data: studentData, isLoading: isStudentDataLoading } = useStudent(axiosAuth, studentId);
   const { isPending: isUpdatePending, mutateAsync: mutateUpdateAsync, isError: isUpdateError, error: updateError } = useStudentMutations(axiosAuth).update
   const { isPending: isDeletePending, mutateAsync: mutateDeleteAsync, isError: isDeleteError, error: deleteError } = useStudentMutations(axiosAuth).delete
 
@@ -45,8 +45,9 @@ const EditStudentPage = () => {
         <CardTitle className='text-center text-2xl'>{t("fileManagment")}</CardTitle>
       </CardHeader>
       <CardContent className='py-0'>
-        <EditStudentInfoFrom isPending={isUpdatePending || isDeletePending} onSubmit={onUpdateSubmit} studentData={studentData} deleteStudent={openDeleteStudentDialog} />
-        <ConfirmDeleteDialog
+        {isStudentDataLoading ? ("loading...") :
+          (<EditStudentInfoFrom isPending={isUpdatePending || isDeletePending} onSubmit={onUpdateSubmit} studentData={studentData} deleteStudent={openDeleteStudentDialog} />)
+        }<ConfirmDeleteDialog
           isOpen={isConfirmDeleteDialogOpen}
           setIsOpen={setIsConfirmDeleteOpen}
           ConfirmDelete={confirmDeleteStudent}

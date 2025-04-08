@@ -23,7 +23,7 @@ const SonsFilesList = ({
   return (
     <div className='flex gap-3  flex-wrap  justify-center '>
       {sons.map((son) => (
-        <SonAvatar isOpen={isOpen} son={son} key={`Son ${son.id}`} />
+        <SonAvatar isOpen={isOpen} son={son} key={`Son ${son._id}`} />
       ))}
       <div>
         <Button className='flex-center mb-3 border  border-dashed border-gray-500 bg-secondary rounded-full size-[169px] hover:bg-gray-300'

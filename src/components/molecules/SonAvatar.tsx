@@ -20,7 +20,7 @@ const SonAvatar = ({
   const router = useRouter();
   const t = useTranslations('common')
   const onEditClick = () => {
-    router.push(`${ROUTES.EDIT_STUDENT}/${son.id}`)
+    router.push(`${ROUTES.EDIT_STUDENT}/${son._id}`)
   }
 
   return (
@@ -28,8 +28,8 @@ const SonAvatar = ({
       <div className="relative group">
         <div className="relative mb-3 w-[169px] h-[169px] rounded-full overflow-hidden shadow-xl">
           <Avatar className="w-full  h-full">
-            <AvatarImage src={son.avatar || "/placeholder.svg?height=160&width=160"} alt="Profile picture" />
-            <AvatarFallback className="text-2xl">{getAvatarInitials(son.studentName)}</AvatarFallback>
+            <AvatarImage src={son.avatar || "/assets/images/avatar-placeholder.jpg"} alt="Profile picture" />
+            <AvatarFallback className="text-2xl">{getAvatarInitials(son.firstName + ' ' + son.lastName)}</AvatarFallback>
           </Avatar>
           <TooltipProvider>
             <Tooltip
@@ -51,7 +51,7 @@ const SonAvatar = ({
             </Tooltip>
           </TooltipProvider>
         </div>
-        <h1 className='text-center text-xl font-bold'>{son.studentName}</h1>
+        <h1 className='text-center text-xl font-bold'>{son.firstName}</h1>
       </div>
 
     </div>)

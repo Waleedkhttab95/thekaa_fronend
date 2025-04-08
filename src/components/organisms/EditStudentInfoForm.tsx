@@ -28,8 +28,9 @@ const EditStudentInfoFrom = ({
   const t = useTranslations('editStudentPage')
   const form = useForm<Partial<IStudentData>>({
     resolver: zodResolver(getStudentEditSchema(t)),
-    defaultValues: studentData
+    defaultValues: studentData,
   })
+
 
   const onAvatarChange = (newAvatar: string) => {
     form.setValue('avatar', newAvatar)
