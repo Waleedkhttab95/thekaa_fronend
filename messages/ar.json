@@ -28,7 +28,8 @@
     "loading": "يتم تسجيل الدخول . . .",
     "continueWith": "أو الاستمرار بواسطة",
     "dontHaveAccount": "ليس لديك حساب؟",
-    "createAnAccount": "انشىء حسابك الآن!"
+    "createAnAccount": "انشىء حسابك الآن!",
+    "loginError": "خطأ في كلمة المرور أو عنوان البريد الإلكتروني."
   },
   "SignUpPage": {
     "welcomeText": "ابدأ رحلة التعلم مع ذكاء👋",
@@ -279,7 +280,7 @@
     "formErrors": {
       "studentFirstNameRequired": "ادخل الاسم الأول الطالب",
       "studentLastNameRequired": "ادخل الاسم الأخير الطالب",
-      "studentNameInvalid" : "ادخل اسم صحيح ، تجنب الأرقام والرموز",
+      "studentNameInvalid": "ادخل اسم صحيح ، تجنب الأرقام والرموز",
       "studentNameMinLength": "الاسم يجب أن يكون من 3 أحرف على الأقل",
       "studentNameMaxLength": "الاسم يجب أن يكون من 40 حرف على الأكثر",
       "studentAgeInvalid": "ادخل عمر صحيح",
