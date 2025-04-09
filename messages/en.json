@@ -28,7 +28,8 @@
     "loading": "loading . . .",
     "continueWith": "Or Continue With",
     "dontHaveAccount": "Don't Have An Account?",
-    "createAnAccount": "Create An Account!"
+    "createAnAccount": "Create An Account!",
+    "loginError": "Email Address or Password is wrong."
   },
   "SignUpPage": {
     "welcomeText": "Start Your Learning Journry With Thekaa👋",
