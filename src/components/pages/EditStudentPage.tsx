@@ -10,25 +10,31 @@ import { ROUTES } from '@/config/routes'
 import { useStudent, useStudentMutations } from '@/hooks/rqs/students'
 import { useAxiosAuth } from '@/hooks/useAxiosAuth'
 import { IStudentData } from '@/types/student.type'
+import Loading from '../atoms/loading'
 
 const EditStudentPage = () => {
   const t = useTranslations("editStudentPage");
   const [isConfirmDeleteDialogOpen, setIsConfirmDeleteOpen] = useState(false)
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false)
+  const [successMessage, setSuccessMessage] = useState('')
   const params = useParams();
   const studentId = params?.id?.toString() ?? "";
   const axiosAuth = useAxiosAuth()
   const { data: studentData, isLoading: isStudentDataLoading } = useStudent(axiosAuth, studentId);
   const { isPending: isUpdatePending, mutateAsync: mutateUpdateAsync, isError: isUpdateError, error: updateError } = useStudentMutations(axiosAuth).update
   const { isPending: isDeletePending, mutateAsync: mutateDeleteAsync, isError: isDeleteError, error: deleteError } = useStudentMutations(axiosAuth).delete
-
   const onUpdateSubmit = async (data: Partial<IStudentData>) => {
-    await mutateUpdateAsync(data)
+    console.log(data)
+    await mutateUpdateAsync({ ...data, _id: studentId })
+    setIsSuccessDialogOpen(true);
+    setSuccessMessage(t("studentEditedSuccessfully"))
+
   }
   const confirmDeleteStudent = async () => {
     setIsConfirmDeleteOpen(false);
     await mutateDeleteAsync(studentId)
     setIsSuccessDialogOpen(true);
+    setSuccessMessage(t("studentDeletedSuccessfully"))
   }
   const openDeleteStudentDialog = () => {
     setIsConfirmDeleteOpen(true)
@@ -44,8 +50,8 @@ const EditStudentPage = () => {
       <CardHeader className='pt-0'>
         <CardTitle className='text-center text-2xl'>{t("fileManagment")}</CardTitle>
       </CardHeader>
-      <CardContent className='py-0'>
-        {isStudentDataLoading ? ("loading...") :
+      <CardContent className='py-0 min-h-[300px]'>
+        {isStudentDataLoading ? <Loading /> :
           (<EditStudentInfoFrom isPending={isUpdatePending || isDeletePending} onSubmit={onUpdateSubmit} studentData={studentData} deleteStudent={openDeleteStudentDialog} />)
         }<ConfirmDeleteDialog
           isOpen={isConfirmDeleteDialogOpen}
@@ -56,7 +62,7 @@ const EditStudentPage = () => {
         <SuccessDialog
           isOpen={isSuccessDialogOpen}
           setIsOpen={setIsSuccessDialogOpen}
-          successMessage={t("studentDeletedSuccessfully")}
+          successMessage={successMessage}
           returnTo={ROUTES.SONS_FILES}
         />
 

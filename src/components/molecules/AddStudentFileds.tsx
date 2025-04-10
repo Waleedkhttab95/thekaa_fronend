@@ -69,7 +69,7 @@ const AddStudentFields = ({
         <SelectContent>
           {currentStepData?.options.length > 0 && currentStepData?.options.map(option => (
             <SelectItem key={option?.id as string} value={option?.name as string}>
-              {option as string}
+              {option.name as string}
             </SelectItem>
           ))}
         </SelectContent>

@@ -271,6 +271,7 @@
     },
     "chooseDifferentImage": "اختر صورة آخرى",
     "studentDeletedSuccessfully": "تم حذف ملف الطالب",
+    "studentEditedSuccessfully": "تم تعديل ملف الطالب",
     "saveChanges": "حفظ التغييرات",
     "EditStudentPicture": "تعديل صورة الطالب",
     "cropDescription": "قص واضبط صورة الطالب",
@@ -279,7 +280,7 @@
     "formErrors": {
       "studentFirstNameRequired": "ادخل الاسم الأول الطالب",
       "studentLastNameRequired": "ادخل الاسم الأخير الطالب",
-      "studentNameInvalid" : "ادخل اسم صحيح ، تجنب الأرقام والرموز",
+      "studentNameInvalid": "ادخل اسم صحيح ، تجنب الأرقام والرموز",
       "studentNameMinLength": "الاسم يجب أن يكون من 3 أحرف على الأقل",
       "studentNameMaxLength": "الاسم يجب أن يكون من 40 حرف على الأكثر",
       "studentAgeInvalid": "ادخل عمر صحيح",
