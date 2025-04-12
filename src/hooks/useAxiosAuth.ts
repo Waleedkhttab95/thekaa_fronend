@@ -10,8 +10,8 @@ export const useAxiosAuth = () => {
   useEffect(() => {
     const reqIntercept = axiosAuthClient.interceptors.request.use(
       (config) => {
-        if (!config.headers["Authorization"])
-          config.headers["Authorization"] = `Bearer ${accessToken}`;
+        // if (!config.headers["Authorization"])
+        //   // config.headers["Authorization"] = `Bearer ${accessToken}`;
 
         return config;
       },

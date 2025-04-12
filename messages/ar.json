@@ -272,6 +272,7 @@
     },
     "chooseDifferentImage": "اختر صورة آخرى",
     "studentDeletedSuccessfully": "تم حذف ملف الطالب",
+    "studentEditedSuccessfully": "تم تعديل ملف الطالب",
     "saveChanges": "حفظ التغييرات",
     "EditStudentPicture": "تعديل صورة الطالب",
     "cropDescription": "قص واضبط صورة الطالب",

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../atoms/form'
 import { useForm } from 'react-hook-form'
 import { IStudentData } from '@/types/student.type'
@@ -8,10 +8,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { getStudentEditSchema } from '@/validations/studentsSchemas'
 import { Button } from '../atoms/button'
 import { getEditStudentFormFields } from '@/data/student'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import AvatarEditorWithCrop from './AvatarWithEdit'
 import AddStudentFields from '../molecules/AddStudentFileds'
+import { useCountries, useGradeLevels, useSubjects } from '@/hooks/rqs/content'
+import { Locales } from '@/types/locales.enum'
 
 type props = {
   deleteStudent: () => void;
@@ -25,15 +27,25 @@ const EditStudentInfoFrom = ({
   isPending,
   onSubmit
 }: props) => {
-  const t = useTranslations('editStudentPage')
+  const t = useTranslations('editStudentPage');
+  const locale = useLocale()
   const form = useForm<Partial<IStudentData>>({
     resolver: zodResolver(getStudentEditSchema(t)),
-    defaultValues: studentData
+    defaultValues: studentData,
   })
 
   const onAvatarChange = (newAvatar: string) => {
     form.setValue('avatar', newAvatar)
   }
+  const { data: gradeLevels } = useGradeLevels(locale as Locales);
+  const { data: subjects } = useSubjects(locale as Locales);
+  const { data: countries } = useCountries(locale as Locales);
+
+  const steps = useMemo(() => getEditStudentFormFields(t, {
+    gradeLevels,
+    subjects,
+    countries
+  }), [t, gradeLevels, subjects, countries]);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='w-full'>
@@ -42,7 +54,7 @@ const EditStudentInfoFrom = ({
             onAvatarChange={onAvatarChange}
             avatarFallback={form.watch('firstName') || ''}
           />
-          {getEditStudentFormFields(t).map((field: any) => (
+          {steps.map((field: any) => (
             // <div key={`esf-input-${field?.name}`}>
             //   <FormLabel className='text-base inline-block mb-1'>{field.label}</FormLabel>
             //   <FormField

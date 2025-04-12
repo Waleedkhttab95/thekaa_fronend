@@ -55,5 +55,5 @@ export const getStudentEditSchema = (t: TFunctionType) =>
     grade: z.string().nonempty(t("formErrors.educationLevelRequired")),
     subject: z.string().nonempty(t("formErrors.subjectRequired")),
     // avatar: z.string().nonempty(t("formErrors.avatarRequired")),
-    avatar: z.string(),
+    avatar: z.string().optional(),
   });

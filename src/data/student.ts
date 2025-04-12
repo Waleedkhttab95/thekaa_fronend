@@ -1,6 +1,11 @@
 import { TFunctionType } from "@/types/common.type";
-
-export const getFromSteps = (t: TFunctionType) => [
+import { ICountry, IGradeLevel, ISubject } from "@/types/content.type";
+type Content = {
+  countries: ICountry[] | undefined;
+  gradeLevels: IGradeLevel[] | undefined;
+  subjects: ISubject[] | undefined;
+};
+export const getFromSteps = (t: TFunctionType, content: Content) => [
   [
     {
       name: "firstName",
@@ -31,8 +36,14 @@ export const getFromSteps = (t: TFunctionType) => [
       type: "select",
       placeholder: t("formData.gender.placeholder"),
       options: [
-        t("formData.gender.options.male"),
-        t("formData.gender.options.female"),
+        {
+          _id: "male",
+          name: t("formData.gender.options.male"),
+        },
+        {
+          _id: "female",
+          name: t("formData.gender.options.female"),
+        },
       ],
     },
   ],
@@ -47,9 +58,9 @@ export const getFromSteps = (t: TFunctionType) => [
     {
       name: "country",
       label: t("formData.country.label"),
-      type: "text",
+      type: "select",
       placeholder: t("formData.country.placeholder"),
-      options: [],
+      options: content.countries ?? [],
     },
   ],
   [
@@ -57,7 +68,7 @@ export const getFromSteps = (t: TFunctionType) => [
       name: "grade",
       label: t("formData.educationLevel.label"),
       type: "select",
-      options: ["إبتدائي", "إعدادي", "ثانوي", "جامعي"],
+      options: content.gradeLevels ?? [],
       placeholder: t("formData.educationLevel.placeholder"),
     },
   ],
@@ -66,38 +77,15 @@ export const getFromSteps = (t: TFunctionType) => [
       name: "subject",
       label: t("formData.subject.label"),
       type: "combo",
-      options: [
-        {
-          id: "english",
-          name: t("formData.subject.options.english"),
-          icon: "/assets/images/icons/en-subject.svg",
-        },
-        {
-          id: "physics",
-          name: t("formData.subject.options.physics"),
-          icon: "/assets/images/icons/physics-subject.svg",
-        },
-        {
-          id: "math",
-          name: t("formData.subject.options.math"),
-          icon: "/assets/images/icons/math-subject.svg",
-        },
-        {
-          id: "science",
-          name: t("formData.subject.options.science"),
-          icon: "/assets/images/icons/science-subject.svg",
-        },
-        {
-          id: "chemistry",
-          name: t("formData.subject.options.chemistry"),
-          icon: "/assets/images/icons/chemistry-subject.svg",
-        },
-      ],
+      options: content.subjects ?? [],
       placeholder: t("formData.subject.placeholder"),
     },
   ],
 ];
-export const getEditStudentFormFields = (t: TFunctionType) => [
+export const getEditStudentFormFields = (
+  t: TFunctionType,
+  content: Content
+) => [
   {
     name: "firstName",
     label: t("formData.studentFirstName.label"),
@@ -120,7 +108,7 @@ export const getEditStudentFormFields = (t: TFunctionType) => [
     name: "grade",
     label: t("formData.educationLevel.label"),
     type: "select",
-    options: ["إبتدائي", "إعدادي", "ثانوي", "جامعي"],
+    options: content.gradeLevels ?? [],
     placeholder: t("formData.educationLevel.placeholder"),
   },
   {
@@ -134,13 +122,7 @@ export const getEditStudentFormFields = (t: TFunctionType) => [
     name: "subject",
     label: t("formData.subject.label"),
     type: "select",
-    options: [
-      t("formData.subject.options.science"),
-      t("formData.subject.options.math"),
-      t("formData.subject.options.science"),
-      t("formData.subject.options.english"),
-      t("formData.subject.options.chemistry"),
-    ],
+    options: content.subjects ?? [],
     placeholder: t("formData.subject.placeholder"),
   },
 ];

@@ -18,6 +18,7 @@ export async function generateMetadata() {
 export default function HomePage() {
   const t = useTranslations("HomePage");
   return (
+
     <ProtectedRoute>
       <LogoutButton />
       <div>
@@ -27,27 +28,6 @@ export default function HomePage() {
         <br />
         {/* using next/link for non-localized routes */}
         <Link href="/dashboard"> dashboard</Link>
-        <h1 className="font-tajawal font-bold">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
-        <h1 className="font-pingar font-medium">بيزووو</h1>
         <h1 className="font-pingar font-medium">بيزووو</h1>
         <h1 className="font-pingar font-medium">بيزووو</h1>
         <h1 className="font-pingar font-medium">بيزووو</h1>

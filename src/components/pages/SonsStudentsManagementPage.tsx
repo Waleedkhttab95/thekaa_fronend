@@ -7,6 +7,7 @@ import { Button } from '../atoms/button'
 import Image from 'next/image'
 import { useStudents } from '@/hooks/rqs/students'
 import { useAxiosAuth } from '@/hooks/useAxiosAuth'
+import Loading from '../atoms/loading'
 
 const SonsStudentsManagementPage = () => {
   const t = useTranslations()
@@ -21,11 +22,11 @@ const SonsStudentsManagementPage = () => {
       <CardHeader>
         <CardTitle className='text-3xl  text-center mb-5'>{t("SonsStudentsManagementPage.title")}</CardTitle>
       </CardHeader>
-      <CardContent>
-        {isSonsLoading ? <p>loading ...</p> : sons ? <SonsFilesList isOpen={isEdited} sons={sons} /> : <p>error</p>}
+      <CardContent className='min-h-[300px]'>
+        {isSonsLoading ? <Loading /> : sons ? <SonsFilesList isOpen={isEdited} sons={sons} /> : <p>error</p>}
       </CardContent>
       <CardFooter>
-        <Button className='w-full md:w-[50%] mx-auto'
+        {sons && (<Button className='w-full md:w-[50%] mx-auto'
           onClick={() => onEditedChange()}
         >
           {isEdited ? (
@@ -40,7 +41,8 @@ const SonsStudentsManagementPage = () => {
             <span>{t("SonsStudentsManagementPage.manageSonsFiles")}</span>
           </>
           )}
-        </Button>
+        </Button>)
+        }
       </CardFooter>
     </Card>
   )

@@ -1,5 +1,5 @@
 "use client";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { STUDENTS_QUERY } from "@/config/qr.constants";
 import {
   createStudent,
@@ -28,109 +28,18 @@ export const useStudent = (axiosClient: AxiosInstance, id: string) => {
 };
 
 export const useStudentMutations = (axiosClient: AxiosInstance) => {
-  const queryClient = useQueryClient();
-
   const createMutation = useMutation({
     mutationFn: (data: Partial<IStudentData>) =>
       createStudent(axiosClient, data),
-    onMutate: async (newStudent: Partial<IStudentData>) => {
-      await queryClient.cancelQueries({ queryKey: [STUDENTS_QUERY] });
-      // when request is start loadings
-      const oldData =
-        queryClient.getQueryData<IStudentData[]>([STUDENTS_QUERY]) || [];
-      if (oldData.length > 0) {
-        queryClient.setQueryData([STUDENTS_QUERY], () => [
-          {
-            ...newStudent,
-          },
-          ...oldData,
-        ]);
-      } else {
-        queryClient.setQueryData([STUDENTS_QUERY], () => [
-          {
-            ...newStudent,
-          },
-        ]);
-      }
-      return { oldData };
-    },
-    onError: (err, variables, context) => {
-      // rollback the old data if error occurred
-      if (context?.oldData) {
-        queryClient.setQueryData([STUDENTS_QUERY], context);
-      }
-
-      console.error(`${err.name} | ${err.message}`);
-    },
-    onSettled: () => {
-      // refetch data after mutation completes
-      queryClient.invalidateQueries({ queryKey: [STUDENTS_QUERY] });
-    },
   });
 
   const updateMutation = useMutation({
     mutationFn: (data: Partial<IStudentData>) =>
       updateStudent(axiosClient, data),
-    onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: [STUDENTS_QUERY] });
-
-      // when request is start loadings
-      const oldData =
-        queryClient.getQueryData<IStudentData[]>([STUDENTS_QUERY]) || [];
-
-      queryClient.setQueryData([STUDENTS_QUERY], (newStudent: IStudentData) => {
-        oldData.map((student) => {
-          if (student._id === newStudent._id) {
-            return {
-              ...student,
-              ...newStudent,
-            };
-          }
-          return student;
-        });
-      });
-
-      return { oldData };
-    },
-
-    onError: (err, variables, context) => {
-      // rollback the old data if error occurred
-      if (context?.oldData) {
-        queryClient.setQueryData([STUDENTS_QUERY], context);
-      }
-      console.error(`${err.name} | ${err.message}`);
-    },
-    onSettled: () => {
-      // refetch data after mutation completes
-      queryClient.invalidateQueries({ queryKey: [STUDENTS_QUERY] });
-    },
   });
 
   const deleteMutation = useMutation({
     mutationFn: (id: string) => deleteStudent(axiosClient, id),
-    onMutate: async () => {
-      await queryClient.cancelQueries({ queryKey: [STUDENTS_QUERY] });
-
-      // when request is start loadings
-      const oldData =
-        queryClient.getQueryData<IStudentData[]>([STUDENTS_QUERY]) || [];
-
-      queryClient.setQueryData([STUDENTS_QUERY], (newStudent: IStudentData) => {
-        return oldData.filter((student) => student._id !== newStudent._id);
-      });
-      return { oldData };
-    },
-    onError: (err, variables, context) => {
-      // rollback the old data if error occurred
-      if (context?.oldData) {
-        queryClient.setQueryData([STUDENTS_QUERY], context);
-      }
-      console.error(`${err.name} | ${err.message}`);
-    },
-    onSettled: () => {
-      // refetch data after mutation completes
-      queryClient.invalidateQueries({ queryKey: [STUDENTS_QUERY] });
-    },
   });
 
   return {
