@@ -11,20 +11,23 @@ import { Button } from '../atoms/button';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { getFromSteps } from '@/data/student';
 import { IStudentData } from '@/types/student.type';
 import { getStudentAddSchema } from '@/validations/studentsSchemas';
 import AddStudentFields from '../molecules/AddStudentFileds';
+import { useCountries, useGradeLevels, useSubjects } from '@/hooks/rqs/content';
+import { Locales } from '@/types/locales.enum';
 type props = {
   onSubmit: (data: Partial<IStudentData>) => void;
   isPending: boolean;
 }
 
 const AddStudentForm = ({ onSubmit: submitFormData, isPending }: props) => {
-  const t = useTranslations("addStudentPage")
+  const t = useTranslations("addStudentPage");
+  const locale = useLocale();
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<Partial<IStudentData>>({
     firstName: '',
@@ -37,7 +40,14 @@ const AddStudentForm = ({ onSubmit: submitFormData, isPending }: props) => {
     gender: ''
 
   });
-  const steps = useMemo(() => getFromSteps(t), [t]);
+  const { data: gradeLevels } = useGradeLevels(locale as Locales);
+  const { data: subjects } = useSubjects(locale as Locales);
+  const { data: countries } = useCountries(locale as Locales);
+  const steps = useMemo(() => getFromSteps(t, {
+    gradeLevels,
+    subjects,
+    countries
+  }), [t, gradeLevels, subjects, countries]);
   const form = useForm({
     resolver: zodResolver(getStudentAddSchema(t)[currentStep]),
     defaultValues: formData,
