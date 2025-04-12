@@ -28,7 +28,8 @@
     "loading": "يتم تسجيل الدخول . . .",
     "continueWith": "أو الاستمرار بواسطة",
     "dontHaveAccount": "ليس لديك حساب؟",
-    "createAnAccount": "انشىء حسابك الآن!"
+    "createAnAccount": "انشىء حسابك الآن!",
+    "loginError": "خطأ في كلمة المرور أو عنوان البريد الإلكتروني."
   },
   "SignUpPage": {
     "welcomeText": "ابدأ رحلة التعلم مع ذكاء👋",
