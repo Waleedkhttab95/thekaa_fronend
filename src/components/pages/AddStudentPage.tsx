@@ -3,14 +3,22 @@ import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../molecules/card';
 import Image from 'next/image';
 import AddStudentForm from '../organisms/AddStudentForm';
-import { Dispatch, SetStateAction, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Button } from '../atoms/button';
 import Link from 'next/link';
 import { TFunctionType } from '@/types/common.type';
+import { cn } from '@/lib/utils';
+import { useStudentMutations } from '@/hooks/rqs/students';
+import { useAxiosAuth } from '@/hooks/useAxiosAuth';
+import { IStudentData } from '@/types/student.type';
 
-type setCurrentStepFnType = Dispatch<SetStateAction<number>>;
-
-const getOuterSteps = (t: TFunctionType, setCurrentStep: setCurrentStepFnType) => [
+type getOuterStepsProps = {
+  t: TFunctionType;
+  onSubmit: (data: Partial<IStudentData>) => void;
+  isPending: boolean;
+  setCurrentStep: React.Dispatch<React.SetStateAction<number>>
+}
+const getOuterSteps = ({ t, setCurrentStep, onSubmit, isPending }: getOuterStepsProps) => [
   {
     id: 'initial_add_Student',
     title: t('addStudentInfoToThekaa'),
@@ -28,7 +36,7 @@ const getOuterSteps = (t: TFunctionType, setCurrentStep: setCurrentStepFnType) =
     title: t('studentInfo'),
     description: t('addStudentInfo'),
     icon: "/assets/images/student.svg",
-    content: <AddStudentForm finish={() => setCurrentStep(2)} />
+    content: <AddStudentForm onSubmit={onSubmit} isPending={isPending} />
   },
   {
     id: 'success_student_added',
@@ -36,7 +44,7 @@ const getOuterSteps = (t: TFunctionType, setCurrentStep: setCurrentStepFnType) =
     description: t('StartLevelExam'),
     icon: "/assets/images/icons/complete.svg",
     content: (
-      <div className='flex justify-between items-center gap-5'>
+      <div className='w-full flex  flex-col md:flex-row justify-between items-center gap-2 md:gap-5'>
         <Link href="/test" className='block w-full' >
           <Button className='w-full'>
             {t("start")}
@@ -56,16 +64,35 @@ const getOuterSteps = (t: TFunctionType, setCurrentStep: setCurrentStepFnType) =
 export default function AddStudentPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const t = useTranslations('addStudentPage');
-  const outerSteps = useMemo(() => getOuterSteps(t, setCurrentStep), [t]);
+  const axiosAuth = useAxiosAuth();
+  const { isPending, mutateAsync } = useStudentMutations(axiosAuth).create;
+  const finish = () => setCurrentStep(2);
+  const submitFormData = async (data: Partial<IStudentData>) => {
+    try {
+      // data api
+      console.log(data)
+      await mutateAsync(data)
+      finish()
+      console.log('Form submitted successfully');
+    } catch (error) {
+      // toast
+      console.log(error)
+    }
+  };
+  const outerSteps = useMemo(() => getOuterSteps({ t, setCurrentStep, onSubmit: submitFormData, isPending }), [t, isPending]);
   const currentStepData = outerSteps[currentStep];
+
+
   return (
-    <Card className={"px-2 md:px-12 flex flex-col justify-center min-h-[452px] lg:px-24 xl:w-[50%] md:w-[75%] w-[95%] mx-auto"}>
-      <CardHeader className="text-center mb-1">
+    <Card className={cn("px-2 md:px-12 flex flex-col justify-center min-h-[440px] lg:px-24 xl:w-fit xl:min-w-[50%] md:w-[75%] w-[95%] mx-auto",
+      currentStep === 0 ? 'xl:w-[50%]' : ''
+    )}>
+      <CardHeader className="text-center mb-1 py-8">
         <Image src={currentStepData.icon} className="mx-auto mb-3" width={48} height={67} alt={t("studentInfo")} />
         <CardTitle className="text-2xl font-bold mb-4">{currentStepData.title}</CardTitle>
         <CardDescription className="text-gray-500 text-lg">{currentStepData.description}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className='xl:min-w-max py-0'>
         {
           currentStepData.content
         }

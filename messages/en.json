@@ -25,9 +25,11 @@
     },
     "forgotPassword": "ْDid You Forget Your Password?",
     "loginButton": "Login",
+    "loading": "loading . . .",
     "continueWith": "Or Continue With",
     "dontHaveAccount": "Don't Have An Account?",
-    "createAnAccount": "Create An Account!"
+    "createAnAccount": "Create An Account!",
+    "loginError": "Email Address or Password is wrong."
   },
   "SignUpPage": {
     "welcomeText": "Start Your Learning Journry With Thekaa👋",
@@ -72,9 +74,11 @@
       "passwordSpecialCharacter": "Password must contain at least one special character @ $ ! % * ? &",
       "confirmPasswordRequired": "Enter the password again",
       "passwordsMustMatch": "Passwords must match",
-      "acceptTermsRequired": "You must agree to the Terms of Service and Usage"
+      "acceptTermsRequired": "You must agree to the Terms of Service and Usage",
+      "emailAlreadyInUse": "There Email is already in use"
     },
-    "signUpButton": "Create An Account"
+    "signUpButton": "Create An Account",
+    "loading": "Creating The Account . . ."
   },
   "VerifyAccountPage": {
     "title": "Account Verification",
@@ -83,6 +87,7 @@
     "didNotGetCode": "Didn't receive the code? You can resend it after 25 seconds, ",
     "sendCodeAgain": "Resend Code",
     "verify": "Verify",
+    "loading": "Verifying . . .",
     "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly."
   },
   "RecoverPasswordPage": {
@@ -154,28 +159,49 @@
     "addStudentInfoToThekaa": "Add Your Child to Thekaa Platform!",
     "addStudentInfoToThekaaDescription": "You can add more than one child to your account to start their fun learning journey on Thekaa. We will ask you for some basic information about them.",
     "startAddNewStudent": "Start Adding a New Student",
-    "studentName": "Student Name",
-    "studentNamePlaceholder": "Enter student name",
-    "studentAge": "Student Age",
-    "studentAgePlaceholder": "Enter student age",
-    "studentLevel": "Student Level",
-    "studentLevelPlaceholder": "Select student level",
     "start": "Start",
     "skip": "Skip",
     "previous": "Previous",
     "next": "Next",
     "formData": {
-      "studentName": {
-        "label": "What is the student's name?",
-        "placeholder": "Enter the student's full name"
+      "studentFirstName": {
+        "label": "What is the student's first name?",
+        "placeholder": "Enter the student's first name"
+      },
+      "studentLastName": {
+        "label": "What is the student's last name?",
+        "placeholder": "Enter the student's last name"
       },
       "age": {
         "label": "How old is the student?",
         "placeholder": "Enter student age"
       },
+      "gender": {
+        "label": "What is gender of the student?",
+        "placeholder": "Enter student gender",
+        "options": {
+          "male": "Male",
+          "female": "Female"
+        }
+      },
+      "phone": {
+        "label": "what is the student phone?",
+        "placeholder": "Enter student phone"
+      },
+      "country": {
+        "label": "What is student country?",
+        "placeholder": "Enter student country"
+      },
       "subject": {
         "label": "What subject does the student want to study? 📚",
-        "placeholder": "Select a subject"
+        "placeholder": "Select a subject",
+        "options": {
+          "english": "English",
+          "math": "Math",
+          "science": "Science",
+          "physics": "Physics",
+          "chemistry": "Chemistry"
+        }
       },
       "educationLevel": {
         "label": "What educational level is the student in? 🎓",
@@ -186,22 +212,33 @@
     "studentAddedSuccessfully": "Student information has been added successfully",
     "StartLevelExam": "Do you want to start the placement test now?",
     "formErrors": {
-      "studentNameRequired": "Enter the student's name",
+      "studentFirstNameRequired": "Enter student's first name",
+      "studentLastNameRequired": "Enter student's last name",
       "studentNameInvalid": "Enter a valid name, avoiding numbers and symbols",
       "studentNameMinLength": "The name must be at least 3 characters long",
       "studentNameMaxLength": "The name must be at most 40 characters long",
       "studentAgeInvalid": "Enter a valid age",
       "educationLevelRequired": "Select an educational level",
-      "subjectRequired": "Select a subject"
+      "subjectRequired": "Select a subject",
+      "phoneRequired": "Enter the student's phone number",
+      "phoneMinError": "The phone number must be at least 10 characters long",
+      "phoneMaxError": "The phone number must be at most 20 characters long",
+      "phoneInvalid": "Enter a Valid phone Number",
+      "countryRequired": "Enter the student's country",
+      "genderRequired": "Enter the student's gender"
     }
   },
   "editStudentPage": {
     "fileManagment": "File Management",
     "confirmDeleteMessage": "Are you sure you want to delete the student?",
     "formData": {
-      "studentName": {
-        "label": "Student Name",
-        "placeholder": "Enter the student's full name"
+      "studentFirstName": {
+        "label": "student's first name?",
+        "placeholder": "Enter the student's first name"
+      },
+      "studentLastName": {
+        "label": "student's last name?",
+        "placeholder": "Enter the student's last name"
       },
       "age": {
         "label": "Student Age",
@@ -209,7 +246,18 @@
       },
       "subject": {
         "label": "Subject",
-        "placeholder": "Select a subject"
+        "placeholder": "Select a subject",
+        "options": {
+          "english": "English",
+          "math": "Math",
+          "science": "Science",
+          "physics": "Physics",
+          "chemistry": "Chemistry"
+        }
+      },
+      "phone": {
+        "label": "Student's phone?",
+        "placeholder": "Enter student phone"
       },
       "educationLevel": {
         "label": "Education Level",
@@ -218,20 +266,21 @@
     },
     "chooseDifferentImage": "Choose a different image",
     "studentDeletedSuccessfully": "Student file has been deleted",
+    "studentEditedSuccessfully": "Student file has been Updated",
     "saveChanges": "Save Changes",
     "EditStudentPicture": "Edit Student Picture",
     "cropDescription": "Crop and adjust the student's picture",
     "zoom": "Zoom",
     "deleteStudentFile": "Delete Student File",
     "formErrors": {
-      "studentNameRequired": "Enter the student's name",
+      "studentFirstNameRequired": "Enter student's first name",
+      "studentLastNameRequired": "Enter student's last name",
       "studentNameInvalid": "Enter a valid name, avoid numbers and symbols",
       "studentNameMinLength": "The name must be at least 3 characters long",
       "studentNameMaxLength": "The name must be at most 40 characters long",
       "studentAgeInvalid": "Enter a valid age",
       "educationLevelRequired": "Select the education level",
-      "subjectRequired": "Select a subject",
-      "avatarRequired": "Please upload an image"
+      "subjectRequired": "Select a subject"
     }
   },
   "SonsStudentsManagementPage": {

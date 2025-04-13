@@ -3,52 +3,30 @@ import React, { useState } from 'react'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../molecules/card'
 import { useTranslations } from 'next-intl'
 import SonsFilesList from '../organisms/SonsFilesList'
-import { IStudentData } from '@/types/student.type'
 import { Button } from '../atoms/button'
 import Image from 'next/image'
-export const sons: IStudentData[] = [
-  {
-    id: '1',
-    studentName: "وليد",
-    age: 10,
-    educationLevel: "إبتدائي",
-    subject: "العلوم",
-    avatar: "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
-  },
-  {
-    id: '2',
-    studentName: "فاطمة",
-    age: 10,
-    educationLevel: "إعدادي",
-    subject: "الرياضيات",
-    avatar: "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
-  },
-  {
-    id: '3',
-    studentName: "محمد",
-    age: 10,
-    educationLevel: "ثانوي",
-    subject: "اللغة الإنجليزية",
-    avatar: "https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
-  },
+import { useStudents } from '@/hooks/rqs/students'
+import { useAxiosAuth } from '@/hooks/useAxiosAuth'
+import Loading from '../atoms/loading'
 
-]
 const SonsStudentsManagementPage = () => {
   const t = useTranslations()
   const [isEdited, setIsEdited] = useState(false);
+  const axiosAuth = useAxiosAuth()
   const onEditedChange = () => {
     setIsEdited((isEdited) => !isEdited)
   }
+  const { data: sons, isLoading: isSonsLoading } = useStudents(axiosAuth);
   return (
     <Card variant='transparent' className='mx-auto xl:w-[60%] md:w-[93%] w-[95%] py-8'>
       <CardHeader>
         <CardTitle className='text-3xl  text-center mb-5'>{t("SonsStudentsManagementPage.title")}</CardTitle>
       </CardHeader>
-      <CardContent>
-        <SonsFilesList isOpen={isEdited} sons={sons} />
+      <CardContent className='min-h-[300px]'>
+        {isSonsLoading ? <Loading /> : sons ? <SonsFilesList isOpen={isEdited} sons={sons} /> : <p>error</p>}
       </CardContent>
       <CardFooter>
-        <Button className='w-full md:w-[50%] mx-auto'
+        {sons && (<Button className='w-full md:w-[50%] mx-auto'
           onClick={() => onEditedChange()}
         >
           {isEdited ? (
@@ -63,7 +41,8 @@ const SonsStudentsManagementPage = () => {
             <span>{t("SonsStudentsManagementPage.manageSonsFiles")}</span>
           </>
           )}
-        </Button>
+        </Button>)
+        }
       </CardFooter>
     </Card>
   )

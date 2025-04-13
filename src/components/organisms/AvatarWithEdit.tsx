@@ -118,7 +118,7 @@ export default function AvatarEditorWithCrop({
       <div className="relative group">
         <div className="relative w-[123px] h-[123px] rounded-full overflow-hidden shadow-xl">
           <Avatar className="w-full h-full">
-            <AvatarImage src={avatar || "/placeholder.svg?height=160&width=160"} alt="Profile picture" />
+            <AvatarImage src={avatar || "/assets/images/avatar-placeholder.jpg"} alt="Profile picture" />
             <AvatarFallback className="text-3xl">{getAvatarInitials(avatarFallback)}</AvatarFallback>
           </Avatar>
 
