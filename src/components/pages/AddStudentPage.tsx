@@ -75,11 +75,6 @@ export default function AddStudentPage() {
       // data api
       await mutateAsync(data)
       finish()
-      toast({
-        title: t("success.title"),
-        description: t("success.description"),
-        variant: "destructive"
-      })
     } catch (error: any) {
       // toast
       toast({
