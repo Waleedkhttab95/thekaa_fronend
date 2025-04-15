@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../molecules/card';
@@ -11,6 +13,7 @@ import { cn } from '@/lib/utils';
 import { useStudentMutations } from '@/hooks/rqs/students';
 import { useAxiosAuth } from '@/hooks/useAxiosAuth';
 import { IStudentData } from '@/types/student.type';
+import { toast } from '../atoms/sooner';
 
 type getOuterStepsProps = {
   t: TFunctionType;
@@ -70,13 +73,20 @@ export default function AddStudentPage() {
   const submitFormData = async (data: Partial<IStudentData>) => {
     try {
       // data api
-      console.log(data)
       await mutateAsync(data)
       finish()
-      console.log('Form submitted successfully');
-    } catch (error) {
+      toast({
+        title: t("success.title"),
+        description: t("success.description"),
+        variant: "destructive"
+      })
+    } catch (error: any) {
       // toast
-      console.log(error)
+      toast({
+        title: t("error.title"),
+        description: t("error.description"),
+        variant: "destructive"
+      })
     }
   };
   const outerSteps = useMemo(() => getOuterSteps({ t, setCurrentStep, onSubmit: submitFormData, isPending }), [t, isPending]);

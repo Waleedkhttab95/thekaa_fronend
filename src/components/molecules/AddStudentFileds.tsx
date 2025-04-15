@@ -75,20 +75,21 @@ const AddStudentFields = ({
         </SelectContent>
       </Select>
     )
-  else if (currentStepData.type === 'combo')
+  else if (currentStepData.type === 'combo') {
+    const gridCols = currentStepData.options.length > 5 ? 6 : 3
     return (
       <RadioGroup
         onValueChange={formField.onChange}
         value={formField.value as string}
-        className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 mt-4"
+        className={`grid lg:w-fit lg:mx-auto sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-${gridCols} gap-5 mt-4`}
         dir={locale === 'ar' ? 'rtl' : 'ltr'}
 
       >
         {/*  eslint-disable-next-line @typescript-eslint/no-explicit-any */}
         {currentStepData.options?.map((option: any) => (
-          <div key={`subject-${option._id}`} className="relative">
+          <div key={`subject-${option._id}`} className="relative ">
             <RadioGroupItem value={option._id} id={option._id} className="sr-only" />
-            <Label htmlFor={option._id} className="cursor-pointer block lg:size-[150px] mx-auto">
+            <Label htmlFor={option._id} className="cursor-pointer block lg:size-[150px] ">
               <div
                 className={`flex flex-col items-center justify-center p-4 text-center h-full border rounded-md select-none transition-all ${formField.value === option._id
                   ? "border-primary border-2 bg-primary/5"
@@ -103,6 +104,7 @@ const AddStudentFields = ({
         ))}
       </RadioGroup>
     )
+  }
   else return null
 
 
