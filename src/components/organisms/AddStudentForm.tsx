@@ -125,7 +125,7 @@ const AddStudentForm = ({ onSubmit: submitFormData, isPending }: props) => {
           )}
 
           <Button type="submit" className={"md:w-[109px]"} disabled={isPending}>
-            <span className='pt-1'>{t("next")}</span>
+            <span className='pt-1'>{currentStep !== steps.length - 1 ? t("next") : t("finish")}</span>
             <Image
               src={'/arrow.svg'}
               alt="arrow"

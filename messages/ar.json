@@ -169,6 +169,7 @@
     "skip": "تخطي",
     "previous": "السابق",
     "next": "التالي",
+    "finish": "إنهاء",
     "formData": {
       "studentFirstName": {
         "label": "ما الاسم الأول الطالب؟",
@@ -223,7 +224,7 @@
       "studentNameInvalid": "ادخل اسم صحيح ، تجنب الأرقام والرموز",
       "studentNameMinLength": "الاسم يجب أن يكون من 3 أحرف على الأقل",
       "studentNameMaxLength": "الاسم يجب أن يكون من 40 حرف على الأكثر",
-      "studentAgeInvalid": "ادخل عمر صحيح",
+      "studentAgeInvalid": "يجب أن يكون عمر الطالب بين 6 و 12 سنة",
       "educationLevelRequired": "اختر مستوى التعليم",
       "subjectRequired": "اختر المادة",
       "phoneRequired": "ادخل رقم الهاتف",
@@ -232,6 +233,18 @@
       "phoneInvalid": "ادخل رقم هاتف صحيح",
       "countryRequired": "اختر الدولة",
       "genderRequired": "اختر الجنس"
+    },
+    "success": {
+      "title": "تمت الإضافة بنجاح",
+      "description": " تمت إضافة معلومات الطالب بنجاح, يمكنك الآن إما بدء إمتحان تحديد المستوى أو الانتقال إلى لوحة التحكم."
+    },
+    "error": {
+      "title": "خطأ",
+      "description": "حدث خطأ أثناء إضافة معلومات الطالب, يرجى المحاولة مرة أخرى.",
+      "delete": {
+        "title": "خطأ",
+        "description": "حدث خطأ أثناء حذف معلومات الطالب, يرجى المحاولة مرة أخرى."
+      }
     }
   },
   "editStudentPage": {

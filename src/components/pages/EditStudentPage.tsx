@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import React, { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../molecules/card'
@@ -11,6 +13,7 @@ import { useStudent, useStudentMutations } from '@/hooks/rqs/students'
 import { useAxiosAuth } from '@/hooks/useAxiosAuth'
 import { IStudentData } from '@/types/student.type'
 import Loading from '../atoms/loading'
+import { toast } from '../atoms/sooner'
 
 const EditStudentPage = () => {
   const t = useTranslations("editStudentPage");
@@ -21,29 +24,43 @@ const EditStudentPage = () => {
   const studentId = params?.id?.toString() ?? "";
   const axiosAuth = useAxiosAuth()
   const { data: studentData, isLoading: isStudentDataLoading } = useStudent(axiosAuth, studentId);
-  const { isPending: isUpdatePending, mutateAsync: mutateUpdateAsync, isError: isUpdateError, error: updateError } = useStudentMutations(axiosAuth).update
-  const { isPending: isDeletePending, mutateAsync: mutateDeleteAsync, isError: isDeleteError, error: deleteError } = useStudentMutations(axiosAuth).delete
+  const { isPending: isUpdatePending, mutateAsync: mutateUpdateAsync } = useStudentMutations(axiosAuth).update
+  const { isPending: isDeletePending, mutateAsync: mutateDeleteAsync } = useStudentMutations(axiosAuth).delete
   const onUpdateSubmit = async (data: Partial<IStudentData>) => {
     console.log(data)
-    await mutateUpdateAsync({ ...data, _id: studentId })
-    setIsSuccessDialogOpen(true);
-    setSuccessMessage(t("studentEditedSuccessfully"))
+    try {
+      await mutateUpdateAsync({ ...data, _id: studentId })
+      setIsSuccessDialogOpen(true);
+      setSuccessMessage(t("studentEditedSuccessfully"))
+    } catch (error: any) {
+      toast({
+        title: t("error.title"),
+        description: t("error.description"),
+        variant: "destructive"
+      })
+    }
 
   }
   const confirmDeleteStudent = async () => {
-    setIsConfirmDeleteOpen(false);
-    await mutateDeleteAsync(studentId)
-    setIsSuccessDialogOpen(true);
-    setSuccessMessage(t("studentDeletedSuccessfully"))
+    try {
+      setIsConfirmDeleteOpen(false);
+      await mutateDeleteAsync(studentId)
+      setIsSuccessDialogOpen(true);
+      setSuccessMessage(t("studentDeletedSuccessfully"))
+    } catch (error: any) {
+      toast({
+        title: t("error.delete.title"),
+        description: t("error.delete.description"),
+        variant: "destructive"
+      })
+
+    }
   }
   const openDeleteStudentDialog = () => {
     setIsConfirmDeleteOpen(true)
 
   }
 
-  if (isUpdateError || isDeleteError) {
-    console.log(updateError || deleteError)
-  }
 
   return (
     <Card className='py-12 lg:px-[100px] xl:w-[55%] md:w-[75%] w-[95%] mx-auto'>
