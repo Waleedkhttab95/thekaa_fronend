@@ -6,12 +6,14 @@ import { useMutation } from "@tanstack/react-query";
 import { axiosClient } from "@/lib/axios";
 import OtpForm from "./OtpForm";
 import { useRouter } from "next/navigation";
+import { toast } from "../atoms/sooner";
+import { useTranslations } from "next-intl";
 
 const VerifyAccountForm = () => {
+  const t = useTranslations("VerifyAccountPage");
   const searchParams = useSearchParams();
   const router = useRouter();
   const [value, setValue] = useState("");
-  const [isValid, setIsValid] = useState(false);
   const [isError, setIsError] = useState(false);
   const email = searchParams.get("email");
 
@@ -25,8 +27,12 @@ const VerifyAccountForm = () => {
     },
     onSuccess: (response) => {
       if (response.status === 201) {
-        setIsValid(true);
         router.push("/login");
+        toast({
+          title: t("success"),
+          description: t("successDescription"),
+          variant: "success",
+        });
       } else {
         setIsError(true);
       }
@@ -53,7 +59,6 @@ const VerifyAccountForm = () => {
     <OtpForm
       pageContent="VerifyAccountPage"
       value={value}
-      isValid={isValid}
       isError={isError}
       onChange={onChange}
       handleComplete={handleComplete}

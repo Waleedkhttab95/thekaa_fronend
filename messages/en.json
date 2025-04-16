@@ -79,7 +79,9 @@
       "emailAlreadyInUse": "There Email is already in use"
     },
     "signUpButton": "Create An Account",
-    "loading": "Creating The Account . . ."
+    "loading": "Creating The Account . . .",
+    "success": "Account Created Successfully",
+    "successDescription": "Check Your Email to Complete Registration."
   },
   "VerifyAccountPage": {
     "title": "Account Verification",
@@ -89,7 +91,9 @@
     "sendCodeAgain": "Resend Code",
     "verify": "Verify",
     "loading": "Verifying . . .",
-    "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly."
+    "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly.",
+    "success": "Verified Successfully",
+    "successDescription": "Now You Can Login To Your Account"
   },
   "RecoverPasswordPage": {
     "title": "Recover Password",
