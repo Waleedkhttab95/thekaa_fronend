@@ -12,7 +12,7 @@
       },
       "password": {
         "label": "كلمة المرور",
-        "placeholder": "ادخل رقم الموبايل"
+        "placeholder": "ادخل كلمة المرور"
       },
       "rememberMe": {
         "label": "تذكرني"
@@ -29,7 +29,8 @@
     "continueWith": "أو الاستمرار بواسطة",
     "dontHaveAccount": "ليس لديك حساب؟",
     "createAnAccount": "انشىء حسابك الآن!",
-    "loginError": "خطأ في كلمة المرور أو عنوان البريد الإلكتروني."
+    "loginError": "خطأ في تسجيل الدخول",
+    "loginErrorDescription": "خطأ في كلمة المرور أو عنوان البريد الإلكتروني."
   },
   "SignUpPage": {
     "welcomeText": "ابدأ رحلة التعلم مع ذكاء👋",

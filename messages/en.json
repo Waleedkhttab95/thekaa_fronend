@@ -29,7 +29,8 @@
     "continueWith": "Or Continue With",
     "dontHaveAccount": "Don't Have An Account?",
     "createAnAccount": "Create An Account!",
-    "loginError": "Email Address or Password is wrong."
+    "loginError": "Error Logging in",
+    "loginErrorDescription": "Wrong Email or Password"
   },
   "SignUpPage": {
     "welcomeText": "Start Your Learning Journry With Thekaa👋",
