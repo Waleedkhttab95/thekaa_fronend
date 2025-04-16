@@ -4,10 +4,12 @@ import { CardDescription, CardTitle } from "../molecules/card";
 import { Button } from "../atoms/button";
 import { useTranslations } from "next-intl";
 
+// todo: remove isValid after intigerating fully in otp forms.
+
 type OtpFormProps = {
   pageContent: string;
   value: string;
-  isValid: boolean;
+  isValid?: boolean;
   isError: boolean;
   onChange: (value: string) => void;
   handleComplete: () => void;

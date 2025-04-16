@@ -24,6 +24,7 @@ import EyeSlashed from "../../../public/eye-slash.svg";
 import { Checkbox } from "../atoms/checkbox";
 import { useMutation } from "@tanstack/react-query";
 import { axiosClient } from "@/lib/axios";
+import { toast } from "../atoms/sooner";
 const SignUpForm = () => {
   const router = useRouter();
   const t = useTranslations("SignUpPage");
@@ -70,6 +71,11 @@ const SignUpForm = () => {
       if (response.status === 201) {
         const email = response.data.email;
         router.push(`/verify-account?email=${encodeURIComponent(email)}`);
+        toast({
+          title: t("success"),
+          description: t("successDescription"),
+          variant: "success",
+        });
       } else {
         console.error(
           "User creation failed, unexpected status:",
@@ -139,7 +145,18 @@ const SignUpForm = () => {
             </FormItem>
           )}
         />
-        {/* //todo: fix the number input format */}
+        {/*
+          phone number rules:
+            ✅ May start with a + (optional).
+            ✅ Must start with a digit from 1 to 9 (i.e., cannot start with 0).
+            ✅ Can only contain digits (no spaces, dashes, or special characters).
+            ✅ Must be at least 2 digits long (because it requires 1 digit after the initial [1-9]).
+            ✅ Maximum of 15 digits total (excluding + if present).
+            ❌ No letters allowed.
+            ❌ No spaces, dashes (-), or parentheses.
+            ❌ Cannot be empty (must be provided).
+            ❌ Cannot start with 0, even after a + (e.g., +012345... is invalid).
+        */}
         <FormField
           control={form.control}
           name="parentPhone"
