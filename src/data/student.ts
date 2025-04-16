@@ -49,13 +49,6 @@ export const getFromSteps = (t: TFunctionType, content: Content) => [
   ],
   [
     {
-      name: "phone",
-      label: t("formData.phone.label"),
-      type: "text",
-      placeholder: t("formData.phone.placeholder"),
-      options: [],
-    },
-    {
       name: "country",
       label: t("formData.country.label"),
       type: "select",

@@ -29,7 +29,8 @@
     "continueWith": "Or Continue With",
     "dontHaveAccount": "Don't Have An Account?",
     "createAnAccount": "Create An Account!",
-    "loginError": "Email Address or Password is wrong."
+    "loginError": "Error Logging in",
+    "loginErrorDescription": "Wrong Email or Password"
   },
   "SignUpPage": {
     "welcomeText": "Start Your Learning Journry With Thekaa👋",
@@ -78,7 +79,9 @@
       "emailAlreadyInUse": "There Email is already in use"
     },
     "signUpButton": "Create An Account",
-    "loading": "Creating The Account . . ."
+    "loading": "Creating The Account . . .",
+    "success": "Account Created Successfully",
+    "successDescription": "Check Your Email to Complete Registration."
   },
   "VerifyAccountPage": {
     "title": "Account Verification",
@@ -88,7 +91,9 @@
     "sendCodeAgain": "Resend Code",
     "verify": "Verify",
     "loading": "Verifying . . .",
-    "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly."
+    "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly.",
+    "success": "Verified Successfully",
+    "successDescription": "Now You Can Login To Your Account"
   },
   "RecoverPasswordPage": {
     "title": "Recover Password",
@@ -163,6 +168,7 @@
     "skip": "Skip",
     "previous": "Previous",
     "next": "Next",
+    "finish": "Finish",
     "formData": {
       "studentFirstName": {
         "label": "What is the student's first name?",
@@ -217,7 +223,7 @@
       "studentNameInvalid": "Enter a valid name, avoiding numbers and symbols",
       "studentNameMinLength": "The name must be at least 3 characters long",
       "studentNameMaxLength": "The name must be at most 40 characters long",
-      "studentAgeInvalid": "Enter a valid age",
+      "studentAgeInvalid": "ٍThe student age must be between 6 and 12 years",
       "educationLevelRequired": "Select an educational level",
       "subjectRequired": "Select a subject",
       "phoneRequired": "Enter the student's phone number",
@@ -226,6 +232,14 @@
       "phoneInvalid": "Enter a Valid phone Number",
       "countryRequired": "Enter the student's country",
       "genderRequired": "Enter the student's gender"
+    },
+    "success": {
+      "title": "Student Added Successfully",
+      "description": "Student information has been added successfully. You can now start the placement test to determine the student's level."
+    },
+    "error": {
+      "title": "Error",
+      "description": "An error occurred while adding the student. Please try again later."
     }
   },
   "editStudentPage": {
@@ -281,6 +295,18 @@
       "studentAgeInvalid": "Enter a valid age",
       "educationLevelRequired": "Select the education level",
       "subjectRequired": "Select a subject"
+    },
+    "success": {
+      "title": "Success",
+      "description": "Student information has been updated successfully."
+    },
+    "error": {
+      "title": "Error",
+      "description": "An error occurred while updating the student. Please try again later.",
+      "delete": {
+        "title": "Error",
+        "description": "An error occurred while deleting the student. Please try again later."
+      }
     }
   },
   "SonsStudentsManagementPage": {

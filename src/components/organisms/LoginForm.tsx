@@ -31,7 +31,7 @@ export function LoginForm() {
   const t = useTranslations("LoginPage");
   const locale = useLocale();
   const router = useRouter();
-  const { mutate: login, isPending, error } = useLogin();
+  const { mutate: login, isPending } = useLogin();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -70,9 +70,6 @@ export function LoginForm() {
         onSuccess: () => {
           router.push("/dashboard");
         },
-        onError: () => {
-          console.log(error);
-        },
       }
     );
   }
@@ -83,7 +80,6 @@ export function LoginForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="auth-form-width flex flex-col gap-y-2"
       >
-        {error && <p className="text-red-500">{t("loginError")}</p>}
         <FormField
           control={form.control}
           name="email"

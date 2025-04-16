@@ -12,7 +12,7 @@
       },
       "password": {
         "label": "كلمة المرور",
-        "placeholder": "ادخل رقم الموبايل"
+        "placeholder": "ادخل كلمة المرور"
       },
       "rememberMe": {
         "label": "تذكرني"
@@ -29,7 +29,8 @@
     "continueWith": "أو الاستمرار بواسطة",
     "dontHaveAccount": "ليس لديك حساب؟",
     "createAnAccount": "انشىء حسابك الآن!",
-    "loginError": "خطأ في كلمة المرور أو عنوان البريد الإلكتروني."
+    "loginError": "خطأ في تسجيل الدخول",
+    "loginErrorDescription": "خطأ في كلمة المرور أو عنوان البريد الإلكتروني."
   },
   "SignUpPage": {
     "welcomeText": "ابدأ رحلة التعلم مع ذكاء👋",
@@ -78,7 +79,9 @@
       "emailAlreadyInUse": "يوجد حساب بالفعل يستخدم هذا الإيميل"
     },
     "signUpButton": "أنشئ حساب",
-    "loading": "بتم إنشاء الحساب . . ."
+    "loading": "بتم إنشاء الحساب . . .",
+    "success": "تمت إنشاء الحساب بنجاح",
+    "successDescription": "تحقق من بريدك الاكرتوني للتحقق من حسابك لإكمال عملية التسجيل."
   },
   "VerifyAccountPage": {
     "title": "التحقق من الحساب",
@@ -88,7 +91,9 @@
     "sendCodeAgain": "أعد إرسال الرمز",
     "verify": "تحقق",
     "wrongCode": "⚠ رمز التحقق غير صحيح يرجى المحاولة مرة أخرى. تأكد من إدخال الأرقام بشكل صحيح",
-    "loading": "يتم التحقق . . ."
+    "loading": "يتم التحقق . . .",
+    "success": "تم التحقق بنجاح",
+    "successDescription": "يمكنك الآن تسجيل الدخول لحسابك"
   },
   "RecoverPasswordPage": {
     "title": "استعادة كلمة المرور",
@@ -169,6 +174,7 @@
     "skip": "تخطي",
     "previous": "السابق",
     "next": "التالي",
+    "finish": "إنهاء",
     "formData": {
       "studentFirstName": {
         "label": "ما الاسم الأول الطالب؟",
@@ -223,7 +229,7 @@
       "studentNameInvalid": "ادخل اسم صحيح ، تجنب الأرقام والرموز",
       "studentNameMinLength": "الاسم يجب أن يكون من 3 أحرف على الأقل",
       "studentNameMaxLength": "الاسم يجب أن يكون من 40 حرف على الأكثر",
-      "studentAgeInvalid": "ادخل عمر صحيح",
+      "studentAgeInvalid": "يجب أن يكون عمر الطالب بين 6 و 12 سنة",
       "educationLevelRequired": "اختر مستوى التعليم",
       "subjectRequired": "اختر المادة",
       "phoneRequired": "ادخل رقم الهاتف",
@@ -232,6 +238,18 @@
       "phoneInvalid": "ادخل رقم هاتف صحيح",
       "countryRequired": "اختر الدولة",
       "genderRequired": "اختر الجنس"
+    },
+    "success": {
+      "title": "تمت الإضافة بنجاح",
+      "description": " تمت إضافة معلومات الطالب بنجاح, يمكنك الآن إما بدء إمتحان تحديد المستوى أو الانتقال إلى لوحة التحكم."
+    },
+    "error": {
+      "title": "خطأ",
+      "description": "حدث خطأ أثناء إضافة معلومات الطالب, يرجى المحاولة مرة أخرى.",
+      "delete": {
+        "title": "خطأ",
+        "description": "حدث خطأ أثناء حذف معلومات الطالب, يرجى المحاولة مرة أخرى."
+      }
     }
   },
   "editStudentPage": {
