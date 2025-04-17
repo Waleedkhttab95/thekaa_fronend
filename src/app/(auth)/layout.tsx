@@ -11,12 +11,15 @@ export default function AuthLayout({
 }) {
   const { user, isLoading } = useAuth();
   const router = useRouter();
+  const email = user?.email;
 
   useEffect(() => {
-    if (!isLoading && user) {
+    if (!isLoading && user?.isActive) {
       router.replace("/");
+    } else if (!isLoading && user && !user?.isActive) {
+      router.replace(`/verify-account?email=${encodeURIComponent(email!)}`);
     }
-  }, [isLoading, user, router]);
+  }, [isLoading, user, router, email]);
 
   if (isLoading) {
     return <div className="p-4 text-center">Loading...</div>;

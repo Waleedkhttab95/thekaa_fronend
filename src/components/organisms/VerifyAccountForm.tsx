@@ -27,7 +27,7 @@ const VerifyAccountForm = () => {
     },
     onSuccess: (response) => {
       if (response.status === 201) {
-        router.push("/login");
+        router.push("/");
         toast({
           title: t("success"),
           description: t("successDescription"),

@@ -30,7 +30,9 @@
     "dontHaveAccount": "Don't Have An Account?",
     "createAnAccount": "Create An Account!",
     "loginError": "Error Logging in",
-    "loginErrorDescription": "Wrong Email or Password"
+    "loginErrorDescription": "Wrong Email or Password",
+    "accountNeedsVerification": "Inactive Account",
+    "accoundNeedsVerificationDescription": "Check Your Email to Get The Verification Code."
   },
   "SignUpPage": {
     "welcomeText": "Start Your Learning Journry With Thekaa👋",
@@ -93,7 +95,7 @@
     "loading": "Verifying . . .",
     "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly.",
     "success": "Verified Successfully",
-    "successDescription": "Now You Can Login To Your Account"
+    "successDescription": "Your Account is Now Active."
   },
   "RecoverPasswordPage": {
     "title": "Recover Password",

@@ -4,21 +4,21 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-type ProtectedRouteProps = {
+type VerifyProtectedRouteProps = {
   children: React.ReactNode;
 };
 
-export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+export const VerifyPageLayout = ({ children }: VerifyProtectedRouteProps) => {
   const { user, isLoading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && !user) {
-      router.replace("/login");
+    if (!isLoading && user?.isActive) {
+      router.replace("/");
     }
   }, [isLoading, user, router]);
 
-  if (isLoading || (!user && typeof window !== "undefined")) {
+  if (isLoading || user?.isActive) {
     return <div className="text-center p-4">Loading...</div>;
   }
 
