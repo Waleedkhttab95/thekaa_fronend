@@ -8,7 +8,6 @@ export const getLoginSchema = (t: TFunctionType) =>
       .email(t("formErrors.emailInvalid"))
       .nonempty(t("formErrors.emailRequired")),
     password: z.string().nonempty(t("formErrors.passwordRequired")),
-    rememberMe: z.boolean().default(false),
   });
 
 export const getSignUpSchema = (t: TFunctionType) =>

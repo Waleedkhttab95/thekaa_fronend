@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getUser, login as loginService } from "@/services/auth";
 import { axiosAuthClient } from "@/lib/axios";
@@ -7,7 +6,6 @@ import { useTranslations } from "next-intl";
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
-  const router = useRouter();
   const t = useTranslations("LoginPage");
 
   return useMutation({
@@ -21,8 +19,6 @@ export const useLogin = () => {
       try {
         const user = await getUser(axiosAuthClient);
         queryClient.setQueryData(["auth", "user"], user);
-
-        router.push("/dashboard");
       } catch {
         toast({
           title: t("loginError"),
