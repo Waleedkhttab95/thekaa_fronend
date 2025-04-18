@@ -22,15 +22,12 @@ import GoogleButton from "../atoms/GoogleButton";
 import { getLoginSchema } from "@/lib/schemas";
 import { useLocale, useTranslations } from "next-intl";
 import { CardDescription } from "../molecules/card";
-import { Checkbox } from "../atoms/checkbox";
 import EyeSlashed from "../../../public/eye-slash.svg";
-import { useRouter } from "next/navigation";
 import { useLogin } from "@/hooks/useLogin";
 
 export function LoginForm() {
   const t = useTranslations("LoginPage");
   const locale = useLocale();
-  const router = useRouter();
   const { mutate: login, isPending } = useLogin();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -40,7 +37,6 @@ export function LoginForm() {
     defaultValues: {
       email: "",
       password: "",
-      rememberMe: false,
     },
   });
 
@@ -64,14 +60,7 @@ export function LoginForm() {
   }, [locale, form]);
 
   function onSubmit(data: z.infer<ReturnType<typeof getLoginSchema>>) {
-    login(
-      { email: data.email, password: data.password },
-      {
-        onSuccess: () => {
-          router.push("/dashboard");
-        },
-      }
-    );
+    login({ email: data.email, password: data.password });
   }
 
   return (
@@ -124,26 +113,7 @@ export function LoginForm() {
           )}
         />
         <div className="flex justify-between items-center">
-          <FormField
-            control={form.control}
-            name="rememberMe"
-            render={({ field }) => (
-              <FormItem className="flex items-center justify-center">
-                <FormControl>
-                  <Checkbox
-                    className="w-6 h-6 bg-white"
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <FormMessage />
-                <FormLabel className="pb-2 ms-1">
-                  {t("formInputs.rememberMe.label")}
-                </FormLabel>
-              </FormItem>
-            )}
-          />
-          <p className="cursor-pointer hover:underline">
+          <p className="cursor-pointer hover:underline pt-2">
             <Link href={"/recover-password"}>{t("forgotPassword")}</Link>
           </p>
         </div>

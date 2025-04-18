@@ -22,13 +22,14 @@ import { CardDescription } from "../molecules/card";
 import GoogleButton from "../atoms/GoogleButton";
 import EyeSlashed from "../../../public/eye-slash.svg";
 import { Checkbox } from "../atoms/checkbox";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axiosClient } from "@/lib/axios";
 import { toast } from "../atoms/sooner";
 const SignUpForm = () => {
   const router = useRouter();
   const t = useTranslations("SignUpPage");
   const locale = useLocale();
+  const queryClient = useQueryClient();
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -67,9 +68,12 @@ const SignUpForm = () => {
     onMutate: () => {
       setIsSubmitting(true);
     },
-    onSuccess: (response) => {
+    onSuccess: async (response) => {
       if (response.status === 201) {
+        await queryClient.invalidateQueries({ queryKey: ["auth", "user"] });
+
         const email = response.data.email;
+
         router.push(`/verify-account?email=${encodeURIComponent(email)}`);
         toast({
           title: t("success"),
