@@ -318,6 +318,18 @@
     "title": "من يذاكر الآن؟",
     "manageSonsFiles": "إدارة ملفات الأبناء"
   },
+  "aiChatPage": {
+    "doICanHelp": "هل يمكنني المساعدة ؟",
+    "error": {
+      "title": "خطأ",
+      "description": "حدث خطأ أثناء إرسال الرسالة, يرجى المحاولة مرة أخرى."
+    },
+    "send": "إرسال",
+    "sendAvoiceMessage": "إرسال رسالة صوتية",
+    "cancel": "إلغاء",
+    "askAboutAnything": "اسألني عن أي شيء...",
+    "talkOrAskAboutAnyThing": "تحدث أو اسأل عن أي شيء"
+  },
   "common": {
     "delete": "حذف",
     "confirmDelete": "تأكيد الحذف",

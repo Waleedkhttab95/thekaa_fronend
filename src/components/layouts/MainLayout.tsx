@@ -4,7 +4,7 @@ import { Sonner } from '../atoms/sooner'
 
 const MainLayout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="relative overflow-hidden min-h-[100vh]">
+    <div className="relative bg-layout overflow-hidden min-h-[100vh]">
       <div className="z-10">
         <Header />
         {children}
