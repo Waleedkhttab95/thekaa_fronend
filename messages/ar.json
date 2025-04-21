@@ -339,5 +339,9 @@
     "edit": "تعديل",
     "returnToDashboard": "العودة إلى لوحة التحكم",
     "done": "تم"
+  },
+  "dashboardLayout": {
+    "allRights": "جميع الحقوق محفوظة",
+    "dashboard": "لوحة التحكم"
   }
 }
