@@ -343,5 +343,17 @@
   "dashboardLayout": {
     "allRights": "جميع الحقوق محفوظة",
     "dashboard": "لوحة التحكم"
+  },
+  "studentProfile": {
+    "nameLabel": "إسم الطالب",
+    "namePlcaeholder": "ادخل اسم الطالب",
+    "ageLabel": "عمر الطالب",
+    "agePlaceholder": "ادخل عمر الطالب",
+    "educationLevelLabel": "المرحلة الدراسية",
+    "educationLevelPlaceholder": "اختر المرحلة الدراسية",
+    "subjectLable": "المادة التي يدرسها",
+    "subjectPlaceholder": "اختر المادة التي يدرسها",
+    "saveChanges": "حفظ التغييرات",
+    "loading": "يتم حفظ التغيرات . . ."
   }
 }
