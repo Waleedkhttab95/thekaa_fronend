@@ -46,7 +46,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           </Button>
         </div>
       </div>
-      {children}
+      <div className="mt-16 mb-36 w-full flex items-center justify-center">{children}</div>
       <div className="h-16 bg-[#23f6f0] flex justify-between items-center p-4 sm:px-24 w-full">
         {locale === Locales.ar ? (
           <Image
