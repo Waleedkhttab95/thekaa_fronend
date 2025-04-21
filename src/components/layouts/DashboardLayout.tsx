@@ -13,7 +13,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
     <div className="flex flex-col items-center pt-10 min-h-screen">
       <div
         className="bg-[linear-gradient(to_right,_#23F6F04D_0%,_#CBBDF24D_50%,_#F7AEF34D_100%)] 
-        w-10/12 rounded-[40px] h-20 px-8 max-w-[1300px] min-w-[360px] flex justify-between"
+        w-11/12 sm:w-10/12 rounded-[40px] h-20 px-8 max-w-[1300px] min-w-[360px] flex justify-between"
       >
         {locale === Locales.ar ? (
           <Image
@@ -46,7 +46,9 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           </Button>
         </div>
       </div>
-      <div className="mt-16 mb-36 w-10/12 max-w-[1300px] min-w-[360px]flex items-center justify-center">{children}</div>
+      <div className="mt-16 mb-36 w-11/12 sm:w-10/12 max-w-[1300px] min-w-[360px]flex items-center justify-center">
+        {children}
+      </div>
       <div className="h-16 bg-[#23f6f0] flex justify-between items-center p-4 sm:px-24 w-full">
         {locale === Locales.ar ? (
           <Image
