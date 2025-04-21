@@ -324,5 +324,9 @@
     "returnToDashboard": "Return To Dashboard",
     "edit": "Edit",
     "done": "Done"
+  },
+  "dashboardLayout": {
+    "allRights": "All Rights Reserved",
+    "dashboard": "Dashboard"
   }
 }
