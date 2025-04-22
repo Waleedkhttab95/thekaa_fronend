@@ -328,5 +328,28 @@
   "dashboardLayout": {
     "allRights": "All Rights Reserved",
     "dashboard": "Dashboard"
+  },
+  "quizIntroPage": {
+    "title": "Welcome to the {quizType} {subject} Quiz!",
+    "beforeStart": {
+      "title": "Before You Start:",
+      "content": "This quiz helps you evaluate your progress in the subject and identify areas that need improvement. Don’t worry, the goal is to help you learn better!"
+    },
+    "details": {
+      "title": "Quiz Details:",
+      "type": "{quizType} Quiz to track your progress.",
+      "questionCount": "Contains {questionCount} covering the key topics you've studied.",
+      "length": "You have {length} minutes to answer the questions.",
+      "grading": "Grading System: Your answers are evaluated to help improve your level in the subject.",
+      "retry": "Retry: You can review your answers after the quiz and learn from your mistakes."
+    },
+    "tips": {
+      "title": "Tips Before Starting:",
+      "tip1": "Choose a quiet place to focus while answering.",
+      "tip2": "Don’t rush. Read the questions carefully before choosing an answer.",
+      "tip3": "Don’t worry if you don’t know the answer — the goal is learning and growth!"
+    },
+    "ready": "When you're ready, click the 'Start Quiz' button and enjoy the challenge!",
+    "startButton": "Start Quiz"
   }
 }
