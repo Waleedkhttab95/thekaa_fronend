@@ -340,5 +340,21 @@
     "subjectPlaceholder": "Select subject",
     "saveChanges": "Save Changes",
     "loading": "loading . . ."
+  },
+  "planPage": {
+    "plan": "Curriculum plan",
+    "numberOfLessons": "Total Number of Lessons",
+    "passedLessons": "Number of Passed Lessons",
+    "lessonsNeedComplete": "Lessons that Needs Completion",
+    "level": "Current Level",
+    "performance": "Student performance",
+    "progressPercentage": "Progress Percentage",
+    "startYourNextLesson": "Start Your Next Lesson",
+    "levels": {
+      "advanced": "Advanced"
+    },
+    "performanceLevels": {
+      "veryGood": "Very Good"
+    }
   }
 }
