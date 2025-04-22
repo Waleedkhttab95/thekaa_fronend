@@ -378,5 +378,21 @@
     "subjectPlaceholder": "اختر المادة التي يدرسها",
     "saveChanges": "حفظ التغييرات",
     "loading": "يتم حفظ التغيرات . . ."
+  },
+  "planPage": {
+    "plan": "الخطة",
+    "numberOfLessons": "عدد دروس الخطة الإجمالي",
+    "passedLessons": "عدد الدروس التي تم إنجازها بنجاح",
+    "lessonsNeedComplete": "عدد الدروس المتبقي إكمالها",
+    "level": "المستوى الحالي",
+    "performance": "أداء الطالب",
+    "progressPercentage": "نسبة الإنجاز",
+    "startYourNextLesson": "ابدأ درسك التالي",
+    "levels": {
+      "advanced": "متقدم"
+    },
+    "performanceLevels": {
+      "veryGood": "جيد جداً"
+    }
   }
 }
