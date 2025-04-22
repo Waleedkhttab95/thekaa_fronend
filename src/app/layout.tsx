@@ -4,29 +4,28 @@ import ProvidersLayout from "@/components/layouts/ProvidersLayout";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { ibmPlexSansArabic, pingAR, tajawal } from "@/config/fonts";
-import MainLayout from "@/components/layouts/MainLayout";
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
 
 export async function generateMetadata() {
-  const locale = await getLocale() as keyof typeof metadataTranslations;
+  const locale = (await getLocale()) as keyof typeof metadataTranslations;
   const metadataTranslations = {
     en: {
       title: {
-        template: '%s | Thekaa',
-        default: 'Home'
-      }
+        template: "%s | Thekaa",
+        default: "Home",
+      },
     },
     ar: {
       title: {
         default: "ذكاء | الصفحة الرئيسية",
-        template: '%s | ذكاء'
-      }
+        template: "%s | ذكاء",
+      },
     },
   };
-  return metadataTranslations[locale]
+  return metadataTranslations[locale];
 }
 export default async function RootLayout({ children }: Props) {
   const locale = await getLocale();
@@ -43,11 +42,7 @@ export default async function RootLayout({ children }: Props) {
         className={` ${pingAR.variable} ${ibmPlexSansArabic.variable} ${tajawal.variable} `}
       >
         <NextIntlClientProvider messages={messages}>
-          <ProvidersLayout>
-            <MainLayout>
-              {children}
-            </MainLayout>
-          </ProvidersLayout>
+          <ProvidersLayout>{children}</ProvidersLayout>
         </NextIntlClientProvider>
       </body>
     </html>
