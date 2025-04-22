@@ -366,5 +366,17 @@
     },
     "ready": "عندما تكون مستعدًا، اضغط على زر ''ابدأ الإختبار'' واستمتع بالتحدي",
     "startButton": "ابدأ الاختبار"
+  },
+  "studentProfile": {
+    "nameLabel": "إسم الطالب",
+    "namePlcaeholder": "ادخل اسم الطالب",
+    "ageLabel": "عمر الطالب",
+    "agePlaceholder": "ادخل عمر الطالب",
+    "educationLevelLabel": "المرحلة الدراسية",
+    "educationLevelPlaceholder": "اختر المرحلة الدراسية",
+    "subjectLable": "المادة التي يدرسها",
+    "subjectPlaceholder": "اختر المادة التي يدرسها",
+    "saveChanges": "حفظ التغييرات",
+    "loading": "يتم حفظ التغيرات . . ."
   }
 }

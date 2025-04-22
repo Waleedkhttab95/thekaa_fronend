@@ -351,5 +351,17 @@
     },
     "ready": "When you're ready, click the 'Start Quiz' button and enjoy the challenge!",
     "startButton": "Start Quiz"
+  },
+  "studentProfile": {
+    "nameLabel": "Student Name",
+    "namePlcaeholder": "Enter student name",
+    "ageLabel": "Student Age",
+    "agePlaceholder": "Enter student age",
+    "educationLevelLabel": "Education Level",
+    "educationLevelPlaceholder": "Select education level",
+    "subjectLable": "Subject",
+    "subjectPlaceholder": "Select subject",
+    "saveChanges": "Save Changes",
+    "loading": "loading . . ."
   }
 }
