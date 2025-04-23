@@ -10,7 +10,10 @@ interface QuestionsProps {
   selectedAnswer: string;
   onSelectAnswer: (answerId: string) => void;
   answer: string;
+  background?: "transparent" | string;
   setAnswer: (value: string) => void;
+  className?: string;
+  titleStyle?: string;
 }
 
 export function Questions({
@@ -19,14 +22,20 @@ export function Questions({
   onSelectAnswer,
   answer,
   setAnswer,
+  background = "transparent",
+  className = "",
+  titleStyle = "",
 }: QuestionsProps) {
   switch (question.type) {
     case "text-choice":
       return (
         <TextChoiceQuestion
           question={question}
+          background={background}
           selectedAnswer={selectedAnswer}
           onSelectAnswer={onSelectAnswer}
+          className={className}
+          titleStyle={titleStyle}
         />
       );
     case "image-choice":
