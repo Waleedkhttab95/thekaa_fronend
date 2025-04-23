@@ -10,6 +10,7 @@ interface QuestionOptionProps {
   isSelected: boolean;
   onSelect: (id: string) => void;
   className?: string;
+  background?: "transparent" | "white" | string;
 }
 
 export function QuestionOption({
@@ -20,6 +21,7 @@ export function QuestionOption({
   hight,
   isSelected,
   onSelect,
+  background = "transparent",
 }: QuestionOptionProps) {
   return (
     <div
@@ -27,8 +29,10 @@ export function QuestionOption({
       className={cn(
         "flex w-full items-center gap-2 p-3 rounded-[40px] border cursor-pointer transition-colors mb-[24px] select-none",
         isSelected
-          ? "border-[#23F6F0] bg-[#23F6F0]/10 ring-1 ring-[#23F6F0] cursor-default"
-          : "hover:bg-gray-100 dark:hover:bg-gray-800"
+          ? "border-[#23F6F0] bg-[#232525]/10 ring-1 ring-[#23F6F0] cursor-default bg-slate-100"
+          : background === "white"
+          ? "bg-white hover:bg-gray-100"
+          : "bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800"
       )}
     >
       {imageUrl ? (
@@ -48,10 +52,12 @@ export function QuestionOption({
         <>
           <div
             className={cn(
-              "w-6 h-6 rounded-full border bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-700",
+              "w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold text-gray-700",
               isSelected
                 ? "border-[#23F6F0] bg-[#23F6F0] scale-200"
-                : "border-gray-300 cursor-default"
+                : background === "white"
+                ? "bg-gray-100 border-gray-300"
+                : "bg-transparent border-gray-300 cursor-default"
             )}
           >
             {id}
