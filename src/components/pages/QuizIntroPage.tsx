@@ -1,7 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { Card, CardTitle } from "../molecules/card";
-import { Label } from "../atoms/label";
 import { Button } from "../atoms/button";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -44,9 +43,9 @@ const QuizIntroPage = () => {
           variant="transparent"
         >
           <div className="mb-9 text-2xl md:text-xl">
-            <Label className="text-xl font-pingar font-bold md:text-2xl sm:text-2xl lg:text-3xl">
+            <div className="text-xl font-pingar font-bold md:text-2xl sm:text-2xl lg:text-3xl">
               {t("beforeStart.title")}
-            </Label>
+            </div>
             <div className="font-pingar text-[20px] md:text-[20px] sm:text-lg lg:text-[22px] font-medium mt-3">
               {t("beforeStart.content")}
             </div>
