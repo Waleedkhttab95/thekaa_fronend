@@ -9,12 +9,14 @@ const DashboardCard = ({
   cardTitle: string;
 }) => {
   return (
-    <Card className="min-w-[375px] max-w-[375px] h-48 bg-white/60 shadow">
-      <CardHeader className="flex items-center justify-center text-2xl font-bold text-center">
-        {cardTitle}
-      </CardHeader>
-      <CardContent className="">{children}</CardContent>
-    </Card>
+    <div className="w-full min-w-[325px] min-[1039px]:max-w-[375px]">
+      <Card className="h-48 bg-white/60 shadow">
+        <CardHeader className="flex items-center justify-center text-2xl font-bold text-center">
+          {cardTitle}
+        </CardHeader>
+        <CardContent className="">{children}</CardContent>
+      </Card>
+    </div>
   );
 };
 export default DashboardCard;

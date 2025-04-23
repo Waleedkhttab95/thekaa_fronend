@@ -10,7 +10,7 @@ const PlanPage = () => {
   return (
     <div>
       <p className="text-2xl font-bold">{t("plan")}</p>
-      <div className="bg-[url('/student-profile-bg.png')] bg-cover rounded-[40px] min-h-[744px] mt-10 p-12">
+      <div className="bg-[url('/student-profile-bg.png')] bg-cover rounded-[40px] min-h-[744px] mt-10 p-12 flex flex-col items-center">
         <div className="h-4/6 flex flex-wrap gap-x-5 justify-center">
           <DashboardCard cardTitle={t("numberOfLessons")}>
             <Button className="w-14 h-14">3</Button>
@@ -34,11 +34,11 @@ const PlanPage = () => {
           </DashboardCard>
           <DashboardCard cardTitle={t("progressPercentage")}>80%</DashboardCard>
         </div>
-        <Card className="h-48 bg-white/60 shadow">
+        <Card className="h-48 bg-white/60 shadow  min-w-[325px] sm:min-w-full lg:min-w-[749px] 2xl:min-w-[1165px]">
           <CardHeader className="flex items-center justify-center text-2xl font-bold">
             {t("startYourNextLesson")}
           </CardHeader>
-          <CardContent className="">
+          <CardContent>
             <Button>
               <Image src={"/arrow.svg"} alt="arrow" width={24} height={24} />
             </Button>
