@@ -57,7 +57,7 @@ const EditProfileForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-y-4 w-full max-w-md"
+        className="flex flex-col gap-y-4 w-full max-w-md px-5"
       >
         <FormField
           control={form.control}
