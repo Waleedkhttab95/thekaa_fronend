@@ -46,7 +46,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           </Button>
         </div>
       </div>
-      <div className="mt-16 mb-36 w-11/12 sm:w-10/12 max-w-[1300px] min-w-[360px]flex items-center justify-center">
+      <div className="mt-16 mb-36 w-11/12 sm:w-10/12 max-w-[1300px] min-w-[360px]flex items-center justify-center min-h-screen">
         {children}
       </div>
       <div className="h-16 bg-[#23f6f0] flex justify-between items-center p-4 sm:px-24 w-full">
