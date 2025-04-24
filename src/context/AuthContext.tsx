@@ -1,7 +1,7 @@
 import { createContext, useContext, ReactNode } from "react";
 import { getUser, logout as logoutService } from "@/services/auth";
-import { axiosAuthClient } from "@/lib/axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 
 // todo: User type still needs work
 type User = {
@@ -28,11 +28,12 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const axiosAuth = useAxiosAuth();
   const queryClient = useQueryClient();
 
   const { data: user, isLoading } = useQuery<User | null>({
     queryKey: ["auth", "user"],
-    queryFn: () => getUser(axiosAuthClient),
+    queryFn: () => getUser(axiosAuth),
     retry: false,
     refetchOnWindowFocus: false,
   });
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   console.log("User Data: ", user);
 
   const logout = async () => {
-    await logoutService(axiosAuthClient);
+    await logoutService(axiosAuth);
     queryClient.setQueryData(["auth", "user"], null);
   };
 
