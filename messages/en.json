@@ -379,5 +379,26 @@
     "performanceLevels": {
       "veryGood": "Very Good"
     }
+  },
+  "reportsPage": {
+    "reports": "Reports",
+    "currentLevel": "Current Level",
+    "levels": {
+      "advanced": "Advanced"
+    },
+    "completionRate": "Completion Rate",
+    "changeInLevel": "Change in Level",
+    "levelChanges": {
+      "decliningLevel": "Declining Level"
+    },
+    "examsDetails": "Exams Details",
+    "numberOfPassedExams": "Number of Passed Exams",
+    "numberOfunPassedExams": "Number of Failed Exams",
+    "numberOfDelayedExams": "Number of Postponed Exams",
+    "examsSuccessRate": "Exams Success Rate",
+    "performanceLevelInTests": "Performance Level in Tests",
+    "performanceLevels": {
+      "advanced": "Advanced Level"
+    }
   }
 }
