@@ -394,5 +394,8 @@
     "performanceLevels": {
       "veryGood": "جيد جداً"
     }
+  },
+  "quizPage": {
+    "subject": "اختبار مادة {subject}"
   }
 }
