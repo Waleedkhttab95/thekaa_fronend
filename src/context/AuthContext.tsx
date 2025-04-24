@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode } from "react";
-import { getUser, logout as logoutService } from "@/services/auth";
+import { getUser } from "@/services/auth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 
@@ -22,7 +22,7 @@ type User = {
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  logout: () => Promise<void>;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -40,8 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   console.log("User Data: ", user);
 
-  const logout = async () => {
-    await logoutService(axiosAuth);
+  const logout = () => {
     queryClient.setQueryData(["auth", "user"], null);
   };
 
