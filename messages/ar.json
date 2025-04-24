@@ -397,5 +397,26 @@
   },
   "quizPage": {
     "subject": "اختبار مادة {subject}"
+  },
+  "reportsPage": {
+    "reports": "التقارير",
+    "currentLevel": "المستوى الحالي",
+    "levels": {
+      "advanced": "متقدم"
+    },
+    "completionRate": "نسبة الإنجاز",
+    "changeInLevel": "التغيير في المستوى",
+    "levelChanges": {
+      "decliningLevel": "مستوى متراجع"
+    },
+    "examsDetails": "تفاصيل الاختبارات",
+    "numberOfPassedExams": "عدد الاختبارات المجتازة بنجاح",
+    "numberOfunPassedExams": "عدد الاختبارات التي لم ينجح الطالب باجتيازها",
+    "numberOfDelayedExams": "عدد الاختبارات المؤجلة",
+    "examsSuccessRate": "نسبة النجاح في الاختبارات",
+    "performanceLevelInTests": "مستوى الأداء في الاختبارات",
+    "performanceLevels": {
+      "advanced": "مستوى متقدم"
+    }
   }
 }
