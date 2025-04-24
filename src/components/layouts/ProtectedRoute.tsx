@@ -12,15 +12,15 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user, isLoading } = useAuth();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (!isLoading && !user) {
-  //     router.replace("/login");
-  //   }
-  // }, [isLoading, user, router]);
+  useEffect(() => {
+    if (!isLoading && !user) {
+      router.replace("/login");
+    }
+  }, [isLoading, user, router]);
 
-  // if (isLoading || (!user && typeof window !== "undefined")) {
-  //   return <div className="text-center p-4">Loading...</div>;
-  // }
+  if (isLoading || (!user && typeof window !== "undefined")) {
+    return <div className="text-center p-4">Loading...</div>;
+  }
 
   return <>{children}</>;
 };

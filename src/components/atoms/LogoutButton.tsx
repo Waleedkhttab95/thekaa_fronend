@@ -1,16 +1,13 @@
-"use client";
-
-import { useAuth } from "@/context/AuthContext";
 import { Button } from "./button";
 import { useRouter } from "next/navigation";
+import { deleteCookie } from "cookies-next/client";
 
 export default function LogoutButton() {
   const router = useRouter();
-  const { logout, isLoading } = useAuth();
 
   const handleLogout = async () => {
     try {
-      await logout();
+      deleteCookie("Authentication");
       router.replace("/login");
     } catch (err) {
       console.error("Logout failed:", err);
@@ -18,8 +15,8 @@ export default function LogoutButton() {
   };
 
   return (
-    <Button onClick={handleLogout} disabled={isLoading} className="w-60">
-      {isLoading ? "Logging out..." : "Logout"}
+    <Button onClick={handleLogout} className="w-60">
+      Logout
     </Button>
   );
 }
