@@ -40,10 +40,10 @@
 }
 
 body {
-  
   font-family: var(--font-pingar);
 }
-.bg-layout{
+
+.bg-layout {
   background: linear-gradient(
     135deg,
     #66d1f0,
@@ -56,6 +56,16 @@ body {
   background-attachment: fixed;
   background-color: transparent;
 }
+
+@keyframes progressBarAnimation {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--target-width);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
