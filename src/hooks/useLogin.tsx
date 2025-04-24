@@ -5,9 +5,11 @@ import { toast } from "@/components/atoms/sooner";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useAxiosAuth } from "./useAxiosAuth";
 
 export const useLogin = () => {
   const router = useRouter();
+  const axiosAuth = useAxiosAuth();
   const queryClient = useQueryClient();
   const t = useTranslations("LoginPage");
 
@@ -21,7 +23,7 @@ export const useLogin = () => {
     },
     onSuccess: async () => {
       try {
-        const user = await getUser(axiosAuthClient);
+        const user = await getUser(axiosAuth);
         queryClient.setQueryData(["auth", "user"], user);
         router.push("/");
       } catch {
