@@ -74,7 +74,7 @@
       "phoneNumberInvalid": "Enter a valid phone number",
       "passwordMinLength": "Password must be at least 8 characters long",
       "passwordDigit": "Password must contain at least one digit",
-      "passwordSpecialCharacter": "Password must contain at least one special character @ $ ! % * ? &",
+      "passwordSpecialCharacter": "Password must contain at least one special character @ $ ! % * ? & #",
       "confirmPasswordRequired": "Enter the password again",
       "passwordsMustMatch": "Passwords must match",
       "acceptTermsRequired": "You must agree to the Terms of Service and Usage",
