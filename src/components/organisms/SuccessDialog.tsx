@@ -9,12 +9,14 @@ import { useRouter } from 'next/navigation';
 type props = {
   isOpen: boolean;
   successMessage: string;
+  successActionText: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   returnTo: string;
 }
 const SuccessDialog = (
   {
     successMessage,
+    successActionText,
     isOpen = false,
     setIsOpen,
     returnTo
@@ -46,7 +48,7 @@ const SuccessDialog = (
 
         <DialogFooter  >
           <Button className='md:w-[50%] w-full mx-auto' onClick={() => returnToDashboard()}>
-            {t("returnToDashboard")}
+            {successActionText}
           </Button>
         </DialogFooter>
 

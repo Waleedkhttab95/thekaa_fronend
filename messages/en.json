@@ -283,6 +283,7 @@
     "chooseDifferentImage": "Choose a different image",
     "studentDeletedSuccessfully": "Student file has been deleted",
     "studentEditedSuccessfully": "Student file has been Updated",
+    "studentEditedSuccessfullyActionText": "Return to Sons Management",
     "saveChanges": "Save Changes",
     "EditStudentPicture": "Edit Student Picture",
     "cropDescription": "Crop and adjust the student's picture",
