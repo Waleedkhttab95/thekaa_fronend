@@ -1,6 +1,5 @@
 import React, { PropsWithChildren } from 'react'
 import Header from '../organisms/Header'
-import { Sonner } from '../atoms/sooner'
 
 const MainLayout = ({ children }: PropsWithChildren) => {
   return (
@@ -8,7 +7,6 @@ const MainLayout = ({ children }: PropsWithChildren) => {
       <div className="z-10">
         <Header />
         {children}
-        <Sonner />
       </div>
       {/* Top-left background */}
       <div
