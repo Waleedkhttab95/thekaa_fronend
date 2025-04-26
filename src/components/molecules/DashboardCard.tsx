@@ -1,25 +1,17 @@
 import { ReactNode } from "react";
-import { Card, CardContent } from "./card";
+import { Card } from "./card";
+
+// todo: add the backgorund image, conditinally render it right and left
+// todo: add arrow button and conditinally render it
+// todo: use Card Content if needed?? or just stickti Card maybe
 
 const DashboardCard = ({
   children,
-  cardTitle,
+  variant,
 }: {
   children: ReactNode;
-  cardTitle: string;
+  variant: "blue" | "pink";
 }) => {
-  return (
-    <div className="w-full max-w-[80%] md:max-w-[280px] xl:max-w-[30%]  aspect-[65/32] cursor-pointer hover:opacity-70 overflow-hidden">
-      <Card className="h-full bg-white/60 shadow flex flex-col justify-center md:justify-evenly">
-        <CardContent
-          className="flex flex-col gap-y-1 sm:gap-y-4 items-center justify-center text-xl sm:text-3xl md:text-sm xl:text-lg 
-        font-bold text-center py-4 sm:py-0"
-        >
-          <p className="pt-3">{cardTitle}</p>
-          {children}
-        </CardContent>
-      </Card>
-    </div>
-  );
+  return <Card variant={variant}>{children}</Card>;
 };
 export default DashboardCard;

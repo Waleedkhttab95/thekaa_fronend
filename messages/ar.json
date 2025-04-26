@@ -422,5 +422,8 @@
     "performanceLevels": {
       "advanced": "مستوى متقدم"
     }
+  },
+  "dashboardPage": {
+    
   }
 }
