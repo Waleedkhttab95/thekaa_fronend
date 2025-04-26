@@ -8,7 +8,6 @@ import ConfirmDeleteDialog from '../organisms/ConfirmDeleteDialog'
 import { useTranslations } from 'next-intl'
 import SuccessDialog from '../organisms/SuccessDialog'
 import { useParams } from 'next/navigation'
-import { ROUTES } from '@/config/routes'
 import { useStudent, useStudentMutations } from '@/hooks/rqs/students'
 import { useAxiosAuth } from '@/hooks/useAxiosAuth'
 import { IStudentData } from '@/types/student.type'
@@ -16,6 +15,7 @@ import Loading from '../atoms/loading'
 import { toast } from '../atoms/sooner'
 import { useQueryClient } from '@tanstack/react-query'
 import { STUDENTS_QUERY } from '@/config/qr.constants'
+import { ProtectedRoutes } from '@/config/routes'
 
 const EditStudentPage = () => {
   const t = useTranslations("editStudentPage");
@@ -86,7 +86,7 @@ const EditStudentPage = () => {
           isOpen={isSuccessDialogOpen}
           setIsOpen={setIsSuccessDialogOpen}
           successMessage={successMessage}
-          returnTo={ROUTES.SONS_FILES}
+          returnTo={ProtectedRoutes.SonsFiles}
           successActionText={t("studentEditedSuccessfullyActionText")}
         />
 

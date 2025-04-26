@@ -16,6 +16,7 @@ import { IStudentData } from '@/types/student.type';
 import { toast } from '../atoms/sooner';
 import { useQueryClient } from '@tanstack/react-query';
 import { STUDENTS_QUERY } from '@/config/qr.constants';
+import { ProtectedRoutes } from '@/config/routes';
 
 type getOuterStepsProps = {
   t: TFunctionType;
@@ -50,12 +51,12 @@ const getOuterSteps = ({ t, setCurrentStep, onSubmit, isPending }: getOuterSteps
     icon: "/assets/images/icons/complete.svg",
     content: (
       <div className='w-full flex  flex-col md:flex-row justify-between items-center gap-2 md:gap-5'>
-        <Link href="/test" className='block w-full' >
+        <Link href={ProtectedRoutes.Test} className='block w-full' >
           <Button className='w-full'>
             {t("start")}
           </Button>
         </Link>
-        <Link href="/sons-files" className=' block w-full'>
+        <Link href={ProtectedRoutes.SonsFiles} className=' block w-full'>
           <Button className='w-full' variant='outline'>
             {t("skip")}
           </Button>
