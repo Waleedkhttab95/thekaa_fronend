@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { ReactNode } from "react";
@@ -5,10 +6,12 @@ import { Locales } from "@/types/locales.enum";
 import LocaleSwitcher from "../molecules/LocaleSwitcher";
 import ProfileLogo from "../molecules/ProfileLogo";
 import { Button } from "../atoms/button";
+import { useProfile } from "@/hooks/rqs/profile";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const locale = useLocale();
   const t = useTranslations("dashboardLayout");
+  const { data: profile } = useProfile()
   return (
     <div className="flex flex-col items-center pt-10 min-h-screen">
       <div
@@ -34,7 +37,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         )}
         <div className="flex items-center gap-3 justify-evenly sm:justify-start w-full sm:w-auto">
           <LocaleSwitcher onlySmall />
-          <ProfileLogo name="Test" />
+          <ProfileLogo name={profile?.parentName?.split(' ')![0] ?? "??"} />
           <Button className="sm:w-48 text-base">
             <Image
               src={"/dashboard-circle.svg"}

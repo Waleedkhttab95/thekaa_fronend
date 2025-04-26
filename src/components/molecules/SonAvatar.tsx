@@ -6,9 +6,9 @@ import { getAvatarInitials } from '@/utils/avatar'
 import { IStudentData } from '@/types/student.type'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { ROUTES } from '@/config/routes'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../atoms/tooltip'
 import { useTranslations } from 'next-intl'
+import { ProtectedRoutes } from '@/config/routes'
 type props = {
   son: IStudentData
   isOpen: boolean
@@ -20,7 +20,7 @@ const SonAvatar = ({
   const router = useRouter();
   const t = useTranslations('common')
   const onEditClick = () => {
-    router.push(`${ROUTES.EDIT_STUDENT}/${son._id}`)
+    router.push(`${ProtectedRoutes.EditStudent}/${son._id}`)
   }
 
   return (

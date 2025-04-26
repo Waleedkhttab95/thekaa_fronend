@@ -1,9 +1,16 @@
-import { ProtectedRoute } from "@/components/layouts/ProtectedRoute";
+import { axiosAuthServer } from "@/lib/serverAxios";
+import { getUser } from "@/services/auth";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 
-export default function ProtectedLayout({
+export default async function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <ProtectedRoute>{children}</ProtectedRoute>;
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["profile"],
+    queryFn: () => getUser(axiosAuthServer),
+  })
+  return <HydrationBoundary state={dehydrate(queryClient)} >{children}</HydrationBoundary>;
 }
