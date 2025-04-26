@@ -4,7 +4,7 @@ type ProgressBarProps = {
 
 const ProgressBar = ({ percentage }: ProgressBarProps) => {
   return (
-    <div className="w-full h-3 bg-white rounded-full overflow-hidden">
+    <div className="w-full h-3 bg-white rounded-full overflow-hidden border border-gray-300">
       <div
         className={`h-full bg-[#F7AEF3] rounded-[40px]`}
         style={{
