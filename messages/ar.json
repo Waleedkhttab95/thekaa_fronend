@@ -331,6 +331,23 @@
     "askAboutAnything": "اسألني عن أي شيء...",
     "talkOrAskAboutAnyThing": "تحدث أو اسأل عن أي شيء"
   },
+  "lessonPage": {
+    "lessonName": "اسم الدرس",
+    "aiChat": {
+      "askMe": "أسألني",
+      "robot": "المساعد الذكي",
+      "howICanHelp": "كيف يمكنني المساعدة؟",
+      "askAboutAnything": "اسألني أي شيء...",
+      "error": {
+        "title": "خطأ",
+        "description": "حدث خطأ أثناء إرسال الرسالة, يرجى المحاولة مرة أخرى."
+      },
+      "send": "إرسال",
+      "sendAvoiceMessage": "إرسال رسالة صوتية",
+      "cancel": "إلغاء",
+      "talkOrAskAboutAnyThing": "تحدث أو اسأل عن أي شيء"
+    }
+  },
   "common": {
     "delete": "حذف",
     "confirmDelete": "تأكيد الحذف",

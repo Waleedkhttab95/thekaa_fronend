@@ -11,6 +11,7 @@ export enum ProtectedRoutes {
   EditStudent = "/edit-student",
   SonsFiles = "/sons-files",
   Test = "/test",
+  Lesson = "/lesson",
 }
 
 export enum GuestOnlyRoutes {
