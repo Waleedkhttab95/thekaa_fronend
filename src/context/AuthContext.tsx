@@ -2,6 +2,7 @@ import { createContext, useContext, ReactNode } from "react";
 import { getUser } from "@/services/auth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAxiosAuth } from "@/hooks/useAxiosAuth";
+import { deleteCookie } from "cookies-next/client";
 
 // todo: User type still needs work
 type User = {
@@ -41,6 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   console.log("User Data: ", user);
 
   const logout = () => {
+    deleteCookie("Authentication");
     queryClient.setQueryData(["auth", "user"], null);
   };
 

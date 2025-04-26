@@ -29,7 +29,7 @@ export const getSignUpSchema = (t: TFunctionType) =>
         .string()
         .min(8, t("formErrors.passwordMinLength"))
         .regex(/\d/, t("formErrors.passwordDigit"))
-        .regex(/[@$!%*?&]/, t("formErrors.passwordSpecialCharacter")),
+        .regex(/[@$!%*?&#]/, t("formErrors.passwordSpecialCharacter")),
       confirmPassword: z
         .string()
         .nonempty(t("formErrors.confirmPasswordRequired")),

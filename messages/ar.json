@@ -74,7 +74,7 @@
       "phoneNumberInvalid": "ادخل رقم هاتف صحيح",
       "passwordMinLength": "كلمة المرور يجب أن تكون من 8 خانات على الأقل",
       "passwordDigit": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
-      "passwordSpecialCharacter": "كلمة المرور يجب أن تحتوي على رمز مميز واحد على الأقل @ $ ! % * ? &",
+      "passwordSpecialCharacter": "كلمة المرور يجب أن تحتوي على رمز مميز واحد على الأقل @ $ ! % * ? & #",
       "confirmPasswordRequired": "ادخل كلمة المرور مرة أخرى",
       "passwordsMustMatch": "يجب أن تتطابق مع كلمة المرور المدخلة أعلاه",
       "acceptTermsRequired": "يجب عليك الموافقة على شروط الخدمة و الاستخدام",
