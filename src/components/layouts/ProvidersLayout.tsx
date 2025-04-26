@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider } from "next-themes";
 import { useState } from "react";
+import { Sonner } from "../atoms/sooner";
 
 export default function ProvidersLayout({
   children,
@@ -31,6 +32,7 @@ export default function ProvidersLayout({
       disableTransitionOnChange
       forcedTheme="light"
     >
+      <Sonner />
       <QueryClientProvider client={queryClient}>
         <AuthProvider>{children}</AuthProvider>
         <ReactQueryDevtools initialIsOpen={false} />
