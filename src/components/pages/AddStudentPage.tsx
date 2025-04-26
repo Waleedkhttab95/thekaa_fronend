@@ -14,6 +14,8 @@ import { useStudentMutations } from '@/hooks/rqs/students';
 import { useAxiosAuth } from '@/hooks/useAxiosAuth';
 import { IStudentData } from '@/types/student.type';
 import { toast } from '../atoms/sooner';
+import { useQueryClient } from '@tanstack/react-query';
+import { STUDENTS_QUERY } from '@/config/qr.constants';
 
 type getOuterStepsProps = {
   t: TFunctionType;
@@ -53,7 +55,7 @@ const getOuterSteps = ({ t, setCurrentStep, onSubmit, isPending }: getOuterSteps
             {t("start")}
           </Button>
         </Link>
-        <Link href="/dashboard" className=' block w-full'>
+        <Link href="/sons-files" className=' block w-full'>
           <Button className='w-full' variant='outline'>
             {t("skip")}
           </Button>
@@ -70,10 +72,12 @@ export default function AddStudentPage() {
   const axiosAuth = useAxiosAuth();
   const { isPending, mutateAsync } = useStudentMutations(axiosAuth).create;
   const finish = () => setCurrentStep(2);
+  const queryClient = useQueryClient();
   const submitFormData = async (data: Partial<IStudentData>) => {
     try {
       // data api
       await mutateAsync(data)
+      await queryClient.invalidateQueries({ queryKey: [STUDENTS_QUERY] })
       finish()
     } catch (error: any) {
       // toast

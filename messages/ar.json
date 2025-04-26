@@ -293,6 +293,7 @@
     "chooseDifferentImage": "اختر صورة آخرى",
     "studentDeletedSuccessfully": "تم حذف ملف الطالب",
     "studentEditedSuccessfully": "تم تعديل ملف الطالب",
+    "studentEditedSuccessfullyActionText": "العودة إلى إدارة ملفات الأبناء",
     "saveChanges": "حفظ التغييرات",
     "EditStudentPicture": "تعديل صورة الطالب",
     "cropDescription": "قص واضبط صورة الطالب",
@@ -337,7 +338,6 @@
     "success": "نجاح",
     "addition": "إضافة",
     "edit": "تعديل",
-    "returnToDashboard": "العودة إلى لوحة التحكم",
     "done": "تم"
   },
   "dashboardLayout": {
