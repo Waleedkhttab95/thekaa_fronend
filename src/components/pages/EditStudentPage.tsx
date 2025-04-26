@@ -14,6 +14,8 @@ import { useAxiosAuth } from '@/hooks/useAxiosAuth'
 import { IStudentData } from '@/types/student.type'
 import Loading from '../atoms/loading'
 import { toast } from '../atoms/sooner'
+import { useQueryClient } from '@tanstack/react-query'
+import { STUDENTS_QUERY } from '@/config/qr.constants'
 
 const EditStudentPage = () => {
   const t = useTranslations("editStudentPage");
@@ -22,7 +24,8 @@ const EditStudentPage = () => {
   const [successMessage, setSuccessMessage] = useState('')
   const params = useParams();
   const studentId = params?.id?.toString() ?? "";
-  const axiosAuth = useAxiosAuth()
+  const axiosAuth = useAxiosAuth();
+  const queryClient = useQueryClient();
   const { data: studentData, isLoading: isStudentDataLoading } = useStudent(axiosAuth, studentId);
   const { isPending: isUpdatePending, mutateAsync: mutateUpdateAsync } = useStudentMutations(axiosAuth).update
   const { isPending: isDeletePending, mutateAsync: mutateDeleteAsync } = useStudentMutations(axiosAuth).delete
@@ -30,6 +33,8 @@ const EditStudentPage = () => {
     console.log(data)
     try {
       await mutateUpdateAsync({ ...data, _id: studentId })
+      await queryClient.invalidateQueries({ queryKey: [STUDENTS_QUERY] })
+
       setIsSuccessDialogOpen(true);
       setSuccessMessage(t("studentEditedSuccessfully"))
     } catch (error: any) {
@@ -45,6 +50,7 @@ const EditStudentPage = () => {
     try {
       setIsConfirmDeleteOpen(false);
       await mutateDeleteAsync(studentId)
+      await queryClient.invalidateQueries({ queryKey: [STUDENTS_QUERY] })
       setIsSuccessDialogOpen(true);
       setSuccessMessage(t("studentDeletedSuccessfully"))
     } catch (error: any) {
@@ -81,6 +87,7 @@ const EditStudentPage = () => {
           setIsOpen={setIsSuccessDialogOpen}
           successMessage={successMessage}
           returnTo={ROUTES.SONS_FILES}
+          successActionText={t("studentEditedSuccessfullyActionText")}
         />
 
       </CardContent>

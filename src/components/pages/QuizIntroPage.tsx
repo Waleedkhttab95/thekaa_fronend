@@ -39,7 +39,7 @@ const QuizIntroPage = () => {
           </CardTitle>
         </div>
         <Card
-          className="max-w-[1213px] lg:w-[100%] md:w-[90%] w-[95%] text-start rounded-[40px] flex flex-col py-10 ps-7 backdrop-blur-md"
+          className="max-w-[1213px] lg:w-[100%] md:w-[90%] w-[95%] text-start rounded-[40px] flex flex-col py-10 px-8 backdrop-blur-md"
           variant="transparent"
         >
           <div className="mb-9 text-2xl md:text-xl">

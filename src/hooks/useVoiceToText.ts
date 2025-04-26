@@ -84,10 +84,10 @@ export const useVoiceToText = () => {
             setIsProcessing(true);
             setVoiceBlob(audioBlob); // Set the audio blob to state
             // Send to Speech-to-Text API
-            const text = await sendToSpeechToTextAPI(audioBlob);
+            // const text = await sendToSpeechToTextAPI(audioBlob);
 
             // Add the transcribed message to the chat
-            setTextMessage(text);
+            setTextMessage("temp voice message"); // Replace with actual text
 
             setIsProcessing(false);
             resolve();
@@ -130,6 +130,7 @@ export const useVoiceToText = () => {
   };
 
   // Send audio to Speech-to-Text API
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const sendToSpeechToTextAPI = async (audioBlob: Blob): Promise<string> => {
     // Create form data for the API request
     const formData = new FormData();
