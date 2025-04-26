@@ -362,7 +362,11 @@
     "subjectLable": "Subject",
     "subjectPlaceholder": "Select subject",
     "saveChanges": "Save Changes",
-    "loading": "loading . . ."
+    "loading": "loading . . .",
+    "nameRequired": "Student name is required",
+    "ageRequired": "Student age is required",
+    "educationLevelRequired": "Education level is required",
+    "subjectRequired": "Subject is required"
   },
   "planPage": {
     "plan": "Curriculum plan",

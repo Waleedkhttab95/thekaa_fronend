@@ -377,7 +377,11 @@
     "subjectLable": "المادة التي يدرسها",
     "subjectPlaceholder": "اختر المادة التي يدرسها",
     "saveChanges": "حفظ التغييرات",
-    "loading": "يتم حفظ التغيرات . . ."
+    "loading": "يتم حفظ التغيرات . . .",
+    "nameRequired": "اسم الطالب مطلوب",
+    "ageRequired": "عمر الطالب مطلوب",
+    "educationLevelRequired": "يجب اختيار المرحلة الدراسية",
+    "subjectRequired": "يجب اختيار المادة التي يدرسها"
   },
   "planPage": {
     "plan": "الخطة",
