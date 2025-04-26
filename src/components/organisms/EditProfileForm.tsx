@@ -3,8 +3,7 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   Form,
   FormControl,
@@ -21,25 +20,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../atoms/select";
+import AvatarEditorWithCrop from "./AvatarWithEdit";
 import { Button } from "../atoms/button";
-
-// todo: edit schema and add error messages for it for both langauges
-const studentSchema = z.object({
-  name: z.string().min(1),
-  age: z.string().min(1),
-  educationLevel: z.string().min(1),
-  subject: z.string().min(1),
-});
-
-type StudentFormValues = z.infer<typeof studentSchema>;
+import { getEditProfileSchema } from "@/lib/schemas";
+import { useEffect } from "react";
 
 const EditProfileForm = () => {
   const t = useTranslations("studentProfile");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const locale = useLocale();
 
-  const form = useForm<StudentFormValues>({
-    resolver: zodResolver(studentSchema),
+  const form = useForm<z.infer<ReturnType<typeof getEditProfileSchema>>>({
+    resolver: zodResolver(getEditProfileSchema(t)),
     defaultValues: {
+      avatar: "",
       name: "",
       age: "",
       educationLevel: "",
@@ -47,10 +40,18 @@ const EditProfileForm = () => {
     },
   });
 
-  const onSubmit = (values: StudentFormValues) => {
-    setIsSubmitting(true);
+  useEffect(() => {
+    form.clearErrors();
+  }, [locale, form]);
+
+  const onAvatarChange = (newAvatar: string) => {
+    form.setValue("avatar", newAvatar);
+  };
+
+  const onSubmit = (
+    values: z.infer<ReturnType<typeof getEditProfileSchema>>
+  ) => {
     console.log(values);
-    setTimeout(() => setIsSubmitting(false), 1000);
   };
 
   return (
@@ -59,6 +60,12 @@ const EditProfileForm = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-y-4 w-full max-w-md px-5"
       >
+        <AvatarEditorWithCrop
+          avatar={form.watch("avatar") || ""}
+          onAvatarChange={onAvatarChange}
+          avatarFallback={form.watch("name") || ""}
+        />
+
         <FormField
           control={form.control}
           name="name"
@@ -139,9 +146,7 @@ const EditProfileForm = () => {
           )}
         />
 
-        <Button type="submit" disabled={isSubmitting}>
-          {t("saveChanges")}
-        </Button>
+        <Button type="submit">{t("saveChanges")}</Button>
       </form>
     </Form>
   );

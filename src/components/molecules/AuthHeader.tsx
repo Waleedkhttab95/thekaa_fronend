@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { CardDescription, CardTitle } from "./card";
 
-// Define prop types
 interface AuthHeaderProps {
   imageSrc: string;
   imageAlt: string;
