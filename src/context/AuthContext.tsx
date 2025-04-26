@@ -1,7 +1,8 @@
 import { createContext, useContext, ReactNode } from "react";
-import { getUser, logout as logoutService } from "@/services/auth";
-import { axiosAuthClient } from "@/lib/axios";
+import { getUser } from "@/services/auth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useAxiosAuth } from "@/hooks/useAxiosAuth";
+import { deleteCookie } from "cookies-next/client";
 
 // todo: User type still needs work
 type User = {
@@ -22,25 +23,26 @@ type User = {
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  logout: () => Promise<void>;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const axiosAuth = useAxiosAuth();
   const queryClient = useQueryClient();
 
   const { data: user, isLoading } = useQuery<User | null>({
     queryKey: ["auth", "user"],
-    queryFn: () => getUser(axiosAuthClient),
+    queryFn: () => getUser(axiosAuth),
     retry: false,
     refetchOnWindowFocus: false,
   });
 
   console.log("User Data: ", user);
 
-  const logout = async () => {
-    await logoutService(axiosAuthClient);
+  const logout = () => {
+    deleteCookie("Authentication");
     queryClient.setQueryData(["auth", "user"], null);
   };
 

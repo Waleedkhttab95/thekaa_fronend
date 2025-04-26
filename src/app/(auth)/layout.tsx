@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import MainLayout from "@/components/layouts/MainLayout";
 
 export default function AuthLayout({
   children,
@@ -29,5 +30,9 @@ export default function AuthLayout({
     return null;
   }
 
-  return <div className="flex justify-center items-center">{children}</div>;
+  return (
+    <MainLayout>
+      <div className="flex justify-center items-center">{children}</div>
+    </MainLayout>
+  );
 }

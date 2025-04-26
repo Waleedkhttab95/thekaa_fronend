@@ -74,7 +74,7 @@
       "phoneNumberInvalid": "Enter a valid phone number",
       "passwordMinLength": "Password must be at least 8 characters long",
       "passwordDigit": "Password must contain at least one digit",
-      "passwordSpecialCharacter": "Password must contain at least one special character @ $ ! % * ? &",
+      "passwordSpecialCharacter": "Password must contain at least one special character @ $ ! % * ? & #",
       "confirmPasswordRequired": "Enter the password again",
       "passwordsMustMatch": "Passwords must match",
       "acceptTermsRequired": "You must agree to the Terms of Service and Usage",
@@ -283,6 +283,7 @@
     "chooseDifferentImage": "Choose a different image",
     "studentDeletedSuccessfully": "Student file has been deleted",
     "studentEditedSuccessfully": "Student file has been Updated",
+    "studentEditedSuccessfullyActionText": "Return to Sons Management",
     "saveChanges": "Save Changes",
     "EditStudentPicture": "Edit Student Picture",
     "cropDescription": "Crop and adjust the student's picture",
@@ -324,5 +325,85 @@
     "returnToDashboard": "Return To Dashboard",
     "edit": "Edit",
     "done": "Done"
+  },
+  "dashboardLayout": {
+    "allRights": "All Rights Reserved",
+    "dashboard": "Dashboard"
+  },
+  "quizIntroPage": {
+    "title": "Welcome to the {quizType} {subject} Quiz!",
+    "beforeStart": {
+      "title": "Before You Start:",
+      "content": "This quiz helps you evaluate your progress in the subject and identify areas that need improvement. Don’t worry, the goal is to help you learn better!"
+    },
+    "details": {
+      "title": "Quiz Details:",
+      "type": "{quizType} Quiz to track your progress.",
+      "questionCount": "Contains {questionCount} covering the key topics you've studied.",
+      "length": "You have {length} minutes to answer the questions.",
+      "grading": "Grading System: Your answers are evaluated to help improve your level in the subject.",
+      "retry": "Retry: You can review your answers after the quiz and learn from your mistakes."
+    },
+    "tips": {
+      "title": "Tips Before Starting:",
+      "tip1": "Choose a quiet place to focus while answering.",
+      "tip2": "Don’t rush. Read the questions carefully before choosing an answer.",
+      "tip3": "Don’t worry if you don’t know the answer — the goal is learning and growth!"
+    },
+    "ready": "When you're ready, click the 'Start Quiz' button and enjoy the challenge!",
+    "startButton": "Start Quiz"
+  },
+  "studentProfile": {
+    "nameLabel": "Student Name",
+    "namePlcaeholder": "Enter student name",
+    "ageLabel": "Student Age",
+    "agePlaceholder": "Enter student age",
+    "educationLevelLabel": "Education Level",
+    "educationLevelPlaceholder": "Select education level",
+    "subjectLable": "Subject",
+    "subjectPlaceholder": "Select subject",
+    "saveChanges": "Save Changes",
+    "loading": "loading . . .",
+    "nameRequired": "Student name is required",
+    "ageRequired": "Student age is required",
+    "educationLevelRequired": "Education level is required",
+    "subjectRequired": "Subject is required"
+  },
+  "planPage": {
+    "plan": "Curriculum plan",
+    "numberOfLessons": "Total Number of Lessons",
+    "passedLessons": "Number of Passed Lessons",
+    "lessonsNeedComplete": "Lessons that Needs Completion",
+    "level": "Current Level",
+    "performance": "Student performance",
+    "progressPercentage": "Progress Percentage",
+    "startYourNextLesson": "Start Your Next Lesson",
+    "levels": {
+      "advanced": "Advanced"
+    },
+    "performanceLevels": {
+      "veryGood": "Very Good"
+    }
+  },
+  "reportsPage": {
+    "reports": "Reports",
+    "currentLevel": "Current Level",
+    "levels": {
+      "advanced": "Advanced"
+    },
+    "completionRate": "Completion Rate",
+    "changeInLevel": "Change in Level",
+    "levelChanges": {
+      "decliningLevel": "Declining Level"
+    },
+    "examsDetails": "Exams Details",
+    "numberOfPassedExams": "Number of Passed Exams",
+    "numberOfunPassedExams": "Number of Failed Exams",
+    "numberOfDelayedExams": "Number of Postponed Exams",
+    "examsSuccessRate": "Exams Success Rate",
+    "performanceLevelInTests": "Performance Level in Tests",
+    "performanceLevels": {
+      "advanced": "Advanced Level"
+    }
   }
 }

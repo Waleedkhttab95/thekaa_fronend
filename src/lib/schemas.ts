@@ -29,7 +29,7 @@ export const getSignUpSchema = (t: TFunctionType) =>
         .string()
         .min(8, t("formErrors.passwordMinLength"))
         .regex(/\d/, t("formErrors.passwordDigit"))
-        .regex(/[@$!%*?&]/, t("formErrors.passwordSpecialCharacter")),
+        .regex(/[@$!%*?&#]/, t("formErrors.passwordSpecialCharacter")),
       confirmPassword: z
         .string()
         .nonempty(t("formErrors.confirmPasswordRequired")),
@@ -63,3 +63,12 @@ export const getNewPasswordSchema = (t: (key: string) => string) =>
       message: t("formErrors.passwordsMustMatch"),
       path: ["confirmNewPassword"],
     });
+
+export const getEditProfileSchema = (t: (key: string) => string) =>
+  z.object({
+    avatar: z.string().optional(),
+    name: z.string().min(1, { message: t("nameRequired") }),
+    age: z.string().min(1, { message: t("ageRequired") }),
+    educationLevel: z.string().min(1, { message: t("educationLevelRequired") }),
+    subject: z.string().min(1, { message: t("subjectRequired") }),
+  });

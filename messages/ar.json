@@ -74,7 +74,7 @@
       "phoneNumberInvalid": "ادخل رقم هاتف صحيح",
       "passwordMinLength": "كلمة المرور يجب أن تكون من 8 خانات على الأقل",
       "passwordDigit": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
-      "passwordSpecialCharacter": "كلمة المرور يجب أن تحتوي على رمز مميز واحد على الأقل @ $ ! % * ? &",
+      "passwordSpecialCharacter": "كلمة المرور يجب أن تحتوي على رمز مميز واحد على الأقل @ $ ! % * ? & #",
       "confirmPasswordRequired": "ادخل كلمة المرور مرة أخرى",
       "passwordsMustMatch": "يجب أن تتطابق مع كلمة المرور المدخلة أعلاه",
       "acceptTermsRequired": "يجب عليك الموافقة على شروط الخدمة و الاستخدام",
@@ -293,6 +293,7 @@
     "chooseDifferentImage": "اختر صورة آخرى",
     "studentDeletedSuccessfully": "تم حذف ملف الطالب",
     "studentEditedSuccessfully": "تم تعديل ملف الطالب",
+    "studentEditedSuccessfullyActionText": "العودة إلى إدارة ملفات الأبناء",
     "saveChanges": "حفظ التغييرات",
     "EditStudentPicture": "تعديل صورة الطالب",
     "cropDescription": "قص واضبط صورة الطالب",
@@ -318,6 +319,18 @@
     "title": "من يذاكر الآن؟",
     "manageSonsFiles": "إدارة ملفات الأبناء"
   },
+  "aiChatPage": {
+    "doICanHelp": "هل يمكنني المساعدة ؟",
+    "error": {
+      "title": "خطأ",
+      "description": "حدث خطأ أثناء إرسال الرسالة, يرجى المحاولة مرة أخرى."
+    },
+    "send": "إرسال",
+    "sendAvoiceMessage": "إرسال رسالة صوتية",
+    "cancel": "إلغاء",
+    "askAboutAnything": "اسألني عن أي شيء...",
+    "talkOrAskAboutAnyThing": "تحدث أو اسأل عن أي شيء"
+  },
   "common": {
     "delete": "حذف",
     "confirmDelete": "تأكيد الحذف",
@@ -325,7 +338,89 @@
     "success": "نجاح",
     "addition": "إضافة",
     "edit": "تعديل",
-    "returnToDashboard": "العودة إلى لوحة التحكم",
     "done": "تم"
+  },
+  "dashboardLayout": {
+    "allRights": "جميع الحقوق محفوظة",
+    "dashboard": "لوحة التحكم"
+  },
+  "quizIntroPage": {
+    "title": "مرحباً بك في اختبار {quizType} لمادة {subject}!",
+    "beforeStart": {
+      "title": "قبل أن تبدأ الاختبار!",
+      "content": "هذا الاختبار يساعدك على تقييم مدى تقدمك في هذه المادة ومعرفة النقاط التي تحتاج إلى تحسينها. لا تقلق، فالغرض منه هو مساعدتك على التعلم بطريقة أفضل!"
+    },
+    "details": {
+      "title": "تفاصيل الاختبار:",
+      "type": "نوع الاختبار: {quizType} لمتابعة تقدمك.",
+      "questionCount": "عدد الأسئلة: يحتوي على {questionCount} سؤالاً يغطي أهم المواضيع التي درستها.",
+      "length": "مدة الاختبار: لديك {length} دقيقة للإجابة على الأسئلة.",
+      "grading": "نظام الدرجات: يتم تقييم إجابتك على تحسين مستواك في المادة.",
+      "retry": "إعادة المحاولة: يمكنك مراجعة إجاباتك بعد الاختبار والتعلم من أخطائك."
+    },
+    "tips": {
+      "title": "نصائح قبل البدء:",
+      "tip1": "اختر مكانًا هادئًا للتركيز أثناء الإجابة.",
+      "tip2": "لا تتسرع، اقرأ الأسئلة جيدًا قبل اختيار الإجابة.",
+      "tip3": "لا تقلق إذا لم تعرف الإجابة، الهدف هو التعلم والتطور!"
+    },
+    "ready": "عندما تكون مستعدًا، اضغط على زر ''ابدأ الإختبار'' واستمتع بالتحدي",
+    "startButton": "ابدأ الاختبار"
+  },
+  "studentProfile": {
+    "nameLabel": "إسم الطالب",
+    "namePlcaeholder": "ادخل اسم الطالب",
+    "ageLabel": "عمر الطالب",
+    "agePlaceholder": "ادخل عمر الطالب",
+    "educationLevelLabel": "المرحلة الدراسية",
+    "educationLevelPlaceholder": "اختر المرحلة الدراسية",
+    "subjectLable": "المادة التي يدرسها",
+    "subjectPlaceholder": "اختر المادة التي يدرسها",
+    "saveChanges": "حفظ التغييرات",
+    "loading": "يتم حفظ التغيرات . . .",
+    "nameRequired": "اسم الطالب مطلوب",
+    "ageRequired": "عمر الطالب مطلوب",
+    "educationLevelRequired": "يجب اختيار المرحلة الدراسية",
+    "subjectRequired": "يجب اختيار المادة التي يدرسها"
+  },
+  "planPage": {
+    "plan": "الخطة",
+    "numberOfLessons": "عدد دروس الخطة الإجمالي",
+    "passedLessons": "عدد الدروس التي تم إنجازها بنجاح",
+    "lessonsNeedComplete": "عدد الدروس المتبقي إكمالها",
+    "level": "المستوى الحالي",
+    "performance": "أداء الطالب",
+    "progressPercentage": "نسبة الإنجاز",
+    "startYourNextLesson": "ابدأ درسك التالي",
+    "levels": {
+      "advanced": "متقدم"
+    },
+    "performanceLevels": {
+      "veryGood": "جيد جداً"
+    }
+  },
+  "quizPage": {
+    "subject": "اختبار مادة {subject}"
+  },
+  "reportsPage": {
+    "reports": "التقارير",
+    "currentLevel": "المستوى الحالي",
+    "levels": {
+      "advanced": "متقدم"
+    },
+    "completionRate": "نسبة الإنجاز",
+    "changeInLevel": "التغيير في المستوى",
+    "levelChanges": {
+      "decliningLevel": "مستوى متراجع"
+    },
+    "examsDetails": "تفاصيل الاختبارات",
+    "numberOfPassedExams": "عدد الاختبارات المجتازة بنجاح",
+    "numberOfunPassedExams": "عدد الاختبارات التي لم ينجح الطالب باجتيازها",
+    "numberOfDelayedExams": "عدد الاختبارات المؤجلة",
+    "examsSuccessRate": "نسبة النجاح في الاختبارات",
+    "performanceLevelInTests": "مستوى الأداء في الاختبارات",
+    "performanceLevels": {
+      "advanced": "مستوى متقدم"
+    }
   }
 }

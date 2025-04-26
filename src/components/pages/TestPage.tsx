@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import mockQuestions from "../../app/(protected)/test/mockQuestions.json";
+import mockQuestions from "../../app/(protected)/(main)/test/mockQuestions.json";
 import { Button } from "@/components/atoms/button";
 import { Question } from "@/types/question.types";
 import { Questions } from "@/components/organisms/Questions";

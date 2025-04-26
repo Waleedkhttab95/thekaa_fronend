@@ -3,6 +3,7 @@
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import MainLayout from "./MainLayout";
 
 type VerifyProtectedRouteProps = {
   children: React.ReactNode;
@@ -22,5 +23,5 @@ export const VerifyPageLayout = ({ children }: VerifyProtectedRouteProps) => {
     return <div className="text-center p-4">Loading...</div>;
   }
 
-  return <>{children}</>;
+  return <MainLayout>{children}</MainLayout>;
 };

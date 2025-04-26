@@ -1,4 +1,5 @@
 import { AxiosInstance } from "axios";
+import { setCookie } from "cookies-next/client";
 
 export const logout = async (axiosClient: AxiosInstance) => {
   const res = await axiosClient.post("/auth/logout");
@@ -10,6 +11,15 @@ export const login = async (
   data: { email: string; password: string }
 ) => {
   const response = await axiosClient.post("/auth/login", data);
+
+  const token = response.data.token;
+  if (token) {
+    setCookie("Authentication", token, {
+      maxAge: 60 * 60 * 24 * 7,
+      path: "/",
+    });
+  }
+
   return response.data;
 };
 

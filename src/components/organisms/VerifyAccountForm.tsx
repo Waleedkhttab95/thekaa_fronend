@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { axiosClient } from "@/lib/axios";
@@ -16,6 +16,12 @@ const VerifyAccountForm = () => {
   const [value, setValue] = useState("");
   const [isError, setIsError] = useState(false);
   const email = searchParams.get("email");
+
+  useEffect(() => {
+    if (!email) {
+      router.replace("/login");
+    }
+  }, [email, router]);
 
   const verifyMutation = useMutation({
     mutationFn: async (otp: string) => {
