@@ -1,11 +1,6 @@
 import { AxiosInstance } from "axios";
 import { setCookie } from "cookies-next/client";
 
-export const logout = async (axiosClient: AxiosInstance) => {
-  const res = await axiosClient.post("/auth/logout");
-  console.log("logout res: ", res);
-};
-
 export const login = async (
   axiosClient: AxiosInstance,
   data: { email: string; password: string }
