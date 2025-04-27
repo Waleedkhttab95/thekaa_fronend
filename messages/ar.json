@@ -422,5 +422,16 @@
     "performanceLevels": {
       "advanced": "مستوى متقدم"
     }
+  },
+  "dashboardPage": {
+    "welcome": "أهلا بك",
+    "currentLevel": "مستواك الحالي",
+    "startTheTest": "ابدأ الاختبار",
+    "yourAssistant": "مساعدك",
+    "studentProfile": "ملف الطالب",
+    "plan": "الخطة",
+    "reports": "التقارير",
+    "startYourNextLesson": "ابدأ درسك التالي",
+    "upcomingLessons": "دروسك القادمة"
   }
 }

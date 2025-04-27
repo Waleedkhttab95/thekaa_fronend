@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import DashboardCard from "../molecules/DashboardCard";
+import DashboardInfoCard from "../molecules/DashboardInfoCard";
 import { Button } from "../atoms/button";
 import { Card, CardContent, CardHeader } from "../molecules/card";
 import Image from "next/image";
@@ -15,19 +15,19 @@ const PlanPage = () => {
       <p className="text-2xl font-bold">{t("plan")}</p>
       <div className="bg-[url('/student-profile-bg.png')] rounded-[90px] md:rounded-[40px] bg-cover min-h-[744px] mt-10 py-12 px-2 flex flex-col items-center">
         <div className="w-full flex flex-wrap gap-y-8 gap-x-5 xl:gap-x-8 justify-center items-center">
-          <DashboardCard cardTitle={t("numberOfLessons")}>
+          <DashboardInfoCard cardTitle={t("numberOfLessons")}>
             <DashboardRoundedStats stats={3} />
-          </DashboardCard>
-          <DashboardCard cardTitle={t("passedLessons")}>
+          </DashboardInfoCard>
+          <DashboardInfoCard cardTitle={t("passedLessons")}>
             <DashboardRoundedStats stats={11} />
-          </DashboardCard>
-          <DashboardCard cardTitle={t("lessonsNeedComplete")}>
+          </DashboardInfoCard>
+          <DashboardInfoCard cardTitle={t("lessonsNeedComplete")}>
             <DashboardRoundedStats stats={3} />
-          </DashboardCard>
-          <DashboardCard cardTitle={t("level")}>
+          </DashboardInfoCard>
+          <DashboardInfoCard cardTitle={t("level")}>
             <StatsCard text={t("levels.advanced")} bgColor="bg-green-500" />
-          </DashboardCard>
-          <DashboardCard cardTitle={t("performance")}>
+          </DashboardInfoCard>
+          <DashboardInfoCard cardTitle={t("performance")}>
             <StatsCard
               text={
                 <>
@@ -38,13 +38,13 @@ const PlanPage = () => {
               }
               bgColor="bg-[#FFA500]"
             />
-          </DashboardCard>
-          <DashboardCard cardTitle={t("progressPercentage")}>
+          </DashboardInfoCard>
+          <DashboardInfoCard cardTitle={t("progressPercentage")}>
             <div className="flex flex-col gap-2 w-full">
               <span className="text-xl font-semibold text-center">80%</span>
               <ProgressBar percentage={80} />
             </div>
-          </DashboardCard>
+          </DashboardInfoCard>
         </div>
         <Card
           className="h-48 bg-white/60 shadow mt-7 

@@ -66,6 +66,55 @@ body {
   }
 }
 
+.dashboard-page-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 20px;
+  max-width: 100vw;
+  overflow: hidden;
+
+  @media (max-width: 1344px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 875px) {
+    width: 100vw;
+    grid-template-columns: 1fr;
+    padding: 5em;
+    justify-content: center;
+  }
+}
+
+.dashboard-first-column-top-section {
+  display: grid;
+  column-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+
+  @media (max-width: 875px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.dashboard-first-column-bottom-section {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 20px;
+
+  @media (max-width: 875px) {
+    grid-template-rows: 1fr;
+  }
+}
+
+.dashboard-second-column {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 3fr;
+  gap: 16px;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
