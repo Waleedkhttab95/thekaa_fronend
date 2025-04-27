@@ -34,11 +34,11 @@ const DashboardPage = () => {
   const t = useTranslations("dashboardPage");
 
   return (
-    <div>
+    <div className="flex flex-col">
       <p className="font-bold text-2xl">{t("welcome")}, test 👋</p>
-      <div className="mt-7 flex gap-x-5 max-w-full">
+      <div className="mt-7 dashboard-page-grid self-center">
         <div className="flex flex-col gap-y-4">
-          <div className="flex gap-x-5">
+          <div className="dashboard-first-column-top-section">
             <DashboardCard
               variant="blue"
               left
@@ -49,10 +49,10 @@ const DashboardPage = () => {
               text={t("currentLevel")}
               imageClassName="top-7 end-2"
             >
-              <ProgressBar
-                percentage={80}
-                className="absolute bottom-16 max-w-[334px]"
-              />
+              <div className="flex flex-col gap-2 absolute bottom-16 w-9/12">
+                <span className="text-xl font-semibold text-center">80%</span>
+                <ProgressBar percentage={80} />
+              </div>
             </DashboardCard>
             <div className="flex flex-col gap-y-4">
               <DashboardCard
@@ -73,8 +73,8 @@ const DashboardPage = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col gap-y-4">
-            <div className="flex gap-x-5">
+          <div className="dashboard-first-column-bottom-section">
+            <div className="flex gap-5 max-[875px]:flex-col">
               <DashboardCard
                 variant="pink"
                 iconPath="./dashboard-icons/student-profile.svg"
@@ -103,7 +103,7 @@ const DashboardPage = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-y-3">
+        <div className="dashboard-second-column">
           <DashboardCard
             variant="pink"
             iconPath="./dashboard-icons/start-next-lesson.svg"
