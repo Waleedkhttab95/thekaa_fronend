@@ -72,7 +72,7 @@ body {
   grid-template-rows: 1fr;
   gap: 20px;
   max-width: 100vw;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   @media (max-width: 1344px) {
     grid-template-columns: 1fr;
@@ -112,7 +112,6 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 3fr;
-  gap: 16px;
 }
 
 @layer base {
