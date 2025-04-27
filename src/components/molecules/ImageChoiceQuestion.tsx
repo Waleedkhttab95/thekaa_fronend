@@ -1,4 +1,4 @@
-import { Choice, ImageChoice } from "@/types/question.types";
+import { Options, ImageChoice } from "@/types/question.types";
 import Image from "next/image";
 
 interface Props {
@@ -22,7 +22,7 @@ export function ImageChoiceQuestion({
         </div>
 
         <div className="flex flex-col md:flex-row w-full justify-center items-start gap-10 mt-8">
-          {question.choices.map((choice: Choice) => (
+          {question.options.map((choice: Options) => (
             <div
               key={choice.id}
               onClick={() => onSelectAnswer(choice.id)}
