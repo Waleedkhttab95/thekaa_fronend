@@ -8,6 +8,7 @@ import complete from "../../../public/complete.svg";
 import arrow from "../../../public/arrow.svg";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { ProtectedRoutes } from "@/config/routes";
 
 export function ExamCompletion() {
   const t = useTranslations("testPage");
@@ -35,11 +36,11 @@ export function ExamCompletion() {
             </p>
           </div>
         ) : (
-          <div className="xl:w-full h-full flex flex-col justify-center items-center gap-3">
+          <div className="xl:w-full h-full flex flex-col justify-center items-center text-center gap-3">
             <Image src={complete} alt="Completed" width={80} height={80} />
-            <h2 className="font-pingar font-bold text-[28px]">{t("done")}</h2>
+            <h2 className="font-pingar font-bold text-[28px]">{t("done")} !</h2>
             <CardFooter>
-              <Link href={"/dashboard"}>
+              <Link href={`/${ProtectedRoutes.Dashboard}`}>
                 <Button
                   onClick={() => {}}
                   variant="default"

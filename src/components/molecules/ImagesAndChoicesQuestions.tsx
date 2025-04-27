@@ -21,7 +21,7 @@ export function ImagesAndChoicesQuestion({
         </h2>
 
         <div className="w-full max-w-lg flex flex-col gap-4">
-          {question.choices.map((choice) => (
+          {question.options.map((choice) => (
             <div
               key={choice.id}
               onClick={() =>

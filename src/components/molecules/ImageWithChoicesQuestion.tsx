@@ -29,7 +29,7 @@ export function ImageWithChoicesQuestion({
         />
 
         <div className="xl:w-[541px] w-[75%] max-w-full h-full flex flex-col">
-          {question.choices.map((choice) => (
+          {question.options.map((choice) => (
             <QuestionOption
               key={choice.id}
               id={choice.id}
