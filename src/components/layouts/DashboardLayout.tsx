@@ -13,7 +13,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const t = useTranslations("dashboardLayout");
   const { data: profile } = useProfile();
   return (
-    <div className="flex flex-col items-center pt-10 min-h-screen">
+    <div className="flex flex-col items-center pt-10 min-h-screen overflow-x-hidden">
       <div
         className="bg-[linear-gradient(to_right,_#23F6F04D_0%,_#CBBDF24D_50%,_#F7AEF34D_100%)] 
         w-11/12 sm:w-10/12 rounded-[40px] h-20 px-8 max-w-[1300px] min-w-[360px] flex justify-between"

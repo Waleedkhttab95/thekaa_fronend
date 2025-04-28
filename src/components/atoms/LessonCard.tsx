@@ -22,7 +22,7 @@ const LessonCard = ({
         transition: { type: "spring", stiffness: 250, damping: 15 },
       }}
       className={cn(
-        "flex items-center text-xs sm:text-base bg-white/60 w-[250px] sm:w-full h-[50px] font-bold border border-white rounded-[40px] ps-8 text-[#6C6063] cursor-pointer z-20",
+        "flex items-center text-xs bg-white/60 w-[250px] sm:w-full h-[50px] font-bold border border-white rounded-[40px] ps-1 text-[#6C6063] cursor-pointer z-20",
         firstLesson && "text-black"
       )}
     >
