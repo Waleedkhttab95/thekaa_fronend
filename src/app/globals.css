@@ -71,8 +71,7 @@ body {
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr;
   gap: 20px;
-  max-width: 100vw;
-  overflow: hidden;
+  max-width: 90vw;
 
   @media (max-width: 1344px) {
     grid-template-columns: 1fr;
@@ -83,6 +82,10 @@ body {
     grid-template-columns: 1fr;
     padding: 5em;
     justify-content: center;
+  }
+
+  @media (max-width: 640px){
+    display: none;
   }
 }
 
@@ -112,7 +115,17 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 3fr;
-  gap: 16px;
+}
+
+.dashboard-first-column-pink-row {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  column-gap: 16px;
+
+  @media (max-width: 875px) {
+    grid-template-columns: 1fr;
+    row-gap: 16px;
+  }
 }
 
 @layer base {
