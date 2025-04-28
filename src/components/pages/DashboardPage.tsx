@@ -47,7 +47,7 @@ const DashboardPage = () => {
               flipIcon
               iconPath="./dashboard-icons/current-level.svg"
               alt="current level"
-              className="sm:min-w-[420px] max-w-[80%] sm:max-w-[100%] h-[318px]"
+              className="sm:min-w-[412.86px] max-w-[80%] sm:max-w-[100%] h-[318px]"
               text={t("currentLevel")}
               imageClassName="top-7 end-2"
             >
@@ -78,7 +78,7 @@ const DashboardPage = () => {
           <div className="dashboard-first-column-bottom-section">
             <div className="dashboard-first-column-pink-row ">
               <DashboardCard
-                className=""
+                className="sm:min-w-[300px] max-w-[80%] sm:max-w-[100%]"
                 variant="pink"
                 iconPath="./dashboard-icons/student-profile.svg"
                 text={t("studentProfile")}
@@ -119,7 +119,6 @@ const DashboardPage = () => {
           />
 
           <DashboardCard
-            className="h-[491px]"
             variant="blue"
             iconPath="./dashboard-icons/upcoming-lessons.svg"
             text={t("upcomingLessons")}
@@ -127,7 +126,7 @@ const DashboardPage = () => {
             imageClassName="w-[340px] h-[340px] start-[45px]"
             inLineIconText
           >
-            <div className="flex flex-col gap-3 min-w-[350px]">
+            <div className="flex flex-col gap-3  min-w-[340px] sm:min-w-[33%] sm:max-w-[100%]">
               {lessons.map((lesson, index) => (
                 <LessonCard
                   firstLesson={index === 0}
@@ -207,7 +206,7 @@ const DashboardPage = () => {
         />
 
         <DashboardCard
-          className="h-[491px]"
+          className="h-[491px] ps-3"
           variant="blue"
           iconPath="./dashboard-icons/upcoming-lessons.svg"
           text={t("upcomingLessons")}

@@ -89,7 +89,7 @@ const DashboardCard = ({
         <div
           className={cn(
             "max-h-24 flex flex-col gap-3 z-10",
-            inLineIconText && "flex-row items-center"
+            inLineIconText && "flex-row items-center mx-auto ms-[4em]"
           )}
         >
           <motion.div animate={iconControls}>
@@ -114,7 +114,7 @@ const DashboardCard = ({
           <motion.div
             whileHover={{ y: -3 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="absolute w-10 h-10 end-10 bottom-6 z-10"
+            className="absolute w-10 h-10 end-6 bottom-6 z-10"
           >
             <Button className="w-full h-full">
               <Image
