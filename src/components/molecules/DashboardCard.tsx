@@ -70,7 +70,7 @@ const DashboardCard = ({
       <Card
         variant={variant}
         className={cn(
-          "relative min-h-[150px] min-w-[420px] flex flex-col pt-11 ps-11 overflow-hidden m-0",
+          "relative min-h-[150px] min-w-[340px] sm:min-w-[33%] sm:max-w-[100%] flex flex-col pt-11 ps-11 overflow-hidden m-0 cursor-pointer",
           className
         )}
       >

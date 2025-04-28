@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { ReactNode } from "react";
@@ -11,7 +11,7 @@ import { useProfile } from "@/hooks/rqs/profile";
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const locale = useLocale();
   const t = useTranslations("dashboardLayout");
-  const { data: profile } = useProfile()
+  const { data: profile } = useProfile();
   return (
     <div className="flex flex-col items-center pt-10 min-h-screen">
       <div
@@ -37,7 +37,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         )}
         <div className="flex items-center gap-3 justify-evenly sm:justify-start w-full sm:w-auto">
           <LocaleSwitcher onlySmall />
-          <ProfileLogo name={profile?.parentName?.split(' ')![0] ?? "??"} />
+          <ProfileLogo name={profile?.parentName?.split(" ")![0] ?? "??"} />
           <Button className="sm:w-48 text-base">
             <Image
               src={"/dashboard-circle.svg"}
@@ -52,7 +52,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       <div className="mt-16 mb-36 w-11/12 sm:w-10/12 max-w-[1300px] min-w-[360px] min-h-[calc(100vh-352px)]">
         {children}
       </div>
-      <div className="h-16 bg-[#23f6f0] flex justify-between items-center p-4 sm:px-24 w-full">
+      <div className="h-16 bg-[#23f6f0] flex justify-between items-center p-4 sm:px-24 min-w-[100vw]">
         {locale === Locales.ar ? (
           <Image
             src={"/assets/images/ar-logo.svg"}
