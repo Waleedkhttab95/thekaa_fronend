@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { Button } from '../atoms/button'
 import { useRouter } from 'next/navigation'
-import { ROUTES } from '@/config/routes'
+import { ProtectedRoutes } from '@/config/routes'
 
 type props = {
   sons: IStudentData[];
@@ -18,7 +18,7 @@ const SonsFilesList = ({
   const t = useTranslations("common");
   const router = useRouter();
   const handleAddSon = () => {
-    router.push(ROUTES.ADD_STUDENT)
+    router.push(ProtectedRoutes.AddStudent)
   }
   return (
     <div className='flex gap-3  flex-wrap  justify-center '>

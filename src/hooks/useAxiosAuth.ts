@@ -3,7 +3,7 @@ import { axiosAuthClient } from "@/lib/axios";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { deleteCookie, getCookie } from "cookies-next/client";
-import { logout } from "@/services/auth";
+import { GuestOnlyRoutes } from "@/config/routes";
 
 export const useAxiosAuth = () => {
   const router = useRouter();
@@ -34,10 +34,9 @@ export const useAxiosAuth = () => {
         ) {
           prevReq.sent = true;
           try {
-            await logout(axiosAuthClient);
             deleteCookie("Authentication");
             deleteCookie("role");
-            router.replace("/login");
+            router.replace(GuestOnlyRoutes.Login);
           } catch (error: any) {
             return Promise.reject(error);
           }

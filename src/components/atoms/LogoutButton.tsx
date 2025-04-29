@@ -1,13 +1,19 @@
 "use client";
 
+import { deleteCookie } from "cookies-next/client";
 import { Button } from "./button";
-import { useAuth } from "@/context/AuthContext";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { GuestOnlyRoutes } from "@/config/routes";
 
 export default function LogoutButton() {
-  const { logout } = useAuth();
+  const queryClient = useQueryClient();
+  const router = useRouter();
 
   const handleLogout = () => {
-    logout();
+    deleteCookie("Authentication");
+    queryClient.setQueryData(["auth", "user"], null);
+    router.replace(GuestOnlyRoutes.Login);
   };
 
   return (

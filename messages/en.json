@@ -405,5 +405,16 @@
     "performanceLevels": {
       "advanced": "Advanced Level"
     }
+  },
+  "dashboardPage": {
+    "welcome": "Welcome",
+    "currentLevel": "Your Current Level",
+    "startTheTest": "Start the Test",
+    "yourAssistant": "Your Assistant",
+    "studentProfile": "Student Profile",
+    "plan": "Plan",
+    "reports": "Reports",
+    "startYourNextLesson": "Start Your Next Lesson",
+    "upcomingLessons": "Your Upcoming Lessons"
   }
 }

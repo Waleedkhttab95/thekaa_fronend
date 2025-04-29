@@ -52,7 +52,7 @@ export function QuestionOption({
         <>
           <div
             className={cn(
-              "w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold text-gray-700",
+              "w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold text-gray-700 text-center",
               isSelected
                 ? "border-[#23F6F0] bg-[#23F6F0] scale-200"
                 : background === "white"
@@ -60,7 +60,7 @@ export function QuestionOption({
                 : "bg-transparent border-gray-300 cursor-default"
             )}
           >
-            {id}
+            {id === "true" ? "✔️" : id === "false" ? "❌" : id}
           </div>
 
           <label

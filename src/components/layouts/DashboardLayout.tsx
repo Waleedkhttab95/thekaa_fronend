@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { ReactNode } from "react";
@@ -5,12 +6,14 @@ import { Locales } from "@/types/locales.enum";
 import LocaleSwitcher from "../molecules/LocaleSwitcher";
 import ProfileLogo from "../molecules/ProfileLogo";
 import { Button } from "../atoms/button";
+import { useProfile } from "@/hooks/rqs/profile";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const locale = useLocale();
   const t = useTranslations("dashboardLayout");
+  const { data: profile } = useProfile();
   return (
-    <div className="flex flex-col items-center pt-10 min-h-screen">
+    <div className="flex flex-col items-center pt-10 min-h-screen overflow-x-hidden">
       <div
         className="bg-[linear-gradient(to_right,_#23F6F04D_0%,_#CBBDF24D_50%,_#F7AEF34D_100%)] 
         w-11/12 sm:w-10/12 rounded-[40px] h-20 px-8 max-w-[1300px] min-w-[360px] flex justify-between"
@@ -34,7 +37,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         )}
         <div className="flex items-center gap-3 justify-evenly sm:justify-start w-full sm:w-auto">
           <LocaleSwitcher onlySmall />
-          <ProfileLogo name="Test" />
+          <ProfileLogo name={profile?.parentName?.split(" ")![0] ?? "??"} />
           <Button className="sm:w-48 text-base">
             <Image
               src={"/dashboard-circle.svg"}
@@ -49,7 +52,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       <div className="mt-16 mb-36 w-11/12 sm:w-10/12 max-w-[1300px] min-w-[360px] min-h-[calc(100vh-352px)]">
         {children}
       </div>
-      <div className="h-16 bg-[#23f6f0] flex justify-between items-center p-4 sm:px-24 w-full">
+      <div className="h-16 bg-[#23f6f0] flex justify-between items-center p-4 sm:px-24 min-w-[100vw]">
         {locale === Locales.ar ? (
           <Image
             src={"/assets/images/ar-logo.svg"}

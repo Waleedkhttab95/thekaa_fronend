@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-type CardVariant = "default" | "transparent";
+type CardVariant = "default" | "transparent" | "blue" | "pink";
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: CardVariant;
@@ -14,6 +14,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       default: "bg-card border",
       transparent:
         "bg-card-transparent backdrop-blur-sm border border-muted/30",
+      blue: "bg-[#23F6F0]",
+      pink: "bg-[#F7AEF3]",
     };
 
     return (
