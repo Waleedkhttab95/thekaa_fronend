@@ -1,7 +1,7 @@
 'use client'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { toast } from '../atoms/sooner'
 import { useForm } from "react-hook-form";
 import {
@@ -35,13 +35,13 @@ const AiLessonChat = ({
     textMessage,
   } = useVoiceToText();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-  // useEffect(() => {
-  //   console.log(messages, stopRecording)
-  //   scrollToBottom();
-  // }, [messages, stopRecording]);
-  // const scrollToBottom = () => {
-  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  // };
+  useEffect(() => {
+    console.log(messages, stopRecording)
+    scrollToBottom();
+  }, [messages, stopRecording]);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  };
   const { watch, register, reset, handleSubmit } = useForm({
     defaultValues: {
       message: "",
