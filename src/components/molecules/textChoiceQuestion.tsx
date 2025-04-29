@@ -1,4 +1,4 @@
-import { Choice, TextChoice } from "@/types/question.types";
+import { Options, TextChoice } from "@/types/question.types";
 import { QuestionOption } from "./questionOption";
 import { ReactNode } from "react";
 
@@ -31,7 +31,7 @@ export function TextChoiceQuestion({
       <h2 className={`text-lg font-tajawal font-bold mb-4 ${titleStyle}`}>
         {question.question}
       </h2>
-      {question.choices.map((choice: Choice) => (
+      {question.options.map((choice: Options) => (
         <QuestionOption
           key={choice.id}
           id={choice.id}

@@ -13,21 +13,22 @@ export interface BaseQuestion {
   totalQuestions: number;
 }
 
-export interface Choice {
+export interface Options {
   id: string;
+  value?: string;
   text: string;
   imageUrl?: string;
 }
 
 export interface TextChoice extends BaseQuestion {
   type: "text-choice";
-  choices: Choice[];
+  options: Options[];
   correctAnswer: string;
 }
 
 export interface ImageChoice extends BaseQuestion {
   type: "image-choice";
-  choices: Choice[];
+  options: Options[];
   correctAnswer: string;
   mainImage: string;
 }
@@ -35,7 +36,7 @@ export interface ImageChoice extends BaseQuestion {
 export interface ImageWithTextChoices extends BaseQuestion {
   type: "image-text-choices";
   mainImage: string;
-  choices: Choice[];
+  options: Options[];
   correctAnswer: string;
 }
 
@@ -46,7 +47,7 @@ export interface Fill extends BaseQuestion {
 
 export interface ImagesAndText extends BaseQuestion {
   type: "images-with-text-choices";
-  choices: Choice[];
+  options: Options[];
   correctAnswer: string;
 }
 

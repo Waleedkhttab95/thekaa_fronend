@@ -104,6 +104,7 @@ export default function TestPage() {
               setAnswer={setAnswer}
               className="text-xl font-medium font-pingar"
               titleStyle="self-center text-[22px] mb-9"
+              onSubmitQuestion={() => {}}
             />
           </CardContent>
           <CardFooter className="flex flex-row justify-end w-[90%]">

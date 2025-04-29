@@ -1,3 +1,6 @@
+"use client";
+
+import { useFormContext } from "react-hook-form";
 import { Question } from "@/types/question.types";
 import { TextChoiceQuestion } from "../molecules/textChoiceQuestion";
 import { ImageChoiceQuestion } from "../molecules/ImageChoiceQuestion";
@@ -10,8 +13,9 @@ interface QuestionsProps {
   selectedAnswer: string;
   onSelectAnswer: (answerId: string) => void;
   answer: string;
-  background?: "transparent" | string;
   setAnswer: (value: string) => void;
+  onSubmitQuestion: () => void;
+  background?: "transparent" | string;
   className?: string;
   titleStyle?: string;
 }
@@ -22,56 +26,73 @@ export function Questions({
   onSelectAnswer,
   answer,
   setAnswer,
+  onSubmitQuestion,
   background = "transparent",
   className = "",
   titleStyle = "",
 }: QuestionsProps) {
-  switch (question.type) {
-    case "text-choice":
-      return (
-        <TextChoiceQuestion
-          question={question}
-          background={background}
-          selectedAnswer={selectedAnswer}
-          onSelectAnswer={onSelectAnswer}
-          className={className}
-          titleStyle={titleStyle}
-        />
-      );
-    case "image-choice":
-      return (
-        <ImageChoiceQuestion
-          question={question}
-          selectedAnswer={selectedAnswer}
-          onSelectAnswer={onSelectAnswer}
-        />
-      );
-    case "image-text-choices":
-      return (
-        <ImageWithChoicesQuestion
-          question={question}
-          selectedAnswer={selectedAnswer}
-          onSelectAnswer={onSelectAnswer}
-          img={"/oil.png"}
-        />
-      );
-    case "fill":
-      return (
-        <FillQuestion
-          question={question}
-          userAnswer={answer}
-          setUserAnswer={setAnswer}
-        />
-      );
-    case "images-with-text-choices":
-      return (
-        <ImagesAndChoicesQuestion
-          question={question}
-          selectedAnswer={selectedAnswer}
-          onSelectAnswer={onSelectAnswer}
-        />
-      );
-    default:
-      return null;
-  }
+  const { handleSubmit } = useFormContext();
+
+  const onSubmit = () => {
+    onSubmitQuestion();
+  };
+
+  return (
+    <form
+      id={`question-form-${question.id}`}
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full flex justify-center"
+    >
+      {(() => {
+        switch (question.type) {
+          case "text-choice":
+            return (
+              <TextChoiceQuestion
+                question={question}
+                background={background}
+                selectedAnswer={selectedAnswer}
+                onSelectAnswer={onSelectAnswer}
+                className={className}
+                titleStyle={titleStyle}
+              />
+            );
+          case "image-choice":
+            return (
+              <ImageChoiceQuestion
+                question={question}
+                selectedAnswer={selectedAnswer}
+                onSelectAnswer={onSelectAnswer}
+              />
+            );
+          case "image-text-choices":
+            return (
+              <ImageWithChoicesQuestion
+                question={question}
+                selectedAnswer={selectedAnswer}
+                onSelectAnswer={onSelectAnswer}
+                img={"/oil.png"}
+              />
+            );
+          case "fill":
+            return (
+              <FillQuestion
+                question={question}
+                userAnswer={answer}
+                setUserAnswer={setAnswer}
+              />
+            );
+          case "images-with-text-choices":
+            return (
+              <ImagesAndChoicesQuestion
+                question={question}
+                selectedAnswer={selectedAnswer}
+                onSelectAnswer={onSelectAnswer}
+              />
+            );
+          default:
+            return null;
+        }
+      })()}
+    </form>
+  );
 }
