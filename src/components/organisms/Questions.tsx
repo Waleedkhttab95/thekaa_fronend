@@ -31,16 +31,16 @@ export function Questions({
   className = "",
   titleStyle = "",
 }: QuestionsProps) {
-  const { handleSubmit } = useFormContext(); // ⬅️ Get from RHF
+  const { handleSubmit } = useFormContext();
 
   const onSubmit = () => {
-    onSubmitQuestion(); // trigger parent to move to next question
+    onSubmitQuestion();
   };
 
   return (
     <form
       id={`question-form-${question.id}`}
-      onSubmit={handleSubmit(onSubmit)} // ⬅️ use RHF handleSubmit
+      onSubmit={handleSubmit(onSubmit)}
       className="w-full flex justify-center"
     >
       {(() => {

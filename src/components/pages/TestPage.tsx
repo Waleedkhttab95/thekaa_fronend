@@ -1,5 +1,5 @@
 "use client";
-import { useTestMutations } from "@/hooks/rqs/assessmentTest";
+import { useTestMutation } from "@/hooks/rqs/assessmentTest";
 import TestClient from "./TestClient";
 import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 
@@ -9,7 +9,7 @@ export default function TestPage() {
   const studentId = "6803b7e59531f759f7622dea";
   const axiosAuth = useAxiosAuth();
 
-  const { data, isLoading, isError, error } = useTestMutations(
+  const { data, isLoading, isError, error } = useTestMutation(
     axiosAuth,
     studentId
   );
@@ -24,5 +24,5 @@ export default function TestPage() {
 
   const mappedQuestions = mapAPIQuestionsToComponentFormat(data);
 
-  return <TestClient questions={mappedQuestions} />;
+  return <TestClient questions={mappedQuestions} data={data} />;
 }

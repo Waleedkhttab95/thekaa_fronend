@@ -1,32 +1,10 @@
+import {
+  AssessmentResult,
+  levelAssessment,
+  TestSubmissionData,
+  Unit,
+} from "@/types/assessmentTest";
 import { Question } from "@/types/question.types";
-
-interface UnitQuestion {
-  question?: string;
-  statement?: string;
-  options?: {
-    key: string;
-    value: string;
-  };
-  correct_answer: string | boolean;
-}
-
-interface Unit {
-  unit_Questions: UnitQuestion[];
-  unit_Number: number;
-}
-
-interface levelAssessment {
-  _id: string;
-  isDeleted: boolean;
-  createdAt: string;
-  updatedAt: string;
-  subjectId: string;
-  questions: Unit[];
-  totalQuestions: number;
-  totalCorrectAnswers: number;
-  totalIncorrectAnswers: number;
-  studentId: string;
-}
 
 export function mapAPIQuestionsToComponentFormat(
   apiData: levelAssessment
@@ -42,7 +20,6 @@ export function mapAPIQuestionsToComponentFormat(
     unit.unit_Questions.forEach((apiQuestion) => {
       questionCounter++;
 
-      //todo: recheck the optios for true/false questions
       if (apiQuestion.statement) {
         const options = [
           { id: "true", text: "صحيح" },
@@ -79,3 +56,50 @@ export function mapAPIQuestionsToComponentFormat(
 
   return mappedQuestions;
 }
+
+export const transformSubmission = (
+  submission: TestSubmissionData,
+  apiData: levelAssessment,
+  studentId: string
+): AssessmentResult => {
+  const questions = apiData.questions;
+  const subjectId = "MATH101";
+
+  const questionMap = new Map();
+  let counter = 0;
+
+  questions.forEach((unit: Unit) => {
+    unit.unit_Questions.forEach((q) => {
+      counter++;
+      const questionId = `question-${counter}`;
+      questionMap.set(questionId, {
+        text: q.question || q.statement,
+        correct_answer:
+          typeof q.correct_answer === "boolean"
+            ? q.correct_answer
+              ? "true"
+              : "false"
+            : q.correct_answer,
+        unit_number: unit.unit_Number,
+      });
+    });
+  });
+
+  const transformedQuestions = Object.entries(submission.answers).map(
+    ([questionId, answerId]) => {
+      const questionDetails = questionMap.get(questionId);
+      return {
+        question_text: questionDetails.text,
+        student_answer: answerId,
+        correct_answer: questionDetails.correct_answer,
+        unit_number: questionDetails.unit_number,
+      };
+    }
+  );
+
+  return {
+    student_id: studentId,
+    subject_id: subjectId,
+    questions: transformedQuestions,
+  };
+};

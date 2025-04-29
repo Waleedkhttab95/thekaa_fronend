@@ -4,16 +4,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Question } from "@/types/question.types";
 import { toast } from "@/components/atoms/sooner";
-import { useTranslations } from "next-intl";
+// import { useAxiosAuth } from "@/hooks/useAxiosAuth";
+// import { useAssessmentSubmitMutation } from "./rqs/assessmentTest";
+import { levelAssessment, TestSubmissionData } from "@/types/assessmentTest";
+import { transformSubmission } from "@/utils/questionsMapper";
 
-export type TestSubmissionData = {
-  answers: Record<string, string>;
-  answerTexts?: Record<string, string>;
-  studentId?: string;
-};
+export const useTest = (questions: Question[], data: levelAssessment) => {
+  // const axiosAuth = useAxiosAuth();
+  // const submitMutation = useAssessmentSubmitMutation(axiosAuth);
 
-export const useTest = (questions: Question[]) => {
-  const t = useTranslations("testPage");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -50,9 +49,9 @@ export const useTest = (questions: Question[]) => {
       shouldValidate: true,
     });
 
-    if ("options" in currentQuestion) {
+    if (currentQuestion.type === "text-choice" && currentQuestion.options) {
       const selectedChoice = currentQuestion.options.find(
-        (choice) => choice.id === answerId
+        (option) => option.id === answerId
       );
       if (selectedChoice) {
         setValue(`answerTexts.${currentQuestion.id}`, selectedChoice.text, {
@@ -95,36 +94,32 @@ export const useTest = (questions: Question[]) => {
     setCurrentQuestionIndex((prev) => prev + 1);
   };
 
-  const onSubmit = async (data: TestSubmissionData) => {
+  const onSubmit = async (testData: TestSubmissionData) => {
     setIsSubmitting(true);
     try {
-      const formattedAnswers = Object.entries(data.answers).reduce(
-        (acc, [questionId, answerId]) => {
-          const answerText = data.answerTexts?.[questionId] || answerId;
+      const studentId = "6803b7e59531f759f7622dea";
+      const results = transformSubmission(testData, data, studentId);
 
-          return {
-            ...acc,
-            [questionId]: {
-              id: answerId,
-              value: answerText,
-            },
-          };
-        },
-        {}
-      );
+      console.log("Test Data: ", results);
 
-      const testSubmission = {
-        answers: formattedAnswers,
-        ...(data.studentId && { studentId: data.studentId }),
-      };
+      //stop submit to api for now
+      // await submitMutation.mutateAsync({
+      //   studentId: studentId,
+      //   data: results,
+      // });
 
-      console.log("Test submission:", testSubmission);
+      toast({
+        title: "Success",
+        description: "Test submitted successfully",
+        variant: "success",
+      });
 
       setIsCompleted(true);
-    } catch {
+    } catch (error) {
+      console.error("Submit error:", error);
       toast({
-        title: t("error.title") || "Error",
-        description: t("error.submitError") || "Failed to submit test",
+        title: "Error",
+        description: "Failed to submit test",
         variant: "destructive",
       });
     } finally {
