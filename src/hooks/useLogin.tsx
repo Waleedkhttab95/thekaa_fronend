@@ -15,10 +15,7 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: (credentials: { email: string; password: string }) =>
-      axiosClient.post(
-        "https://store-system-app.onrender.com/api/v1/auth/login",
-        credentials
-      ),
+      loginService(axiosClient, credentials),
     onMutate: async (variables) => {
       console.log("Logging in with:", variables);
       await queryClient.cancelQueries({ queryKey: ["auth", "user"] });
