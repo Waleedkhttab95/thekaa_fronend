@@ -26,7 +26,7 @@ const SonsFilesList = ({
         <SonAvatar isOpen={isOpen} son={son} key={`Son ${son._id}`} />
       ))}
       <div>
-        {sons.length <= 4 && (<Button className='flex-center mb-3 border  border-dashed border-gray-500 bg-secondary rounded-full size-[169px] hover:bg-gray-300'
+        {sons.length < 4 && (<Button className='flex-center mb-3 border  border-dashed border-gray-500 bg-secondary rounded-full size-[169px] hover:bg-gray-300'
           onClick={() => handleAddSon()}>
           <Image
             src="/assets/images/icons/black-plus.svg"
