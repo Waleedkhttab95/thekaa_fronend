@@ -1,7 +1,7 @@
 'use client'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { toast } from '../atoms/sooner'
 import { useForm } from "react-hook-form";
 import {
@@ -14,7 +14,12 @@ import ChatMessages from "../organisms/ChatMessages";
 import { useVoiceToText } from '@/hooks/useVoiceToText'
 import { Send } from 'lucide-react'
 import AiVoiceListening from './AiVoiceListening'
-const AiLessonChat = () => {
+import { cn } from '@/lib/utils'
+const AiLessonChat = ({
+  className
+}: {
+  className?: string
+}) => {
   const t = useTranslations('lessonPage.aiChat')
   const [messages, setMessages] = useState<{ text: string; user?: boolean }[]>(
     []
@@ -30,12 +35,13 @@ const AiLessonChat = () => {
     textMessage,
   } = useVoiceToText();
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages, stopRecording]);
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  // useEffect(() => {
+  //   console.log(messages, stopRecording)
+  //   scrollToBottom();
+  // }, [messages, stopRecording]);
+  // const scrollToBottom = () => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  // };
   const { watch, register, reset, handleSubmit } = useForm({
     defaultValues: {
       message: "",
@@ -79,8 +85,7 @@ const AiLessonChat = () => {
     });
   }
   return (
-    <div className='h-[460px] bg-[#1DC0CA]/20 flex flex-col justify-between rounded-[40px] p-5'>
-
+    <div className={cn('h-full bg-[#1DC0CA]/20 flex flex-col justify-between rounded-[40px] p-5', className)}>
       {
         isRecording ? (
           <AiVoiceListening
@@ -106,7 +111,7 @@ const AiLessonChat = () => {
                 <p className='text-center font-bold text-secondary-foreground text-lg'>{t("howICanHelp")}</p>
               </div >
             ) : (
-              <div className="flex-1 overflow-y-auto px-5 py-2">
+              <div className="relative flex-1 overflow-y-auto px-5 py-2">
                 <ChatMessages messages={messages} />
                 <div ref={messagesEndRef} />
               </div>
