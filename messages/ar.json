@@ -331,6 +331,45 @@
     "askAboutAnything": "اسألني عن أي شيء...",
     "talkOrAskAboutAnyThing": "تحدث أو اسأل عن أي شيء"
   },
+  "lessonPage": {
+    "lessonName": "اسم الدرس",
+    "aiChat": {
+      "askMe": "أسألني",
+      "robot": "المساعد الذكي",
+      "howICanHelp": "كيف يمكنني المساعدة؟",
+      "askAboutAnything": "اسألني أي شيء...",
+      "openChat": "افتح الدردشة",
+      "closeChat": "أغلق الدردشة",
+      "error": {
+        "title": "خطأ",
+        "description": "حدث خطأ أثناء إرسال الرسالة, يرجى المحاولة مرة أخرى."
+      },
+      "send": "إرسال",
+      "sendAvoiceMessage": "إرسال رسالة صوتية",
+      "cancel": "إلغاء",
+      "talkOrAskAboutAnyThing": "تحدث أو اسأل عن أي شيء"
+    },
+    "lessonInfo": {
+      "duration": "مدة الدرس",
+      "durationValue": "{duration} دقيقة"
+    },
+    "lessonDescription": {
+      "title": "الوصف"
+    },
+    "lessonPlayer": {
+      "play": "تشغيل",
+      "pause": "إيقاف مؤقت",
+      "mute": "كتم الصوت",
+      "unmute": "إلغاء كتم الصوت",
+      "fullscreen": "ملء الشاشة",
+      "exitFullscreen": "الخروج من وضع ملء الشاشة",
+      "skipForward": "تخطي للأمام",
+      "skipBackward": "تخطي للخلف",
+      "speed": "السرعة",
+      "seconds": "ثوان",
+      "replay": "إعادة التشغيل"
+    }
+  },
   "common": {
     "delete": "حذف",
     "confirmDelete": "تأكيد الحذف",

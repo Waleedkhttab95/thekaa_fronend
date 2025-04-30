@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "../atoms/button";
 import { useLocale } from "next-intl";
 import { Locales } from "@/types/locales.enum";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 
 type DashboardCardProps = {
   children?: ReactNode;
@@ -38,33 +38,14 @@ const DashboardCard = ({
 }: DashboardCardProps) => {
   const locale = useLocale();
 
-  const iconControls = useAnimation();
-
-  const pulseAnimation = {
-    scale: [1, 0.85, 1],
-    transition: {
-      duration: 1,
-      ease: "easeInOut",
-      repeat: Infinity,
-    },
-  };
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      whileHover={{
-        scale: 1.05,
-        y: -5,
-        transition: { type: "spring", stiffness: 300, damping: 20 },
-      }}
-      onHoverStart={() => {
-        iconControls.start(pulseAnimation);
-      }}
-      onHoverEnd={() => {
-        iconControls.stop();
-        iconControls.set({ scale: 1 });
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      whileHover="hover"
+      variants={{
+        hover: { scale: 1.02 },
       }}
     >
       <Card
@@ -92,7 +73,12 @@ const DashboardCard = ({
             inLineIconText && "flex-row items-center mx-auto ms-[4em]"
           )}
         >
-          <motion.div animate={iconControls}>
+          <motion.div
+            variants={{
+              hover: { rotateX: 360 },
+            }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
             <Image
               className={cn(
                 locale === Locales.en && flipIcon && "scale-x-[-1]"
@@ -103,6 +89,7 @@ const DashboardCard = ({
               height={40}
             />
           </motion.div>
+
           <div className="font-bold text-2xl">{text}</div>
         </div>
 
@@ -113,7 +100,7 @@ const DashboardCard = ({
         {haveArrow && (
           <motion.div
             whileHover={{ y: -3 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="absolute w-10 h-10 end-6 bottom-6 z-10"
           >
             <Button className="w-full h-full">

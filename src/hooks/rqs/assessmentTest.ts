@@ -1,8 +1,12 @@
-import { getAssessmentTest } from "@/services/assessmentTest";
-import { useQuery } from "@tanstack/react-query";
+import {
+  getAssessmentTest,
+  submitAssessmentResult,
+} from "@/services/assessmentTest";
+import { AssessmentResult } from "@/types/assessmentTest";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
 
-export const useTestMutations = (
+export const useTestMutation = (
   axiosClient: AxiosInstance,
   studentId: string
 ) => {
@@ -16,4 +20,18 @@ export const useTestMutations = (
   });
 
   return query;
+};
+
+export const useAssessmentSubmitMutation = (axiosClient: AxiosInstance) => {
+  const submitMutation = useMutation({
+    mutationFn: ({
+      studentId,
+      data,
+    }: {
+      studentId: string;
+      data: AssessmentResult;
+    }) => submitAssessmentResult(axiosClient, studentId, data),
+  });
+
+  return submitMutation;
 };
