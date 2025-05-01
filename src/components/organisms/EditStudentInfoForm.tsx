@@ -8,12 +8,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { getStudentEditSchema } from '@/validations/studentsSchemas'
 import { Button } from '../atoms/button'
 import { getEditStudentFormFields } from '@/data/student'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import AvatarEditorWithCrop from './AvatarWithEdit'
 import AddStudentFields from '../molecules/AddStudentFileds'
-import { useCountries, useGradeLevels, useSubjects } from '@/hooks/rqs/content'
-import { Locales } from '@/types/locales.enum'
 
 type props = {
   deleteStudent: () => void;
@@ -28,7 +26,6 @@ const EditStudentInfoFrom = ({
   onSubmit
 }: props) => {
   const t = useTranslations('editStudentPage');
-  const locale = useLocale()
   const form = useForm<Partial<IStudentData>>({
     resolver: zodResolver(getStudentEditSchema(t)),
     defaultValues: studentData,
@@ -37,15 +34,8 @@ const EditStudentInfoFrom = ({
   const onAvatarChange = (newAvatar: string) => {
     form.setValue('avatar', newAvatar)
   }
-  const { data: gradeLevels } = useGradeLevels(locale as Locales);
-  const { data: subjects } = useSubjects(locale as Locales);
-  const { data: countries } = useCountries(locale as Locales);
 
-  const steps = useMemo(() => getEditStudentFormFields(t, {
-    gradeLevels,
-    subjects,
-    countries
-  }), [t, gradeLevels, subjects, countries]);
+  const steps = useMemo(() => getEditStudentFormFields(t), [t]);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='w-full'>
