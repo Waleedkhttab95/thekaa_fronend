@@ -416,5 +416,56 @@
     "reports": "Reports",
     "startYourNextLesson": "Start Your Next Lesson",
     "upcomingLessons": "Your Upcoming Lessons"
+  },
+  "lessonPage": {
+    "lessonName": "Lesson Name",
+    "aiChat": {
+      "askMe": "Ask Me",
+      "robot": "Ai Chat Bot",
+      "howICanHelp": "How can I help you?",
+      "askAboutAnything": "Ask me about anything ...",
+      "openChat": "Open Chat",
+      "closeChat": "Close Chat",
+      "error": {
+        "title": "Error",
+        "description": "An error occurred while sending the message. Please try again later."
+      },
+      "send": "Send",
+      "sendAvoiceMessage": "Send a voice message",
+      "cancel": "Cancel",
+      "talkOrAskAboutAnyThing": "Talk or ask about anything"
+    },
+    "lessonInfo": {
+      "duration": "Lesson Duration",
+      "durationValue": "{duration} Minutes"
+    },
+    "lessonDescription": {
+      "title": "Description"
+    },
+    "lessonPlayer": {
+      "play": "Play",
+      "pause": "Pause",
+      "mute": "Mute",
+      "unmute": "Unmute",
+      "fullscreen": "Fullscreen",
+      "exitFullscreen": "Exit Fullscreen",
+      "skipForward": "Skip Forward",
+      "skipBackward": "Skip Backward",
+      "speed": "Speed",
+      "seconds": "Seconds",
+      "replay": " Replay"
+    }
+  },
+  "aiChatPage": {
+    "doICanHelp": "How can I help you?",
+    "error": {
+      "title": "Error",
+      "description": "An error occurred while sending the message. Please try again later."
+    },
+    "send": "Send",
+    "sendAvoiceMessage": "Send a voice message",
+    "cancel": "Cancel",
+    "askAboutAnything": "Ask me about anything ...",
+    "talkOrAskAboutAnyThing": " Talk or ask about anything"
   }
 }
