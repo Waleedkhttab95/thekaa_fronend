@@ -155,6 +155,8 @@
     "placementTest": "Placement Test",
     "finishExam": "Finish Exam",
     "next": "Next",
+    "missingSelect": "Please select an answer",
+    "missingFill": "Please enter your answer",
     "levelLoading": "Placing student level",
     "goToDashboard": "Go to Dashboard",
     "done": "Completed the student data successfully",

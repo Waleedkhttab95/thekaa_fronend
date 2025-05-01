@@ -16,7 +16,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useTest } from "@/hooks/useTest";
 import { levelAssessment } from "@/types/assessmentTest";
-import { useState } from "react";
+import { toast } from "../atoms/sooner";
 
 interface TestClientProps {
   questions: Question[];
@@ -25,7 +25,6 @@ interface TestClientProps {
 
 export default function TestClient({ questions, data }: TestClientProps) {
   const t = useTranslations("testPage");
-  const [showValidationMessage, setShowValidationMessage] = useState(false);
 
   const {
     methods,
@@ -49,10 +48,16 @@ export default function TestClient({ questions, data }: TestClientProps) {
 
   const checkAnswer = () => {
     if (isAnswerRequired) {
-      setShowValidationMessage(true);
-      setTimeout(() => setShowValidationMessage(false), 1000);
+      toast({
+        title:
+          currentQuestion?.type === "fill"
+            ? t("missingFill")
+            : t("missingSelect"),
+        variant: "destructive",
+      });
       return;
     }
+    handleNext();
   };
 
   return (
@@ -82,16 +87,6 @@ export default function TestClient({ questions, data }: TestClientProps) {
               setAnswer={handleFillAnswer}
               onSubmitQuestion={handleNext}
             />
-
-            {showValidationMessage && (
-              <div className="absolute top-[50%] mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded flex items-center mb-4">
-                <span>
-                  {currentQuestion.type === "fill"
-                    ? "Please enter your answer before continuing"
-                    : "Please select an answer before continuing"}
-                </span>
-              </div>
-            )}
           </CardContent>
           <CardFooter className="flex justify-end">
             <Button
@@ -112,7 +107,7 @@ export default function TestClient({ questions, data }: TestClientProps) {
                 width={24}
                 height={24}
                 alt="next"
-                className="ms-2"
+                className="ms-2 ltr:scale-x-[-1]"
               />
             </Button>
           </CardFooter>
