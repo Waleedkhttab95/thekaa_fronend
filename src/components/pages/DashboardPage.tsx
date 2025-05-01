@@ -34,7 +34,7 @@ const DashboardPage = () => {
   const t = useTranslations("dashboardPage");
 
   return (
-    <div className="flex flex-col items-center w-screen sm:w-full ms-[-1em] min-[410px]:ms-[-2em] sm:ms-0">
+    <div className="flex flex-col items-center sm:w-full">
       <p className="font-bold text-2xl sm:self-start sm:ps-3">
         {t("welcome")}, test 👋
       </p>
@@ -104,6 +104,7 @@ const DashboardPage = () => {
               haveArrow
               left
               imageClassName="top-[-15%]"
+              disabled
             />
           </div>
         </div>
@@ -140,14 +141,13 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 items-center justify-center sm:hidden w-full ps-2 mt-7">
+      <div className="flex flex-col gap-4 items-center sm:hidden mt-7">
         <DashboardCard
           variant="blue"
           left
           flipIcon
           iconPath="./dashboard-icons/current-level.svg"
           alt="current level"
-          className="sm:min-w-[420px] max-w-[80%] sm:max-w-[100%]"
           text={t("currentLevel")}
           imageClassName="top-7 end-2"
           haveArrow
@@ -194,6 +194,7 @@ const DashboardPage = () => {
           haveArrow
           left
           imageClassName="top-[-15%]"
+          disabled
         />
         <DashboardCard
           variant="pink"
