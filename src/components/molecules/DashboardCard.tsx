@@ -21,6 +21,7 @@ type DashboardCardProps = {
   alt?: string;
   flipIcon?: boolean;
   inLineIconText?: boolean;
+  disabled?: boolean;
 };
 
 const DashboardCard = ({
@@ -35,26 +36,29 @@ const DashboardCard = ({
   alt,
   flipIcon,
   inLineIconText,
+  disabled,
 }: DashboardCardProps) => {
   const locale = useLocale();
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      initial={!disabled ? { opacity: 0, y: 30 } : false}
+      animate={!disabled ? { opacity: 1, y: 0 } : false}
+      transition={!disabled ? { duration: 0.8, ease: "easeOut" } : {}}
       whileHover="hover"
-      variants={{
-        hover: { scale: 1.02 },
-      }}
+      variants={!disabled ? { hover: { scale: 1.02 } } : {}}
     >
       <Card
         variant={variant}
         className={cn(
           "relative min-h-[150px] min-w-[340px] sm:min-w-[33%] sm:max-w-[100%] flex flex-col pt-11 ps-11 overflow-hidden m-0 cursor-pointer",
+          disabled && "opacity-50",
           className
         )}
       >
+        {disabled && (
+          <p className="absolute top-12 start-24 text-red-500">COMING SOON!</p>
+        )}
         <Image
           className={cn(
             "absolute top-0",
@@ -74,10 +78,8 @@ const DashboardCard = ({
           )}
         >
           <motion.div
-            variants={{
-              hover: { rotateX: 360 },
-            }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            variants={!disabled ? { hover: { rotateX: 360 } } : {}}
+            transition={!disabled ? { duration: 0.5, ease: "easeInOut" } : {}}
           >
             <Image
               className={cn(
@@ -90,7 +92,14 @@ const DashboardCard = ({
             />
           </motion.div>
 
-          <div className="font-bold text-2xl">{text}</div>
+          <div
+            className={cn(
+              "font-bold sm:text-2xl",
+              inLineIconText && "text-xs sm:text-2xl"
+            )}
+          >
+            {text}
+          </div>
         </div>
 
         {children && (
@@ -99,11 +108,13 @@ const DashboardCard = ({
 
         {haveArrow && (
           <motion.div
-            whileHover={{ y: -3 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            whileHover={!disabled ? { y: -3 } : {}}
+            transition={
+              !disabled ? { type: "spring", stiffness: 300, damping: 20 } : {}
+            }
             className="absolute w-10 h-10 end-6 bottom-6 z-10"
           >
-            <Button className="w-full h-full">
+            <Button className="w-full h-full" disabled={disabled}>
               <Image
                 className={cn(
                   "absolute",
