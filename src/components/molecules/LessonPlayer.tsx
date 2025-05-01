@@ -12,14 +12,14 @@ import {
   Maximize,
   Pause,
   Play,
-  SkipForward,
-  SkipBack,
   ChevronDown,
   RotateCcw,
   Loader2,
+  Rewind,
 } from "lucide-react"
 import { useTranslations, useLocale } from "next-intl"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/atoms/dropdown-menu"
+import { cn } from "@/lib/utils"
 
 interface CustomVideoPlayerProps {
   url: string
@@ -116,13 +116,105 @@ export default function LessonPlayer({ url, poster, title }: CustomVideoPlayerPr
   const handleFullscreen = () => {
     if (playerContainerRef.current) {
       if (document.fullscreenElement) {
-        document.exitFullscreen()
+        document.exitFullscreen().then(() => {
+          // Reset screen orientation when exiting fullscreen (if available)
+          if (screen.orientation && 'unlock' in screen.orientation) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (screen.orientation as any).unlock();
+          }
+        }).catch(err => {
+          console.error('Error exiting fullscreen:', err);
+        });
       } else {
-        playerContainerRef.current.requestFullscreen()
+        playerContainerRef.current.requestFullscreen().then(() => {
+          // Lock to landscape orientation when entering fullscreen (if available)
+          if (screen.orientation && 'lock' in screen.orientation) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (screen.orientation as any).lock('landscape').catch((err: Error) => {
+              // Handle error (some devices or browsers may not support this)
+              console.warn('Screen orientation lock not supported:', err);
+            });
+          }
+        }).catch(err => {
+          console.error('Error entering fullscreen:', err);
+        });
       }
     }
-  }
+  };
 
+  // Add this useEffect to handle cleanup when component unmounts
+  useEffect(() => {
+    return () => {
+      // Unlock screen orientation when component unmounts (if still locked)
+      if (screen.orientation && screen.orientation.unlock) {
+        screen.orientation.unlock();
+      }
+
+      if (stalledTimeoutRef.current) {
+        clearTimeout(stalledTimeoutRef.current);
+      }
+    };
+  }, []);
+  useEffect(() => {
+    const handleKeyDown = (event: { key: string; preventDefault: () => void }) => {
+      // Check if the player container is in focus or has focus within
+      const isPlayerFocused =
+        playerContainerRef.current &&
+        (document.activeElement === playerContainerRef.current ||
+          playerContainerRef.current.contains(document.activeElement));
+
+      // Only handle keyboard events when player is focused or document has focus
+      if (isPlayerFocused || document.activeElement === document.body) {
+        // Toggle fullscreen with 'f' key
+        if (event.key.toLowerCase() === 'f') {
+          event.preventDefault();
+          handleFullscreen();
+        }
+
+        // You can add more keyboard shortcuts here
+        // Play/Pause with space bar
+        if (event.key === ' ' || event.key === 'Spacebar') {
+          event.preventDefault();
+          setPlaying(!playing);
+        }
+
+        // Skip forward with right arrow
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          const currentTime = playerRef.current?.getCurrentTime() || 0;
+          playerRef.current?.seekTo(Math.min(currentTime + 10, duration), "seconds");
+          setShowSkipMessage({ show: true, direction: "forward" });
+          setTimeout(() => setShowSkipMessage({ show: false, direction: "forward" }), 1000);
+        }
+
+        // Skip backward with left arrow
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          const currentTime = playerRef.current?.getCurrentTime() || 0;
+          playerRef.current?.seekTo(Math.max(currentTime - 10, 0), "seconds");
+          setShowSkipMessage({ show: true, direction: "backward" });
+          setTimeout(() => setShowSkipMessage({ show: false, direction: "backward" }), 1000);
+        }
+      }
+    };
+
+    // Add event listener
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Clean up
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+
+      // Keep existing cleanup code
+      if (screen.orientation && screen.orientation.unlock) {
+        screen.orientation.unlock();
+      }
+
+      if (stalledTimeoutRef.current) {
+        clearTimeout(stalledTimeoutRef.current);
+      }
+    };
+  }, [playing, duration]);
   // Handle video end
   const handleVideoEnded = () => {
     setPlaying(false)
@@ -277,54 +369,57 @@ export default function LessonPlayer({ url, poster, title }: CustomVideoPlayerPr
           }`}
       >
         <button
-          className="bg-black/30 backdrop-blur-sm rounded-full p-6 cursor-pointer hover:bg-black/40 transition-colors hover:scale-110 active:scale-95 pointer-events-auto"
+          className="bg-black/30 backdrop-blur-sm rounded-full p-2 md:p-6 cursor-pointer hover:bg-black/40 transition-colors hover:scale-110 active:scale-95 pointer-events-auto"
           onClick={handlePlayPause}
           aria-label={playing ? t("pause") : t("play")}
         >
           {ended ? (
-            <RotateCcw className="h-12 w-12 text-white" />
+            <RotateCcw className="xl:size-12 size-8 text-white" />
           ) : playing ? (
-            <Pause className="h-12 w-12 text-white" />
+            <Pause className="xl:size-12 size-8 text-white" />
           ) : (
-            <Play className="h-12 w-12 text-white" />
+            <Play className="xl:size-12 size-8 text-white" />
           )}
         </button>
       </div>
 
       {/* Skip Buttons - Positioned with pointer-events-auto */}
       <div
-        className={`absolute inset-y-0 ${isRTL ? "right-8" : "left-8"
-          } flex items-center opacity-0 group-hover:opacity-100 transition-opacity z-30 pointer-events-none`}
+        className={`absolute inset-y-0 ${isRTL ? "right-8" : "left-8"} flex items-center  transition-opacity z-30 pointer-events-none 
+          ${showControls || !playing || ended ? "opacity-100" : "opacity-0"}`}
       >
         <button
-          className="bg-black/30 backdrop-blur-sm rounded-full p-3 cursor-pointer hover:bg-black/40 transition-colors hover:scale-110 active:scale-95 pointer-events-auto"
+          className="bg-black/30 backdrop-blur-sm rounded-full p-2  md:p-3 cursor-pointer hover:bg-black/40 transition-colors hover:scale-110 active:scale-95 pointer-events-auto"
           onClick={handleSkipBackward}
           aria-label={t("skipBackward")}
         >
-          <SkipForward className="h-6 w-6 text-white" />
+          <Rewind className="size-5 md:size-6 text-white rtl:rotate-180" />
         </button>
       </div>
 
       <div
-        className={`absolute inset-y-0 ${isRTL ? "left-8" : "right-8"
-          } flex items-center opacity-0 group-hover:opacity-100 transition-opacity z-30 pointer-events-none`}
+        className={`absolute inset-y-0 ${isRTL ? "left-8" : "right-8"} flex items-center transition-opacity z-30 pointer-events-none
+        ${showControls || !playing || ended ? "opacity-100" : "opacity-0"}`}
+
       >
         <button
-          className="bg-black/30 backdrop-blur-sm rounded-full p-3 cursor-pointer hover:bg-black/40 transition-colors hover:scale-110 active:scale-95 pointer-events-auto"
+          className="bg-black/30 backdrop-blur-sm rounded-full p-2  md:p-3 cursor-pointer hover:bg-black/40 transition-colors hover:scale-110 active:scale-95 pointer-events-auto"
           onClick={handleSkipForward}
           aria-label={t("skipForward")}
         >
-          <SkipBack className="h-6 w-6 text-white " />
+          <Rewind className="size-5 md:size-6 text-white ltr:rotate-180" />
         </button>
       </div>
 
       {/* Skip Message */}
-      {showSkipMessage.show && (
-        <div className="absolute top-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/60 text-white px-4 py-2 rounded-full backdrop-blur-sm z-40">
-          {showSkipMessage.direction === "forward" ? "+10 " : "-10 "}
-          {t("seconds")}
-        </div>
-      )}
+      {
+        showSkipMessage.show && (
+          <div className="absolute top-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/60 text-white px-4 py-2 rounded-full backdrop-blur-sm z-40">
+            {showSkipMessage.direction === "forward" ? "+10 " : "-10 "}
+            {t("seconds")}
+          </div>
+        )
+      }
 
       {/* Custom Controls Overlay */}
       <div
@@ -337,11 +432,11 @@ export default function LessonPlayer({ url, poster, title }: CustomVideoPlayerPr
         )}
 
         {/* Bottom Controls */}
-        <div className="absolute bottom-0 left-0 right-0 p-4" onClick={(e) => e.stopPropagation()}>
+        <div className="absolute bottom-0 left-0 right-0 px-2 py-0 md:py-4 md:px-4" onClick={(e) => e.stopPropagation()}>
           {/* Creative Progress Bar */}
-          <div className="relative mb-4">
-            <div className="absolute -top-6 left-0 right-0 flex justify-center">
-              <div className="bg-white/10 backdrop-blur-sm px-2 py-0.5 rounded-full text-xs text-white">
+          <div className="relative md:mb-4">
+            <div className="absolute md:-top-6 left-0 right-0 flex justify-center">
+              <div className="bg-white/10 backdrop-blur-sm px-2 md:py-0.5 rounded-full mt-6 !pb-0 pt-1 md:mt-0  text-xs text-white">
                 {formatTime(duration * played)} / {formatTime(duration)}
               </div>
             </div>
@@ -370,10 +465,11 @@ export default function LessonPlayer({ url, poster, title }: CustomVideoPlayerPr
 
               {/* Custom thumb - positioned correctly for RTL/LTR */}
               <div
-                className="absolute top-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-purple-500 z-10"
+                className={cn("absolute top-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-purple-500 z-10",
+                )}
                 style={{
                   [isRTL ? "right" : "left"]: `${played * 100}%`,
-                  transform: `translateX(${isRTL ? "50%" : "-50%"}) translateY(-50%)`,
+                  transform: `translateX(${isRTL ? "40%" : "-40%"}) translateY(-50%)`,
                 }}
               />
             </div>
@@ -392,13 +488,13 @@ export default function LessonPlayer({ url, poster, title }: CustomVideoPlayerPr
 
           {/* Control Buttons */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 -ms-[10px] md:ms-0">
               {/* Play/Pause Button */}
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={handlePlayPause}
-                className="text-white hover:bg-white/20 rounded-full w-10 h-10 hover:scale-110 active:scale-95 cursor-pointer"
+                className="text-white hover:bg-white/20 rounded-full w-10 h-10 hover:scale-110  active:scale-95 cursor-pointer"
               >
                 {ended ? (
                   <RotateCcw className="h-5 w-5" />
@@ -435,7 +531,7 @@ export default function LessonPlayer({ url, poster, title }: CustomVideoPlayerPr
             </div>
 
             {/* Right Controls */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 -me-[7px] md:me-0">
               {/* Playback Speed */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -474,6 +570,6 @@ export default function LessonPlayer({ url, poster, title }: CustomVideoPlayerPr
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
