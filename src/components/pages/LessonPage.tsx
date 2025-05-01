@@ -20,7 +20,7 @@ const LessonPage = () => {
       {/* Main content area */}
       <div className='flex flex-col  lg:flex-row gap-4 mb-5'>
         {/* Video player takes full width on mobile, 65% on desktop */}
-        <div className='w-full lg:w-[65%] relative aspect-video ' ref={playerWrapperRef}>
+        <div className='w-full xl:w-[65%] relative aspect-video ' ref={playerWrapperRef}>
           <LessonPlayer
             url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             title='درس 1 :الأفعال والحروف'
@@ -29,7 +29,7 @@ const LessonPage = () => {
         </div>
 
         {/* Chat visible only on desktop screens */}
-        <div className='hidden  lg:block w-[35%]  '
+        <div className='hidden  xl:block w-[35%]  '
           style={{
             height: playerWrapperRef.current ? playerWrapperRef.current.clientHeight : 'auto',
           }}>
@@ -50,7 +50,7 @@ const LessonPage = () => {
       <button
         onClick={() => setIsChatOpen(true)}
         className={cn(
-          'lg:hidden fixed bottom-6 right-6 z-10 bg-primary rounded-full p-3 shadow-lg',
+          'xl:hidden fixed bottom-6 right-6 z-10 bg-primary rounded-full p-3 shadow-lg',
           'hover:bg-primary/90 transition-colors'
         )}
         aria-label={t("aiChat.openChat")}
