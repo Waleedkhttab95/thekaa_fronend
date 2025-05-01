@@ -305,7 +305,7 @@
       "studentNameInvalid": "ادخل اسم صحيح ، تجنب الأرقام والرموز",
       "studentNameMinLength": "الاسم يجب أن يكون من 3 أحرف على الأقل",
       "studentNameMaxLength": "الاسم يجب أن يكون من 40 حرف على الأكثر",
-      "studentAgeInvalid": "ادخل عمر صحيح",
+      "studentAgeInvalid": "يجب أن يكون عمر الطالب بين 6 و 12 سنة",
       "educationLevelRequired": "اختر مستوى التعليم",
       "subjectRequired": "اختر المادة",
       "avatarRequired": "الرجاء إدخال صورة",
