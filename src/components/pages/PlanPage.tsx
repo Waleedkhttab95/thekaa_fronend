@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import DashboardInfoCard from "../molecules/DashboardInfoCard";
 import { Button } from "../atoms/button";
 import { Card, CardContent, CardHeader } from "../molecules/card";
@@ -6,9 +6,12 @@ import Image from "next/image";
 import ProgressBar from "../atoms/progressBar";
 import DashboardRoundedStats from "../atoms/dashboard-rouneded-stats";
 import StatsCard from "../molecules/StatsCard";
+import { Locales } from "@/types/locales.enum";
+import { cn } from "@/lib/utils";
 
 const PlanPage = () => {
   const t = useTranslations("planPage");
+  const locale = useLocale();
 
   return (
     <div>
@@ -47,14 +50,14 @@ const PlanPage = () => {
           </DashboardInfoCard>
         </div>
         <Card
-          className="h-48 bg-white/60 shadow mt-7 
+          className="h-48 bg-white/60 shadow mt-7 text-center
           min-w-[80%] max-w-[80%] md:min-w-[calc(280px*2+20px)] min-[1075px]:min-w-[calc(280px*3+40px)] xl:min-w-[calc(90%+2*32px)]"
         >
           <CardHeader className="flex items-center justify-center text-2xl font-bold">
             {t("startYourNextLesson")}
           </CardHeader>
           <CardContent>
-            <Button>
+            <Button className={cn(locale === Locales.ar && "rotate-180")}>
               <Image src={"/arrow.svg"} alt="arrow" width={24} height={24} />
             </Button>
           </CardContent>
