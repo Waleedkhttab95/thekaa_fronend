@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { ReactNode } from "react";
+import { motion } from "framer-motion";
 import { Locales } from "@/types/locales.enum";
 import LocaleSwitcher from "../molecules/LocaleSwitcher";
 import ProfileLogo from "../molecules/ProfileLogo";
@@ -55,9 +56,14 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           </Link>
         </div>
       </div>
-      <div className="mt-16 mb-36 w-11/12 sm:w-10/12 max-w-[1300px] min-w-[310px] min-h-[calc(100vh-352px)]">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="mt-16 mb-36 w-11/12 sm:w-10/12 max-w-[1300px] min-w-[310px] min-h-[calc(100vh-352px)]"
+      >
         {children}
-      </div>
+      </motion.div>
       <div className="h-16 bg-[#23f6f0] flex justify-between items-center p-4 sm:px-24 min-w-[100vw]">
         {locale === Locales.ar ? (
           <Image
