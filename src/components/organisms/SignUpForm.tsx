@@ -71,7 +71,7 @@ const SignUpForm = () => {
       if (response.status === 201) {
         const email = response.data.email;
 
-        router.push(`/verify-account?email=${encodeURIComponent(email)}`);
+        router.replace(`/verify-account?email=${encodeURIComponent(email)}`);
         toast({
           title: t("success"),
           description: t("successDescription"),

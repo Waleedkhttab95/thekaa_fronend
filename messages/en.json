@@ -95,7 +95,9 @@
     "loading": "Verifying . . .",
     "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly.",
     "success": "Verified Successfully",
-    "successDescription": "Your Account is Now Active."
+    "successDescription": "Your Account is Now Active.",
+    "somethingWentWrong": "Something Went Wrong",
+    "somethingWentWrongDescription": "Something went wrong logging in try again later."
   },
   "RecoverPasswordPage": {
     "title": "Recover Password",
