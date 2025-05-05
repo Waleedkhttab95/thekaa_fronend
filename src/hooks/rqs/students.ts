@@ -48,7 +48,8 @@ export const useStudentMutations = (axiosClient: AxiosInstance) => {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id: string) => deleteStudent(axiosClient, id),
+    mutationFn: ({ id, studentId }: Record<string, string>) =>
+      deleteStudent(axiosClient, id, studentId),
   });
 
   return {

@@ -55,8 +55,11 @@ export const updateStudentAvatar = async (
 
 export const deleteStudent = async (
   axiosClient: AxiosInstance,
-  _id: string
+  _id: string,
+  studentId: string
 ) => {
-  const { data } = await axiosClient.delete(`/${API_ROUTE}/${_id}`);
+  const { data } = await axiosClient.delete(
+    `/auth/user/${_id}/students/${studentId}`
+  );
   return data;
 };

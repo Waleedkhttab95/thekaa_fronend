@@ -17,6 +17,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { STUDENTS_QUERY } from '@/config/qr.constants'
 import { ProtectedRoutes } from '@/config/routes'
 import { base64ToFile } from '@/utils/avatar'
+import { useProfile } from '@/hooks/rqs/profile'
 
 const EditStudentPage = () => {
   const t = useTranslations("editStudentPage");
@@ -28,6 +29,7 @@ const EditStudentPage = () => {
   const studentId = params?.id?.toString() ?? "";
   const axiosAuth = useAxiosAuth();
   const queryClient = useQueryClient();
+  const { data: profile } = useProfile();
   const { data: studentData, isLoading: isStudentDataLoading } = useStudent(axiosAuth, studentId);
   const { isPending: isUpdatePending, mutateAsync: mutateUpdateAsync } = useStudentMutations(axiosAuth).update
   const { isPending: isUpdateAvatarPending, mutateAsync: mutateAvatarAsync } = useStudentMutations(axiosAuth).updateAvatar
@@ -72,7 +74,7 @@ const EditStudentPage = () => {
   const confirmDeleteStudent = async () => {
     try {
       setIsConfirmDeleteOpen(false);
-      await mutateDeleteAsync(studentId)
+      await mutateDeleteAsync({ id: profile._id, studentId })
       await queryClient.invalidateQueries({ queryKey: [STUDENTS_QUERY] })
       setIsSuccessDialogOpen(true);
       setSuccessMessage(t("studentDeletedSuccessfully"))
@@ -98,7 +100,7 @@ const EditStudentPage = () => {
       </CardHeader>
       <CardContent className='py-0 min-h-[300px]'>
         {isStudentDataLoading ? <Loading /> :
-          (<EditStudentInfoFrom resetAvatar={resetAvatar} studentAvatar={studentData?.profileImage} handleAvatarChange={handleAvatarChange} isPending={isUpdatePending || isDeletePending} onSubmit={onUpdateSubmit} studentData={studentData} deleteStudent={openDeleteStudentDialog} />)
+          (<EditStudentInfoFrom resetAvatar={resetAvatar} studentAvatar={studentData?.profileImage} handleAvatarChange={handleAvatarChange} isPending={isUpdatePending || isUpdateAvatarPending || isDeletePending} onSubmit={onUpdateSubmit} studentData={studentData} deleteStudent={openDeleteStudentDialog} />)
         }<ConfirmDeleteDialog
           isOpen={isConfirmDeleteDialogOpen}
           setIsOpen={setIsConfirmDeleteOpen}
