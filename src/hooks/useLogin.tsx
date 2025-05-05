@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useAxiosAuth } from "./useAxiosAuth";
+import { ProtectedRoutes } from "@/config/routes";
 
 export const useLogin = () => {
   const router = useRouter();
@@ -25,7 +26,7 @@ export const useLogin = () => {
       try {
         const user = await getUser(axiosAuth);
         queryClient.setQueryData(["auth", "user"], user);
-        router.push("/");
+        router.replace(ProtectedRoutes.Dashboard);
       } catch {
         toast({
           title: t("loginError"),
