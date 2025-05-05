@@ -16,18 +16,23 @@ import { toast } from '../atoms/sooner'
 import { useQueryClient } from '@tanstack/react-query'
 import { STUDENTS_QUERY } from '@/config/qr.constants'
 import { ProtectedRoutes } from '@/config/routes'
+import { base64ToFile } from '@/utils/avatar'
+import { useProfile } from '@/hooks/rqs/profile'
 
 const EditStudentPage = () => {
   const t = useTranslations("editStudentPage");
   const [isConfirmDeleteDialogOpen, setIsConfirmDeleteOpen] = useState(false)
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false)
-  const [successMessage, setSuccessMessage] = useState('')
+  const [successMessage, setSuccessMessage] = useState('');
+  const [resetAvatar, setIsResetAvatar] = useState(false);
   const params = useParams();
   const studentId = params?.id?.toString() ?? "";
   const axiosAuth = useAxiosAuth();
   const queryClient = useQueryClient();
+  const { data: profile } = useProfile();
   const { data: studentData, isLoading: isStudentDataLoading } = useStudent(axiosAuth, studentId);
   const { isPending: isUpdatePending, mutateAsync: mutateUpdateAsync } = useStudentMutations(axiosAuth).update
+  const { isPending: isUpdateAvatarPending, mutateAsync: mutateAvatarAsync } = useStudentMutations(axiosAuth).updateAvatar
   const { isPending: isDeletePending, mutateAsync: mutateDeleteAsync } = useStudentMutations(axiosAuth).delete
   const onUpdateSubmit = async (data: Partial<IStudentData>) => {
     console.log(data)
@@ -46,10 +51,30 @@ const EditStudentPage = () => {
     }
 
   }
+  const handleAvatarChange = async (avatar: string) => {
+    try {
+      const avatarFile = await base64ToFile(avatar, "avatar.png")
+      await mutateAvatarAsync({ avatar: avatarFile, _id: studentId })
+      await queryClient.invalidateQueries({ queryKey: [STUDENTS_QUERY] })
+    } catch (error: any) {
+      setIsResetAvatar(true)
+      toast({
+        title: t("error.updateAvatar.title"),
+        description: t("error.updateAvatar.description"),
+        variant: "destructive"
+      })
+    } finally {
+      setTimeout(() => {
+        setIsResetAvatar(false)
+      }
+        , 500)
+
+    }
+  }
   const confirmDeleteStudent = async () => {
     try {
       setIsConfirmDeleteOpen(false);
-      await mutateDeleteAsync(studentId)
+      await mutateDeleteAsync({ id: profile._id, studentId })
       await queryClient.invalidateQueries({ queryKey: [STUDENTS_QUERY] })
       setIsSuccessDialogOpen(true);
       setSuccessMessage(t("studentDeletedSuccessfully"))
@@ -75,7 +100,7 @@ const EditStudentPage = () => {
       </CardHeader>
       <CardContent className='py-0 min-h-[300px]'>
         {isStudentDataLoading ? <Loading /> :
-          (<EditStudentInfoFrom isPending={isUpdatePending || isDeletePending} onSubmit={onUpdateSubmit} studentData={studentData} deleteStudent={openDeleteStudentDialog} />)
+          (<EditStudentInfoFrom resetAvatar={resetAvatar} studentAvatar={studentData?.profileImage} handleAvatarChange={handleAvatarChange} isPending={isUpdatePending || isUpdateAvatarPending || isDeletePending} onSubmit={onUpdateSubmit} studentData={studentData} deleteStudent={openDeleteStudentDialog} />)
         }<ConfirmDeleteDialog
           isOpen={isConfirmDeleteDialogOpen}
           setIsOpen={setIsConfirmDeleteOpen}

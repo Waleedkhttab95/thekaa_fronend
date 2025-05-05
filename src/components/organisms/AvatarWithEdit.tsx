@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useRef, useCallback } from "react"
+import { useState, useRef, useCallback, useEffect } from "react"
 import { PencilLineIcon } from "lucide-react"
 import { Button } from "@/components/atoms/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/atoms/avatar"
@@ -24,11 +24,13 @@ type props = {
   avatar: string;
   avatarFallback: string;
   onAvatarChange: (newAvatar: string) => void
+  resetAvatar: boolean
 }
 export default function AvatarEditorWithCrop({
   avatar: defaultAvatar,
   avatarFallback,
   onAvatarChange,
+  resetAvatar
 }: props) {
   const t = useTranslations("editStudentPage")
   const [avatar, setAvatar] = useState<string | null>(defaultAvatar);
@@ -112,7 +114,13 @@ export default function AvatarEditorWithCrop({
       }
     }
   }
-
+  useEffect(() => {
+    if (resetAvatar) {
+      setAvatar(defaultAvatar)
+      setImageSrc(null)
+      setIsEditing(false)
+    }
+  }, [resetAvatar, defaultAvatar])
   return (
     <div className="flex flex-col items-center justify-center p-6 pt-0">
       <div className="relative group">

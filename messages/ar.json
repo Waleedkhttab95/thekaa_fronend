@@ -317,6 +317,12 @@
       "phoneMinError": "رقم الهاتف يجب أن يكون على الأقل 10 أرقام",
       "phoneMaxError": "رقم الهاتف يجب أن يكون أقل من 15 رقم",
       "phoneInvalid": "ادخل رقم هاتف صحيح"
+    },
+    "error": {
+      "updateAvatar": {
+        "title": "خطأ",
+        "description": "حدث خطأ أثناء تحديث صورة الطالب, يرجى المحاولة مرة أخرى."
+      }
     }
   },
   "SonsStudentsManagementPage": {
