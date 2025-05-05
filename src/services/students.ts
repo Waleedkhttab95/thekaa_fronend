@@ -41,3 +41,13 @@ export const deleteStudent = async (
   const { data } = await axiosClient.delete(`/${API_ROUTE}/${_id}`);
   return data;
 };
+
+export const checkStudentLevelAssesmentStatus = async (
+  axiosClient: AxiosInstance,
+  studentId: string
+): Promise<boolean> => {
+  const { data } = await axiosClient.get(
+    `/student/student/${studentId}/level-assesment-status`
+  );
+  return data;
+};

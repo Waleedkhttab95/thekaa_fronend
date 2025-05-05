@@ -12,6 +12,7 @@ export default function LogoutButton() {
 
   const handleLogout = () => {
     deleteCookie("Authentication");
+    deleteCookie("current_user");
     queryClient.setQueryData(["auth", "user"], null);
     router.replace(GuestOnlyRoutes.Login);
   };
