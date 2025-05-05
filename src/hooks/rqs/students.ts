@@ -7,6 +7,7 @@ import {
   getStudentById,
   getStudents,
   updateStudent,
+  updateStudentAvatar,
 } from "@/services/students";
 import { IStudentData } from "@/types/student.type";
 import { AxiosInstance } from "axios";
@@ -38,6 +39,14 @@ export const useStudentMutations = (axiosClient: AxiosInstance) => {
       updateStudent(axiosClient, data),
   });
 
+  const updateAvatarMutation = useMutation({
+    mutationFn: ({ _id, avatar }: { _id: string; avatar: File }) =>
+      updateStudentAvatar(axiosClient, {
+        _id,
+        avatar: avatar,
+      }),
+  });
+
   const deleteMutation = useMutation({
     mutationFn: (id: string) => deleteStudent(axiosClient, id),
   });
@@ -45,6 +54,7 @@ export const useStudentMutations = (axiosClient: AxiosInstance) => {
   return {
     create: createMutation,
     update: updateMutation,
+    updateAvatar: updateAvatarMutation,
     delete: deleteMutation,
   };
 };
