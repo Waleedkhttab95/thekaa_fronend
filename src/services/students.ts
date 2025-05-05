@@ -63,3 +63,13 @@ export const deleteStudent = async (
   );
   return data;
 };
+
+export const checkStudentLevelAssesmentStatus = async (
+  axiosClient: AxiosInstance,
+  studentId: string
+): Promise<boolean> => {
+  const { data } = await axiosClient.get(
+    `/student/student/${studentId}/level-assesment-status`
+  );
+  return data;
+};

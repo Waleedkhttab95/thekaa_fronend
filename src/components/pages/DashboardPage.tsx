@@ -1,7 +1,12 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import DashboardCard from "../molecules/DashboardCard";
 import ProgressBar from "../atoms/progressBar";
 import LessonCard from "../atoms/LessonCard";
+import { useStudent } from "@/hooks/rqs/students";
+import { useAxiosAuth } from "@/hooks/useAxiosAuth";
+import { getCookie } from "cookies-next/client";
 
 const lessons = [
   {
@@ -32,12 +37,24 @@ const lessons = [
 
 const DashboardPage = () => {
   const t = useTranslations("dashboardPage");
+  const axiosAuth = useAxiosAuth();
+  const studentId = getCookie("current_user");
+  const { data: studentData, isLoading: isStudentDataLoading } = useStudent(
+    axiosAuth,
+    studentId as string
+  );
+
+  // console.log("student data: ", studentData);
 
   return (
     <div className="flex flex-col items-center sm:w-full">
-      <p className="font-bold text-2xl sm:self-start sm:ps-3">
-        {t("welcome")}, test 👋
-      </p>
+      {isStudentDataLoading ? (
+        <p className="font-bold text-2xl sm:self-start sm:ps-3">. . .</p>
+      ) : (
+        <p className="font-bold text-2xl sm:self-start sm:ps-3">
+          {t("welcome")}, <span>{studentData?.firstName ?? "??"}</span> 👋
+        </p>
+      )}
       <div className="mt-7 dashboard-page-grid self-center">
         <div className="flex flex-col gap-y-4">
           <div className="dashboard-first-column-top-section">

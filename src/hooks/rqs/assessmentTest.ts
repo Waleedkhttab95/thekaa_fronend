@@ -2,6 +2,7 @@ import {
   getAssessmentTest,
   submitAssessmentResult,
 } from "@/services/assessmentTest";
+import { checkStudentLevelAssesmentStatus } from "@/services/students";
 import { AssessmentResult } from "@/types/assessmentTest";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
@@ -34,4 +35,14 @@ export const useAssessmentSubmitMutation = (axiosClient: AxiosInstance) => {
   });
 
   return submitMutation;
+};
+
+export const useCheckStudentAssesmentStatus = (
+  axiosClient: AxiosInstance,
+  studentId: string
+) => {
+  return useQuery({
+    queryKey: ["assessmentStatus", studentId],
+    queryFn: () => checkStudentLevelAssesmentStatus(axiosClient, studentId),
+  });
 };

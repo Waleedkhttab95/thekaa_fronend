@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { ReactNode } from "react";
@@ -7,14 +8,12 @@ import { Locales } from "@/types/locales.enum";
 import LocaleSwitcher from "../molecules/LocaleSwitcher";
 import ProfileLogo from "../molecules/ProfileLogo";
 import { Button } from "../atoms/button";
-import { useProfile } from "@/hooks/rqs/profile";
 import Link from "next/link";
 import { ProtectedRoutes } from "@/config/routes";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const locale = useLocale();
   const t = useTranslations("dashboardLayout");
-  const { data: profile } = useProfile();
   return (
     <div className="flex flex-col items-center pt-10 min-h-screen overflow-x-hidden">
       <div
@@ -42,7 +41,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         </Link>
         <div className="flex items-center gap-3 justify-evenly sm:justify-start w-full sm:w-auto">
           <LocaleSwitcher onlySmall />
-          <ProfileLogo name={profile?.parentName?.split(" ")![0] ?? "??"} />
+          <ProfileLogo/>
           <Link href={ProtectedRoutes.Dashboard}>
             <Button className="sm:w-48 text-base">
               <Image
