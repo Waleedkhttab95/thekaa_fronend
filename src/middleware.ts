@@ -15,13 +15,15 @@ export async function middleware(request: NextRequest) {
 
   if (protectedRoutes.some((route) => pathname.startsWith(route))) {
     if (!authCookie) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL(GuestOnlyRoutes.Login, request.url));
     }
   }
 
   if (guestOnlyRoutes.some((route) => pathname.startsWith(route))) {
     if (authCookie) {
-      return NextResponse.redirect(new URL("/dashboard", request.url));
+      return NextResponse.redirect(
+        new URL(ProtectedRoutes.SonsFiles, request.url)
+      );
     }
   }
 
@@ -50,6 +52,10 @@ export async function middleware(request: NextRequest) {
       } catch (error) {
         console.error("Failed to fetch level assessment status:", error);
       }
+    } else {
+      return NextResponse.redirect(
+        new URL(ProtectedRoutes.SonsFiles, request.url)
+      );
     }
   }
 
