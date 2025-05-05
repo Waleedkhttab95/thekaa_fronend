@@ -6,7 +6,7 @@ export interface IStudentData {
   age: number;
   grade: string;
   subject: string;
-  avatar?: string;
+  profileImage?: string;
   country: string;
   phone: string;
   gender: string;

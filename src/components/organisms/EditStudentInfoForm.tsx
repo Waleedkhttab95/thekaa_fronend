@@ -16,14 +16,20 @@ import AddStudentFields from '../molecules/AddStudentFileds'
 type props = {
   deleteStudent: () => void;
   studentData: IStudentData | undefined
+  studentAvatar: string | undefined
   onSubmit: (data: Partial<IStudentData>) => void
-  isPending: boolean
+  isPending: boolean;
+  handleAvatarChange: (newAvatar: string) => void;
+  resetAvatar: boolean
 }
 const EditStudentInfoFrom = ({
   studentData,
+  studentAvatar,
   deleteStudent,
   isPending,
-  onSubmit
+  onSubmit,
+  handleAvatarChange,
+  resetAvatar = false
 }: props) => {
   const t = useTranslations('editStudentPage');
   const form = useForm<Partial<IStudentData>>({
@@ -31,18 +37,16 @@ const EditStudentInfoFrom = ({
     defaultValues: studentData,
   })
 
-  const onAvatarChange = (newAvatar: string) => {
-    form.setValue('avatar', newAvatar)
-  }
 
   const steps = useMemo(() => getEditStudentFormFields(t), [t]);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='w-full'>
         <div className='space-y-3 mb-10'>
-          <AvatarEditorWithCrop avatar={form.watch('avatar') || ''}
-            onAvatarChange={onAvatarChange}
+          <AvatarEditorWithCrop avatar={studentAvatar || ''}
+            onAvatarChange={handleAvatarChange}
             avatarFallback={form.watch('firstName') || ''}
+            resetAvatar={resetAvatar}
           />
           {steps.map((field: any) => (
             // <div key={`esf-input-${field?.name}`}>
