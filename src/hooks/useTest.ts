@@ -4,14 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Question } from "@/types/question.types";
 import { toast } from "@/components/atoms/sooner";
-// import { useAxiosAuth } from "@/hooks/useAxiosAuth";
-// import { useAssessmentSubmitMutation } from "./rqs/assessmentTest";
+import { useAxiosAuth } from "@/hooks/useAxiosAuth";
+import { useAssessmentSubmitMutation } from "./rqs/assessmentTest";
 import { levelAssessment, TestSubmissionData } from "@/types/assessmentTest";
 import { transformSubmission } from "@/utils/questionsMapper";
 
 export const useTest = (questions: Question[], data: levelAssessment) => {
-  // const axiosAuth = useAxiosAuth();
-  // const submitMutation = useAssessmentSubmitMutation(axiosAuth);
+  const axiosAuth = useAxiosAuth();
+  const submitMutation = useAssessmentSubmitMutation(axiosAuth);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -35,7 +35,7 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
     },
   });
 
-  const { handleSubmit, setValue, watch } = methods;
+  const { setValue, watch } = methods;
   const answers = watch("answers");
 
   const currentQuestion = questions[currentQuestionIndex] as Question;
@@ -87,7 +87,7 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
     }));
 
     if (isLastQuestion) {
-      handleSubmit(onSubmit)();
+      onSubmit(methods.getValues());
       return;
     }
 
@@ -102,11 +102,12 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
 
       console.log("Test Data: ", results);
 
-      //stop submit to api for now
-      // await submitMutation.mutateAsync({
-      //   studentId: studentId,
-      //   data: results,
-      // });
+      const res = await submitMutation.mutateAsync({
+        studentId: studentId,
+        data: results,
+      });
+
+      console.log("Test Submitted Successfully", res);
 
       toast({
         title: "Success",
