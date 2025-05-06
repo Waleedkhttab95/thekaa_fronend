@@ -14,7 +14,6 @@ interface QuestionsProps {
   onSelectAnswer: (answerId: string) => void;
   answer: string;
   setAnswer: (value: string) => void;
-  onSubmitQuestion: () => void;
   background?: "transparent" | string;
   className?: string;
   titleStyle?: string;
@@ -26,21 +25,14 @@ export function Questions({
   onSelectAnswer,
   answer,
   setAnswer,
-  onSubmitQuestion,
   background = "transparent",
   className = "",
   titleStyle = "",
 }: QuestionsProps) {
-  const { handleSubmit } = useFormContext();
-
-  const onSubmit = () => {
-    onSubmitQuestion();
-  };
-
   return (
     <form
       id={`question-form-${question.id}`}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={(e) => e.preventDefault()}
       className="w-full flex justify-center"
     >
       {(() => {

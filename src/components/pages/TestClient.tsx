@@ -1,5 +1,5 @@
 "use client";
-import { FormProvider } from "react-hook-form";
+import { Form, FormProvider } from "react-hook-form";
 import { Button } from "@/components/atoms/button";
 import { Question } from "@/types/question.types";
 import { Questions } from "@/components/organisms/Questions";
@@ -85,7 +85,6 @@ export default function TestClient({ questions, data }: TestClientProps) {
               onSelectAnswer={handleAnswerSelect}
               answer={currentAnswer}
               setAnswer={handleFillAnswer}
-              onSubmitQuestion={handleNext}
             />
           </CardContent>
           <CardFooter className="flex justify-end">
@@ -96,7 +95,7 @@ export default function TestClient({ questions, data }: TestClientProps) {
               className="text-[16px] font-pingar font-bold w-[193px] h-[56px] flex flex-row justify-center items-center text-start select-none"
             >
               {isSubmitting ? (
-                "Submitting..."
+                <>{t("loading")}</>
               ) : isLastQuestion ? (
                 <>{t("finishExam")}</>
               ) : (
