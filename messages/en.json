@@ -319,7 +319,11 @@
   },
   "SonsStudentsManagementPage": {
     "title": "Who's Studying Now?",
-    "manageSonsFiles": "Manage Sons Files"
+    "manageSonsFiles": "Manage Sons Files",
+    "youHaventTakenTheTest": "You have not taken the placement test.",
+    "takeTheTestNow": "Take the test",
+    "cancel": "Cancel",
+    "youNeedToTakeTheTest": "You need to take the placement test!"
   },
   "common": {
     "delete": "Delete",

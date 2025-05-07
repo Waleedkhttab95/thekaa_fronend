@@ -20,3 +20,6 @@ export enum GuestOnlyRoutes {
   RecoverPassword = "/recover-password",
   RecoveryCode = "/recovery-code",
 }
+
+//todo: add the rest of the routes when we finish the other pages
+export const RoutesNeedsAssessmentTest = ["/dashboard"];
