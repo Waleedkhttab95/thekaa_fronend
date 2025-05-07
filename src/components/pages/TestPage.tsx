@@ -4,14 +4,15 @@ import TestClient from "./TestClient";
 import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 
 import { mapAPIQuestionsToComponentFormat } from "@/utils/questionsMapper";
+import { getCookie } from "cookies-next/client";
 
 export default function TestPage() {
-  const studentId = "6803b7e59531f759f7622dea";
+  const studentId = getCookie("current_user");
   const axiosAuth = useAxiosAuth();
 
   const { data, isLoading, isError, error } = useTestMutation(
     axiosAuth,
-    studentId
+    studentId as string
   );
 
   if (isLoading) {

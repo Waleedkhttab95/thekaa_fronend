@@ -328,7 +328,11 @@
   },
   "SonsStudentsManagementPage": {
     "title": "من يذاكر الآن؟",
-    "manageSonsFiles": "إدارة ملفات الأبناء"
+    "manageSonsFiles": "إدارة ملفات الأبناء",
+    "youHaventTakenTheTest": "لم تقم بتقديم اختبار تحديد المستوى",
+    "takeTheTestNow": "تقديم الاختبار",
+    "cancel": "إلغاء",
+    "youNeedToTakeTheTest": "يجب عليك تقديم اختبار تحديد المستوى!"
   },
   "aiChatPage": {
     "doICanHelp": "هل يمكنني المساعدة ؟",
