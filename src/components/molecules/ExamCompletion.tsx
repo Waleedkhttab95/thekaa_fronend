@@ -40,9 +40,8 @@ export function ExamCompletion() {
             <Image src={complete} alt="Completed" width={80} height={80} />
             <h2 className="font-pingar font-bold text-[28px]">{t("done")} !</h2>
             <CardFooter>
-              <Link href={`/${ProtectedRoutes.Dashboard}`}>
+              <Link href={`${ProtectedRoutes.Dashboard}`}>
                 <Button
-                  onClick={() => {}}
                   variant="default"
                   className="w-[264px] h-[56px] font-bold bg-gray-900 hover:bg-gray-800 text-[#E7FEFD] mt-12 select-none"
                 >
