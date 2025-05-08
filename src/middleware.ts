@@ -53,6 +53,12 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  if (pathname === "/test" && assesmentStatus === "true") {
+    return NextResponse.redirect(
+      new URL(ProtectedRoutes.Dashboard, request.url)
+    );
+  }
+
   return NextResponse.next();
 }
 

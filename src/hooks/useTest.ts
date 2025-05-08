@@ -8,6 +8,7 @@ import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 import { useAssessmentSubmitMutation } from "./rqs/assessmentTest";
 import { levelAssessment, TestSubmissionData } from "@/types/assessmentTest";
 import { transformSubmission } from "@/utils/questionsMapper";
+import { getCookie } from "cookies-next/client";
 
 export const useTest = (questions: Question[], data: levelAssessment) => {
   const axiosAuth = useAxiosAuth();
@@ -97,7 +98,7 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
   const onSubmit = async (testData: TestSubmissionData) => {
     setIsSubmitting(true);
     try {
-      const studentId = "6803b7e59531f759f7622dea";
+      const studentId = getCookie("current_user") as string;
       const results = transformSubmission(testData, data, studentId);
 
       console.log("Test Data: ", results);
