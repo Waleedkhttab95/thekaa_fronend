@@ -47,21 +47,23 @@ const SonAvatar = ({ son, isOpen = false }: props) => {
     useCheckStudentAssesmentStatus(axiosAuth, studentId as string);
 
   const handleChooseProfile = () => {
-    if (!CheckingAssesmentTestStatus) {
-      setCookie("current_user", son._id, {
-        maxAge: 60 * 60 * 24 * 7,
-        path: "/",
-      });
+    if (!isOpen) {
+      if (!CheckingAssesmentTestStatus) {
+        setCookie("current_user", son._id, {
+          maxAge: 60 * 60 * 24 * 7,
+          path: "/",
+        });
 
-      setCookie("assesment_test_status", assesmentTestStatus, {
-        maxAge: 60 * 60 * 24 * 7,
-        path: "/",
-      });
+        setCookie("assesment_test_status", assesmentTestStatus, {
+          maxAge: 60 * 60 * 24 * 7,
+          path: "/",
+        });
 
-      if (assesmentTestStatus) {
-        router.push(ProtectedRoutes.Dashboard);
-      } else {
-        setTakeTest(true);
+        if (assesmentTestStatus) {
+          router.push(ProtectedRoutes.Dashboard);
+        } else {
+          setTakeTest(true);
+        }
       }
     }
   };
