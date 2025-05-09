@@ -8,7 +8,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
 import { getCookie, setCookie } from "cookies-next/client";
 
-export const useTestMutation = (
+export const useAssessmentTest = (
   axiosClient: AxiosInstance,
   studentId: string
 ) => {

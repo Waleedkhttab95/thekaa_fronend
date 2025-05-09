@@ -9,6 +9,7 @@ import { useAssessmentSubmitMutation } from "./rqs/assessmentTest";
 import { levelAssessment, TestSubmissionData } from "@/types/assessmentTest";
 import { transformSubmission } from "@/utils/questionsMapper";
 import { getCookie } from "cookies-next/client";
+import { useTranslations } from "next-intl";
 
 export const useTest = (questions: Question[], data: levelAssessment) => {
   const axiosAuth = useAxiosAuth();
@@ -20,6 +21,7 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
   const [submittedAnswers, setSubmittedAnswers] = useState<
     Record<string, boolean>
   >({});
+  const t = useTranslations("testPage");
 
   const formSchema = z.object({
     answers: z.record(
@@ -111,8 +113,8 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
       console.log("Test Submitted Successfully", res);
 
       toast({
-        title: "Success",
-        description: "Test submitted successfully",
+        title: t("success"),
+        description: t("successDescription"),
         variant: "success",
       });
 
@@ -120,8 +122,8 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
     } catch (error) {
       console.error("Submit error:", error);
       toast({
-        title: "Error",
-        description: "Failed to submit test",
+        title: t("failed"),
+        description: t("failedDescription"),
         variant: "destructive",
       });
     } finally {
