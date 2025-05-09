@@ -1,5 +1,5 @@
 "use client";
-import { useTestMutation } from "@/hooks/rqs/assessmentTest";
+import { useAssessmentTest } from "@/hooks/rqs/assessmentTest";
 import TestClient from "./TestClient";
 import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 
@@ -10,7 +10,7 @@ export default function TestPage() {
   const studentId = getCookie("current_user");
   const axiosAuth = useAxiosAuth();
 
-  const { data, isLoading, isError, error } = useTestMutation(
+  const { data, isLoading, isError, error } = useAssessmentTest(
     axiosAuth,
     studentId as string
   );
