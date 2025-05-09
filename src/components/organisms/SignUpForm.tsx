@@ -67,9 +67,9 @@ const SignUpForm = () => {
     onMutate: () => {
       setIsSubmitting(true);
     },
-    onSuccess: async (response) => {
+    onSuccess: async (response, variables) => {
       if (response.status === 201) {
-        const email = response.data.email;
+        const email = variables.email;
 
         router.replace(`/verify-account?email=${encodeURIComponent(email)}`);
         toast({
