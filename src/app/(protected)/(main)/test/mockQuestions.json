@@ -5,7 +5,7 @@
     "question": "ما هي المادة التي لا تختلط مع المياه؟",
     "questionNumber": 1,
     "totalQuestions": 5,
-    "choices": [
+    "options": [
       { "id": "1", "text": "الزيت" },
       { "id": "2", "text": "الملح" },
       { "id": "3", "text": "التراب" },
@@ -20,7 +20,7 @@
     "questionNumber": 2,
     "totalQuestions": 5,
     "mainImage": "/oil.png",
-    "choices": [
+    "options": [
       { "id": "1", "text": "الزيت" },
       { "id": "2", "text": "الملح" },
       { "id": "3", "text": "التراب" },
@@ -42,7 +42,7 @@
     "question": "ما هي المادة التي لا تختلط مع المياه؟",
     "questionNumber": 5,
     "totalQuestions": 5,
-    "choices": [
+    "options": [
       { "id": "1", "text": "الزيت" },
       { "id": "2", "text": "الملح" },
       { "id": "3", "text": "التراب" },

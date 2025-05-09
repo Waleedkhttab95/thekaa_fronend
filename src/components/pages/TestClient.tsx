@@ -43,7 +43,9 @@ export default function TestClient({ questions, data }: TestClientProps) {
     currentQuestion?.type === "fill" ? !currentAnswer.trim() : !currentAnswer;
 
   if (questions.length === 0) {
-    return <p className="text-center mt-10 text-red-500">Error Loading...</p>;
+    return (
+      <p className="text-center mt-10 text-red-500">{t("errorLoading")}</p>
+    );
   }
 
   const checkAnswer = () => {
