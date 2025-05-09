@@ -439,7 +439,13 @@
     "nameRequired": "اسم الطالب مطلوب",
     "ageRequired": "عمر الطالب مطلوب",
     "educationLevelRequired": "يجب اختيار المرحلة الدراسية",
-    "subjectRequired": "يجب اختيار المادة التي يدرسها"
+    "subjectRequired": "يجب اختيار المادة التي يدرسها",
+    "loadingData": "يتم تحميل بياناتك . . .",
+    "saving": "يتم حقظ التغييرات . . .",
+    "updatedSuccess": "نجحت العملية!",
+    "updateSuccessDescription": "تم تحديث بياناتك بنجاح!",
+    "updateFailed": "فشلت العملية",
+    "updateFailedDescription": "حدث خطأ أثناء تحديث البيانات يرجى المحاولة في وقت آخر!"
   },
   "planPage": {
     "plan": "الخطة",

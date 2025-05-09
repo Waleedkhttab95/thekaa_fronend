@@ -380,7 +380,13 @@
     "nameRequired": "Student name is required",
     "ageRequired": "Student age is required",
     "educationLevelRequired": "Education level is required",
-    "subjectRequired": "Subject is required"
+    "subjectRequired": "Subject is required",
+    "loadingData": "Your Data Is Loading . . .",
+    "saving": "Saving Changes . . .",
+    "updatedSuccess": "Operation Successful!",
+    "updateSuccessDescription": "Your data has been successfully updated!",
+    "updateFailed": "Operation Failed",
+    "updateFailedDescription": "An error occurred while updating the data. Please try again later!"
   },
   "planPage": {
     "plan": "Curriculum plan",
