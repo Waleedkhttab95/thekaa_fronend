@@ -151,7 +151,7 @@
     "switchLocale-sm": "E"
   },
   "testPage": {
-    "errorLoading": "...خطأ في التحميل",
+    "errorLoading": "خطأ في تحميل الأسئلة...",
     "question": "سؤال",
     "of": "من",
     "placementTest": "إختبار تحديد المستوى",
@@ -160,6 +160,10 @@
     "next": "التالي",
     "missingSelect": "اختر الإجابة أولاً",
     "missingFill": "أدخل الإجابة أولاً",
+    "success": "تم الإختبار بنجاح",
+    "successDescription": "تم رفع الإختبار بنجاح",
+    "failed": "فشل",
+    "failedDescription": "فشل رفع الإختبار",
     "levelLoading": "جار تحميل مستوى الطالب",
     "goToDashboard": "الانتقال إلى لوحة التحكم",
     "done": "تم استكمال ملف الطالب بنجاح",

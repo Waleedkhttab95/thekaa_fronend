@@ -151,7 +151,7 @@
     "switchLocale-sm": "ع"
   },
   "testPage": {
-    "errorLoading": "Error Loading...",
+    "errorLoading": "No questions found...",
     "question": "Question",
     "of": "of",
     "placementTest": "Placement Test",
@@ -160,6 +160,10 @@
     "next": "Next",
     "missingSelect": "Please select an answer",
     "missingFill": "Please enter your answer",
+    "success": "Success",
+    "successDescription": "Test submitted successfully",
+    "failed": "Error",
+    "failedDescription": "Failed to submit test",
     "levelLoading": "Placing student level",
     "goToDashboard": "Go to Dashboard",
     "done": "Completed the student data successfully",
