@@ -7,44 +7,33 @@ import LessonCard from "../atoms/LessonCard";
 import { useStudent } from "@/hooks/rqs/students";
 import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 import { getCookie } from "cookies-next/client";
-
-const lessons = [
-  {
-    title: "تصنيف الكائنات الحية",
-    date: "8/3/2025",
-  },
-  {
-    title: "دورة الماء في الطبيعة",
-    date: "20/3/2025",
-  },
-  {
-    title: "الكهرباء والمغناطيسية",
-    date: "20/3/2025",
-  },
-  {
-    title: "الجهاز الهضمي في الإنسان",
-    date: "20/3/2025",
-  },
-  {
-    title: "النظام الشمسي والكواكب",
-    date: "20/3/2025",
-  },
-  {
-    title: "التغيرات الفيزيائية والكيميائية",
-    date: "20/3/2025",
-  },
-];
+import { useNextLessons, useEducationPlan } from "@/hooks/rqs/calender";
 
 const DashboardPage = () => {
   const t = useTranslations("dashboardPage");
   const axiosAuth = useAxiosAuth();
-  const studentId = getCookie("current_user");
+  const studentId = getCookie("current_user") as string;
   const { data: studentData, isLoading: isStudentDataLoading } = useStudent(
     axiosAuth,
     studentId as string
   );
 
   // console.log("student data: ", studentData);
+
+  const { data: educationPlan, isLoading: isPlanLoading } = useEducationPlan(
+    axiosAuth,
+    studentId
+  );
+
+  const {
+    data: nextLessons,
+    isLoading: isNextLessonsLoading,
+    isError: isError,
+  } = useNextLessons(axiosAuth, studentId, educationPlan?._id || "");
+
+  const formatDateToYMD = (dateString: string): string => {
+    return dateString.slice(0, 10);
+  };
 
   return (
     <div className="flex flex-col items-center sm:w-full">
@@ -145,14 +134,27 @@ const DashboardPage = () => {
             inLineIconText
           >
             <div className="flex flex-col gap-3  min-w-[340px] sm:min-w-[33%] sm:max-w-[100%]">
-              {lessons.map((lesson, index) => (
-                <LessonCard
-                  firstLesson={index === 0}
-                  key={lesson.title}
-                  lesson={lesson.title}
-                  date={lesson.date}
-                />
-              ))}
+              {isPlanLoading && <p>....</p>}
+              {isNextLessonsLoading ? (
+                <p className="text-center">{t("nextLessonsLoading")}</p>
+              ) : nextLessons && nextLessons.length > 0 ? (
+                nextLessons.map((lesson, index) => (
+                  <LessonCard
+                    firstLesson={index === 0}
+                    key={lesson.lessonId}
+                    lesson={lesson.lessonName}
+                    date={formatDateToYMD(lesson.date)}
+                  />
+                ))
+              ) : (
+                <>
+                  {isError ? (
+                    <p>{t("nextLessonsError")}</p>
+                  ) : (
+                    <p className="text-center">{t("planError")}</p>
+                  )}
+                </>
+              )}
             </div>
           </DashboardCard>
         </div>
@@ -233,14 +235,27 @@ const DashboardPage = () => {
           inLineIconText
         >
           <div className="flex flex-col gap-3">
-            {lessons.map((lesson, index) => (
-              <LessonCard
-                firstLesson={index === 0}
-                key={lesson.title}
-                lesson={lesson.title}
-                date={lesson.date}
-              />
-            ))}
+            {isPlanLoading && <p>....</p>}
+            {isNextLessonsLoading ? (
+              <p className="text-center">{t("nextLessonsLoading")}</p>
+            ) : nextLessons && nextLessons.length > 0 ? (
+              nextLessons.map((lesson, index) => (
+                <LessonCard
+                  firstLesson={index === 0}
+                  key={lesson.lessonId}
+                  lesson={lesson.lessonName}
+                  date={formatDateToYMD(lesson.date)}
+                />
+              ))
+            ) : (
+              <>
+                {isError ? (
+                  <p>{t("nextLessonsError")}</p>
+                ) : (
+                  <p className="text-center">{t("planError")}</p>
+                )}
+              </>
+            )}
           </div>
         </DashboardCard>
       </div>
