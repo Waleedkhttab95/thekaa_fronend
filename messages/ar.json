@@ -151,6 +151,7 @@
     "switchLocale-sm": "E"
   },
   "testPage": {
+    "questionsLoading": "جار تحميل الأسئلة...",
     "errorLoading": "خطأ في تحميل الأسئلة...",
     "question": "سؤال",
     "of": "من",
@@ -496,6 +497,9 @@
     "plan": "الخطة",
     "reports": "التقارير",
     "startYourNextLesson": "ابدأ درسك التالي",
-    "upcomingLessons": "دروسك القادمة"
+    "upcomingLessons": "دروسك القادمة",
+    "planError": "لا يوجد خطة لديك ، حاول تقديم الإختبار مرة أخرى",
+    "nextLessonsLoading": "تحميل دروسك القادمة...",
+    "nextLessonsError": "خطأ في تحميل دروسك القادمة..."
   }
 }
