@@ -1,6 +1,5 @@
 "use client";
 
-import { useFormContext } from "react-hook-form";
 import { Question } from "@/types/question.types";
 import { TextChoiceQuestion } from "../molecules/textChoiceQuestion";
 import { ImageChoiceQuestion } from "../molecules/ImageChoiceQuestion";

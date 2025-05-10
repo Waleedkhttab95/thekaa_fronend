@@ -151,6 +151,7 @@
     "switchLocale-sm": "ع"
   },
   "testPage": {
+    "questionsLoading": "Questions Loading...",
     "errorLoading": "No questions found...",
     "question": "Question",
     "of": "of",
@@ -434,7 +435,10 @@
     "plan": "Plan",
     "reports": "Reports",
     "startYourNextLesson": "Start Your Next Lesson",
-    "upcomingLessons": "Your Upcoming Lessons"
+    "upcomingLessons": "Your Upcoming Lessons",
+    "planError": "You do not have a plan, try taking the test again",
+    "nextLessonsLoading": "Upcoming Lessons...",
+    "nextLessonsError": "Error Loading Upcoming Lessons..."
   },
   "lessonPage": {
     "lessonName": "Lesson Name",
