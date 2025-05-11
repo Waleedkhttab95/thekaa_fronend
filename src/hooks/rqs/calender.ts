@@ -13,6 +13,7 @@ export const useEducationPlan = (
   return useQuery<IEducationPlan>({
     queryKey: [EDUCATION_PLAN_QUERY, studentId],
     queryFn: () => getStudentEducationPlan(axiosClient, studentId),
+    staleTime: 12000,
     enabled: !!studentId,
   });
 };
@@ -25,6 +26,7 @@ export const useNextLessons = (
   return useQuery<INextLesson[]>({
     queryKey: [NEXT_LESSONS_QUERY, studentId, planId],
     queryFn: () => getNextLessons(axiosClient, studentId, planId),
+    staleTime: 12000,
     enabled: !!studentId && !!planId,
   });
 };
