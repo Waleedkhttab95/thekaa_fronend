@@ -8,6 +8,8 @@ import { useStudent } from "@/hooks/rqs/students";
 import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 import { getCookie } from "cookies-next/client";
 import { useNextLessons, useEducationPlan } from "@/hooks/rqs/calender";
+import Link from "next/link";
+import { ProtectedRoutes } from "@/config/routes";
 
 const DashboardPage = () => {
   const t = useTranslations("dashboardPage");
@@ -20,7 +22,7 @@ const DashboardPage = () => {
 
   // console.log("student data: ", studentData);
 
-  const { data: educationPlan, isLoading: isPlanLoading } = useEducationPlan(
+  const { data: educationPlan, isPending: isPlanLoading } = useEducationPlan(
     axiosAuth,
     studentId
   );
@@ -58,8 +60,10 @@ const DashboardPage = () => {
               imageClassName="top-7 end-2"
             >
               <div className="flex flex-col gap-2 absolute bottom-16 w-9/12">
-                <span className="text-xl font-semibold text-center">80%</span>
-                <ProgressBar percentage={80} />
+                <span className="text-xl font-semibold text-center">
+                  {isPlanLoading ? <p>...</p> : educationPlan?.level}%
+                </span>
+                <ProgressBar percentage={Number(educationPlan?.level)} />
               </div>
             </DashboardCard>
             <div className="flex flex-col gap-y-4">
@@ -71,14 +75,16 @@ const DashboardPage = () => {
                 haveArrow
                 imageClassName="top-[-31%] start-[-15%]"
               />
-              <DashboardCard
-                variant="blue"
-                iconPath="./dashboard-icons/your-assistant.svg"
-                text={t("yourAssistant")}
-                alt="your assistant"
-                haveArrow
-                left
-              />
+              <Link href={ProtectedRoutes.AiChat}>
+                <DashboardCard
+                  variant="blue"
+                  iconPath="./dashboard-icons/your-assistant.svg"
+                  text={t("yourAssistant")}
+                  alt="your assistant"
+                  haveArrow
+                  left
+                />
+              </Link>
             </div>
           </div>
           <div className="dashboard-first-column-bottom-section">
@@ -92,15 +98,17 @@ const DashboardPage = () => {
                 haveArrow
                 imageClassName="top-[22%] start-[-3%]"
               />
-              <DashboardCard
-                className=""
-                variant="pink"
-                iconPath="./dashboard-icons/plan.svg"
-                text={t("plan")}
-                alt="plan"
-                haveArrow
-                imageClassName="top-[-22%]"
-              />
+              <Link href={ProtectedRoutes.Plan}>
+                <DashboardCard
+                  className=""
+                  variant="pink"
+                  iconPath="./dashboard-icons/plan.svg"
+                  text={t("plan")}
+                  alt="plan"
+                  haveArrow
+                  imageClassName="top-[-22%]"
+                />
+              </Link>
             </div>
             <DashboardCard
               variant="blue"
@@ -134,7 +142,6 @@ const DashboardPage = () => {
             inLineIconText
           >
             <div className="flex flex-col gap-3  min-w-[340px] sm:min-w-[33%] sm:max-w-[100%]">
-              {isPlanLoading && <p>....</p>}
               {isNextLessonsLoading ? (
                 <p className="text-center">{t("nextLessonsLoading")}</p>
               ) : nextLessons && nextLessons.length > 0 ? (
@@ -147,13 +154,7 @@ const DashboardPage = () => {
                   />
                 ))
               ) : (
-                <>
-                  {isError ? (
-                    <p>{t("nextLessonsError")}</p>
-                  ) : (
-                    <p className="text-center">{t("planError")}</p>
-                  )}
-                </>
+                <>{isError && <p>{t("nextLessonsError")}</p>}</>
               )}
             </div>
           </DashboardCard>
@@ -235,7 +236,6 @@ const DashboardPage = () => {
           inLineIconText
         >
           <div className="flex flex-col gap-3">
-            {isPlanLoading && <p>....</p>}
             {isNextLessonsLoading ? (
               <p className="text-center">{t("nextLessonsLoading")}</p>
             ) : nextLessons && nextLessons.length > 0 ? (
@@ -248,13 +248,7 @@ const DashboardPage = () => {
                 />
               ))
             ) : (
-              <>
-                {isError ? (
-                  <p>{t("nextLessonsError")}</p>
-                ) : (
-                  <p className="text-center">{t("planError")}</p>
-                )}
-              </>
+              <>{isError && <p>{t("nextLessonsError")}</p>}</>
             )}
           </div>
         </DashboardCard>
