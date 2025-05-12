@@ -438,7 +438,9 @@
     "upcomingLessons": "Your Upcoming Lessons",
     "planError": "You do not have a plan, try taking the test again",
     "nextLessonsLoading": "Upcoming Lessons...",
-    "nextLessonsError": "Error Loading Upcoming Lessons..."
+    "nextLessonsError": "Error Loading Upcoming Lessons...",
+    "quizDay": "You can't take the quiz yet.",
+    "lessonDay": "You can't go to the lesson yet."
   },
   "lessonPage": {
     "lessonName": "Lesson Name",
