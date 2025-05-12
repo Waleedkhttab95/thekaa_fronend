@@ -1,22 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
-import { getStudentEducationPlan, getNextLessons } from "@/services/calender";
-import { IEducationPlan, INextLesson } from "@/types/student.type";
+import { getNextLessons, getStudentProgress } from "@/services/calender";
+import { INextLesson, IStudentProgress } from "@/types/student.type";
 
-const EDUCATION_PLAN_QUERY = "education-plan";
 const NEXT_LESSONS_QUERY = "next-lessons";
-
-export const useEducationPlan = (
-  axiosClient: AxiosInstance,
-  studentId: string
-) => {
-  return useQuery<IEducationPlan>({
-    queryKey: [EDUCATION_PLAN_QUERY, studentId],
-    queryFn: () => getStudentEducationPlan(axiosClient, studentId),
-    staleTime: 12000,
-    enabled: !!studentId,
-  });
-};
+const STUDENT_PROGRESS_QUERY = "student-dashboard";
 
 export const useNextLessons = (
   axiosClient: AxiosInstance,
@@ -28,5 +16,17 @@ export const useNextLessons = (
     queryFn: () => getNextLessons(axiosClient, studentId, planId),
     staleTime: 12000,
     enabled: !!studentId && !!planId,
+  });
+};
+
+export const useStudentProgress = (
+  axiosClient: AxiosInstance,
+  studentId: string
+) => {
+  return useQuery<IStudentProgress>({
+    queryKey: [STUDENT_PROGRESS_QUERY, studentId],
+    queryFn: () => getStudentProgress(axiosClient, studentId),
+    staleTime: 120000,
+    enabled: !!studentId,
   });
 };
