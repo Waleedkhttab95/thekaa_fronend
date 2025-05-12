@@ -1,15 +1,15 @@
 import { API_BASE_URL } from "@/config/env.constant";
-import { IEducationPlan, INextLesson } from "@/types/student.type";
+import { INextLesson, IStudentProgress } from "@/types/student.type";
 import { AxiosInstance } from "axios";
 
 const API_ROUTE = "education_plan/education_plan";
 
-export const getStudentEducationPlan = async (
+export const getStudentProgress = async (
   axiosClient: AxiosInstance,
   studentId: string
-): Promise<IEducationPlan> => {
+): Promise<IStudentProgress> => {
   const { data } = await axiosClient.get(
-    `${API_BASE_URL}/${API_ROUTE}/student/${studentId}`
+    `${API_BASE_URL}/${API_ROUTE}/student-dashboard/${studentId}`
   );
   return data;
 };
