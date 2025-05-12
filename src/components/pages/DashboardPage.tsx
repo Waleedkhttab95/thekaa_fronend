@@ -7,7 +7,7 @@ import LessonCard from "../atoms/LessonCard";
 import { useStudent } from "@/hooks/rqs/students";
 import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 import { getCookie } from "cookies-next/client";
-import { useNextLessons, useEducationPlan } from "@/hooks/rqs/calender";
+import { useNextLessons, useStudentProgress } from "@/hooks/rqs/calender";
 import Link from "next/link";
 import { ProtectedRoutes } from "@/config/routes";
 
@@ -20,9 +20,7 @@ const DashboardPage = () => {
     studentId as string
   );
 
-  // console.log("student data: ", studentData);
-
-  const { data: educationPlan, isPending: isPlanLoading } = useEducationPlan(
+  const { data: progress, isPending: progressLoading } = useStudentProgress(
     axiosAuth,
     studentId
   );
@@ -31,11 +29,14 @@ const DashboardPage = () => {
     data: nextLessons,
     isLoading: isNextLessonsLoading,
     isError: isError,
-  } = useNextLessons(axiosAuth, studentId, educationPlan?._id || "");
+  } = useNextLessons(axiosAuth, studentId, studentData?.educationPlanId || "");
 
   const formatDateToYMD = (dateString: string): string => {
     return dateString.slice(0, 10);
   };
+
+  const lessonDay = progress?.lessonDay;
+  const quizDay = progress?.quizDay;
 
   return (
     <div className="flex flex-col items-center sm:w-full">
@@ -61,20 +62,23 @@ const DashboardPage = () => {
             >
               <div className="flex flex-col gap-2 absolute bottom-16 w-9/12">
                 <span className="text-xl font-semibold text-center">
-                  {isPlanLoading ? <p>...</p> : educationPlan?.level}%
+                  {progressLoading ? <p>...</p> : progress?.planPrecentage}%
                 </span>
-                <ProgressBar percentage={Number(educationPlan?.level)} />
+                <ProgressBar percentage={Number(progress?.planPrecentage)} />
               </div>
             </DashboardCard>
             <div className="flex flex-col gap-y-4">
-              <DashboardCard
-                variant="pink"
-                iconPath="./dashboard-icons/start-test.svg"
-                text={t("startTheTest")}
-                alt="start test"
-                haveArrow
-                imageClassName="top-[-31%] start-[-15%]"
-              />
+              <Link href={quizDay ? ProtectedRoutes.Quiz : "#"}>
+                <DashboardCard
+                  variant="pink"
+                  iconPath="./dashboard-icons/start-test.svg"
+                  text={t("startTheTest")}
+                  alt="start test"
+                  haveArrow
+                  imageClassName="top-[-31%] start-[-15%]"
+                  tooltip={quizDay ? undefined : t("quizDay")}
+                />
+              </Link>
               <Link href={ProtectedRoutes.AiChat}>
                 <DashboardCard
                   variant="blue"
@@ -123,15 +127,18 @@ const DashboardPage = () => {
           </div>
         </div>
         <div className="dashboard-second-column">
-          <DashboardCard
-            variant="pink"
-            iconPath="./dashboard-icons/start-next-lesson.svg"
-            text={t("startYourNextLesson")}
-            alt="start your next lesson"
-            haveArrow
-            left
-            imageClassName="top-[-35%] end-[-3%]"
-          />
+          <Link href={lessonDay ? `${ProtectedRoutes.Lesson}/1` : "#"}>
+            <DashboardCard
+              variant="pink"
+              iconPath="./dashboard-icons/start-next-lesson.svg"
+              text={t("startYourNextLesson")}
+              alt="start your next lesson"
+              haveArrow
+              left
+              imageClassName="top-[-35%] end-[-3%]"
+              tooltip={lessonDay ? "" : t("lessonDay")}
+            />
+          </Link>
 
           <DashboardCard
             variant="blue"
@@ -172,14 +179,17 @@ const DashboardPage = () => {
           imageClassName="top-7 end-2"
           haveArrow
         />
-        <DashboardCard
-          variant="pink"
-          iconPath="./dashboard-icons/start-test.svg"
-          text={t("startTheTest")}
-          alt="start test"
-          haveArrow
-          imageClassName="top-[-31%] start-[-15%]"
-        />
+        <Link href={quizDay ? ProtectedRoutes.Quiz : "#"}>
+          <DashboardCard
+            variant="pink"
+            iconPath="./dashboard-icons/start-test.svg"
+            text={t("startTheTest")}
+            alt="start test"
+            haveArrow
+            imageClassName="top-[-31%] start-[-15%]"
+            tooltip={quizDay ? undefined : t("quizDay")}
+          />
+        </Link>
         <DashboardCard
           variant="blue"
           iconPath="./dashboard-icons/your-assistant.svg"
@@ -216,16 +226,19 @@ const DashboardPage = () => {
           imageClassName="top-[-15%]"
           disabled
         />
-        <DashboardCard
-          variant="pink"
-          iconPath="./dashboard-icons/start-next-lesson.svg"
-          text={t("startYourNextLesson")}
-          alt="start your next lesson"
-          haveArrow
-          left
-          imageClassName="top-[-35%] end-[-3%]"
-        />
 
+        <Link href={lessonDay ? `${ProtectedRoutes.Lesson}/1` : "#"}>
+          <DashboardCard
+            variant="pink"
+            iconPath="./dashboard-icons/start-next-lesson.svg"
+            text={t("startYourNextLesson")}
+            alt="start your next lesson"
+            haveArrow
+            left
+            imageClassName="top-[-35%] end-[-3%]"
+            tooltip={lessonDay ? "" : t("lessonDay")}
+          />
+        </Link>
         <DashboardCard
           className="h-[491px] ps-3"
           variant="blue"

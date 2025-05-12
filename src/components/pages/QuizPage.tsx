@@ -79,7 +79,7 @@ export default function TestPage() {
       ) : (
         <Card
           variant="default"
-          className="bg-[url('/student-profile-bg.png')] bg-cover rounded-[40px] sapce-y-5 relative h-[744px] flex flex-col"
+          className="bg-[url('/student-profile-bg.png')] bg-cover rounded-[40px] sapce-y-5 relative min-h-[744px] flex flex-col"
         >
           <CardHeader className="flex flex-row align-top mt-8 max-w-[1030px] justify-between w-full items-center px-4 py-4 self-center mb-7">
             <div className="flex flex-col gap-4">
