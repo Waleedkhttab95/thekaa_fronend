@@ -67,6 +67,7 @@ const DashboardCard = ({
           className={cn(
             "relative min-h-[150px] min-w-[340px] sm:min-w-[33%] sm:max-w-[100%] flex flex-col pt-11 ps-11 overflow-hidden m-0 cursor-pointer",
             disabled && "opacity-50",
+            tooltip && "opacity-50",
             className
           )}
         >
@@ -94,7 +95,9 @@ const DashboardCard = ({
             )}
           >
             <motion.div
-              variants={!disabled ? { hover: { rotateX: 360 } } : {}}
+              variants={
+                !disabled && !tooltip ? { hover: { rotateX: 360 } } : {}
+              }
               transition={!disabled ? { duration: 0.5, ease: "easeInOut" } : {}}
             >
               <Image

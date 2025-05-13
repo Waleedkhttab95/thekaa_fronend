@@ -38,6 +38,31 @@ const DashboardPage = () => {
   const lessonDay = progress?.lessonDay;
   const quizDay = progress?.quizDay;
 
+  const QuizCard = (
+    <DashboardCard
+      variant="pink"
+      iconPath="./dashboard-icons/start-test.svg"
+      text={t("startTheTest")}
+      alt="start test"
+      haveArrow
+      imageClassName="top-[-31%] start-[-15%]"
+      tooltip={quizDay ? undefined : t("quizDay")}
+    />
+  );
+
+  const startLessonCard = (
+    <DashboardCard
+      variant="pink"
+      iconPath="./dashboard-icons/start-next-lesson.svg"
+      text={t("startYourNextLesson")}
+      alt="start your next lesson"
+      haveArrow
+      left
+      imageClassName="top-[-35%] end-[-3%]"
+      tooltip={lessonDay ? "" : t("lessonDay")}
+    />
+  );
+
   return (
     <div className="flex flex-col items-center sm:w-full">
       {isStudentDataLoading ? (
@@ -68,17 +93,11 @@ const DashboardPage = () => {
               </div>
             </DashboardCard>
             <div className="flex flex-col gap-y-4">
-              <Link href={quizDay ? ProtectedRoutes.Quiz : "#"}>
-                <DashboardCard
-                  variant="pink"
-                  iconPath="./dashboard-icons/start-test.svg"
-                  text={t("startTheTest")}
-                  alt="start test"
-                  haveArrow
-                  imageClassName="top-[-31%] start-[-15%]"
-                  tooltip={quizDay ? undefined : t("quizDay")}
-                />
-              </Link>
+              {quizDay ? (
+                <Link href={ProtectedRoutes.Quiz}>{QuizCard}</Link>
+              ) : (
+                QuizCard
+              )}
               <Link href={ProtectedRoutes.AiChat}>
                 <DashboardCard
                   variant="blue"
@@ -93,15 +112,17 @@ const DashboardPage = () => {
           </div>
           <div className="dashboard-first-column-bottom-section">
             <div className="dashboard-first-column-pink-row ">
-              <DashboardCard
-                className="sm:min-w-[300px] max-w-[80%] sm:max-w-[100%]"
-                variant="pink"
-                iconPath="./dashboard-icons/student-profile.svg"
-                text={t("studentProfile")}
-                alt="student profile"
-                haveArrow
-                imageClassName="top-[22%] start-[-3%]"
-              />
+              <Link href={ProtectedRoutes.StudentProfile}>
+                <DashboardCard
+                  className="sm:min-w-[300px] max-w-[80%] sm:max-w-[100%]"
+                  variant="pink"
+                  iconPath="./dashboard-icons/student-profile.svg"
+                  text={t("studentProfile")}
+                  alt="student profile"
+                  haveArrow
+                  imageClassName="top-[22%] start-[-3%]"
+                />
+              </Link>
               <Link href={ProtectedRoutes.Plan}>
                 <DashboardCard
                   className=""
@@ -127,21 +148,14 @@ const DashboardPage = () => {
           </div>
         </div>
         <div className="dashboard-second-column">
-          <Link href={lessonDay ? `${ProtectedRoutes.Lesson}/1` : "#"}>
-            <DashboardCard
-              variant="pink"
-              iconPath="./dashboard-icons/start-next-lesson.svg"
-              text={t("startYourNextLesson")}
-              alt="start your next lesson"
-              haveArrow
-              left
-              imageClassName="top-[-35%] end-[-3%]"
-              tooltip={lessonDay ? "" : t("lessonDay")}
-            />
-          </Link>
+          {lessonDay ? (
+            <Link href={`${ProtectedRoutes.Lesson}/1`}>{startLessonCard}</Link>
+          ) : (
+            startLessonCard
+          )}
 
           <DashboardCard
-          className="mt-2 min-h-[482px]"
+            className="mt-2 min-h-[482px]"
             variant="blue"
             iconPath="./dashboard-icons/upcoming-lessons.svg"
             text={t("upcomingLessons")}
@@ -180,17 +194,11 @@ const DashboardPage = () => {
           imageClassName="top-7 end-2"
           haveArrow
         />
-        <Link href={quizDay ? ProtectedRoutes.Quiz : "#"}>
-          <DashboardCard
-            variant="pink"
-            iconPath="./dashboard-icons/start-test.svg"
-            text={t("startTheTest")}
-            alt="start test"
-            haveArrow
-            imageClassName="top-[-31%] start-[-15%]"
-            tooltip={quizDay ? undefined : t("quizDay")}
-          />
-        </Link>
+        {quizDay ? (
+          <Link href={ProtectedRoutes.Quiz}>{QuizCard}</Link>
+        ) : (
+          QuizCard
+        )}
         <DashboardCard
           variant="blue"
           iconPath="./dashboard-icons/your-assistant.svg"
@@ -199,15 +207,17 @@ const DashboardPage = () => {
           haveArrow
           left
         />
-        <DashboardCard
-          className=""
-          variant="pink"
-          iconPath="./dashboard-icons/student-profile.svg"
-          text={t("studentProfile")}
-          alt="student profile"
-          haveArrow
-          imageClassName="top-[22%] start-[-3%]"
-        />
+        <Link href={ProtectedRoutes.StudentProfile}>
+          <DashboardCard
+            className=""
+            variant="pink"
+            iconPath="./dashboard-icons/student-profile.svg"
+            text={t("studentProfile")}
+            alt="student profile"
+            haveArrow
+            imageClassName="top-[22%] start-[-3%]"
+          />
+        </Link>
         <DashboardCard
           className=""
           variant="pink"
@@ -228,18 +238,12 @@ const DashboardPage = () => {
           disabled
         />
 
-        <Link href={lessonDay ? `${ProtectedRoutes.Lesson}/1` : "#"}>
-          <DashboardCard
-            variant="pink"
-            iconPath="./dashboard-icons/start-next-lesson.svg"
-            text={t("startYourNextLesson")}
-            alt="start your next lesson"
-            haveArrow
-            left
-            imageClassName="top-[-35%] end-[-3%]"
-            tooltip={lessonDay ? "" : t("lessonDay")}
-          />
-        </Link>
+        {lessonDay ? (
+          <Link href={`${ProtectedRoutes.Lesson}/1`}>{startLessonCard}</Link>
+        ) : (
+          startLessonCard
+        )}
+
         <DashboardCard
           className="h-[491px] ps-3"
           variant="blue"
