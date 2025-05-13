@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { getCookie, setCookie } from "cookies-next/client";
+import { setCookie } from "cookies-next/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../atoms/avatar";
 import { PencilLineIcon } from "lucide-react";
 import { getAvatarInitials } from "@/utils/avatar";
@@ -37,14 +37,13 @@ const SonAvatar = ({ son, isOpen = false }: props) => {
   const router = useRouter();
   const t = useTranslations("common");
   const dialogT = useTranslations("SonsStudentsManagementPage");
-  const studentId = getCookie("current_user");
   const axiosAuth = useAxiosAuth();
   const onEditClick = () => {
     router.push(`${ProtectedRoutes.EditStudent}/${son._id}`);
   };
 
   const { data: assesmentTestStatus, isLoading: CheckingAssesmentTestStatus } =
-    useCheckStudentAssesmentStatus(axiosAuth, studentId as string);
+    useCheckStudentAssesmentStatus(axiosAuth, son._id);
 
   const handleChooseProfile = () => {
     if (!isOpen) {
