@@ -66,7 +66,7 @@ const EditProfileForm = () => {
   }, [locale, form]);
 
   useEffect(() => {
-    if (studentData) {
+    if (studentData && grades && subjects) {
       form.reset({
         avatar: studentData.profileImage || "",
         name: studentData.firstName || "",
@@ -75,7 +75,7 @@ const EditProfileForm = () => {
         subject: studentData.subject || "",
       });
     }
-  }, [studentData, form, locale]);
+  }, [studentData, form, locale, grades, subjects]);
 
   const onAvatarChange = (newAvatar: string) => {
     form.setValue("avatar", newAvatar);
@@ -115,8 +115,6 @@ const EditProfileForm = () => {
       subject: values.subject,
     });
   };
-
-  // todo: fix when navigating that subject and grade gets deselected!
 
   return (
     <Form {...form}>
