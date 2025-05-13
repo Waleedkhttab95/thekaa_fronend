@@ -42,21 +42,21 @@ const EditProfileForm = () => {
   const studentId = getCookie("current_user");
   const queryClient = useQueryClient();
 
-  const form = useForm<z.infer<ReturnType<typeof getEditProfileSchema>>>({
-    resolver: zodResolver(getEditProfileSchema(t)),
-    defaultValues: {
-      avatar: "",
-      name: "",
-      age: "",
-      educationLevel: "",
-      subject: "",
-    },
-  });
-
   const { data: studentData, isLoading: isStudentLoading } = useStudent(
     axiosClient,
     studentId as string
   );
+
+  const form = useForm<z.infer<ReturnType<typeof getEditProfileSchema>>>({
+    resolver: zodResolver(getEditProfileSchema(t)),
+    defaultValues: {
+      avatar: studentData?.profileImage || "",
+      name: studentData?.firstName || "",
+      age: studentData?.age?.toString() || "",
+      educationLevel: studentData?.grade || "",
+      subject: studentData?.subject || "",
+    },
+  });
 
   const { data: grades } = useGradeLevels(locale as Locales);
   const { data: subjects } = useSubjects(locale as Locales);
@@ -75,7 +75,7 @@ const EditProfileForm = () => {
         subject: studentData.subject || "",
       });
     }
-  }, [studentData, form, locale, grades, subjects]);
+  }, [studentData, grades, subjects, form, locale]);
 
   const onAvatarChange = (newAvatar: string) => {
     form.setValue("avatar", newAvatar);
