@@ -141,6 +141,7 @@ const DashboardPage = () => {
           </Link>
 
           <DashboardCard
+          className="mt-2 min-h-[482px]"
             variant="blue"
             iconPath="./dashboard-icons/upcoming-lessons.svg"
             text={t("upcomingLessons")}
