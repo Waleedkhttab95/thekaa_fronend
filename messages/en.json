@@ -399,7 +399,11 @@
     "progressPercentage": "Progress Percentage",
     "startYourNextLesson": "Start Your Next Lesson",
     "levels": {
-      "advanced": "Advanced"
+      "Expert": "Expert",
+      "Advanced": "Advanced",
+      "Intermediate": "Intermediate",
+      "Beginner": "Beginner",
+      "Novice": "Novice"
     },
     "performanceLevels": {
       "veryGood": "Very Good"

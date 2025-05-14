@@ -458,7 +458,11 @@
     "progressPercentage": "نسبة الإنجاز",
     "startYourNextLesson": "ابدأ درسك التالي",
     "levels": {
-      "advanced": "متقدم"
+      "Expert": "خبير",
+      "Advanced": "متقدم",
+      "Intermediate": "متوسط",
+      "Beginner": "مبتدئ",
+      "Novice": "مبتدئ جدًا"
     },
     "performanceLevels": {
       "veryGood": "جيد جداً"

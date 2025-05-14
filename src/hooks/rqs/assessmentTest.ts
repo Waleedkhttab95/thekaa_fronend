@@ -1,5 +1,6 @@
 import {
   getAssessmentTest,
+  getStudentEducationDetails,
   submitAssessmentResult,
 } from "@/services/assessmentTest";
 import { checkStudentLevelAssesmentStatus } from "@/services/students";
@@ -58,5 +59,19 @@ export const useCheckStudentAssesmentStatus = (
   return useQuery({
     queryKey: ["assessmentStatus", studentId],
     queryFn: () => checkStudentLevelAssesmentStatus(axiosClient, studentId),
+  });
+};
+
+export const useGetStudentEducationPlanDetails = (
+  axiosClient: AxiosInstance,
+  studentID: string,
+  educationPlanId: string,
+  options = {}
+) => {
+  return useQuery({
+    queryKey: ["EducationPlanDetails", studentID],
+    queryFn: () =>
+      getStudentEducationDetails(axiosClient, studentID, educationPlanId),
+    ...options,
   });
 };
