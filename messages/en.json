@@ -168,7 +168,7 @@
     "levelLoading": "Placing student level",
     "goToDashboard": "Go to Dashboard",
     "done": "Completed the student data successfully",
-    "levelMessage": "We are working on accurately evaluating Mohammad's performance using artificial intelligence, so that you can learn his basic specifications experience 🚀"
+    "levelMessage": "We are working on accurately evaluating {firstName}'s performance using artificial intelligence, so that you can learn his basic specifications experience 🚀"
   },
   "addStudentPage": {
     "studentInfo": "Student Information",
