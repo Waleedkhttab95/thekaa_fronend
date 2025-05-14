@@ -1,3 +1,5 @@
+import { LevelLabels } from "./content.type";
+
 export interface UnitQuestion {
   question?: string;
   statement?: string;
@@ -41,4 +43,13 @@ export type TestSubmissionData = {
   answers: Record<string, string>;
   answerTexts?: Record<string, string>;
   studentId?: string;
+};
+
+export type EducationPlanDetails = {
+  numberOfLessons: number;
+  completedLessons: number;
+  numberOflessonsLeft: number;
+  planPrecentage: number;
+  studentPerformance: string;
+  currentLevelTitle: LevelLabels;
 };
