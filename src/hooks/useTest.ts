@@ -10,6 +10,8 @@ import { levelAssessment, TestSubmissionData } from "@/types/assessmentTest";
 import { transformSubmission } from "@/utils/questionsMapper";
 import { getCookie } from "cookies-next/client";
 import { useTranslations } from "next-intl";
+import { ProtectedRoutes } from "@/config/routes";
+import Router from "next/router";
 
 export const useTest = (questions: Question[], data: levelAssessment) => {
   const axiosAuth = useAxiosAuth();
@@ -18,6 +20,7 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [submittedAnswers, setSubmittedAnswers] = useState<
     Record<string, boolean>
   >({});
@@ -90,6 +93,7 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
     }));
 
     if (isLastQuestion) {
+      setIsAnalyzing(true);
       onSubmit(methods.getValues());
       return;
     }
@@ -119,6 +123,9 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
       });
 
       setIsCompleted(true);
+      setTimeout(() => {
+        window.location.href = ProtectedRoutes.Dashboard;
+      }, 2000);
     } catch (error) {
       console.error("Submit error:", error);
       toast({
@@ -126,6 +133,11 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
         description: t("failedDescription"),
         variant: "destructive",
       });
+      setIsAnalyzing(false);
+
+      setTimeout(() => {
+        Router.push(ProtectedRoutes.SonsFiles);
+      }, 1500);
     } finally {
       setIsSubmitting(false);
     }
@@ -138,6 +150,7 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
     isLastQuestion,
     isCompleted,
     isSubmitting,
+    isAnalyzing,
     currentAnswer,
     submittedAnswers,
     handleAnswerSelect,
