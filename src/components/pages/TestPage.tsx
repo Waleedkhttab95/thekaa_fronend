@@ -6,6 +6,7 @@ import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 import { mapAPIQuestionsToComponentFormat } from "@/utils/questionsMapper";
 import { getCookie } from "cookies-next/client";
 import { useTranslations } from "next-intl";
+import Loading from "../atoms/loading";
 
 export default function TestPage() {
   const t = useTranslations("testPage");
@@ -22,13 +23,17 @@ export default function TestPage() {
   if (isLoading) {
     return (
       <p className="w-full flex justify-center self-center">
-        {t("questionsLoading")}
+        <Loading />
       </p>
     );
   }
 
   if (isError) {
-    return <p>{t("errorLoading")}</p>;
+    return (
+      <div>
+        <p>{t("errorLoading")}</p>;
+      </div>
+    );
   }
 
   const mappedQuestions = mapAPIQuestionsToComponentFormat(data);
