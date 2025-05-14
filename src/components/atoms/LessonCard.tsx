@@ -14,12 +14,11 @@ const LessonCard = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ y: -20 }}
+      animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      whileHover={{ scale: 1.03 }}
       className={cn(
-        "flex items-center text-xs bg-white/60 w-[250px] sm:w-full h-[50px] font-bold border border-white rounded-[40px] ps-1 text-[#6C6063] cursor-pointer z-20",
+        "flex items-center text-xs bg-white/60  h-[50px] font-bold border border-white rounded-[40px] ps-1 text-[#6C6063] cursor-pointer z-20",
         firstLesson && "text-black"
       )}
     >

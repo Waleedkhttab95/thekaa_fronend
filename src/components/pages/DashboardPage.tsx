@@ -163,7 +163,7 @@ const DashboardPage = () => {
             imageClassName="w-[340px] h-[340px] start-[45px]"
             inLineIconText
           >
-            <div className="flex flex-col gap-3  min-w-[340px] sm:min-w-[33%] sm:max-w-[100%]">
+            <div className="flex flex-col gap-3 min-w-[100%]">
               {isNextLessonsLoading ? (
                 <p className="text-center">{t("nextLessonsLoading")}</p>
               ) : nextLessons && nextLessons.length > 0 ? (
@@ -253,7 +253,7 @@ const DashboardPage = () => {
           imageClassName="w-[340px] h-[340px] start-[45px]"
           inLineIconText
         >
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3  min-w-[100%]">
             {isNextLessonsLoading ? (
               <p className="text-center">{t("nextLessonsLoading")}</p>
             ) : nextLessons && nextLessons.length > 0 ? (
