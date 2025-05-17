@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Plus, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTranslations } from "next-intl"
 
 type FaqItem = {
   question: string
@@ -11,26 +12,24 @@ type FaqItem = {
 
 export default function LandingFaq() {
   const [openIndex, setOpenIndex] = useState(0)
-
+  const t = useTranslations("HomePage.faq")
   const faqItems: FaqItem[] = [
     {
-      question: "هل المنصة آمنة لطفلي؟",
-      answer: "أبداً. خصوصية وأمان طفلك أولوية عندنا. كل البيانات محفوظة ومحمية بأعلى معايير الأمان.",
+      question: t("questions.question1.question"),
+      answer: t("questions.question1.answer"),
+
     },
     {
-      question: "هل أقدر أتابع تقدم طفلي؟",
-      answer:
-        "نعم، توفر منصة ذكاء لوحة تحكم خاصة للآباء تمكنك من متابعة تقدم طفلك بشكل مفصل، ومعرفة المهارات التي أتقنها والمجالات التي تحتاج إلى تحسين.",
+      question: t("questions.question2.question"),
+      answer: t("questions.question2.answer"),
     },
     {
-      question: "لأي أعمار المنصة مناسبة؟",
-      answer:
-        "منصة ذكاء مصممة للأطفال من سن 6 إلى 14 سنة، مع محتوى تعليمي مخصص لكل فئة عمرية بما يتناسب مع قدراتهم ومستوى تطورهم.",
+      question: t("questions.question3.question"),
+      answer: t("questions.question3.answer"),
     },
     {
-      question: "هل يحتاج إشراف دائم مني؟",
-      answer:
-        "لا، المنصة مصممة لتكون آمنة وسهلة الاستخدام للأطفال. ومع ذلك، نشجع المشاركة الأبوية الدورية لمتابعة تقدم الطفل ودعم رحلته التعليمية.",
+      question: t("questions.question4.question"),
+      answer: t("questions.question4.answer"),
     },
   ]
 

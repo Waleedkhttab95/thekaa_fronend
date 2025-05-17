@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import LandingHowCanHelpCard from "../molecules/LandingHowCanHelpCard"
 
 
@@ -12,51 +13,60 @@ type FeatureItem = {
 }
 
 export default function HowCanWeHelp() {
+  const t = useTranslations('HomePage.howcanhelp')
   // Dynamic data array for features
   const features: FeatureItem[] = [
     {
       icon: '/assets/images/icons/graduate-student.svg',
-      title: "خطط تعليمية ذكية تتكيف مع أسلوبك وقدراتك",
-      description: "من خلال الذكاء الاصطناعي، نقدم خطط تعلم مرنة تتكيف مع سرعة وتوجهات كل طالب.",
+      title: t("cards.card1.title"),
+      description: t("cards.card1.description"),
       bgColor: "bg-[#ffb6e1]",
     },
     {
       icon: '/assets/images/icons/open-book.svg',
-      title: "رحلات تعليمية مخصصة لك",
-      description: "الذكاء الاصطناعي يرافق طفلك بخطة مصممة خصيصاً حسب مستواه واهتماماته.",
+      title: t("cards.card2.title"),
+      description: t("cards.card2.description"),
       bgColor: "bg-[#22e3e3]",
     },
     {
       icon: '/assets/images/icons/pencil-ruler.svg',
-      title: "تركيز خاص على احتياجات الطلاب في المملكة العربية السعودية",
-      description:
-        "تم تصميم المنصة لتلبية احتياجات الطلاب في المملكة العربية السعودية، مع مراعاة النظام التعليمي المحلي.",
+      title: t("cards.card3.title"),
+      description: t("cards.card3.description"),
       bgColor: "bg-[#22e3e3]",
     },
     {
       icon: '/assets/images/icons/graduate-student.svg',
-      title: "جميع المناهج الدراسية في مكان واحد",
-      description: "نوفر لك جميع المناهج الدراسية التي تحتاجها لتجربة تعلم شاملة، من جميع المراحل الدراسية.",
+      title: t("cards.card4.title"),
+      description: t("cards.card4.description"),
       bgColor: "bg-[#ffb6e1]",
     },
   ]
 
   return (
-    <div className="py-20 px-4 mb-5 rounded-[40px] md:px-8 bg-[#22e3e3]" dir="rtl">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-3xl md:text-4xl font-bold mb-16 text-black">كيف يمكن لـ &ldquo;ذكــاء&ldquo; أن يساعدك؟</h2>
+    <div className="relative py-20 px-2 md:px-0">
+      <div className="absolute size-[250px] lg:size-[594px] bg-[#23F6F0]  rounded-full blur-[120px] lg:blur-[200px] bottom-16 -right-1/2"></div>
+      <div className="hidden lg:block absolute  z-20 size-[150px] lg:size-[400px] bg-[url('/assets/images/bg-circle.svg')] bg-cover bg-no-repeat top-56 lg:top-96 -right-24  lg:-right-36"
+      ></div>
+      <div className="absolute size-[250px] lg:size-[594px] bg-[#F7AEF3]  rounded-full blur-[120px] lg:blur-[200px] -top-48 -left-1/2"></div>
+      <div className="hidden lg:block absolute  z-20 size-[150px] lg:size-[400px] bg-[url('/assets/images/bg-circle.svg')]  bg-no-repeat -top-5 lg:-top-24 -left-24  lg:-left-60"
+      ></div>
+      <div className=" py-20 px-4 mb-5 rounded-[40px] md:px-8 bg-[#22e3e3]" >
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {features.map((feature, index) => (
-            <LandingHowCanHelpCard
-              key={`how-can-help-${index}`}
-              icon={feature.icon}
-              title={feature.title}
-              description={feature.description}
-              bgColor={feature.bgColor}
-            />
-          ))}
+        <div className="max-w-7xl mx-auto relative z-30">
+          <h2 className="text-center text-3xl md:text-4xl font-bold mb-16 text-black">{t("title")}</h2>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {features.map((feature, index) => (
+              <LandingHowCanHelpCard
+                key={`how-can-help-${index}`}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+                bgColor={feature.bgColor}
+              />
+            ))}
+
+          </div>
         </div>
       </div>
     </div>

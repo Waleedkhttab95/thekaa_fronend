@@ -24,7 +24,7 @@ export default function MobileDrawer() {
           <Menu className="h-6 w-6" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="bg-[linear-gradient(120deg,_#23F6F0_0%,_#F7AEF3_80%,_#3D313A_100%)] text-white border-none" >
+      <SheetContent side="right" className="bg-[#333] text-white border-none" >
         <div className="flex flex-col gap-6 mt-10">
           <a href="#" className="text-xl hover:underline">
             رابط 1

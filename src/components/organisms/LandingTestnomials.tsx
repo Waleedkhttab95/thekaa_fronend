@@ -2,66 +2,63 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { TestimonialCard } from "../molecules/TestonomialCard";
+import { useTranslations } from "next-intl";
 
 const TestimonialSlider = () => {
+  const t = useTranslations("HomePage.testimonials");
   // Define testimonials
   const testimonials = [
     {
       id: 1,
-      name: "أمير",
-      quote: "المحتوى على ذكاء مدروس لمستويات مختلفة.",
-      avatar: "/api/placeholder/100/100"
+      name: t("cards.card1.name"),
+      quote: t("cards.card1.description"),
+      avatar: "https://randomuser.me/api/portraits/med/men/65.jpg"
     },
     {
       id: 2,
-      name: "عبد الرحمن",
-      quote: "أدوات المتابعة في ذكاء ممتازة، أقدر أعرف وين كل طالب يحتاج دعم.",
-      avatar: "/api/placeholder/100/100"
+      name: t("cards.card2.name"),
+      quote: t("cards.card1.description"),
+      avatar: "https://randomuser.me/api/portraits/med/men/4.jpg"
     },
     {
       id: 3,
-      name: "محمد",
-      quote: "منصة ذكاء غيرت نظرة ولدي للتعلم، صار يطلب يدخل عليها بنفسه!",
-      avatar: "/api/placeholder/100/100"
+      name: t("cards.card3.name"),
+      quote: t("cards.card3.description"),
+      avatar: "https://randomuser.me/api/portraits/med/men/10.jpg"
     },
     {
       id: 4,
-      name: "مرام",
-      quote: "كنت ضايعة في اختيار المنهج المناسب، ذكاء دلني على كل شيء.",
-      avatar: "/api/placeholder/100/100"
+      name: t("cards.card4.name"),
+      quote: t("cards.card4.description"),
+      avatar: "https://randomuser.me/api/portraits/med/womens/10.jpg"
     },
     {
       id: 5,
-      name: "عبدالله",
-      quote: "ذكاء فعلا أداة ذكية، ما هو مجرد دروس محفوظة، هو يتفاعل مع الطفل بشكل حي.",
-      avatar: "/api/placeholder/100/100"
+      name: t("cards.card5.name"),
+      quote: t("cards.card6.description"),
+      avatar: "https://randomuser.me/api/portraits/med/mens/10.jpg"
     },
     {
       id: 6,
-      name: "فاطمة",
-      quote: "أبغى أوصي أصحابي ذكاء، عشان يتعلم سوا!",
-      avatar: "/api/placeholder/100/100"
+      name: t("cards.card6.name"),
+      quote: t("cards.card6.description"),
+      avatar: "https://randomuser.me/api/portraits/med/womens/15.jpg"
     },
     {
       id: 7,
-      name: "خالد",
-      quote: "كل ما أخلص درس في ذكاء أحصل نجوم، أحسني إني بطل!",
-      avatar: "/api/placeholder/100/100"
+      name: t("cards.card7.name"),
+      quote: t("cards.card7.description"),
+      avatar: "https://randomuser.me/api/portraits/child/mens/16.jpg"
     }
   ];
 
-  // Title component with gradient text
-  const Title = () => (
 
-    <h2 className="text-3xl md:text-4xl text-center mb-8 pt-10 text-wrap font-bold text-transparent bg-clip-text bg-[linear-gradient(to_right,_#23F6F0_0%,_#F7AEF3_68%,_#3D313A_100%)]">
-      قصص نجاح مع ذكاء
-    </h2>
-  );
 
   return (
     <div className="w-full py-12 relative overflow-x-hidden">
-      <Title />
-      <div className="flex flex-col md:py-12 gap-6">          {/* First Row - Right to Left */}
+      <h2 className="section-heading !text-center">
+        قصص نجاح مع ذكاء
+      </h2>      <div className="flex flex-col md:py-12 gap-6">          {/* First Row - Right to Left */}
         <div className="relative overflow-x-hidden">
           <div className="overflow-x-hidden w-full">
             <motion.div
