@@ -53,8 +53,4 @@ export const getStudentEditSchema = (t: TFunctionType) =>
       .refine((val = 0) => val >= 6 && val <= 12, {
         message: t("formErrors.studentAgeInvalid"),
       }),
-    grade: z.string().nonempty(t("formErrors.educationLevelRequired")),
-    subject: z.string().nonempty(t("formErrors.subjectRequired")),
-    // avatar: z.string().nonempty(t("formErrors.avatarRequired")),
-    avatar: z.string().optional(),
   });

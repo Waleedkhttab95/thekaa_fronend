@@ -24,34 +24,96 @@ import AvatarEditorWithCrop from "./AvatarWithEdit";
 import { Button } from "../atoms/button";
 import { getEditProfileSchema } from "@/lib/schemas";
 import { useEffect } from "react";
+import { getCookie } from "cookies-next/client";
+import { useStudent } from "@/hooks/rqs/students";
+import { useGradeLevels, useSubjects } from "@/hooks/rqs/content";
+import { useAxiosAuth } from "@/hooks/useAxiosAuth";
+import { Locales } from "@/types/locales.enum";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateStudent } from "@/services/students";
+import { IStudentData } from "@/types/student.type";
+import { toast } from "../atoms/sooner";
+import { STUDENTS_QUERY } from "@/config/qr.constants";
 
 const EditProfileForm = () => {
   const t = useTranslations("studentProfile");
   const locale = useLocale();
+  const axiosClient = useAxiosAuth();
+  const studentId = getCookie("current_user");
+  const queryClient = useQueryClient();
+
+  const { data: studentData, isLoading: isStudentLoading } = useStudent(
+    axiosClient,
+    studentId as string
+  );
 
   const form = useForm<z.infer<ReturnType<typeof getEditProfileSchema>>>({
     resolver: zodResolver(getEditProfileSchema(t)),
     defaultValues: {
-      avatar: "",
-      name: "",
-      age: "",
-      educationLevel: "",
-      subject: "",
+      avatar: studentData?.profileImage || "",
+      name: studentData?.firstName || "",
+      age: studentData?.age?.toString() || "",
+      educationLevel: studentData?.grade || "",
+      subject: studentData?.subject || "",
     },
   });
+
+  const { data: grades } = useGradeLevels(locale as Locales);
+  const { data: subjects } = useSubjects(locale as Locales);
 
   useEffect(() => {
     form.clearErrors();
   }, [locale, form]);
 
+  useEffect(() => {
+    if (studentData && grades && subjects) {
+      form.reset({
+        avatar: studentData.profileImage || "",
+        name: studentData.firstName || "",
+        age: studentData.age?.toString() || "",
+        educationLevel: studentData.grade || "",
+        subject: studentData.subject || "",
+      });
+    }
+  }, [studentData, grades, subjects, form, locale]);
+
   const onAvatarChange = (newAvatar: string) => {
     form.setValue("avatar", newAvatar);
   };
 
+  const updateMutation = useMutation({
+    mutationFn: (data: Partial<IStudentData>) =>
+      updateStudent(axiosClient, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [STUDENTS_QUERY, studentId] });
+      toast({
+        title: t("updatedSuccess"),
+        description: t("updateSuccessDescription"),
+        variant: "success",
+      });
+    },
+    onError: () => {
+      toast({
+        title: t("updateFailed"),
+        description: t("updateFailedDescription"),
+        variant: "destructive",
+      });
+    },
+  });
+
   const onSubmit = (
     values: z.infer<ReturnType<typeof getEditProfileSchema>>
   ) => {
-    console.log(values);
+    if (!studentId) return;
+
+    updateMutation.mutate({
+      _id: studentId as string,
+      profileImage: values.avatar,
+      firstName: values.name,
+      age: Number(values.age),
+      grade: values.educationLevel,
+      subject: values.subject,
+    });
   };
 
   return (
@@ -64,6 +126,7 @@ const EditProfileForm = () => {
           avatar={form.watch("avatar") || ""}
           onAvatarChange={onAvatarChange}
           avatarFallback={form.watch("name") || ""}
+          resetAvatar={false}
         />
 
         <FormField
@@ -73,7 +136,12 @@ const EditProfileForm = () => {
             <FormItem>
               <FormLabel>{t("nameLabel")}</FormLabel>
               <FormControl>
-                <Input placeholder={t("namePlcaeholder")} {...field} />
+                <Input
+                  placeholder={t("namePlcaeholder")}
+                  value={isStudentLoading ? t("loadingData") : field.value}
+                  onChange={field.onChange}
+                  disabled={isStudentLoading}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -87,13 +155,18 @@ const EditProfileForm = () => {
             <FormItem>
               <FormLabel>{t("ageLabel")}</FormLabel>
               <FormControl>
-                <Input placeholder={t("agePlaceholder")} {...field} />
+                <Input
+                  placeholder={t("agePlaceholder")}
+                  value={isStudentLoading ? t("loadingData") : field.value}
+                  onChange={field.onChange}
+                  disabled={isStudentLoading}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        {/* //todo: there is an endpoint for the level and subject use it to fill the options */}
+
         <FormField
           control={form.control}
           name="educationLevel"
@@ -103,15 +176,24 @@ const EditProfileForm = () => {
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  value={field.value}
+                  disabled={!grades || isStudentLoading}
                 >
                   <SelectTrigger className="bg-white">
-                    <SelectValue placeholder={t("educationLevelPlaceholder")} />
+                    <SelectValue
+                      placeholder={
+                        isStudentLoading
+                          ? t("loadingData")
+                          : t("educationLevelPlaceholder")
+                      }
+                    />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="primary">Primary</SelectItem>
-                    <SelectItem value="secondary">Secondary</SelectItem>
-                    <SelectItem value="highSchool">High School</SelectItem>
+                    {grades?.map((grade) => (
+                      <SelectItem key={grade._id} value={grade._id}>
+                        {grade.name}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </FormControl>
@@ -129,15 +211,24 @@ const EditProfileForm = () => {
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  value={field.value}
+                  disabled={!subjects || isStudentLoading}
                 >
                   <SelectTrigger className="bg-white">
-                    <SelectValue placeholder={t("subjectPlaceholder")} />
+                    <SelectValue
+                      placeholder={
+                        isStudentLoading
+                          ? t("loadingData")
+                          : t("subjectPlaceholder")
+                      }
+                    />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="math">Math</SelectItem>
-                    <SelectItem value="science">Science</SelectItem>
-                    <SelectItem value="english">English</SelectItem>
+                    {subjects?.map((subject) => (
+                      <SelectItem key={subject._id} value={subject._id}>
+                        {subject.name}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </FormControl>
@@ -146,7 +237,12 @@ const EditProfileForm = () => {
           )}
         />
 
-        <Button type="submit">{t("saveChanges")}</Button>
+        <Button
+          type="submit"
+          disabled={isStudentLoading || updateMutation.isPending}
+        >
+          {updateMutation.isPending ? t("saving") : t("saveChanges")}
+        </Button>
       </form>
     </Form>
   );

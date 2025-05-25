@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axiosClient } from "@/lib/axios";
 import OtpForm from "./OtpForm";
 import { useRouter } from "next/navigation";
 import { toast } from "../atoms/sooner";
 import { useTranslations } from "next-intl";
+import { ProtectedRoutes } from "@/config/routes";
+import { getUser, verifyAccount } from "@/services/auth";
+import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 
 const VerifyAccountForm = () => {
   const t = useTranslations("VerifyAccountPage");
@@ -16,6 +19,8 @@ const VerifyAccountForm = () => {
   const [value, setValue] = useState("");
   const [isError, setIsError] = useState(false);
   const email = searchParams.get("email");
+  const queryClient = useQueryClient();
+  const axiosAuth = useAxiosAuth();
 
   useEffect(() => {
     if (!email) {
@@ -24,23 +29,27 @@ const VerifyAccountForm = () => {
   }, [email, router]);
 
   const verifyMutation = useMutation({
-    mutationFn: async (otp: string) => {
-      if (!email) throw new Error("Email is required");
-      return axiosClient.post("/auth/otp/verify", {
-        email,
-        otp,
-      });
-    },
-    onSuccess: (response) => {
+    mutationFn: async (otp: string) =>
+      verifyAccount(axiosClient, { email: email!, otp }),
+    onSuccess: async (response) => {
       if (response.status === 201) {
-        router.push("/");
         toast({
           title: t("success"),
           description: t("successDescription"),
           variant: "success",
         });
-      } else {
-        setIsError(true);
+      }
+
+      try {
+        const user = await getUser(axiosAuth);
+        queryClient.setQueryData(["auth", "user"], user);
+        router.replace(ProtectedRoutes.SonsFiles);
+      } catch {
+        toast({
+          title: t("somethingWentWrong"),
+          description: t("somethingWentWrongDescription"),
+          variant: "destructive",
+        });
       }
     },
     onError: () => {

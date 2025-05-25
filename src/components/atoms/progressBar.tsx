@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 type ProgressBarProps = {
-  percentage: number;
+  percentage?: number;
   className?: string;
 };
 
@@ -17,7 +17,7 @@ const ProgressBar = ({ percentage, className }: ProgressBarProps) => {
         className={`h-full bg-[#F7AEF3] rounded-[40px]`}
         style={{
           animation: `progressBarAnimation 1.5s ease-out forwards`,
-          ["--target-width" as string]: `${percentage}%`,
+          ["--target-width" as string]: `${percentage ? percentage : 0}%`,
         }}
       />
     </div>

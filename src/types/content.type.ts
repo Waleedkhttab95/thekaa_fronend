@@ -11,3 +11,11 @@ export interface ICountry {
   _id: string;
   name: string;
 }
+
+export enum LevelLabels {
+  EXPERT = "Expert",
+  ADVANCED = "Advanced",
+  INTERMEDIATE = "Intermediate",
+  BEGINNER = "Beginner",
+  NOVICE = "Novice",
+}

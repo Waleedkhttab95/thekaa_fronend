@@ -35,6 +35,7 @@ export const useAxiosAuth = () => {
           prevReq.sent = true;
           try {
             deleteCookie("Authentication");
+            deleteCookie("current_user");
             deleteCookie("role");
             router.replace(GuestOnlyRoutes.Login);
           } catch (error: any) {

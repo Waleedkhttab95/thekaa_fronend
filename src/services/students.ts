@@ -33,11 +33,43 @@ export const updateStudent = async (
   const { data } = await axiosClient.put(`/${API_ROUTE}/${_id}`, updateData);
   return data;
 };
+export const updateStudentAvatar = async (
+  axiosClient: AxiosInstance,
+  { _id, avatar }: { _id: string; avatar: File }
+) => {
+  const formData = new FormData();
+  formData.append("image", avatar);
+  const { data } = await axiosClient.post(
+    `/${API_ROUTE}/${_id}/profile-image`,
+    {
+      image: avatar,
+    },
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return data;
+};
 
 export const deleteStudent = async (
   axiosClient: AxiosInstance,
-  _id: string
+  _id: string,
+  studentId: string
 ) => {
-  const { data } = await axiosClient.delete(`/${API_ROUTE}/${_id}`);
+  const { data } = await axiosClient.delete(
+    `/auth/user/${_id}/students/${studentId}`
+  );
+  return data;
+};
+
+export const checkStudentLevelAssesmentStatus = async (
+  axiosClient: AxiosInstance,
+  studentId: string
+): Promise<boolean> => {
+  const { data } = await axiosClient.get(
+    `/student/student/${studentId}/level-assesment-status`
+  );
   return data;
 };

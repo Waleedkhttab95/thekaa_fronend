@@ -6,7 +6,6 @@ import { Button } from "@/components/atoms/button";
 import { Question } from "@/types/question.types";
 import { Questions } from "@/components/organisms/Questions";
 import { ExamCompletion } from "@/components/molecules/ExamCompletion";
-import arrow from "../../../public/arrow.svg";
 import {
   Card,
   CardContent,
@@ -80,7 +79,7 @@ export default function TestPage() {
       ) : (
         <Card
           variant="default"
-          className="bg-[url('/student-profile-bg.png')] bg-cover rounded-[40px] sapce-y-5 relative h-[744px] flex flex-col"
+          className="bg-[url('/student-profile-bg.png')] bg-cover rounded-[40px] sapce-y-5 relative min-h-[744px] flex flex-col"
         >
           <CardHeader className="flex flex-row align-top mt-8 max-w-[1030px] justify-between w-full items-center px-4 py-4 self-center mb-7">
             <div className="flex flex-col gap-4">
@@ -104,7 +103,6 @@ export default function TestPage() {
               setAnswer={setAnswer}
               className="text-xl font-medium font-pingar"
               titleStyle="self-center text-[22px] mb-9"
-              onSubmitQuestion={() => {}}
             />
           </CardContent>
           <CardFooter className="flex flex-row justify-end w-[90%]">
@@ -119,7 +117,7 @@ export default function TestPage() {
             >
               {isLastQuestion ? <>{t("finishExam")}</> : <>{t("next")}</>}
               <Image
-                src={arrow}
+                src={"/arrow.svg"}
                 alt="arrow"
                 width={17.5}
                 height={11.5}

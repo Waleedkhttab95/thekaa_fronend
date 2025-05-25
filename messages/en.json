@@ -1,6 +1,153 @@
 {
   "HomePage": {
-    "base": "base"
+    "base": "Base",
+    "thekaa": "Thekaa",
+    "signup": "Sign Up",
+    "login": "Log In",
+    "dashboard": "Dashboard",
+    "navs": {
+      "home": "Home"
+    },
+    "hero": {
+      "title": "Smart learning that enhances your child’s abilities with modern methods",
+      "description": "An intelligent educational platform that creates a personalized study plan for each child using artificial intelligence.",
+      "startTrialFree": "Start Free Trial"
+    },
+    "learningWay": {
+      "title": "The smartest way to help your child learn.",
+      "description1": "Thekaa is your smart tutor designed especially for your child, offering a personalized learning experience powered by AI.",
+      "description2": "We help parents understand their child’s level, provide a plan tailored to their abilities, and offer real support throughout the learning journey."
+    },
+    "features": {
+      "title": "What makes Thekaa special?",
+      "feature1": {
+        "title": "Personalized Study Plan",
+        "description": "AI accompanies your child with a custom plan based on their level and interests."
+      },
+      "feature2": {
+        "title": "Fun and Motivating Learning",
+        "description": "A system of motivation and daily challenges that combines learning, play, and rewards."
+      },
+      "feature3": {
+        "title": "Daily Parental Monitoring",
+        "description": "Smart reports that show progress and reveal strengths and areas for improvement."
+      },
+      "feature4": {
+        "title": "Instant Help in Weak Areas",
+        "description": "Difficult subjects or skills are detected and explained instantly with AI support."
+      },
+      "feature5": {
+        "title": "Voice Support & Interactive Chat",
+        "description": "Natural and smooth communication with a smart educational bot that encourages interaction."
+      },
+      "feature6": {
+        "title": "Continuous Improvement by Education Experts",
+        "description": "A platform backed by a specialized team that ensures ongoing content updates and experience enhancements."
+      }
+    },
+    "howcanhelp": {
+      "title": "How can Thekaa help you?",
+      "cards": {
+        "card1": {
+          "title": "Smart learning plans that adapt to your style and abilities",
+          "description": "Using AI, we offer flexible learning plans that adapt to each student’s pace and preferences."
+        },
+        "card2": {
+          "title": "Learning journeys made for you",
+          "description": "AI accompanies your child with a plan specifically designed for their level and interests."
+        },
+        "card3": {
+          "title": "Special focus on students in Saudi Arabia",
+          "description": "The platform is designed to meet the needs of students in Saudi Arabia, taking into account the local education system."
+        },
+        "card4": {
+          "title": "All school curriculums in one place",
+          "description": "We provide all the educational curricula you need for a comprehensive learning experience across all grade levels."
+        }
+      }
+    },
+    "testimonials": {
+      "title": "Success stories with Thekaa",
+      "cards": {
+        "card1": {
+          "name": "Ameer",
+          "description": "The content on Thekaa is thoughtfully designed for different levels."
+        },
+        "card2": {
+          "name": "Abdulrahman",
+          "description": "The tracking tools in Thekaa are excellent — I can see exactly where each student needs support."
+        },
+        "card3": {
+          "name": "Mohammed",
+          "description": "The Thekaa platform changed how my son views learning — now he asks to use it himself!"
+        },
+        "card4": {
+          "name": "Maram",
+          "description": "I was lost choosing the right curriculum, but Thekaa guided me through everything."
+        },
+        "card5": {
+          "name": "Abdullah",
+          "description": "Thekaa is truly smart — it’s not just pre-recorded lessons, it interacts live with the child."
+        },
+        "card6": {
+          "name": "Fatimah",
+          "description": "I want to recommend Thekaa to my friends so we can learn together!"
+        },
+        "card7": {
+          "name": "Khalid",
+          "description": "Every time I finish a lesson on Thekaa, I earn stars — I feel like a hero!"
+        }
+      }
+    },
+    "faq": {
+      "tile": "No worries — we've got all the answers",
+      "questions": {
+        "question1": {
+          "question": "Is the platform safe for my child?",
+          "answer": "Absolutely. Your child’s privacy and safety are our top priority. All data is stored and protected with the highest security standards."
+        },
+        "question2": {
+          "question": "Can I track my child’s progress?",
+          "answer": "Yes, Thekaa provides a special parent dashboard so you can monitor your child's progress in detail and see mastered skills and areas needing improvement."
+        },
+        "question3": {
+          "question": "What age group is the platform suitable for?",
+          "answer": "Thekaa is designed for children aged 6 to 14, with educational content tailored to each age group’s abilities and development level."
+        },
+        "question4": {
+          "question": "Does it need constant supervision?",
+          "answer": "No, the platform is built to be safe and easy for children to use independently. Still, we encourage regular parental involvement to support your child’s progress."
+        }
+      }
+    },
+    "journeySteps": {
+      "title": "Your journey with Thekaa, step by step",
+      "steps": {
+        "step1": {
+          "title": "Create your account",
+          "description": "Sign up for Thekaa with a few quick and easy steps"
+        },
+        "step2": {
+          "title": "Set your needs",
+          "description": "Choose the subjects and skills you want to develop"
+        },
+        "step3": {
+          "title": "Enjoy learning",
+          "description": "Start your learning journey with content tailored to your needs"
+        },
+        "step4": {
+          "title": "Track your progress",
+          "description": "Monitor your progress and keep achieving your learning goals"
+        }
+      }
+    },
+    "footer": {
+      "allRights": "All rights reserved",
+      "facebook": "Follow us on Facebook",
+      "twitter": "Follow us on X",
+      "linkedin": "Follow us on LinkedIn",
+      "instagram": "Follow us on Instagram"
+    }
   },
   "LoginPage": {
     "welcomeText": "Welcome To Thekaa!👋",
@@ -95,7 +242,9 @@
     "loading": "Verifying . . .",
     "wrongCode": "⚠ Incorrect verification code. Please try again. Make sure to enter the digits correctly.",
     "success": "Verified Successfully",
-    "successDescription": "Your Account is Now Active."
+    "successDescription": "Your Account is Now Active.",
+    "somethingWentWrong": "Something Went Wrong",
+    "somethingWentWrongDescription": "Something went wrong logging in try again later."
   },
   "RecoverPasswordPage": {
     "title": "Recover Password",
@@ -149,18 +298,24 @@
     "switchLocale-sm": "ع"
   },
   "testPage": {
-    "errorLoading": "Error Loading...",
+    "questionsLoading": "Questions Loading...",
+    "errorLoading": "No questions found...",
     "question": "Question",
     "of": "of",
     "placementTest": "Placement Test",
     "finishExam": "Finish Exam",
+    "loading": "loading . . .",
     "next": "Next",
     "missingSelect": "Please select an answer",
     "missingFill": "Please enter your answer",
+    "success": "Success",
+    "successDescription": "Test submitted successfully",
+    "failed": "Error",
+    "failedDescription": "Failed to submit test",
     "levelLoading": "Placing student level",
     "goToDashboard": "Go to Dashboard",
     "done": "Completed the student data successfully",
-    "levelMessage": "We are working on accurately evaluating Mohammad's performance using artificial intelligence, so that you can learn his basic specifications experience 🚀"
+    "levelMessage": "We are working on accurately evaluating {firstName}'s performance using artificial intelligence, so that you can learn his basic specifications experience 🚀"
   },
   "addStudentPage": {
     "studentInfo": "Student Information",
@@ -316,7 +471,11 @@
   },
   "SonsStudentsManagementPage": {
     "title": "Who's Studying Now?",
-    "manageSonsFiles": "Manage Sons Files"
+    "manageSonsFiles": "Manage Sons Files",
+    "youHaventTakenTheTest": "You have not taken the placement test.",
+    "takeTheTestNow": "Take the test",
+    "cancel": "Cancel",
+    "youNeedToTakeTheTest": "You need to take the placement test!"
   },
   "common": {
     "delete": "Delete",
@@ -369,7 +528,13 @@
     "nameRequired": "Student name is required",
     "ageRequired": "Student age is required",
     "educationLevelRequired": "Education level is required",
-    "subjectRequired": "Subject is required"
+    "subjectRequired": "Subject is required",
+    "loadingData": "Your Data Is Loading . . .",
+    "saving": "Saving Changes . . .",
+    "updatedSuccess": "Operation Successful!",
+    "updateSuccessDescription": "Your data has been successfully updated!",
+    "updateFailed": "Operation Failed",
+    "updateFailedDescription": "An error occurred while updating the data. Please try again later!"
   },
   "planPage": {
     "plan": "Curriculum plan",
@@ -381,7 +546,11 @@
     "progressPercentage": "Progress Percentage",
     "startYourNextLesson": "Start Your Next Lesson",
     "levels": {
-      "advanced": "Advanced"
+      "Expert": "Expert",
+      "Advanced": "Advanced",
+      "Intermediate": "Intermediate",
+      "Beginner": "Beginner",
+      "Novice": "Novice"
     },
     "performanceLevels": {
       "veryGood": "Very Good"
@@ -417,7 +586,12 @@
     "plan": "Plan",
     "reports": "Reports",
     "startYourNextLesson": "Start Your Next Lesson",
-    "upcomingLessons": "Your Upcoming Lessons"
+    "upcomingLessons": "Your Upcoming Lessons",
+    "planError": "You do not have a plan, try taking the test again",
+    "nextLessonsLoading": "Upcoming Lessons...",
+    "nextLessonsError": "Error Loading Upcoming Lessons...",
+    "quizDay": "You can't take the quiz yet.",
+    "lessonDay": "You can't go to the lesson yet."
   },
   "lessonPage": {
     "lessonName": "Lesson Name",

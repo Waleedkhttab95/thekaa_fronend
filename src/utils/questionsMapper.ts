@@ -63,7 +63,7 @@ export const transformSubmission = (
   studentId: string
 ): AssessmentResult => {
   const questions = apiData.questions;
-  const subjectId = "MATH101";
+  const subjectId = apiData.subjectId;
 
   const questionMap = new Map();
   let counter = 0;

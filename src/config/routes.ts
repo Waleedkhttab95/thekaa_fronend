@@ -11,7 +11,7 @@ export enum ProtectedRoutes {
   EditStudent = "/edit-student",
   SonsFiles = "/sons-files",
   Test = "/test",
-  Lesson = "/lesson",
+  Lesson = "/lessons",
 }
 
 export enum GuestOnlyRoutes {
@@ -20,3 +20,6 @@ export enum GuestOnlyRoutes {
   RecoverPassword = "/recover-password",
   RecoveryCode = "/recovery-code",
 }
+
+//todo: add the rest of the routes when we finish the other pages
+export const RoutesNeedsAssessmentTest = ["/dashboard"];

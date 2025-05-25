@@ -9,15 +9,32 @@ import arrow from "../../../public/arrow.svg";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { ProtectedRoutes } from "@/config/routes";
+import { useAxiosAuth } from "@/hooks/useAxiosAuth";
+import { getCookie } from "cookies-next/client";
+import { useStudent } from "@/hooks/rqs/students";
 
-export function ExamCompletion() {
+type ExamCompletionState = "analyzing" | "completed";
+
+interface ExamCompletionProps {
+  initialState?: ExamCompletionState;
+}
+
+export function ExamCompletion({
+  initialState = "analyzing",
+}: ExamCompletionProps) {
   const t = useTranslations("testPage");
-  const [state, setState] = useState<"analyzing" | "completed">("analyzing");
+  const [state, setState] = useState<ExamCompletionState>(initialState);
 
   useEffect(() => {
-    const timer = setTimeout(() => setState("completed"), 2000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (state === "analyzing") {
+      const timer = setTimeout(() => setState("completed"), 18000);
+      return () => clearTimeout(timer);
+    }
+  }, [state]);
+
+  const axiosAuth = useAxiosAuth();
+  const studentId = getCookie("current_user") as string;
+  const { data: studentData } = useStudent(axiosAuth, studentId as string);
 
   return (
     <Card
@@ -32,7 +49,7 @@ export function ExamCompletion() {
               {t("levelLoading")}...
             </h2>
             <p className="font-pingar font-medium max-w-[670px] max-h-[116px] text-center">
-              {t("levelMessage")}
+              {t("levelMessage", { firstName: studentData?.firstName })}
             </p>
           </div>
         ) : (
@@ -40,9 +57,8 @@ export function ExamCompletion() {
             <Image src={complete} alt="Completed" width={80} height={80} />
             <h2 className="font-pingar font-bold text-[28px]">{t("done")} !</h2>
             <CardFooter>
-              <Link href={`/${ProtectedRoutes.Dashboard}`}>
+              <Link href={`${ProtectedRoutes.Dashboard}`}>
                 <Button
-                  onClick={() => {}}
                   variant="default"
                   className="w-[264px] h-[56px] font-bold bg-gray-900 hover:bg-gray-800 text-[#E7FEFD] mt-12 select-none"
                 >

@@ -1,12 +1,15 @@
 import {
   getAssessmentTest,
+  getStudentEducationDetails,
   submitAssessmentResult,
 } from "@/services/assessmentTest";
+import { checkStudentLevelAssesmentStatus } from "@/services/students";
 import { AssessmentResult } from "@/types/assessmentTest";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
+import { getCookie, setCookie } from "cookies-next/client";
 
-export const useTestMutation = (
+export const useAssessmentTest = (
   axiosClient: AxiosInstance,
   studentId: string
 ) => {
@@ -23,6 +26,9 @@ export const useTestMutation = (
 };
 
 export const useAssessmentSubmitMutation = (axiosClient: AxiosInstance) => {
+  const queryClient = useQueryClient();
+  const studentId = getCookie("current_user") as string;
+
   const submitMutation = useMutation({
     mutationFn: ({
       studentId,
@@ -31,7 +37,41 @@ export const useAssessmentSubmitMutation = (axiosClient: AxiosInstance) => {
       studentId: string;
       data: AssessmentResult;
     }) => submitAssessmentResult(axiosClient, studentId, data),
+    onSuccess: async () => {
+      queryClient.invalidateQueries({
+        queryKey: ["assessmentStatus", studentId],
+      });
+
+      setCookie("assesment_test_status", true, {
+        maxAge: 60 * 60 * 24 * 7,
+        path: "/",
+      });
+    },
   });
 
   return submitMutation;
+};
+
+export const useCheckStudentAssesmentStatus = (
+  axiosClient: AxiosInstance,
+  studentId: string
+) => {
+  return useQuery({
+    queryKey: ["assessmentStatus", studentId],
+    queryFn: () => checkStudentLevelAssesmentStatus(axiosClient, studentId),
+  });
+};
+
+export const useGetStudentEducationPlanDetails = (
+  axiosClient: AxiosInstance,
+  studentID: string,
+  educationPlanId: string,
+  options = {}
+) => {
+  return useQuery({
+    queryKey: ["EducationPlanDetails", studentID],
+    queryFn: () =>
+      getStudentEducationDetails(axiosClient, studentID, educationPlanId),
+    ...options,
+  });
 };
