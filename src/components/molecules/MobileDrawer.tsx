@@ -1,12 +1,15 @@
 "use client"
 import { Button } from "@/components/atoms/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/atoms/sheet"
+import { IHomeNavs } from "@/types/navs"
 import { getCookie } from "cookies-next/client"
 import { Menu } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
-
-export default function MobileDrawer() {
+type props = {
+  navs: IHomeNavs[]
+}
+export default function MobileDrawer({ navs }: props) {
   const t = useTranslations('HomePage')
   const accessToken = getCookie("Authentication");
   const router = useRouter();
@@ -26,22 +29,11 @@ export default function MobileDrawer() {
       </SheetTrigger>
       <SheetContent side="right" className="bg-[#333] text-white border-none" >
         <div className="flex flex-col gap-6 mt-10">
-          <a href="#" className="text-xl hover:underline">
-            رابط 1
-          </a>
-          <a href="#" className="text-xl hover:underline">
-            رابط 2
-          </a>
-          <a href="#" className="text-xl hover:underline">
-            رابط 3
-          </a>
-          <a href="#" className="text-xl hover:underline">
-            رابط 4
-          </a>
-          <a href="#" className="text-xl hover:underline">
-            رابط 5
-          </a>
-
+          {navs.map(nav => (
+            <a href={nav.href} className="text-xl hover:underline select-none" key={`nav-m-${nav.name}`}>
+              {nav.name}
+            </a>))
+          }
           <div className="flex flex-col gap-4 mt-6">
             <Button variant="secondary" className="border-white text-secondary-foreground hover:bg-white/10 hover:text-white">
               {t("signup")}
