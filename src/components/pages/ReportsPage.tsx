@@ -3,6 +3,7 @@ import DashboardInfoCard from "../molecules/DashboardInfoCard";
 import DashboardRoundedStats from "../atoms/dashboard-rouneded-stats";
 import ProgressBar from "../atoms/progressBar";
 import StatsCard from "../molecules/StatsCard";
+import { LevelLabels } from "@/types/content.type";
 
 const ReportsPage = () => {
   const t = useTranslations("reportsPage");
@@ -13,7 +14,10 @@ const ReportsPage = () => {
       <div className="bg-[url('/student-profile-bg.png')] rounded-[90px] md:rounded-[40px] bg-cover min-h-[880px] mt-10 py-14 px-2 flex flex-col items-center">
         <div className="w-full flex flex-wrap ps-8 gap-y-8 gap-x-5 xl:gap-x-8 items-center justify-start max-[1113px]:justify-center">
           <DashboardInfoCard cardTitle={t("currentLevel")}>
-            <StatsCard text={t("levels.advanced")} bgColor="bg-green-500" />
+            <StatsCard
+              text={t("levels.advanced")}
+              level={LevelLabels.ADVANCED}
+            />
           </DashboardInfoCard>
           <DashboardInfoCard cardTitle={t("completionRate")}>
             <div className="flex flex-col gap-2 w-full">
@@ -24,7 +28,7 @@ const ReportsPage = () => {
           <DashboardInfoCard cardTitle={t("changeInLevel")}>
             <StatsCard
               text={t("levelChanges.decliningLevel")}
-              bgColor="bg-red-500"
+              level={LevelLabels.BEGINNER}
               svgPath="/trade-down.svg"
               alt="declining level"
             />
@@ -52,7 +56,7 @@ const ReportsPage = () => {
           <DashboardInfoCard cardTitle={t("performanceLevelInTests")}>
             <StatsCard
               text={t("performanceLevels.advanced")}
-              bgColor="bg-green-500"
+              level={LevelLabels.ADVANCED}
               svgPath="/trade-up.svg"
               alt="advanced level"
             />
