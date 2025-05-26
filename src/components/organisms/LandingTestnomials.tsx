@@ -63,7 +63,9 @@ export default function TestimonialSlider() {
   ]
   return (
     <div className="w-full py-8">
-      {/* First row - right to left */}
+      <h2 className="section-heading !text-center">
+        {t("title")}
+      </h2>
       <div className="mb-8">
         <Swiper
           modules={[Autoplay]}
