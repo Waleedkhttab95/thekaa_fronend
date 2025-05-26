@@ -1,16 +1,22 @@
 "use client"
-import { motion } from "framer-motion"
 import { TestimonialCard } from "../molecules/TestonomialCard"
-import { useTranslations, useLocale } from "next-intl"
+import { useTranslations } from "next-intl"
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react"
+// Import Swiper styles
+import "swiper/css"
+// Import required modules
+import { Autoplay } from "swiper/modules"
+// Import Swiper core
+import { register } from "swiper/element/bundle"
+import useIsMobile from "@/hooks/useIsMobile"
 
-const TestimonialSlider = () => {
-  const t = useTranslations("HomePage.testimonials")
-  const locale = useLocale()
+// Register Swiper custom elements
+register()
 
-  // Check if current locale is RTL
-  const isRTL = ["ar", "he", "fa", "ur"].includes(locale)
-
-  // Define testimonials
+export default function TestimonialSlider() {
+  const t = useTranslations("HomePage.testimonials");
+  const isMobile = useIsMobile()
   const testimonials = [
     {
       id: 1,
@@ -55,102 +61,60 @@ const TestimonialSlider = () => {
       avatar: "https://randomuser.me/api/portraits/med/men/16.jpg",
     },
   ]
-
-  // Split testimonials properly
-  const midPoint = Math.ceil(testimonials.length / 2)
-  const row1Testimonials = testimonials.slice(0, midPoint)
-  const row2Testimonials = testimonials.slice(midPoint)
-
-  // Create multiple copies for seamless infinite scroll - use more copies for smoother transition
-  const createInfiniteArray = (arr: typeof testimonials) => {
-    return [...arr, ...arr, ...arr, ...arr] // 4 copies instead of 3
-  }
-
-  const row1Data = createInfiniteArray(row1Testimonials)
-  const row2Data = createInfiniteArray(row2Testimonials)
-
-  // Use smaller percentage for smoother transition - 25% since we have 4 copies
-  const animationDistance = "25%" // 25% instead of 33.333%
-
-  // Adjust animation values based on text direction
-  const getAnimationValues = () => {
-    if (isRTL) {
-      return {
-        row1: [0, animationDistance],
-        row2: [0, '-' + animationDistance],
-      }
-    } else {
-      return {
-        row1: [0, '-' + animationDistance],
-        row2: [0, animationDistance],
-      }
-    }
-  }
-
-  const animationValues = getAnimationValues()
-
   return (
-    <div id="successStories-section" className="w-full py-24 relative overflow-hidden">
-      <h2 className="section-heading !text-center">{t("title")}</h2>
-      <div className="flex flex-col md:py-12 gap-6">
-        {/* First Row - Right to Left (visually) */}
-        <div className="relative overflow-hidden">
-          <motion.div
-            className="flex gap-4 py-4 flex-nowrap"
-            animate={{
-              x: animationValues.row1,
-            }}
-            transition={{
-              x: {
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: "loop",
-                duration: 20, // Slightly faster to match the smaller distance
-                ease: "linear",
-              },
-            }}
-            style={{
-              willChange: "transform",
-              display: "flex",
-              width: "fit-content",
-            }}
-          >
-            {row1Data.map((testimonial, index) => (
-              <TestimonialCard key={`row1-${testimonial.id}-${index}`} testimonial={testimonial} index={index} />
-            ))}
-          </motion.div>
-        </div>
-        {/* First Row - Right to Left (visually) */}
-        <div className="relative overflow-hidden">
-          <motion.div
-            className="flex gap-4 py-4 flex-nowrap"
-            animate={{
-              x: animationValues.row2,
-            }}
-            transition={{
-              x: {
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: "loop",
-                duration: 20, // Slightly faster to match the smaller distance
-                ease: "linear",
+    <div className="w-full py-8">
+      {/* First row - right to left */}
+      <div className="mb-8">
+        <Swiper
+          modules={[Autoplay]}
+          slidesPerView={isMobile ? 1 : 3} // Show exactly 3 slides
+          spaceBetween={16} // Minimal space between slides
+          loop={true}
+          speed={8000}
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+          }}
+          allowTouchMove={false}
+          className="testimonial-swiper"
+          wrapperClass="testimonial-wrapper"
+        >
+          {testimonials.map((testimonial, index) => (
+            <SwiperSlide key={`row1-${testimonial.id}`} className="testimonial-slide">
+              <div className="testimonial-container ">
+                <TestimonialCard testimonial={testimonial} index={index} />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
 
-              },
-            }}
-            style={{
-              willChange: "transform",
-              display: "flex",
-              width: "fit-content",
-            }}
-          >
-            {row2Data.map((testimonial, index) => (
-              <TestimonialCard key={`row2-${testimonial.id}-${index}`} testimonial={testimonial} index={index} />
-            ))}
-          </motion.div>
-        </div>
-
-
+      {/* Second row - left to right */}
+      <div>
+        <Swiper
+          modules={[Autoplay]}
+          slidesPerView={isMobile ? 1 : 3} // Show exactly 3 slides
+          spaceBetween={16} // Minimal space between slides
+          loop={true}
+          speed={8000}
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+            reverseDirection: true, // Reverse direction for second row
+          }}
+          allowTouchMove={false}
+          className="testimonial-swiper"
+          wrapperClass="testimonial-wrapper"
+        >
+          {testimonials.map((testimonial, index) => (
+            <SwiperSlide key={`row2-${testimonial.id}`} className="testimonial-slide">
+              <div className="testimonial-container">
+                <TestimonialCard testimonial={testimonial} index={index + testimonials.length} />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   )
 }
-
-export default TestimonialSlider
