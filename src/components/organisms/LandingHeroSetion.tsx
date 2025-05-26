@@ -31,7 +31,7 @@ const LandingHeroSection = () => {
           </Button>
         </div>
         <div className="hero-image select-none">
-          <Image src="/assets/images/hero-image.svg" width={700} height={548} alt="Hero Image" />
+          <Image src="/assets/images/hero-image.png" width={700} height={548} alt="Hero Image" />
         </div>
       </div>
     </div>
