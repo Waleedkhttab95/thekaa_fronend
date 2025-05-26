@@ -17,7 +17,7 @@ export default function LandingNavbar() {
   ], [t])
   return (
     <>
-      < div className="hidden md:flex items-center gap-6 text-white" >
+      < div className="hidden lg:flex items-center gap-6 text-white" >
         {navs.map(nav => (
           <a href={nav.href} className="hover:underline select-none" key={`nav-${nav.name}`}>
             {nav.name}
@@ -27,7 +27,7 @@ export default function LandingNavbar() {
 
       </div >
       {/* Mobile Menu */}
-      < div className="md:hidden" >
+      < div className="lg:hidden" >
         <MobileDrawer navs={navs} />
       </div >
     </ >
