@@ -55,7 +55,7 @@ const LandingHeader = () => {
 
         <LandingNavbar />
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           {!accessToken && <Button variant="ghost" className="ps-0 text-white hover:bg-transparent hover:text-white hover:underline" onClick={handleSignUpClick}>
             {t("signup")}
           </Button>}

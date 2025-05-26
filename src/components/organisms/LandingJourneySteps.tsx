@@ -92,7 +92,7 @@ export default function JourneySteps() {
           {/* Image - full width on mobile, 50% on larger screens */}
           <div className="w-full md:w-1/2 mt-10 md:mt-0 flex justify-center items-center select-none">
             <motion.img
-              src="/assets/images/illustration.svg"
+              src="/assets/images/Illustration.svg"
               alt="Journey illustration"
               className="w-full max-w-[300px] md:max-w-[350px] lg:max-w-[400px] h-auto"
               initial={{ opacity: 0, scale: 0.8 }}
