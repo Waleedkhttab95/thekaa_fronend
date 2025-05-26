@@ -43,7 +43,7 @@ export default function HowCanWeHelp() {
   ]
 
   return (
-    <div className="relative py-20 px-2 md:px-0">
+    <div id="howWeCanHelp-section" className="relative py-20 px-2 md:px-0">
       <div className="absolute size-[250px] lg:size-[594px] bg-[#23F6F0]  rounded-full blur-[120px] lg:blur-[200px] bottom-16 -right-1/2"></div>
       <div className="hidden lg:block absolute  z-20 size-[150px] lg:size-[400px] bg-[url('/assets/images/bg-circle.svg')] bg-cover bg-no-repeat top-56 lg:top-96 -right-24  lg:-right-36"
       ></div>

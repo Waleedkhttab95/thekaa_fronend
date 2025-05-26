@@ -16,8 +16,8 @@ const LandingHowCanHelpCard = ({ icon, title, description, bgColor }: props) => 
           <div className="mb-6 select-none">
             <Image width={50} height={60} src={icon} alt={title} className="w-auto h-auto" />
           </div>
-          <h3 className="text-center text-2xl font-bold mb-4">{title}</h3>
-          <p className="text-center text-lg">{description}</p>
+          <h3 className="text-center text-2xl font-bold mb-4 select-none">{title}</h3>
+          <p className="text-center text-lg select-none">{description}</p>
         </div>
       </div>
     </div>)
