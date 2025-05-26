@@ -10,16 +10,15 @@
   .auth-form-width {
     @apply w-full xl:w-[487px];
   }
-  .section-heading{
-   @apply font-pingar  text-3xl md:text-4xl text-center md:text-start mb-6  text-wrap font-bold text-transparent bg-clip-text ;
+  .section-heading {
+    @apply font-pingar  text-3xl md:text-4xl text-center md:text-start mb-6  text-wrap font-bold text-transparent bg-clip-text;
     background-image: linear-gradient(
-        45deg,
-        #23F6F0 0%,
-        #F7AEF3 68%,
-        #b761b2 98%,
-        #3D313A 100%
-      );
-      
+      45deg,
+      #23f6f0 0%,
+      #f7aef3 68%,
+      #b761b2 98%,
+      #3d313a 100%
+    );
   }
 }
 ::-webkit-scrollbar {
@@ -201,7 +200,6 @@ body {
   * {
     @apply border-border outline-ring/50;
     scroll-behavior: smooth;
-
   }
   body {
     @apply bg-background text-foreground;
@@ -244,3 +242,6 @@ body {
 .testimonial-slide {
   height: auto;
 } */
+.testimonial-swiper .swiper-wrapper {
+  transition-timing-function: linear !important;
+}
