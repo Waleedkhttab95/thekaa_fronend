@@ -1,23 +1,23 @@
-"use client"
-import { TestimonialCard } from "../molecules/TestonomialCard"
-import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
+"use client";
+import { TestimonialCard } from "../molecules/TestonomialCard";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react"
+import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
-import "swiper/css"
+import "swiper/css";
 // Import Autoplay module and styles
-import { Autoplay } from "swiper/modules"
-import Loading from "../atoms/loading"
+import { Autoplay } from "swiper/modules";
+import Loading from "../atoms/loading";
 
 export default function TestimonialSlider() {
-  const t = useTranslations("HomePage.testimonials")
-  const [mounted, setMounted] = useState(false)
+  const t = useTranslations("HomePage.testimonials");
+  const [mounted, setMounted] = useState(false);
 
   // Ensure component is mounted before rendering Swiper
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   const testimonials = [
     {
@@ -62,14 +62,14 @@ export default function TestimonialSlider() {
       quote: t("cards.card7.description"),
       avatar: "https://randomuser.me/api/portraits/med/men/16.jpg",
     },
-  ]
+  ];
 
   if (!mounted) {
     return (
       <div className="w-full py-8" id="successStories-section">
         <Loading></Loading>
       </div>
-    )
+    );
   }
 
   return (
@@ -102,7 +102,10 @@ export default function TestimonialSlider() {
           style={{ height: "auto", minHeight: "200px" }}
         >
           {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={`row1-${testimonial.id}`} className="testimonial-slide">
+            <SwiperSlide
+              key={`row1-${testimonial.id}`}
+              className="testimonial-slide"
+            >
               <div className="testimonial-container">
                 <TestimonialCard testimonial={testimonial} index={index} />
               </div>
@@ -118,7 +121,7 @@ export default function TestimonialSlider() {
           spaceBetween={16}
           slidesPerView={1}
           loop={true}
-          speed={3000}
+          speed={5000}
           breakpoints={{
             640: {
               slidesPerView: 2,
@@ -139,14 +142,20 @@ export default function TestimonialSlider() {
           style={{ height: "auto", minHeight: "200px" }}
         >
           {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={`row2-${testimonial.id}`} className="testimonial-slide">
+            <SwiperSlide
+              key={`row2-${testimonial.id}`}
+              className="testimonial-slide"
+            >
               <div className="testimonial-container">
-                <TestimonialCard testimonial={testimonial} index={index + testimonials.length} />
+                <TestimonialCard
+                  testimonial={testimonial}
+                  index={index + testimonials.length}
+                />
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
     </div>
-  )
+  );
 }
