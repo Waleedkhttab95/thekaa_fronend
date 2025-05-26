@@ -12,10 +12,10 @@ const LandingTeachingWay = () => {
         <h2 className="section-heading">
           {t("title")}
         </h2>
-        <p className='font-pingar md:text-2xl mb-2 text-center md:text-start text-secondary md:max-w-[90%] text-wrap'>
+        <p className='font-pingar md:text-2xl mb-2 text-center md:text-start text-secondary md:max-w-[90%] text-wrap select-none'>
           {t("description1")}
         </p>
-        <p className='font-pingar md:text-2xl text-center md:text-start text-secondary md:max-w-[90%] text-wrap'>
+        <p className='font-pingar md:text-2xl text-center md:text-start text-secondary md:max-w-[90%] text-wrap select-none'>
           {t("description2")}
         </p>
       </div>

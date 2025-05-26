@@ -43,67 +43,15 @@ export default function JourneySteps() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStep((prev) => (prev + 1) % steps.length)
-    }, 5000)
+    }, 3000)
 
     return () => clearInterval(interval)
   }, [steps.length])
 
-  // Handle scroll events
-  useEffect(() => {
-    if (!containerRef.current) return
 
-    let touchStartY = 0
-    let lastScrollTime = 0
-    const scrollThreshold = 300 // ms between scroll events
-
-    const handleWheel = (e: WheelEvent) => {
-      const now = Date.now()
-      if (now - lastScrollTime < scrollThreshold) return
-
-      if (e.deltaY > 0) {
-        // Scrolling down
-        setCurrentStep((prev) => (prev + 1) % steps.length)
-      } else {
-        // Scrolling up
-        setCurrentStep((prev) => (prev - 1 + steps.length) % steps.length)
-      }
-
-      lastScrollTime = now
-    }
-
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY
-    }
-
-    const handleTouchEnd = (e: TouchEvent) => {
-      const touchEndY = e.changedTouches[0].clientY
-      const diff = touchStartY - touchEndY
-
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          // Swipe up
-          setCurrentStep((prev) => (prev + 1) % steps.length)
-        } else {
-          // Swipe down
-          setCurrentStep((prev) => (prev - 1 + steps.length) % steps.length)
-        }
-      }
-    }
-
-    const element = containerRef.current
-    element.addEventListener("wheel", handleWheel, { passive: true })
-    element.addEventListener("touchstart", handleTouchStart, { passive: true })
-    element.addEventListener("touchend", handleTouchEnd, { passive: true })
-
-    return () => {
-      element.removeEventListener("wheel", handleWheel)
-      element.removeEventListener("touchstart", handleTouchStart)
-      element.removeEventListener("touchend", handleTouchEnd)
-    }
-  }, [steps.length])
 
   return (
-    <div ref={containerRef} className="py-20 px-4 md:px-8 min-h-[500px]">
+    <div ref={containerRef} id="journey-section" className="py-24 px-4 md:px-8 min-h-[500px]">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="section-heading !text-center !mb-16" initial={{ opacity: 0, y: 20 }}

@@ -6,7 +6,11 @@
     "login": "Log In",
     "dashboard": "Dashboard",
     "navs": {
-      "home": "Home"
+      "home": "Home",
+      "features": "Our Features",
+      "howCanHelp": "Growth",
+      "successStories": "Stories",
+      "journeySteps": "Journey"
     },
     "hero": {
       "title": "Smart learning that enhances your child’s abilities with modern methods",

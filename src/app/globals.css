@@ -200,6 +200,8 @@ body {
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scroll-behavior: smooth;
+
   }
   body {
     @apply bg-background text-foreground;
@@ -211,4 +213,22 @@ body {
       transform: translateX(-50%);
     }
   }
+}
+.swiper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.swiper-wrapper {
+  display: flex;
+  transition-timing-function: linear !important;
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+  width: auto;
 }
