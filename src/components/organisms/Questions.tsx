@@ -30,12 +30,12 @@ export function Questions({
 }: QuestionsProps) {
   return (
     <form
-      id={`question-form-${question.id}`}
+      id={`question-form-${question?.id}`}
       onSubmit={(e) => e.preventDefault()}
       className="w-full flex justify-center"
     >
       {(() => {
-        switch (question.type) {
+        switch (question?.type) {
           case "text-choice":
             return (
               <TextChoiceQuestion
