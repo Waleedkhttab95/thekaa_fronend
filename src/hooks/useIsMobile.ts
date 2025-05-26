@@ -1,34 +1,19 @@
+// hooks/useIsMobile.js
 import { useState, useEffect } from "react";
 
-const useIsMobile = (breakpoint = 768) => {
-  const [isMobile, setIsMobile] = useState(false);
+export default function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false); // Default to false for SSR
 
   useEffect(() => {
     const checkDevice = () => {
-      // Check screen width
-      const isSmallScreen = window.innerWidth < breakpoint;
-
-      // Check user agent for mobile devices
-      const userAgent = navigator.userAgent.toLowerCase();
-      const mobileRegex =
-        /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
-      const isMobileDevice = mobileRegex.test(userAgent);
-
-      // Consider it mobile if either condition is true
-      setIsMobile(isSmallScreen || isMobileDevice);
+      setIsMobile(window.innerWidth < 768);
     };
 
-    // Check on mount
     checkDevice();
-
-    // Add resize listener
     window.addEventListener("resize", checkDevice);
 
-    // Cleanup
     return () => window.removeEventListener("resize", checkDevice);
-  }, [breakpoint]);
+  }, []);
 
   return isMobile;
-};
-
-export default useIsMobile;
+}
