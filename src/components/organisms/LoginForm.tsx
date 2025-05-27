@@ -28,7 +28,7 @@ import { useLogin } from "@/hooks/useLogin";
 export function LoginForm() {
   const t = useTranslations("LoginPage");
   const locale = useLocale();
-  const { mutate: login, isPending, isNavigating } = useLogin();
+  const { mutate: login, isPending } = useLogin();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -118,8 +118,8 @@ export function LoginForm() {
           </p>
         </div>
         <div className="w-full flex flex-col gap-y-4 mt-6">
-          <Button type="submit" disabled={isPending || isNavigating}>
-            {isPending || isNavigating ? t("loading") : t("loginButton")}
+          <Button type="submit" disabled={isPending}>
+            {isPending ? t("loading") : t("loginButton")}
           </Button>
           <CardDescription className="relative flex items-center gap-x-2 w-full text-center text-sm">
             <span className="flex-1 h-px bg-[#E7E4E5]"></span>
