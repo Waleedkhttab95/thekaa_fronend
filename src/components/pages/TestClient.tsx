@@ -17,6 +17,10 @@ import { useTranslations } from "next-intl";
 import { useTest } from "@/hooks/useTest";
 import { levelAssessment } from "@/types/assessmentTest";
 import { toast } from "../atoms/sooner";
+import { useRouter } from "next/navigation";
+import Loading from "../atoms/loading";
+import { ProtectedRoutes } from "@/config/routes";
+import { useEffect, useRef } from "react";
 
 interface TestClientProps {
   questions: Question[];
@@ -25,6 +29,8 @@ interface TestClientProps {
 
 export default function TestClient({ questions, data }: TestClientProps) {
   const t = useTranslations("testPage");
+  const router = useRouter();
+  const hasShownErrorToast = useRef(false);
 
   const {
     methods,
@@ -39,13 +45,25 @@ export default function TestClient({ questions, data }: TestClientProps) {
     handleNext,
   } = useTest(questions, data);
 
+  useEffect(() => {
+    if (questions.length === 0 && !hasShownErrorToast.current) {
+      hasShownErrorToast.current = true;
+      toast({
+        title: t("failed"),
+        description: t("errorLoading"),
+        variant: "destructive",
+      });
+      setTimeout(() => {
+        router.push(ProtectedRoutes.SonsFiles);
+      }, 1500);
+    }
+  }, [questions.length, t, router]);
+
   const isAnswerRequired =
     currentQuestion?.type === "fill" ? !currentAnswer.trim() : !currentAnswer;
 
   if (questions.length === 0) {
-    return (
-      <p className="text-center mt-10 text-red-500">{t("errorLoading")}</p>
-    );
+    return <Loading />;
   }
 
   const checkAnswer = () => {

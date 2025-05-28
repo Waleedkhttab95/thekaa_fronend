@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import { setCookie } from "cookies-next/client";
 import { Avatar, AvatarFallback, AvatarImage } from "../atoms/avatar";
 import { PencilLineIcon } from "lucide-react";
@@ -27,6 +27,7 @@ import {
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { Button } from "../atoms/button";
 import Image from "next/image";
+import { LoaderCircle } from "lucide-react";
 
 type props = {
   son: IStudentData;
@@ -35,6 +36,7 @@ type props = {
 const SonAvatar = ({ son, isOpen = false }: props) => {
   const [takeTest, setTakeTest] = useState(false);
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const t = useTranslations("common");
   const dialogT = useTranslations("SonsStudentsManagementPage");
   const axiosAuth = useAxiosAuth();
@@ -59,7 +61,9 @@ const SonAvatar = ({ son, isOpen = false }: props) => {
         });
 
         if (assesmentTestStatus) {
-          router.push(ProtectedRoutes.Dashboard);
+          startTransition(() => {
+            router.push(ProtectedRoutes.Dashboard);
+          });
         } else {
           setTakeTest(true);
         }
@@ -101,10 +105,13 @@ const SonAvatar = ({ son, isOpen = false }: props) => {
       </Dialog>
       <div
         className={cn(
-          "flex flex-col items-center justify-center py-6 pt-0",
+          "flex flex-col items-center justify-center py-6 pt-0 relative",
           CheckingAssesmentTestStatus && "opacity-50"
         )}
       >
+        {isPending && (
+          <LoaderCircle className="animate-spin absolute bottom-36" />
+        )}
         <div className="relative group">
           <div
             className={cn(
@@ -113,7 +120,7 @@ const SonAvatar = ({ son, isOpen = false }: props) => {
             )}
             onClick={handleChooseProfile}
           >
-            <Avatar className="w-full  h-full">
+            <Avatar className={cn("w-full  h-full", isPending && "opacity-50")}>
               <AvatarImage
                 src={
                   son.profileImage || "/assets/images/avatar-placeholder.jpg"

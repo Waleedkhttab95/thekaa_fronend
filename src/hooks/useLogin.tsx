@@ -1,16 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getUser, login as loginService } from "@/services/auth";
+import { login as loginService } from "@/services/auth";
 import { axiosClient } from "@/lib/axios";
 import { toast } from "@/components/atoms/sooner";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { useAxiosAuth } from "./useAxiosAuth";
 import { ProtectedRoutes } from "@/config/routes";
 
 export const useLogin = () => {
   const router = useRouter();
-  const axiosAuth = useAxiosAuth();
   const queryClient = useQueryClient();
   const t = useTranslations("LoginPage");
 
@@ -23,17 +21,7 @@ export const useLogin = () => {
       return { email: variables.email };
     },
     onSuccess: async () => {
-      try {
-        const user = await getUser(axiosAuth);
-        queryClient.setQueryData(["auth", "user"], user);
-        router.replace(ProtectedRoutes.SonsFiles);
-      } catch {
-        toast({
-          title: t("loginError"),
-          description: t("loginErrorDescription"),
-          variant: "destructive",
-        });
-      }
+      router.replace(ProtectedRoutes.SonsFiles);
     },
     onError: (error, variables) => {
       if (axios.isAxiosError(error)) {
