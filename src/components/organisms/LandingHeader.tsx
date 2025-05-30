@@ -36,30 +36,39 @@ const LandingHeader = () => {
       router.push('/login')
     }
   }
-  const handleSignUpClick = () => {
-    router.push('/sign-up')
-  }
+
   return (
     <div className='pt-5'>
       <div
         className={cn(
-          "z-50 bg-[#a393a7] rounded-full flex items-center justify-between px-4 py-2 transition-all duration-300",
+          "z-50 flex items-center justify-between px-4 py-2 transition-all duration-300",
           isScrolled
-            ? "fixed top-2 left-0 right-0 mx-auto w-[95%] md:w-[90%] lg:w-[83%] shadow-md"
-            : "mb-10"
+            ? "fixed top-2 left-0 right-0 mx-auto w-[95%] md:w-[90%] lg:w-[83%] bg-transparent backdrop-blur-sm"
+            : "mb-10 bg-[#a393a7] rounded-full"
         )}
       >
         <div className="flex items-center gap-2">
-          <Image className="text-white text-2xl font-bold" src="/assets/images/white-logo.svg" width={94} height={26} alt='' />
+          <Image 
+            className="text-white text-2xl font-bold" 
+            src="/assets/images/white-logo.svg" 
+            width={94} 
+            height={26} 
+            alt='Thekaa Logo' 
+          />
         </div>
 
-        <LandingNavbar />
+        {/* <LandingNavbar /> */}
 
         <div className="hidden lg:flex items-center gap-3">
-          {!accessToken && <Button variant="ghost" className="ps-0 text-white hover:bg-transparent hover:text-white hover:underline" onClick={handleSignUpClick}>
-            {t("signup")}
-          </Button>}
-          <Button className="bg-[#222] hover:bg-[#333] text-white rounded-full px-6" onClick={handleLoginClick}>{accessToken ? t("dashboard") : t("login")}</Button>
+          {!accessToken && (
+            <Button 
+              variant="ghost" 
+              className="text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-300" 
+              onClick={handleLoginClick}
+            >
+              {t("login")}
+            </Button>
+          )}
         </div>
       </div>
 

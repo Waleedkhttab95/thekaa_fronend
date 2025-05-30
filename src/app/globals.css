@@ -11,14 +11,16 @@
     @apply w-full xl:w-[487px];
   }
   .section-heading {
-    @apply font-pingar  text-3xl md:text-4xl text-center md:text-start mb-6  text-wrap font-bold text-transparent bg-clip-text;
+    @apply font-pingar text-4xl md:text-5xl text-center md:text-start mb-8 text-wrap font-extrabold text-transparent bg-clip-text;
     background-image: linear-gradient(
       45deg,
-      #23f6f0 0%,
-      #f7aef3 68%,
-      #b761b2 98%,
-      #3d313a 100%
+      #1a9e9a 0%, /* Darker cyan for better contrast */
+      #c47bc0 68%, /* Darker pink for better contrast */
+      #8a4a86 98%, /* Darker purple for better contrast */
+      #2d2528 100% /* Darker gray for better contrast */
     );
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: -0.02em;
   }
 }
 ::-webkit-scrollbar {

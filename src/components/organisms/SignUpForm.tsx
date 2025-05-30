@@ -112,21 +112,25 @@ const SignUpForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="auth-form-width flex flex-col gap-y-2"
+        className="auth-form-width flex flex-col gap-y-4"
+        noValidate
       >
         <FormField
           control={form.control}
           name="parentName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("formInputs.parentName.label")}</FormLabel>
+              <FormLabel htmlFor="parentName">{t("formInputs.parentName.label")}</FormLabel>
               <FormControl>
                 <Input
+                  id="parentName"
                   placeholder={t("formInputs.parentName.placeholder")}
                   {...field}
+                  aria-describedby="parentName-error"
+                  className="focus:ring-2 focus:ring-[#23F6F0] focus:ring-offset-2"
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage id="parentName-error" />
             </FormItem>
           )}
         />
@@ -135,14 +139,18 @@ const SignUpForm = () => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("formInputs.email.label")}</FormLabel>
+              <FormLabel htmlFor="email">{t("formInputs.email.label")}</FormLabel>
               <FormControl>
                 <Input
+                  id="email"
+                  type="email"
                   placeholder={t("formInputs.email.placeholder")}
                   {...field}
+                  aria-describedby="email-error"
+                  className="focus:ring-2 focus:ring-[#23F6F0] focus:ring-offset-2"
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage id="email-error" />
             </FormItem>
           )}
         />
@@ -163,14 +171,18 @@ const SignUpForm = () => {
           name="parentPhone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("formInputs.phoneNumber.label")}</FormLabel>
+              <FormLabel htmlFor="parentPhone">{t("formInputs.phoneNumber.label")}</FormLabel>
               <FormControl>
                 <Input
+                  id="parentPhone"
+                  type="tel"
                   placeholder={t("formInputs.phoneNumber.placeholder")}
                   {...field}
+                  aria-describedby="parentPhone-error"
+                  className="focus:ring-2 focus:ring-[#23F6F0] focus:ring-offset-2"
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage id="parentPhone-error" />
             </FormItem>
           )}
         />
@@ -179,25 +191,31 @@ const SignUpForm = () => {
           name="password"
           render={({ field }) => (
             <FormItem className="relative">
-              <FormLabel>{t("formInputs.password.label")}</FormLabel>
+              <FormLabel htmlFor="password">{t("formInputs.password.label")}</FormLabel>
               <FormControl>
                 <Input
+                  id="password"
                   placeholder={t("formInputs.password.placeholder")}
                   type={showPassword ? "text" : "password"}
                   {...field}
+                  aria-describedby="password-error"
+                  className="focus:ring-2 focus:ring-[#23F6F0] focus:ring-offset-2"
                 />
               </FormControl>
-              <Image
-                className="absolute top-[32px] end-4 cursor-pointer"
-                src={EyeSlashed}
-                alt="eye-slashed"
-                width={24}
-                height={24}
-                onClick={() => {
-                  setShowPassword((prev) => !prev);
-                }}
-              />
-              <FormMessage />
+              <button
+                type="button"
+                className="absolute top-[32px] end-4 cursor-pointer bg-transparent border-none p-0"
+                onClick={() => setShowPassword((prev) => !prev)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                <Image
+                  src={EyeSlashed}
+                  alt={showPassword ? "Hide password" : "Show password"}
+                  width={24}
+                  height={24}
+                />
+              </button>
+              <FormMessage id="password-error" />
             </FormItem>
           )}
         />
@@ -206,25 +224,31 @@ const SignUpForm = () => {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem className="relative">
-              <FormLabel>{t("formInputs.confirmPassword.label")}</FormLabel>
+              <FormLabel htmlFor="confirmPassword">{t("formInputs.confirmPassword.label")}</FormLabel>
               <FormControl>
                 <Input
+                  id="confirmPassword"
                   placeholder={t("formInputs.confirmPassword.placeholder")}
                   type={showConfirmPassword ? "text" : "password"}
                   {...field}
+                  aria-describedby="confirmPassword-error"
+                  className="focus:ring-2 focus:ring-[#23F6F0] focus:ring-offset-2"
                 />
               </FormControl>
-              <Image
-                className="absolute top-[32px] end-4 cursor-pointer"
-                src={EyeSlashed}
-                alt="eye-slashed"
-                width={24}
-                height={24}
-                onClick={() => {
-                  setShowConfirmPassword((prev) => !prev);
-                }}
-              />
-              <FormMessage />
+              <button
+                type="button"
+                className="absolute top-[32px] end-4 cursor-pointer bg-transparent border-none p-0"
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+                aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+              >
+                <Image
+                  src={EyeSlashed}
+                  alt={showConfirmPassword ? "Hide password" : "Show password"}
+                  width={24}
+                  height={24}
+                />
+              </button>
+              <FormMessage id="confirmPassword-error" />
             </FormItem>
           )}
         />
@@ -236,14 +260,17 @@ const SignUpForm = () => {
               <FormItem className="flex items-center justify-center">
                 <FormControl>
                   <Checkbox
-                    className="w-6 h-6 bg-white"
+                    id="acceptTerms"
+                    className="w-6 h-6 bg-white focus:ring-2 focus:ring-[#23F6F0] focus:ring-offset-2"
                     checked={field.value}
                     onCheckedChange={field.onChange}
+                    aria-describedby="acceptTerms-error"
                   />
                 </FormControl>
-                <FormLabel className="pb-2 ms-1">
+                <FormLabel htmlFor="acceptTerms" className="pb-2 ms-1 cursor-pointer">
                   {t("formInputs.acceptTerms.label")}
                 </FormLabel>
+                <FormMessage id="acceptTerms-error" />
               </FormItem>
             )}
           />
