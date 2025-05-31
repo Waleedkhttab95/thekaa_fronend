@@ -1,8 +1,9 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { useTranslations } from "next-intl"
+import { ChevronDown } from "lucide-react"
 
 type Step = {
   number: string
@@ -14,13 +15,16 @@ export default function JourneySteps() {
   const [currentStep, setCurrentStep] = useState(0);
   const t = useTranslations("HomePage.journeySteps");
   const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
 
   const steps: Step[] = [
     {
       number: "01",
       title: t("steps.step1.title"),
       description: t("steps.step1.description"),
-
     },
     {
       number: "02",
@@ -48,18 +52,52 @@ export default function JourneySteps() {
     return () => clearInterval(interval)
   }, [steps.length])
 
-
-
   return (
-    <div ref={containerRef} id="journey-section" className="py-24 px-4 md:px-8 min-h-[500px]">
+    <div ref={containerRef} id="journey-section" className="py-24 px-4 md:px-8 min-h-[500px] relative">
+      {/* Scroll Progress Indicator */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-[#22e3e3] origin-left z-50"
+        style={{ scaleX: scrollYProgress }}
+      />
+
       <div className="max-w-7xl mx-auto">
         <motion.h2
-          className="section-heading !text-center !mb-16" initial={{ opacity: 0, y: 20 }}
+          className="section-heading !text-center !mb-16" 
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           {t("title")}
         </motion.h2>
+
+        {/* Visual Timeline */}
+        <div className="relative mb-16">
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-[#22e3e3]/30" />
+          <div className="flex justify-between relative">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.number}
+                className="flex flex-col items-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+              >
+                <div 
+                  className={`w-8 h-8 rounded-full flex items-center justify-center mb-4 transition-all duration-300 ${
+                    currentStep === index 
+                      ? 'bg-[#22e3e3] scale-110' 
+                      : 'bg-[#22e3e3]/30'
+                  }`}
+                >
+                  <span className="text-sm font-bold text-[#1a1a1a]">{step.number}</span>
+                </div>
+                <div className="text-center max-w-[200px]">
+                  <h4 className="text-sm font-semibold text-[#22e3e3] mb-2">{step.title}</h4>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
         <div className="flex flex-col md:flex-row">
           {/* Steps content - full width on mobile, 50% on larger screens */}
@@ -73,7 +111,7 @@ export default function JourneySteps() {
                 transition={{ duration: 0.5 }}
                 className="absolute inset-0 select-none"
               >
-                <div className="flex flex-col  h-full">
+                <div className="flex flex-col h-full">
                   <div className="text-[#22e3e3] text-8xl md:text-9xl lg:text-[12rem] font-bold mb-4">
                     {steps[currentStep].number}
                   </div>
@@ -102,7 +140,19 @@ export default function JourneySteps() {
           </div>
         </div>
 
-
+        {/* Directional Cue */}
+        {/* <motion.div 
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          onClick={() => {
+            const nextSection = document.getElementById('successStories-section');
+            nextSection?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          <span className="text-[#22e3e3] text-sm mb-2">Scroll to Success Stories</span>
+          <ChevronDown className="text-[#22e3e3] w-6 h-6" />
+        </motion.div> */}
       </div>
     </div>
   )
