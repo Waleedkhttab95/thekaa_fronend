@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { login as loginService } from "@/services/auth";
 import { axiosClient } from "@/lib/axios";
 import { toast } from "@/components/atoms/sooner";
@@ -6,22 +6,20 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { ProtectedRoutes } from "@/config/routes";
+import { useTransition } from "react";
 
 export const useLogin = () => {
   const router = useRouter();
-  const queryClient = useQueryClient();
   const t = useTranslations("LoginPage");
+  const [isNavigating, startTransition] = useTransition();
 
-  return useMutation({
+  const loginMutation = useMutation({
     mutationFn: (credentials: { email: string; password: string }) =>
       loginService(axiosClient, credentials),
-    onMutate: async (variables) => {
-      console.log("Logging in with:", variables);
-      await queryClient.cancelQueries({ queryKey: ["auth", "user"] });
-      return { email: variables.email };
-    },
     onSuccess: async () => {
-      router.replace(ProtectedRoutes.SonsFiles);
+      startTransition(() => {
+        router.replace(ProtectedRoutes.SonsFiles);
+      });
     },
     onError: (error, variables) => {
       if (axios.isAxiosError(error)) {
@@ -43,4 +41,6 @@ export const useLogin = () => {
       }
     },
   });
+
+  return { ...loginMutation, isNavigating };
 };

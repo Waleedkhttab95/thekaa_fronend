@@ -14,7 +14,6 @@ export default function LogoutButton() {
     deleteCookie("Authentication");
     deleteCookie("current_user");
     deleteCookie("assesment_test_status");
-    queryClient.setQueryData(["auth", "user"], null);
     router.replace(GuestOnlyRoutes.Login);
   };
 
