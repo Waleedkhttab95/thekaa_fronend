@@ -36,7 +36,7 @@ export default function LandingFaq() {
   return (
     <div className="py-10 md:py-32 px-4 md:px-8">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-center text-4xl  font-bold mb-16 bg-gradient-to-r from-[#22e3e3] via-[#dd8ee0] to-[#ffb6e1] bg-clip-text text-transparent">
+        <h2 className="text-center text-4xl md:text-5xl font-extrabold mb-16 bg-gradient-to-r from-[#1a9e9a] via-[#c47bc0] to-[#8a4a86] bg-clip-text text-transparent" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', letterSpacing: '-0.02em' }}>
           اطمئن، جهّزنا لك كل الإجابات
         </h2>
 

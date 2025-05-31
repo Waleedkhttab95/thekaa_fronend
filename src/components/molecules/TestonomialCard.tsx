@@ -30,7 +30,7 @@ export const TestimonialCard = ({ testimonial, index }: props) => {
         </div>
 
         {/* Quote content */}
-        <p className="text-white select-none text-md md:text-xl font-bold md:mb-5 text-right ms-3 mt-6 md:mt-16" >
+        <p className="text-[#f8f8f8] select-none text-md md:text-xl font-bold md:mb-5 text-right ms-3 mt-6 md:mt-16" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)' }}>
           {testimonial.quote}
         </p>
 
