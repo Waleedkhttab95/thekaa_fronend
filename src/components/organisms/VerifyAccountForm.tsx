@@ -41,8 +41,6 @@ const VerifyAccountForm = () => {
       }
 
       try {
-        const user = await getUser(axiosAuth);
-        queryClient.setQueryData(["auth", "user"], user);
         router.replace(ProtectedRoutes.SonsFiles);
       } catch {
         toast({
