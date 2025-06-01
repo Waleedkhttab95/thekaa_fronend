@@ -48,22 +48,24 @@ const LandingHeader = () => {
         )}
       >
         <div className="flex items-center gap-2">
-          <Image 
-            className="text-white text-2xl font-bold" 
-            src="/assets/images/white-logo.svg" 
-            width={94} 
-            height={26} 
-            alt='Thekaa Logo' 
+          <Image
+            className="text-white text-2xl font-bold"
+            src="/assets/images/white-logo.svg"
+            width={94}
+            height={26}
+            alt='Thekaa Logo'
           />
         </div>
 
         {/* <LandingNavbar /> */}
+        <LandingNavbar />
 
+        {/* Login button for larger screens */}
         <div className="hidden lg:flex items-center gap-3">
           {!accessToken && (
-            <Button 
-              variant="ghost" 
-              className="text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-300" 
+            <Button
+              variant="ghost"
+              className="text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-300"
               onClick={handleLoginClick}
             >
               {t("login")}
