@@ -75,7 +75,7 @@ const LandingHeader = () => {
       </div>
 
       {/* Spacer div to prevent content jump when header becomes fixed */}
-      {isScrolled && <div className="h-16 mb-10"></div>}
+      {isScrolled && <div className="h-18 mb-10"></div>}
     </div>
   )
 }
