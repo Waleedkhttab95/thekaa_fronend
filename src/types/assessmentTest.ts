@@ -7,6 +7,7 @@ export interface UnitQuestion {
     key: string;
     value: string;
   };
+  unit_name?: string;
   correct_answer: string | boolean;
 }
 
