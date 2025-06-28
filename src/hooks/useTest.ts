@@ -1,161 +1,129 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Question } from "@/types/question.types";
-import { toast } from "@/components/atoms/sooner";
 import { useAxiosAuth } from "@/hooks/useAxiosAuth";
-import { useAssessmentSubmitMutation } from "./rqs/assessmentTest";
-import { levelAssessment, TestSubmissionData } from "@/types/assessmentTest";
-import { transformSubmission } from "@/utils/questionsMapper";
+import { interviewStudent, submitAssessmentResult } from "@/services/assessmentTest";
+import { getStudentById } from "@/services/students";
 import { getCookie } from "cookies-next/client";
+import { toast } from "@/components/atoms/sooner";
 import { useTranslations } from "next-intl";
 import { ProtectedRoutes } from "@/config/routes";
 import Router from "next/router";
 
-export const useTest = (questions: Question[], data: levelAssessment) => {
+export const useTest = () => {
   const axiosAuth = useAxiosAuth();
-  const submitMutation = useAssessmentSubmitMutation(axiosAuth);
-
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
+  const [currentQuestion, setCurrentQuestion] = useState<string>("");
+  const [report, setReport] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [submittedAnswers, setSubmittedAnswers] = useState<
-    Record<string, boolean>
-  >({});
+  const [error, setError] = useState<string | null>(null);
   const t = useTranslations("testPage");
 
-  const formSchema = z.object({
-    answers: z.record(
-      z.string().min(1, "Answer is required").max(500, "Answer is too long")
-    ),
-    answerTexts: z.record(z.string().max(500, "Answer is too long")).optional(),
+  const methods = useForm<{ answer: string }>({
+    defaultValues: { answer: "" },
   });
 
-  const methods = useForm<TestSubmissionData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      answers: {},
-      answerTexts: {},
-    },
-  });
-
-  const { setValue, watch } = methods;
-  const answers = watch("answers");
-
-  const currentQuestion = questions[currentQuestionIndex] as Question;
-  const isLastQuestion = currentQuestionIndex === questions.length - 1;
-  const currentAnswer = answers[currentQuestion?.id] || "";
-
-  const handleAnswerSelect = (answerId: string) => {
-    if (!currentQuestion) return;
-
-    setValue(`answers.${currentQuestion.id}`, answerId, {
-      shouldValidate: true,
-    });
-
-    if (currentQuestion.type === "text-choice" && currentQuestion.options) {
-      const selectedChoice = currentQuestion.options.find(
-        (option) => option.id === answerId
-      );
-      if (selectedChoice) {
-        setValue(`answerTexts.${currentQuestion.id}`, selectedChoice.text, {
-          shouldValidate: false,
-        });
+  // Start interview on mount
+  useEffect(() => {
+    const startInterview = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const data = await interviewStudent(axiosAuth, [], "en", "math", "10");
+        setCurrentQuestion(data.response);
+        setMessages([{ role: "interviewer", content: data.response }]);
+        setReport(data.report);
+        if (data.report) setIsCompleted(true);
+      } catch (err) {
+        setError("Failed to start interview");
+      } finally {
+        setIsLoading(false);
       }
-    }
-  };
-
-  const handleFillAnswer = (value: string) => {
-    if (!currentQuestion) return;
-
-    const trimmedValue = value.slice(0, 500);
-
-    setValue(`answers.${currentQuestion.id}`, trimmedValue, {
-      shouldValidate: true,
-    });
-
-    setValue(`answerTexts.${currentQuestion.id}`, trimmedValue, {
-      shouldValidate: false,
-    });
-  };
+    };
+    startInterview();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleNext = async () => {
-    if (!currentQuestion) return;
-
-    if (currentQuestion.type === "fill" && !currentAnswer.trim()) return;
-    if (!currentAnswer && currentQuestion.type !== "fill") return;
-
-    setSubmittedAnswers((prev) => ({
-      ...prev,
-      [currentQuestion.id]: true,
-    }));
-
-    if (isLastQuestion) {
-      setIsAnalyzing(true);
-      onSubmit(methods.getValues());
-      return;
-    }
-
-    setCurrentQuestionIndex((prev) => prev + 1);
-  };
-
-  const onSubmit = async (testData: TestSubmissionData) => {
-    setIsSubmitting(true);
+    const answer = methods.getValues("answer");
+    if (!answer.trim()) return;
+    setIsLoading(true);
+    setError(null);
     try {
-      const studentId = getCookie("current_user") as string;
-      const results = transformSubmission(testData, data, studentId);
+      const newMessages = [
+        ...messages,
+        { role: "student", content: answer },
+      ];
+      const data = await interviewStudent(axiosAuth, newMessages, "en", "math", "10");
+      // If report is present, end the conversation and show the report only
+      if (data.report) {
+        setReport(data.report);
+        setIsCompleted(true);
+        setIsAnalyzing(false);
+        methods.reset({ answer: "" });
+        // Submit assessment result to backend
+        try {
+          const studentId = getCookie("current_user") as string;
+          const student = await getStudentById(axiosAuth, studentId);
+          const subjectId = student.subject;
+          // Minimal AssessmentResult payload
+          const assessmentResult = {
+            student_id: studentId,
+            subject_id: subjectId,
+            report: data.report,
+          };
+          const res =  await submitAssessmentResult(axiosAuth, studentId, assessmentResult);
+          setIsAnalyzing(true);
 
-      console.log("Test Data: ", results);
-
-      const res = await submitMutation.mutateAsync({
-        studentId: studentId,
-        data: results,
-      });
-
-      console.log("Test Submitted Successfully", res);
-
-      toast({
-        title: t("success"),
-        description: t("successDescription"),
-        variant: "success",
-      });
-
-      setIsCompleted(true);
-      setTimeout(() => {
-        window.location.href = ProtectedRoutes.Dashboard;
-      }, 2000);
-    } catch (error) {
-      console.error("Submit error:", error);
-      toast({
-        title: t("failed"),
-        description: t("failedDescription"),
-        variant: "destructive",
-      });
-      setIsAnalyzing(false);
-
-      setTimeout(() => {
-        Router.push(ProtectedRoutes.SonsFiles);
-      }, 1500);
+          toast({
+            title: t("success"),
+            description: t("successDescription"),
+            variant: "success",
+          });
+    
+          setIsCompleted(true);
+          if(res){
+            window.location.href = ProtectedRoutes.Dashboard;
+          }
+          
+        } catch (e) {
+          console.error("Submit error:", error);
+          toast({
+            title: t("failed"),
+            description: t("failedDescription"),
+            variant: "destructive",
+          });
+          setIsAnalyzing(false);
+    
+          setTimeout(() => {
+            Router.push(ProtectedRoutes.SonsFiles);
+          }, 1500);
+        }
+        return;
+      }
+      setMessages([
+        ...newMessages,
+        { role: "interviewer", content: data.response },
+      ]);
+      setCurrentQuestion(data.response);
+      setReport(data.report);
+      methods.reset({ answer: "" });
+    } catch (err) {
+      setError("Failed to continue interview");
     } finally {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
   return {
     methods,
-    currentQuestionIndex,
     currentQuestion,
-    isLastQuestion,
     isCompleted,
-    isSubmitting,
     isAnalyzing,
-    currentAnswer,
-    submittedAnswers,
-    handleAnswerSelect,
-    handleFillAnswer,
+    report,
+    isLoading,
+    error,
     handleNext,
-    onSubmit,
   };
 };

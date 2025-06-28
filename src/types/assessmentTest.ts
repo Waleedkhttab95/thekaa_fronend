@@ -32,12 +32,7 @@ export interface levelAssessment {
 export interface AssessmentResult {
   student_id: string;
   subject_id: string;
-  questions: {
-    question_text: string;
-    student_answer: string;
-    correct_answer: string;
-    unit_number: number;
-  }[];
+  report: any;
 }
 
 export type TestSubmissionData = {

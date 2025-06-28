@@ -303,6 +303,8 @@
     "switchLocale-sm": "E"
   },
   "testPage": {
+    "typeYourAnswer":"اكتب الإجابة هنا",
+    "interviewReport":"تقرير المقابلة" , 
     "questionsLoading": "جار تحميل الأسئلة...",
     "errorLoading": "خطأ في تحميل الأسئلة...",
     "question": "سؤال",
