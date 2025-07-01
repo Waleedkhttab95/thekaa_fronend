@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
@@ -41,7 +41,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         </Link>
         <div className="flex items-center gap-3 justify-evenly sm:justify-start w-full sm:w-auto">
           <LocaleSwitcher onlySmall />
-          <ProfileLogo/>
+          <ProfileLogo />
           <Link href={ProtectedRoutes.Dashboard}>
             <Button className="sm:w-48 text-base">
               <Image
