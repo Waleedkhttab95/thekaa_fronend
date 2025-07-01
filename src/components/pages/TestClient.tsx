@@ -12,13 +12,14 @@ import {
 import { useTranslations } from "next-intl";
 import Loading from "../atoms/loading";
 import Image from "next/image";
-
 interface TestClientProps {
   currentQuestion: string;
   isCompleted: boolean;
   isAnalyzing: boolean;
   report: string | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   methods: any;
+  // methods: UseFormReturn<{ answer: string }>;
   handleNext: () => void;
 }
 
@@ -26,7 +27,6 @@ export default function TestClient({
   currentQuestion,
   isCompleted,
   isAnalyzing,
-  report,
   methods,
   handleNext,
 }: TestClientProps) {
@@ -39,11 +39,11 @@ export default function TestClient({
     return (
       <Card className="w-full max-w-2xl mx-auto mt-10 p-8">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold mb-4">{t("interviewReport")}</CardTitle>
+          <CardTitle className="text-2xl font-bold mb-4">
+            {t("interviewReport")}
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-         
-        </CardContent>
+        <CardContent></CardContent>
       </Card>
     );
   }
@@ -56,12 +56,19 @@ export default function TestClient({
     <FormProvider {...methods}>
       <Card className="w-full max-w-2xl mx-auto mt-10 p-8">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold mb-4">{t("placementTest")}</CardTitle>
+          <CardTitle className="text-2xl font-bold mb-4">
+            {t("placementTest")}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-6">
             <div className="mb-2 text-lg font-semibold bg-black text-white rounded-[12px] p-4 border border-[#222] shadow-sm flex items-center gap-3">
-              <Image src="/assets/images/icons/robot.svg" alt="AI" width={32} height={32} />
+              <Image
+                src="/assets/images/icons/robot.svg"
+                alt="AI"
+                width={32}
+                height={32}
+              />
               <span>{currentQuestion}</span>
             </div>
             <textarea
