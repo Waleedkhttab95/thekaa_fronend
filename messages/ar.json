@@ -303,8 +303,8 @@
     "switchLocale-sm": "E"
   },
   "testPage": {
-    "typeYourAnswer":"اكتب الإجابة هنا",
-    "interviewReport":"تقرير المقابلة" , 
+    "typeYourAnswer": "اكتب الإجابة هنا",
+    "interviewReport": "تقرير المقابلة",
     "questionsLoading": "جار تحميل الأسئلة...",
     "errorLoading": "خطأ في تحميل الأسئلة...",
     "question": "سؤال",
@@ -388,7 +388,7 @@
     },
     "addStudentButton": "إضافة الطالب",
     "studentAddedSuccessfully": "تم إضافة معلومات الطالب بنجاح",
-    "StartLevelExam": "هل تريد بدء إمتحان تحديد المستوى الآن؟",
+    "StartLevelExam": "هل تريد بدء تحديد المستوى الآن؟",
     "formErrors": {
       "studentFirstNameRequired": "ادخل الاسم الأول الطالب",
       "studentLastNameRequired": "ادخل الاسم الأخير الطالب",
