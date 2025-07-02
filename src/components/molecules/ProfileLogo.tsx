@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "../atoms/button";
 import { useRouter } from "next/navigation";
-import { ProtectedRoutes } from "@/config/routes";
+import { GuestOnlyRoutes, ProtectedRoutes } from "@/config/routes";
 import { useAxiosAuth } from "@/hooks/useAxiosAuth";
 import { getCookie } from "cookies-next";
 import { useStudent } from "@/hooks/rqs/students";
@@ -13,7 +13,7 @@ import {
   DropdownMenuItem,
 } from "@/components/atoms/dropdown-menu";
 import { useTranslations } from "next-intl";
-import { logout } from "@/services/auth";
+import { deleteCookie } from "cookies-next/client";
 
 const ProfileLogo = () => {
   const axiosAuth = useAxiosAuth();
@@ -26,8 +26,11 @@ const ProfileLogo = () => {
   const [open, setOpen] = React.useState(false);
   const t = useTranslations("dropDownItems");
 
-  const handleLogout = async () => {
-    await logout();
+  const handleLogout = () => {
+    deleteCookie("Authentication");
+    deleteCookie("current_user");
+    deleteCookie("assesment_test_status");
+    router.replace(GuestOnlyRoutes.Login);
   };
 
   return (
