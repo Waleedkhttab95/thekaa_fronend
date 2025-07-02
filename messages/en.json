@@ -302,8 +302,8 @@
     "switchLocale-sm": "ع"
   },
   "testPage": {
-    "typeYourAnswer":"Answer",
-    "interviewReport":"interview Report" , 
+    "typeYourAnswer": "Answer",
+    "interviewReport": "interview Report",
     "questionsLoading": "Questions Loading...",
     "errorLoading": "No questions found...",
     "question": "Question",
@@ -649,5 +649,11 @@
     "cancel": "Cancel",
     "askAboutAnything": "Ask me about anything ...",
     "talkOrAskAboutAnyThing": " Talk or ask about anything"
-  } 
+  },
+  "dropDownItems": {
+    "sonsFiles": "Sons Files",
+    "reports": "Reports",
+    "editStudent": "Edit Student",
+    "logout": "Logout"
+  }
 }
