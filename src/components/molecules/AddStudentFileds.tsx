@@ -108,7 +108,7 @@ const AddStudentFields = ({ currentStepData, formField }: props) => {
                 }`}
               >
                 <Image
-                  src={`/assets/images/icons/${option.course}.svg`}
+                  src={option.icon ?? "/assets/images/learning.png"}
                   width={69}
                   height={69}
                   alt={option.name}
