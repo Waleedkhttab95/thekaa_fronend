@@ -14,16 +14,18 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       default: "bg-card border",
       transparent:
         "bg-card-transparent backdrop-blur-sm border border-muted/30",
-      blue: "bg-[#23F6F0]",
-      pink: "bg-[#F7AEF3]",
+      blue: "bg-slate-100",
+      pink: "bg-slate-100",
     };
 
     return (
       <div
         ref={ref}
         className={cn(
-          "w-full sm:w-auto md:w-auto rounded-[40px] text-card-foreground mb-14",
+          "w-full sm:w-auto md:w-auto rounded-[40px] mb-14",
           variantStyles[variant],
+          variant === "blue" && "text-[#000000]",
+          variant === "pink" && "text-[#000000]",
           className
         )}
         {...props}

@@ -1,130 +1,91 @@
 "use client";
 import { FormProvider } from "react-hook-form";
 import { Button } from "@/components/atoms/button";
-import { Question } from "@/types/question.types";
-import { Questions } from "@/components/organisms/Questions";
 import { ExamCompletion } from "@/components/molecules/ExamCompletion";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/molecules/card";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useTest } from "@/hooks/useTest";
-import { levelAssessment } from "@/types/assessmentTest";
-import { toast } from "../atoms/sooner";
-import { useRouter } from "next/navigation";
 import Loading from "../atoms/loading";
-import { ProtectedRoutes } from "@/config/routes";
-import { useEffect, useRef } from "react";
-
+import Image from "next/image";
 interface TestClientProps {
-  questions: Question[];
-  data: levelAssessment;
+  currentQuestion: string;
+  isCompleted: boolean;
+  isAnalyzing: boolean;
+  report: string | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  methods: any;
+  // methods: UseFormReturn<{ answer: string }>;
+  handleNext: () => void;
 }
 
-export default function TestClient({ questions, data }: TestClientProps) {
+export default function TestClient({
+  currentQuestion,
+  isCompleted,
+  isAnalyzing,
+  methods,
+  handleNext,
+}: TestClientProps) {
   const t = useTranslations("testPage");
-  const router = useRouter();
-  const hasShownErrorToast = useRef(false);
 
-  const {
-    methods,
-    currentQuestionIndex,
-    currentQuestion,
-    isLastQuestion,
-    isCompleted,
-    isAnalyzing,
-    currentAnswer,
-    handleAnswerSelect,
-    handleFillAnswer,
-    handleNext,
-  } = useTest(questions, data);
-
-  useEffect(() => {
-    if (questions.length === 0 && !hasShownErrorToast.current) {
-      hasShownErrorToast.current = true;
-      toast({
-        title: t("failed"),
-        description: t("errorLoading"),
-        variant: "destructive",
-      });
-      setTimeout(() => {
-        router.push(ProtectedRoutes.SonsFiles);
-      }, 1500);
-    }
-  }, [questions.length, t, router]);
-
-  const isAnswerRequired =
-    currentQuestion?.type === "fill" ? !currentAnswer.trim() : !currentAnswer;
-
-  if (questions.length === 0) {
-    return <Loading />;
+  if (isAnalyzing) {
+    return <ExamCompletion initialState="analyzing" />;
+  }
+  if (isCompleted) {
+    return (
+      <Card className="w-full max-w-2xl mx-auto mt-10 p-8">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold mb-4">
+            {t("interviewReport")}
+          </CardTitle>
+        </CardHeader>
+        <CardContent></CardContent>
+      </Card>
+    );
   }
 
-  const checkAnswer = () => {
-    if (isAnswerRequired) {
-      toast({
-        title:
-          currentQuestion?.type === "fill"
-            ? t("missingFill")
-            : t("missingSelect"),
-        variant: "destructive",
-      });
-      return;
-    }
-    handleNext();
-  };
-
-  if (isAnalyzing || isCompleted) {
-    return (
-      <ExamCompletion initialState={isCompleted ? "completed" : "analyzing"} />
-    );
+  if (!currentQuestion) {
+    return <Loading />;
   }
 
   return (
     <FormProvider {...methods}>
-      <Card
-        variant="default"
-        className="relative xl:w-[1141px] md:w-[75%] w-[95%] max-h-[770] max-w-full p-8 flex flex-col justify-center self-center mx-auto"
-      >
+      <Card className="w-full max-w-2xl mx-auto mt-10 p-8">
         <CardHeader>
-          <CardDescription>
-            {t("question")} {currentQuestionIndex + 1} {t("of")}{" "}
-            {questions.length}
-          </CardDescription>
-          <CardTitle className="font-pingar font-bold text-2xl">
+          <CardTitle className="text-2xl font-bold mb-4">
             {t("placementTest")}
           </CardTitle>
         </CardHeader>
-        <CardContent className="flex justify-center">
-          <Questions
-            question={currentQuestion}
-            selectedAnswer={currentAnswer}
-            onSelectAnswer={handleAnswerSelect}
-            answer={currentAnswer}
-            setAnswer={handleFillAnswer}
-          />
+        <CardContent>
+          <div className="flex flex-col gap-6">
+            <div className="mb-2 text-lg font-semibold bg-black text-white rounded-[12px] p-4 border border-[#222] shadow-sm flex items-center gap-3">
+              <Image
+                src="/assets/images/icons/robot.svg"
+                alt="AI"
+                width={32}
+                height={32}
+              />
+              <span>{currentQuestion}</span>
+            </div>
+            <textarea
+              {...methods.register("answer", { required: true })}
+              className="w-full h-[120px] p-4 border rounded-[20px] resize-none text-base font-normal bg-white shadow-md focus:outline-none focus:ring-2 focus:ring-[#23F6F0]"
+              placeholder={t("typeYourAnswer")}
+              maxLength={1000}
+            />
+          </div>
         </CardContent>
-        <CardFooter className="flex justify-end">
+        <CardFooter className="flex justify-end mt-4">
           <Button
-            type="submit"
-            form={`question-form-${currentQuestion.id}`}
-            onClick={checkAnswer}
+            type="button"
+            onClick={handleNext}
             className="text-[16px] font-pingar font-bold w-[193px] h-[56px] flex flex-row justify-center items-center text-start select-none"
           >
-            {isLastQuestion ? <>{t("finishExam")}</> : <>{t("next")}</>}
-            <Image
-              src={"/arrow.svg"}
-              width={24}
-              height={24}
-              alt="next"
-              className="ms-2 ltr:scale-x-[-1]"
-            />
+            {t("next")}
           </Button>
         </CardFooter>
       </Card>

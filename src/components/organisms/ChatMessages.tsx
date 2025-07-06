@@ -1,10 +1,9 @@
 import React from 'react'
 import ChatMessage from '../molecules/ChatMessage'
+import { AiAssistantMessage } from '@/services/content'
+
 type props = {
-  messages: {
-    text: string
-    user?: boolean
-  }[]
+  messages: AiAssistantMessage[]
 }
 const ChatMessages = ({ messages }: props) => {
   return (

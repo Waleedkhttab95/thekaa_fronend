@@ -1,120 +1,66 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Question } from "@/types/question.types";
-import { toast } from "@/components/atoms/sooner";
 import { useAxiosAuth } from "@/hooks/useAxiosAuth";
-import { useAssessmentSubmitMutation } from "./rqs/assessmentTest";
-import { levelAssessment, TestSubmissionData } from "@/types/assessmentTest";
-import { transformSubmission } from "@/utils/questionsMapper";
-import { getCookie } from "cookies-next/client";
+import {
+  interviewStudent,
+  submitAssessmentResult,
+} from "@/services/assessmentTest";
+import { getStudentById } from "@/services/students";
+import { getCookie, setCookie } from "cookies-next/client";
+import { toast } from "@/components/atoms/sooner";
 import { useTranslations } from "next-intl";
 import { ProtectedRoutes } from "@/config/routes";
-import Router from "next/router";
 
-export const useTest = (questions: Question[], data: levelAssessment) => {
+export const useTest = () => {
   const axiosAuth = useAxiosAuth();
-  const submitMutation = useAssessmentSubmitMutation(axiosAuth);
-
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [messages, setMessages] = useState<{ role: string; content: string }[]>(
+    []
+  );
+  const [currentQuestion, setCurrentQuestion] = useState<string>("");
+  const [report, setReport] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [submittedAnswers, setSubmittedAnswers] = useState<
-    Record<string, boolean>
-  >({});
+  const [error, setError] = useState<string | null>(null);
   const t = useTranslations("testPage");
 
-  const formSchema = z.object({
-    answers: z.record(
-      z.string().min(1, "Answer is required").max(500, "Answer is too long")
-    ),
-    answerTexts: z.record(z.string().max(500, "Answer is too long")).optional(),
+  const methods = useForm<{ answer: string }>({
+    defaultValues: { answer: "" },
   });
 
-  const methods = useForm<TestSubmissionData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      answers: {},
-      answerTexts: {},
-    },
-  });
+  const containsReportKeyword = (text: string): boolean => {
+    const reportKeywords = ["REPORT", "تقرير"];
+    return reportKeywords.some((keyword) =>
+      text.toLowerCase().includes(keyword.toLocaleLowerCase())
+    );
+  };
 
-  const { setValue, watch } = methods;
-  const answers = watch("answers");
-
-  const currentQuestion = questions[currentQuestionIndex] as Question;
-  const isLastQuestion = currentQuestionIndex === questions.length - 1;
-  const currentAnswer = answers[currentQuestion?.id] || "";
-
-  const handleAnswerSelect = (answerId: string) => {
-    if (!currentQuestion) return;
-
-    setValue(`answers.${currentQuestion.id}`, answerId, {
-      shouldValidate: true,
-    });
-
-    if (currentQuestion.type === "text-choice" && currentQuestion.options) {
-      const selectedChoice = currentQuestion.options.find(
-        (option) => option.id === answerId
-      );
-      if (selectedChoice) {
-        setValue(`answerTexts.${currentQuestion.id}`, selectedChoice.text, {
-          shouldValidate: false,
-        });
+  const extractReportFromResponse = (aiResponse: string): object | null => {
+    const match = aiResponse.match(/REPORT:\s*({[\s\S]*})/i);
+    if (match && match[1]) {
+      try {
+        return JSON.parse(match[1]);
+      } catch {
+        return null;
       }
     }
+    return null;
   };
 
-  const handleFillAnswer = (value: string) => {
-    if (!currentQuestion) return;
-
-    const trimmedValue = value.slice(0, 500);
-
-    setValue(`answers.${currentQuestion.id}`, trimmedValue, {
-      shouldValidate: true,
-    });
-
-    setValue(`answerTexts.${currentQuestion.id}`, trimmedValue, {
-      shouldValidate: false,
-    });
-  };
-
-  const handleNext = async () => {
-    if (!currentQuestion) return;
-
-    if (currentQuestion.type === "fill" && !currentAnswer.trim()) return;
-    if (!currentAnswer && currentQuestion.type !== "fill") return;
-
-    setSubmittedAnswers((prev) => ({
-      ...prev,
-      [currentQuestion.id]: true,
-    }));
-
-    if (isLastQuestion) {
-      setIsAnalyzing(true);
-      onSubmit(methods.getValues());
-      return;
-    }
-
-    setCurrentQuestionIndex((prev) => prev + 1);
-  };
-
-  const onSubmit = async (testData: TestSubmissionData) => {
-    setIsSubmitting(true);
+  const submitAssessment = async (reportData: object) => {
     try {
       const studentId = getCookie("current_user") as string;
-      const results = transformSubmission(testData, data, studentId);
+      const student = await getStudentById(axiosAuth, studentId);
+      const subjectId = student.subject;
 
-      console.log("Test Data: ", results);
+      // Minimal AssessmentResult payload
+      const assessmentResult = {
+        student_id: studentId,
+        subject_id: subjectId,
+        report: reportData,
+      };
 
-      const res = await submitMutation.mutateAsync({
-        studentId: studentId,
-        data: results,
-      });
-
-      console.log("Test Submitted Successfully", res);
+      await submitAssessmentResult(axiosAuth, studentId, assessmentResult);
 
       toast({
         title: t("success"),
@@ -123,39 +69,117 @@ export const useTest = (questions: Question[], data: levelAssessment) => {
       });
 
       setIsCompleted(true);
-      setTimeout(() => {
-        window.location.href = ProtectedRoutes.Dashboard;
-      }, 2000);
-    } catch (error) {
-      console.error("Submit error:", error);
+      setIsAnalyzing(false);
+
+      setCookie("assesment_test_status", "true");
+      window.location.href = ProtectedRoutes.Dashboard;
+    } catch (e) {
+      console.error("Submit error:", e);
       toast({
         title: t("failed"),
         description: t("failedDescription"),
         variant: "destructive",
       });
       setIsAnalyzing(false);
+    }
+  };
 
-      setTimeout(() => {
-        Router.push(ProtectedRoutes.SonsFiles);
-      }, 1500);
-    } finally {
-      setIsSubmitting(false);
+  const handleAIResponse = async (
+    aiResponse: string,
+    reportData: object | null,
+    newMessages: { role: string; content: string }[]
+  ) => {
+    let finalReportData = reportData;
+    if (!finalReportData && containsReportKeyword(aiResponse)) {
+      finalReportData = extractReportFromResponse(aiResponse);
+    }
+
+    // console.log(aiResponse);
+    // console.log(finalReportData);
+
+    setMessages([...newMessages, { role: "interviewer", content: aiResponse }]);
+    setCurrentQuestion(aiResponse);
+    setReport(finalReportData ? JSON.stringify(finalReportData) : null);
+
+    if (containsReportKeyword(aiResponse) && finalReportData) {
+      setIsAnalyzing(true);
+      setIsLoading(false);
+      await submitAssessment(finalReportData);
+      return true;
+    }
+
+    return false;
+  };
+
+  // Start interview on mount
+  useEffect(() => {
+    const startInterview = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const data = await interviewStudent(axiosAuth, [], "en", "math", "10");
+
+        const autoSubmitted = await handleAIResponse(
+          data.response,
+          data.report,
+          []
+        );
+
+        if (!autoSubmitted) {
+          setIsLoading(false);
+        }
+      } catch (err) {
+        setError(err + " Failed to start interview");
+        setIsLoading(false);
+      }
+    };
+    startInterview();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleNext = async () => {
+    const answer = methods.getValues("answer");
+    if (!answer.trim()) return;
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const newMessages = [...messages, { role: "student", content: answer }];
+      // console.log(messages);
+      const data = await interviewStudent(
+        axiosAuth,
+        newMessages,
+        "en",
+        "math",
+        "10"
+      );
+
+      methods.reset({ answer: "" });
+
+      const autoSubmitted = await handleAIResponse(
+        data.response,
+        data.report,
+        newMessages
+      );
+
+      if (!autoSubmitted) {
+        setIsLoading(false);
+      }
+    } catch (err) {
+      setError(err + " Failed to continue interview");
+      setIsLoading(false);
     }
   };
 
   return {
     methods,
-    currentQuestionIndex,
     currentQuestion,
-    isLastQuestion,
     isCompleted,
-    isSubmitting,
     isAnalyzing,
-    currentAnswer,
-    submittedAnswers,
-    handleAnswerSelect,
-    handleFillAnswer,
+    report,
+    isLoading,
+    error,
     handleNext,
-    onSubmit,
   };
 };
