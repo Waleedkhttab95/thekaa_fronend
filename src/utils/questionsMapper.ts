@@ -1,8 +1,8 @@
 import {
-  AssessmentResult,
+  // AssessmentResult,
   levelAssessment,
-  TestSubmissionData,
-  Unit,
+  // TestSubmissionData,
+  // Unit,
 } from "@/types/assessmentTest";
 import { Question } from "@/types/question.types";
 
@@ -57,50 +57,50 @@ export function mapAPIQuestionsToComponentFormat(
   return mappedQuestions;
 }
 
-export const transformSubmission = (
-  submission: TestSubmissionData,
-  apiData: levelAssessment,
-  studentId: string
-): AssessmentResult => {
-  const questions = apiData.questions;
-  const subjectId = apiData.subjectId;
+// export const transformSubmission = (
+//   submission: TestSubmissionData,
+//   apiData: levelAssessment,
+//   studentId: string
+// ): AssessmentResult => {
+//   const questions = apiData.questions;
+//   const subjectId = apiData.subjectId;
 
-  const questionMap = new Map();
-  let counter = 0;
+//   const questionMap = new Map();
+//   let counter = 0;
 
-  questions.forEach((unit: Unit) => {
-    unit.unit_Questions.forEach((q) => {
-      counter++;
-      const questionId = `question-${counter}`;
-      questionMap.set(questionId, {
-        text: q.question || q.statement,
-        correct_answer:
-          typeof q.correct_answer === "boolean"
-            ? q.correct_answer
-              ? "true"
-              : "false"
-            : q.correct_answer,
-        unit_name: q.unit_name,
-        unit_number: unit.unit_Number,
-      });
-    });
-  });
+//   questions.forEach((unit: Unit) => {
+//     unit.unit_Questions.forEach((q) => {
+//       counter++;
+//       const questionId = `question-${counter}`;
+//       questionMap.set(questionId, {
+//         text: q.question || q.statement,
+//         correct_answer:
+//           typeof q.correct_answer === "boolean"
+//             ? q.correct_answer
+//               ? "true"
+//               : "false"
+//             : q.correct_answer,
+//         unit_name: q.unit_name,
+//         unit_number: unit.unit_Number,
+//       });
+//     });
+//   });
 
-  const transformedQuestions = Object.entries(submission.answers).map(
-    ([questionId, answerId]) => {
-      const questionDetails = questionMap.get(questionId);
-      return {
-        question_text: questionDetails.text,
-        student_answer: answerId,
-        correct_answer: questionDetails.correct_answer,
-        unit_number: questionDetails.unit_number,
-      };
-    }
-  );
+//   const transformedQuestions = Object.entries(submission.answers).map(
+//     ([questionId, answerId]) => {
+//       const questionDetails = questionMap.get(questionId);
+//       return {
+//         question_text: questionDetails.text,
+//         student_answer: answerId,
+//         correct_answer: questionDetails.correct_answer,
+//         unit_number: questionDetails.unit_number,
+//       };
+//     }
+//   );
 
-  return {
-    student_id: studentId,
-    subject_id: subjectId,
-    questions: transformedQuestions,
-  };
-};
+//   return {
+//     student_id: studentId,
+//     subject_id: subjectId,
+//     questions: transformedQuestions,
+//   };
+// };
