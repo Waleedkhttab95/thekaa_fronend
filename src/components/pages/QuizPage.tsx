@@ -1,11 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import mockQuestions from "../../app/(protected)/(main)/test/mockQuestions.json";
 import { Button } from "@/components/atoms/button";
-import { Question } from "@/types/question.types";
-import { Questions } from "@/components/organisms/Questions";
-import { ExamCompletion } from "@/components/molecules/ExamCompletion";
 import {
   Card,
   CardContent,
@@ -17,69 +12,66 @@ import {
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import Timer from "../molecules/timer";
-import { useRouter } from "next/navigation";
+import { useQuiz } from "@/hooks/useQuiz";
+import { TextChoiceQuestion } from "../molecules/textChoiceQuestion";
+import { ResultBox } from "../molecules/QuizResult";
+import LoadingDots from "../atoms/loadingDots";
 
 export default function TestPage() {
-  const router = useRouter();
-
   const t = useTranslations("testPage");
-  const t2 = useTranslations("quizPage");
-  const questions = mockQuestions as Question[];
-  const [answer, setAnswer] = useState("");
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<
-    Record<string, string>
-  >({});
-  const [isCompleted, setIsCompleted] = useState(false);
+  const t2 = useTranslations("quiz");
 
-  if (questions.length === 0) {
-    return <p className="text-center mt-10 text-red-500">Error Loading...</p>;
+  const {
+    questions,
+    timeLimit,
+    currentQuestionIndex,
+    selectedAnswers,
+    isCompleted,
+    isCreatingQuiz,
+    isLoadingQuestions,
+    isSubmitting,
+    error,
+    handleAnswerSelect,
+    handleNext,
+    handleTimerComplete,
+    result,
+  } = useQuiz();
+
+  if (isCreatingQuiz || isLoadingQuestions) {
+    return (
+      <div className="flex justify-center items-center min-h-[500px]">
+        <p className="text-lg font-medium">{t2("loadingQuestions")}</p>
+        <LoadingDots />
+      </div>
+    );
   }
 
-  const currentQuestion = questions[currentQuestionIndex] as Question;
+  if (error || questions.length === 0) {
+    return (
+      <Card className="bg-[url('/student-profile-bg.png')] bg-cover rounded-[40px]">
+        <div className="flex justify-center items-center min-h-[500px]">
+          <div className="text-center">
+            <p className="text-red-500 text-lg mb-4">
+              {error || "Failed to load quiz questions"}
+            </p>
+          </div>
+        </div>
+      </Card>
+    );
+  }
+
+  const currentQuestion = questions[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
-
-  const handleAnswerSelect = (answerId: string) => {
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [currentQuestion.id]: answerId,
-    }));
-  };
-
-  const startTime = Date.now();
-  let timeTaken = 0;
-
-  const handleNext = () => {
-    if (currentQuestion.type === "fill" && !answer.trim()) return;
-    if (!selectedAnswers[currentQuestion.id] && currentQuestion.type !== "fill")
-      return;
-
-    if (isLastQuestion) {
-      setIsCompleted(true);
-      timeTaken = Math.floor((Date.now() - startTime) / 1000);
-      console.log("Time taken:", timeTaken);
-      router.push("/dashboard");
-      return;
-    }
-
-    setCurrentQuestionIndex((prev) => prev + 1);
-    setAnswer("");
-  };
-  const handleTimerComplete = () => {
-    alert("Timer finished!");
-    router.push("/dashboard");
-  };
-
-  const subject = "الكيمياء";
+  const subject = "الرياضيات";
 
   return (
     <>
       {isCompleted ? (
-        <ExamCompletion />
+        <ResultBox open={isCompleted} score={Number(result)} />
       ) : (
         <Card
           variant="default"
-          className="bg-[url('/student-profile-bg.png')] bg-cover rounded-[40px] sapce-y-5 relative min-h-[744px] flex flex-col"
+          className="bg-[url('/student-profile-bg.png')] bg-cover rounded-[40px] space-y-5 relative min-h-[744px] flex flex-col"
         >
           <CardHeader className="flex flex-row align-top mt-8 max-w-[1030px] justify-between w-full items-center px-4 py-4 self-center mb-7">
             <div className="flex flex-col gap-4">
@@ -91,39 +83,41 @@ export default function TestPage() {
                 {t2("subject", { subject })}
               </CardTitle>
             </div>
-            <Timer minutes={1} onComplete={handleTimerComplete} />
+            <Timer minutes={timeLimit} onComplete={handleTimerComplete} />
           </CardHeader>
+
           <CardContent className="flex justify-center self-center font-xl mb-4">
-            <Questions
+            <TextChoiceQuestion
               question={currentQuestion}
-              selectedAnswer={selectedAnswers[currentQuestion.id]}
+              selectedAnswer={selectedAnswers[currentQuestion.id] || null}
               onSelectAnswer={handleAnswerSelect}
-              answer={answer}
-              background={"white"}
-              setAnswer={setAnswer}
+              background="white"
               className="text-xl font-medium font-pingar"
               titleStyle="self-center text-[22px] mb-9"
             />
           </CardContent>
+
           <CardFooter className="flex flex-row justify-end w-[90%]">
             <Button
               onClick={handleNext}
-              disabled={
-                currentQuestion.type === "fill"
-                  ? !answer.trim()
-                  : !selectedAnswers[currentQuestion.id]
-              }
+              type="submit"
+              disabled={!selectedAnswers[currentQuestion.id] || isSubmitting}
               className="text-[16px] font-pingar font-bold w-[193px] h-[56px] flex flex-row justify-center items-center text-start select-none self-end"
             >
-              {isLastQuestion ? <>{t("finishExam")}</> : <>{t("next")}</>}
-              <Image
-                src={"/arrow.svg"}
-                alt="arrow"
-                width={17.5}
-                height={11.5}
-                color="white"
-                className={"ltr:scale-x-[-1]"}
-              ></Image>
+              {isSubmitting ? (
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+              ) : (
+                <>
+                  {isLastQuestion ? <>{t("finishExam")}</> : <>{t("next")}</>}
+                  <Image
+                    src="/arrow.svg"
+                    alt="arrow"
+                    width={17.5}
+                    height={11.5}
+                    className="ltr:scale-x-[-1] ml-2"
+                  />
+                </>
+              )}
             </Button>
           </CardFooter>
         </Card>
