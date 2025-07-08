@@ -655,5 +655,20 @@
     "reports": "Reports",
     "editStudent": "Edit Student",
     "logout": "Logout"
+  },
+  "quiz": {
+    "subject": "{subject} Quiz",
+    "success": "Quiz submitted",
+    "loadingQuestions": "Loading Questions",
+    "successDescription": "Your answers have been submitted successfully.",
+    "failed": "Submission failed",
+    "failedDescription": "Could not submit your quiz. Please try again.",
+    "invalidData": "Invalid quiz data format.",
+    "processError": "Failed to process quiz data.",
+    "createFailed": "Failed to create quiz.",
+    "loadFailed": "Failed to load quiz questions.",
+    "result": "Your Score is:",
+    "loadingResult": "Loading result...",
+    "ok": "Go to Dashboard"
   }
 }

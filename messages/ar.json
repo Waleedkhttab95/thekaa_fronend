@@ -622,9 +622,6 @@
       "veryGood": "جيد جداً"
     }
   },
-  "quizPage": {
-    "subject": "اختبار مادة {subject}"
-  },
   "reportsPage": {
     "reports": "التقارير",
     "currentLevel": "المستوى الحالي",
@@ -667,5 +664,20 @@
     "reports": "التقارير",
     "editStudent": "تعديل بيانات الطالب",
     "logout": "تسجيل الخروج"
+  },
+  "quiz": {
+    "subject": "اختبار مادة {subject}",
+    "success": "تم إرسال الاختبار",
+    "successDescription": "تم إرسال إجاباتك بنجاح.",
+    "loadingQuestions": "جار تحميل الأسئلة",
+    "failed": "فشل الإرسال",
+    "failedDescription": "تعذر إرسال الاختبار. حاول مرة أخرى.",
+    "invalidData": "تنسيق بيانات الاختبار غير صالح.",
+    "processError": "فشل في معالجة بيانات الاختبار.",
+    "createFailed": "فشل في إنشاء الاختبار.",
+    "loadFailed": "فشل في تحميل أسئلة الاختبار.",
+    "result": "درجتك هي:",
+    "loadingResult": "جار تحميل النتيجة",
+    "ok": "الذهاب للوحة التحكم"
   }
 }
