@@ -28,7 +28,7 @@ export function TextChoiceQuestion({
         ${className}
       `}
     >
-      <h2 className={`text-lg font-tajawal font-bold mb-4 ${titleStyle}`}>
+      <h2 className={`text-3xl font-tajawal font-bold mb-4 ${titleStyle}`}>
         {question.question}
       </h2>
       {question.options.map((choice: Options) => (

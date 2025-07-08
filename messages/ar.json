@@ -303,6 +303,8 @@
     "switchLocale-sm": "E"
   },
   "testPage": {
+    "typeYourAnswer": "اكتب الإجابة هنا",
+    "interviewReport": "تقرير المقابلة",
     "questionsLoading": "جار تحميل الأسئلة...",
     "errorLoading": "خطأ في تحميل الأسئلة...",
     "question": "سؤال",
@@ -386,7 +388,7 @@
     },
     "addStudentButton": "إضافة الطالب",
     "studentAddedSuccessfully": "تم إضافة معلومات الطالب بنجاح",
-    "StartLevelExam": "هل تريد بدء إمتحان تحديد المستوى الآن؟",
+    "StartLevelExam": "هل تريد بدء تحديد المستوى الآن؟",
     "formErrors": {
       "studentFirstNameRequired": "ادخل الاسم الأول الطالب",
       "studentLastNameRequired": "ادخل الاسم الأخير الطالب",
@@ -620,9 +622,6 @@
       "veryGood": "جيد جداً"
     }
   },
-  "quizPage": {
-    "subject": "اختبار مادة {subject}"
-  },
   "reportsPage": {
     "reports": "التقارير",
     "currentLevel": "المستوى الحالي",
@@ -659,5 +658,26 @@
     "nextLessonsError": "خطأ في تحميل دروسك القادمة...",
     "quizDay": "لا يمكنك الذهاب للإختبار بعد",
     "lessonDay": "لا يمكنك الذهاب للدرس بعد"
+  },
+  "dropDownItems": {
+    "sonsFiles": "ملفات الأبناء",
+    "reports": "التقارير",
+    "editStudent": "تعديل بيانات الطالب",
+    "logout": "تسجيل الخروج"
+  },
+  "quiz": {
+    "subject": "اختبار مادة {subject}",
+    "success": "تم إرسال الاختبار",
+    "successDescription": "تم إرسال إجاباتك بنجاح.",
+    "loadingQuestions": "جار تحميل الأسئلة",
+    "failed": "فشل الإرسال",
+    "failedDescription": "تعذر إرسال الاختبار. حاول مرة أخرى.",
+    "invalidData": "تنسيق بيانات الاختبار غير صالح.",
+    "processError": "فشل في معالجة بيانات الاختبار.",
+    "createFailed": "فشل في إنشاء الاختبار.",
+    "loadFailed": "فشل في تحميل أسئلة الاختبار.",
+    "result": "درجتك هي:",
+    "loadingResult": "جار تحميل النتيجة",
+    "ok": "الذهاب للوحة التحكم"
   }
 }

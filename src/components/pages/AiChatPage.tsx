@@ -15,11 +15,12 @@ import {
 } from "../atoms/tooltip";
 import AiChatLayout from "../layouts/AiChatLayout";
 import ChatMessages from "../organisms/ChatMessages";
+import { getAiAssistantResponse, AiAssistantMessage } from "@/services/content";
+import LoadingDots from "../atoms/loadingDots";
 
 const AiChatPage = () => {
-  const [messages, setMessages] = useState<{ text: string; user?: boolean }[]>(
-    []
-  );
+  const [messages, setMessages] = useState<AiAssistantMessage[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     isRecording,
     isProcessing,
@@ -47,30 +48,52 @@ const AiChatPage = () => {
   const handleStartVoiceClick = () => {
     startRecording();
   };
-  const handleStopVoiceClick = () => {
+  const handleStopVoiceClick = async () => {
     stopRecording();
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      {
-        text: textMessage ?? "",
-        user: true,
-      },
-      {
-        text: "مرحبا بك في ذكاء",
-        user: false,
-      },
-    ]);
+    const userMessage: AiAssistantMessage = {
+      role: "user",
+      content: textMessage ?? "",
+    };
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
+    setIsLoading(true);
+    try {
+      const response = await getAiAssistantResponse(updatedMessages);
+      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+    } catch (err) {
+      toast({
+        title: t("error.title"),
+        description: t("error.description"),
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
   const handleCancelClick = () => {
     cancelRecording();
   };
-  const onSubmit = (data: { message: string }) => {
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { text: data.message, user: true },
-      { text: "مرحبا بك في ذكاء", user: false },
-    ]);
+  const onSubmit = async (data: { message: string }) => {
+    const userMessage: AiAssistantMessage = {
+      role: "user",
+      content: data.message,
+    };
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     reset();
+    setIsLoading(true);
+    try {
+      const response = await getAiAssistantResponse(updatedMessages);
+      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+    } catch (err) {
+      toast({
+        title: t("error.title"),
+        description: t("error.description"),
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (error) {
@@ -102,6 +125,13 @@ const AiChatPage = () => {
             ) : (
               <div className="flex-1 overflow-y-auto px-5 py-2">
                 <ChatMessages messages={messages} />
+                {isLoading && (
+                  <div className="flex justify-end">
+                    <div className="bg-card-transparent rounded-[40px] rounded-ts-none px-4 py-2 shadow-md max-w-[80%]">
+                      <LoadingDots />
+                    </div>
+                  </div>
+                )}
                 <div ref={messagesEndRef} />
               </div>
             )}
@@ -121,7 +151,7 @@ const AiChatPage = () => {
                   <Tooltip delayDuration={50}>
                     <TooltipTrigger asChild>
                       <button
-                        disabled={!watch("message")}
+                        disabled={!watch("message") || isLoading}
                         className="bg-[#1DC0CA] disabled:bg-[#1DC0CA]/40 text-white size-[42px] flex flex-center rounded-full "
                       >
                         <Send className="size-[19px]" />

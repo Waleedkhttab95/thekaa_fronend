@@ -40,3 +40,28 @@ export const getStudentEducationDetails = async (
   );
   return data;
 };
+
+export const interviewStudent = async (
+  axiosClient: AxiosInstance,
+  messages: { role: string; content: string }[],
+  lang: string,
+  subject: string,
+  age: string
+) => {
+  const { data } = await axiosClient.post(
+    `${API_BASE_URL}/education_plan/education_plan/post_ai_interview`,
+    { messages, lang, subject, age }
+  );
+  return data;
+};
+
+export const generateStudentPlan = async (
+  axiosClient: AxiosInstance,
+  report: string
+) => {
+  const { data } = await axiosClient.post(
+    `${API_BASE_URL}/generate_student_plan`,
+    { report }
+  );
+  return data;
+};
