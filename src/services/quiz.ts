@@ -1,29 +1,50 @@
 import { API_BASE_URL } from "@/config/env.constant";
 import { AxiosInstance } from "axios";
 
-const QuizRoute = "/education_plan/education_plan/quiz";
+const QuizRoute = "/education_content/generate_lessons_questions";
+const StartQuizRoute = "/education_plan/education_plan/quiz";
 
-// education_plan/quiz/:studentId/:educationPlanId
+const getQuizBody = {
+  question_type: "MC",
+  number_of_questions: 10,
+};
 
-export const getQuiz = async (
+export const makeQuiz = async (
   axiosClient: AxiosInstance,
-  studentId: string,
-  educationPlanId: string
+  studentId: string
 ) => {
-  const { data } = await axiosClient.get(
-    `${API_BASE_URL}${QuizRoute}/${studentId}/${educationPlanId}`
+  const { data } = await axiosClient.post(
+    `${API_BASE_URL}${QuizRoute}/${studentId}`,
+    getQuizBody
   );
   return data;
 };
 
-// export const submitQuizResult = async (
-//   axiosClient: AxiosInstance,
-//   studentId: string,
-//   resultData: AssessmentResult
-// ) => {
-//   const { data } = await axiosClient.post(
-//     `${API_BASE_URL}/${SUBMIT_ROUTE}/${studentId}`,
-//     resultData
-//   );
-//   return data;
-// };
+export const startQuiz = async (axiosClient: AxiosInstance, quizId: string) => {
+  const { data } = await axiosClient.post(
+    `${API_BASE_URL}${StartQuizRoute}/${quizId}/start`
+  );
+  return data;
+};
+
+export const submitQuiz = async (
+  axiosClient: AxiosInstance,
+  quizId: string,
+  Answers: string[]
+) => {
+  const { data } = await axiosClient.post(
+    `${API_BASE_URL}${StartQuizRoute}/${quizId}`,
+    { Answers }
+  );
+  return data;
+};
+
+export const getQuizResult = async (
+  axiosClient: AxiosInstance,
+  quizId: string
+) => {
+  const { data } = await axiosClient.get(
+    `${API_BASE_URL}${StartQuizRoute}/${quizId}/results`
+  );
+  return data;
+};
