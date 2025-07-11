@@ -30,11 +30,11 @@ export const startQuiz = async (axiosClient: AxiosInstance, quizId: string) => {
 export const submitQuiz = async (
   axiosClient: AxiosInstance,
   quizId: string,
-  Answers: string[]
+  answers: string[]
 ) => {
   const { data } = await axiosClient.post(
     `${API_BASE_URL}${StartQuizRoute}/${quizId}`,
-    { Answers }
+    { answers }
   );
   return data;
 };

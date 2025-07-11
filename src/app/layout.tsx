@@ -17,11 +17,21 @@ export async function generateMetadata() {
         template: "%s | Thekaa",
         default: "Home",
       },
+      icons: {
+        icon: "/logoFav.svg",
+        shortcut: "/logoFav.svg",
+        apple: "/logoFav.svg",
+      },
     },
     ar: {
       title: {
         default: "ذكاء | الصفحة الرئيسية",
         template: "%s | ذكاء",
+      },
+      icons: {
+        icon: "/logoFav.svg",
+        shortcut: "/logoFav.svg",
+        apple: "/logoFav.svg",
       },
     },
   };
