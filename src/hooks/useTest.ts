@@ -8,10 +8,13 @@ import {
 import { getStudentById } from "@/services/students";
 import { getCookie, setCookie } from "cookies-next/client";
 import { toast } from "@/components/atoms/sooner";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ProtectedRoutes } from "@/config/routes";
+import { Locales } from "@/types/locales.enum";
 
 export const useTest = () => {
+  const locale = useLocale();
+
   const axiosAuth = useAxiosAuth();
   const [messages, setMessages] = useState<{ role: string; content: string }[]>(
     []
@@ -117,7 +120,7 @@ export const useTest = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const data = await interviewStudent(axiosAuth, [], "en", "math", "10");
+        const data = await interviewStudent(axiosAuth, [],  locale, "math", "10");
 
         const autoSubmitted = await handleAIResponse(
           data.response,
@@ -150,7 +153,7 @@ export const useTest = () => {
       const data = await interviewStudent(
         axiosAuth,
         newMessages,
-        "en",
+        locale,
         "math",
         "10"
       );
