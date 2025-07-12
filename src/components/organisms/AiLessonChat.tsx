@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -15,12 +16,17 @@ import { useVoiceToText } from "@/hooks/useVoiceToText";
 import { Send } from "lucide-react";
 import AiVoiceListening from "./AiVoiceListening";
 import { cn } from "@/lib/utils";
-import { AiAssistantMessage } from "@/services/content";
-const AiLessonChat = ({ className }: { className?: string }) => {
+import { AiAssistantMessage, getAiAssistantResponse } from "@/services/content";
+import LoadingDots from "../atoms/loadingDots";
+interface IProps {
+  className?: string;
+  messages: AiAssistantMessage[];
+  setMessages: React.Dispatch<React.SetStateAction<AiAssistantMessage[]>>;
+}
+const AiLessonChat = ({ className, messages, setMessages }: IProps) => {
   const t = useTranslations("lessonPage.aiChat");
-  const [messages, setMessages] = useState<{ text: string; user?: boolean }[]>(
-    []
-  );
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     isRecording,
     isProcessing,
@@ -51,30 +57,52 @@ const AiLessonChat = ({ className }: { className?: string }) => {
   const handleStartVoiceClick = () => {
     startRecording();
   };
-  const handleStopVoiceClick = () => {
+  const handleStopVoiceClick = async () => {
     stopRecording();
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      {
-        text: textMessage ?? "",
-        user: true,
-      },
-      {
-        text: "مرحبا بك في ذكاء",
-        user: false,
-      },
-    ]);
+    const userMessage: AiAssistantMessage = {
+      role: "user",
+      content: textMessage ?? "",
+    };
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
+    setIsLoading(true);
+    try {
+      const response = await getAiAssistantResponse(updatedMessages);
+      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+    } catch (err) {
+      toast({
+        title: t("error.title"),
+        description: t("error.description"),
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
   const handleCancelClick = () => {
     cancelRecording();
   };
-  const onSubmit = (data: { message: string }) => {
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { text: data.message, user: true },
-      { text: "مرحبا بك في ذكاء", user: false },
-    ]);
+  const onSubmit = async (data: { message: string }) => {
+    const userMessage: AiAssistantMessage = {
+      role: "user",
+      content: data.message,
+    };
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     reset();
+    setIsLoading(true);
+    try {
+      const response = await getAiAssistantResponse(updatedMessages);
+      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+    } catch (err) {
+      toast({
+        title: t("error.title"),
+        description: t("error.description"),
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (error) {
@@ -127,7 +155,14 @@ const AiLessonChat = ({ className }: { className?: string }) => {
             </div>
           ) : (
             <div className="relative flex-1 overflow-y-auto px-5 py-2">
-              <ChatMessages messages={transformMessages(messages)} />
+              <ChatMessages messages={messages} />
+              {isLoading && (
+                <div className="flex justify-end">
+                  <div className="bg-card-transparent rounded-[40px] rounded-ts-none px-4 py-2 shadow-md max-w-[80%]">
+                    <LoadingDots />
+                  </div>
+                </div>
+              )}
               <div ref={messagesEndRef} />
             </div>
           )}

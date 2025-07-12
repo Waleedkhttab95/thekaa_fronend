@@ -9,7 +9,7 @@ const ChatMessage = ({ message }: props) => {
   return (
     <div
       className={cn(
-        "flex w-[70%] md:w-[70%]  items-center mb-2  overflow-x-auto",
+        "flex w-[70%] py-1 md:w-[70%]  items-center mb-2  overflow-x-auto",
         message.role === "user" ? "justify-start" : "justify-end ms-auto"
       )}
     >

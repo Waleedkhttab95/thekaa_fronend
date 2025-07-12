@@ -62,13 +62,13 @@ const LandingHeader = () => {
 
         {/* Login button for larger screens */}
         <div className="hidden lg:flex items-center gap-3">
-          {!accessToken && (
+          {(
             <Button
               variant="ghost"
               className="text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-300"
               onClick={handleLoginClick}
             >
-              {t("login")}
+              {accessToken ? t("dashboard") : t("login")}
             </Button>
           )}
         </div>

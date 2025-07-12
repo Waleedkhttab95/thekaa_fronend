@@ -542,7 +542,12 @@
       "speed": "السرعة",
       "seconds": "ثوان",
       "replay": "إعادة التشغيل"
-    }
+    },
+    "defaultTitle": "درس بدون عنوان",
+    "defaultDescription": "الوصف غير متوفر",
+    "defaultSubject": "المادة غير معرفة",
+    "lessonNotFound": "الدرس غير متاح حالياً",
+    "lessonNotFoundDescription": "الدرس الذي تبحث عنه غير موجود أو تم حذفه. يرجى التحقق من الرابط أو العودة إلى الصفحة الرئيسية."
   },
   "common": {
     "delete": "حذف",
