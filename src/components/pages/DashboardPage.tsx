@@ -35,8 +35,8 @@ const DashboardPage = () => {
     return dateString.slice(0, 10);
   };
 
-  const lessonDay = progress?.lessonDay;
-  const quizDay = progress?.quizDay;
+  const lessonDay = true//progress?.lessonDay;
+  const quizDay = true//progress?.quizDay;
 
   const QuizCard = (
     <DashboardCard
