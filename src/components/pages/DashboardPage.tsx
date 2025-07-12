@@ -149,7 +149,7 @@ const DashboardPage = () => {
         </div>
         <div className="dashboard-second-column">
           {lessonDay ? (
-            <Link href={`${ProtectedRoutes.Lesson}/1`}>{startLessonCard}</Link>
+            <Link href={`${ProtectedRoutes.Lesson}`}>{startLessonCard}</Link>
           ) : (
             startLessonCard
           )}
@@ -239,7 +239,7 @@ const DashboardPage = () => {
         />
 
         {lessonDay ? (
-          <Link href={`${ProtectedRoutes.Lesson}/1`}>{startLessonCard}</Link>
+          <Link href={`${ProtectedRoutes.Lesson}`}>{startLessonCard}</Link>
         ) : (
           startLessonCard
         )}
