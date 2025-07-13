@@ -44,7 +44,7 @@ export const getQuizResult = async (
   quizId: string
 ) => {
   const { data } = await axiosClient.get(
-    `${API_BASE_URL}${StartQuizRoute}/${quizId}/results`
+    `${API_BASE_URL}${StartQuizRoute}/results/${quizId}`
   );
   return data;
 };
