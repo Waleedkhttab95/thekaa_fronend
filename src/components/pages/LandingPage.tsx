@@ -22,7 +22,7 @@ const LandingPage = () => {
         <LandingHowCanWeHelp />
         <JourneySteps />
       </div>
-      <TestimonialSlider />
+      {/* <TestimonialSlider /> */}
       <div className='w-[95%] md:w-[90%] lg:w-[83%] mx-auto '>
         <LandingFaq />
       </div>

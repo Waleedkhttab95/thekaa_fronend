@@ -58,7 +58,7 @@ const LandingHeader = () => {
         </div>
 
         {/* <LandingNavbar /> */}
-        <LandingNavbar />
+        {/* <LandingNavbar /> */}
 
         {/* Login button for larger screens */}
         <div className="hidden lg:flex items-center gap-3">
