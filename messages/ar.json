@@ -547,7 +547,12 @@
     "defaultDescription": "الوصف غير متوفر",
     "defaultSubject": "المادة غير معرفة",
     "lessonNotFound": "الدرس غير متاح حالياً",
-    "lessonNotFoundDescription": "الدرس الذي تبحث عنه غير موجود أو تم حذفه. يرجى التحقق من الرابط أو العودة إلى الصفحة الرئيسية."
+    "lessonNotFoundDescription": "الدرس الذي تبحث عنه غير موجود أو تم حذفه. يرجى التحقق من الرابط أو العودة إلى الصفحة الرئيسية.",
+    "complete": "إكمال الدرس",
+    "completeLesson": "إكمال الدرس",
+    "congratulations": "تهانينا!",
+    "lessonCompleted": "لقد أكملت الدرس بنجاح!، هل تريد المتابعة إلى الدرس التالي؟",
+    "stayInLesson": "البقاء في الدرس"
   },
   "common": {
     "delete": "حذف",
