@@ -20,9 +20,10 @@ interface CustomVideoPlayerProps {
   url: string
   poster?: string
   title?: string
+  onVideoEnd?: () => void
 }
 
-export default function LessonPlayer({ url, poster, title }: CustomVideoPlayerProps) {
+export default function LessonPlayer({ url, poster, title, onVideoEnd }: CustomVideoPlayerProps) {
   const t = useTranslations("lessonPage.lessonPlayer")
   const locale = useLocale()
   const isRTL = locale === "ar"
@@ -222,6 +223,10 @@ export default function LessonPlayer({ url, poster, title }: CustomVideoPlayerPr
     setPlaying(false)
     setEnded(true)
     setShowControls(true)
+    // Call the onVideoEnd callback if provided
+    if (onVideoEnd) {
+      onVideoEnd()
+    }
   }
 
   // Restart video
