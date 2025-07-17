@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 import { useLocale, useTranslations } from 'next-intl'
 import React, { useState } from 'react'
@@ -6,7 +7,7 @@ import LessonPlayer from '../molecules/LessonPlayer'
 import LessonInfo from '../molecules/LessonInfo'
 import LessonDescription from '../molecules/LessonDescription'
 import { Dialog, DialogContent } from '../atoms/dialog'
-import { MessageCircle, AlertCircle, GraduationCap } from 'lucide-react'
+import { MessageCircle, AlertCircle, GraduationCap, CheckCircle, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import { getLesson } from '@/services/lesson'
@@ -22,6 +23,8 @@ const LessonPage = () => {
   const locale = useLocale() as Locales;
   const studentId = getCookie("current_user") as string;
   const [isChatOpen, setIsChatOpen] = useState(false)
+  const [showCompletionModal, setShowCompletionModal] = useState(true)
+  const [isVideoEnded, setIsVideoEnded] = useState(false)
   const playerWrapperRef = React.useRef<HTMLDivElement>(null);
   const axiosAuth = useAxiosAuth();
   const { data, isLoading, error } = useQuery<ILessonData>({
@@ -36,7 +39,7 @@ const LessonPage = () => {
   const defaultLesson = {
     name: t('defaultTitle'),
     description: t('defaultDescription'),
-    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    videoUrl: "",
     videoDuration: 15,
     subject: {
       name: t('defaultSubject'),
@@ -50,6 +53,42 @@ const LessonPage = () => {
   const subjectName = lessonData.subject?.name || defaultLesson.subject.name;
   const videoUrl = lessonData?.videoUrl || defaultLesson.videoUrl;
   const videoDuration = lessonData?.videoDuration || defaultLesson.videoDuration;
+
+  // Handle video end event
+  const handleVideoEnd = () => {
+    setIsVideoEnded(true);
+    setShowCompletionModal(true);
+  };
+
+  // Handle lesson completion
+  const handleCompleteLesson = async () => {
+    try {
+      // Call the completion API
+      const response = await axiosAuth.post(`/education_plan/complete-lesson/${studentId}`, {
+        lessonId: data?._id || ''
+      });
+
+      console.log('Lesson completed successfully:', response.data);
+      setShowCompletionModal(false);
+      // You might want to navigate to next lesson or dashboard
+      // router.push('/dashboard') or router.push('/next-lesson')
+    } catch (error) {
+      console.error('Error completing lesson:', error);
+      // Handle error (show toast, etc.)
+
+    }
+  };
+
+  // Handle cancel completion
+  const handleCancelCompletion = () => {
+    setShowCompletionModal(false);
+    setIsVideoEnded(false);
+  };
+
+  // Handle manual complete button click
+  const handleManualComplete = () => {
+    setShowCompletionModal(true);
+  };
 
   // Handle loading state
   if (isLoading) {
@@ -86,6 +125,7 @@ const LessonPage = () => {
               url={videoUrl}
               title={lessonTitle}
               poster=''
+              onVideoEnd={handleVideoEnd}
             />
           ) : data && !data.videoUrl ? (
             // Show "lesson not available" when data is fetched but no video URL
@@ -122,6 +162,7 @@ const LessonPage = () => {
               url={videoUrl}
               title={lessonTitle}
               poster=''
+              onVideoEnd={handleVideoEnd}
             />
           )}
         </div>
@@ -143,6 +184,56 @@ const LessonPage = () => {
       <LessonDescription lesson={{
         description: lessonDescription
       }} />
+
+      {/* Complete Lesson Button */}
+      <div className="mt-4">
+        <button
+          onClick={handleManualComplete}
+          className="bg-green-500 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
+        >
+          <CheckCircle className="w-5 h-5" />
+          {t("completeLesson")}
+        </button>
+      </div>
+
+      {/* Lesson Completion Modal */}
+      <Dialog open={showCompletionModal} onOpenChange={setShowCompletionModal}>
+        <DialogContent className="w-[90%] max-w-md p-0 border-none rounded-3xl overflow-hidden">
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 text-center">
+            <div className="flex justify-center mb-6">
+              <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center animate-pulse">
+                <CheckCircle className="w-12 h-12 text-white" />
+              </div>
+            </div>
+
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              {t("congratulations")}
+            </h2>
+
+            <p className="text-gray-600 mb-8 leading-relaxed">
+              {t("lessonCompleted")}
+            </p>
+
+            <div className="flex gap-4 justify-center">
+              <button
+                onClick={handleCompleteLesson}
+                className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+              >
+                <CheckCircle className="w-4 h-4" />
+                {t("complete")}
+              </button>
+
+              <button
+                onClick={handleCancelCompletion}
+                className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+              >
+                <X className="w-4 h-4" />
+                {t("stayInLesson")}
+              </button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Floating chat button (visible only on mobile) */}
       <button
