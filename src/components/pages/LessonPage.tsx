@@ -23,7 +23,7 @@ const LessonPage = () => {
   const locale = useLocale() as Locales;
   const studentId = getCookie("current_user") as string;
   const [isChatOpen, setIsChatOpen] = useState(false)
-  const [showCompletionModal, setShowCompletionModal] = useState(true)
+  const [showCompletionModal, setShowCompletionModal] = useState(false)
   const [isVideoEnded, setIsVideoEnded] = useState(false)
   const playerWrapperRef = React.useRef<HTMLDivElement>(null);
   const axiosAuth = useAxiosAuth();
@@ -39,7 +39,7 @@ const LessonPage = () => {
   const defaultLesson = {
     name: t('defaultTitle'),
     description: t('defaultDescription'),
-    videoUrl: "",
+    videoUrl: "https://www.youtube.com/embed/2dQDvJEpmMk",
     videoDuration: 15,
     subject: {
       name: t('defaultSubject'),
@@ -51,7 +51,7 @@ const LessonPage = () => {
   const lessonTitle = lessonData.name || defaultLesson.name;
   const lessonDescription = lessonData.description || defaultLesson.description;
   const subjectName = lessonData.subject?.name || defaultLesson.subject.name;
-  const videoUrl = lessonData?.videoUrl || defaultLesson.videoUrl;
+  const videoUrl = defaultLesson.videoUrl;
   const videoDuration = lessonData?.videoDuration || defaultLesson.videoDuration;
 
   // Handle video end event
