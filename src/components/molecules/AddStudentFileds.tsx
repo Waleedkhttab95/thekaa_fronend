@@ -31,6 +31,8 @@ const AddStudentFields = ({ currentStepData, formField }: props) => {
         placeholder={currentStepData.placeholder}
         {...formField}
         value={isNaN(formField.value as number) ? "" : formField.value}
+        min={currentStepData.name === "age" ? 6 : undefined}
+        max={currentStepData.name === "age" ? 12 : undefined}
         onBlur={(e) => {
           if (e.target.value === "") {
             formField.onChange(0);
@@ -39,6 +41,10 @@ const AddStudentFields = ({ currentStepData, formField }: props) => {
         }}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           const parsed = parseFloat(e.target.value);
+          // For age field, ensure minimum value is 6
+          if (currentStepData.name === "age" && parsed < 6 && parsed > 0) {
+            return; // Don't update if value is below 6
+          }
           const value = isNaN(parsed) ? "" : parsed;
           formField.onChange(value);
         }}

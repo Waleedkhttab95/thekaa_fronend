@@ -64,7 +64,7 @@ const LessonPage = () => {
   const handleCompleteLesson = async () => {
     try {
       // Call the completion API
-      const response = await axiosAuth.post(`/education_plan/complete-lesson/${studentId}`, {
+      const response = await axiosAuth.post(`education_plan/education_plan/complete-lesson/${studentId}`, {
         lessonId: data?._id || ''
       });
 

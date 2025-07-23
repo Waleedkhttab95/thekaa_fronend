@@ -56,11 +56,17 @@ const SignUpForm = () => {
       parentName: string;
       parentPhone: string;
     }) => {
+      // Add +966 country code if phone number doesn't start with +
+      let phoneNumber = data.parentPhone;
+      if (!phoneNumber.startsWith('+')) {
+        phoneNumber = '+966' + phoneNumber;
+      }
+      
       const payload = {
         email: data.email,
         password: data.password,
         parentName: data.parentName,
-        parentPhone: data.parentPhone,
+        parentPhone: phoneNumber,
       };
       return axiosClient.post("/auth/user/create", payload);
     },

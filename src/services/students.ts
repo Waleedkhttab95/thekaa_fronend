@@ -22,7 +22,13 @@ export const createStudent = async (
   axiosClient: AxiosInstance,
   newStudent: Partial<IStudentData>
 ) => {
-  const { data } = await axiosClient.post(`/${API_ROUTE}`, newStudent);
+  // Add +966 country code if phone number exists and doesn't start with +
+  const studentData = { ...newStudent };
+  if (studentData.phone && !studentData.phone.startsWith('+')) {
+    studentData.phone = '+966' + studentData.phone;
+  }
+  
+  const { data } = await axiosClient.post(`/${API_ROUTE}`, studentData);
   return data;
 };
 
@@ -30,7 +36,13 @@ export const updateStudent = async (
   axiosClient: AxiosInstance,
   { _id, ...updateData }: Partial<IStudentData>
 ) => {
-  const { data } = await axiosClient.put(`/${API_ROUTE}/${_id}`, updateData);
+  // Add +966 country code if phone number exists and doesn't start with +
+  const studentData = { ...updateData };
+  if (studentData.phone && !studentData.phone.startsWith('+')) {
+    studentData.phone = '+966' + studentData.phone;
+  }
+  
+  const { data } = await axiosClient.put(`/${API_ROUTE}/${_id}`, studentData);
   return data;
 };
 export const updateStudentAvatar = async (

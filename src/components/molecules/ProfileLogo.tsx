@@ -64,27 +64,27 @@ const ProfileLogo = () => {
         className="min-w-[150px] text-start flex flex-col items-center"
         align="center"
       >
-        <DropdownMenuItem
+        {/* <DropdownMenuItem
           onClick={() => router.push(ProtectedRoutes.SonsFiles)}
           dir="center"
           className="transition duration-200 hover:bg-primary/10 hover:text-primary cursor-pointer w-full justify-center border-b-2"
         >
           {t("sonsFiles")}
-        </DropdownMenuItem>
-        <DropdownMenuItem
+        </DropdownMenuItem> */}
+        {/* <DropdownMenuItem
           onClick={() => router.push(ProtectedRoutes.Reports)}
           className="transition duration-200 hover:bg-primary/10 hover:text-primary cursor-pointer w-full justify-center border-b-2"
         >
           {t("reports")}
-        </DropdownMenuItem>
-        <DropdownMenuItem
+        </DropdownMenuItem> */}
+        {/* <DropdownMenuItem
           onClick={() =>
             router.push(`${ProtectedRoutes.EditStudent}/${studentId}`)
           }
           className="transition duration-200 hover:bg-primary/10 hover:text-primary cursor-pointer w-full justify-center border-b-2"
         >
           {t("editStudent")}
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <DropdownMenuItem
           onClick={handleLogout}
           className="transition duration-200 hover:bg-red-100 hover:text-red-600 cursor-pointer w-full justify-center"

@@ -202,7 +202,7 @@
       },
       "phoneNumber": {
         "label": "Parent Phone Number",
-        "placeholder": "Enter Parent Phone Number"
+        "placeholder": "Enter phone number (without country code)"
       },
       "password": {
         "label": "Password",
@@ -222,7 +222,7 @@
       "emailRequired": "Enter your email address",
       "emailInvalid": "Enter a valid email address",
       "phoneNumberRequired": "Enter the parent's phone number",
-      "phoneNumberInvalid": "Enter a valid phone number",
+      "phoneNumberInvalid": "Enter a valid phone number (without country code, +966 will be added automatically)",
       "passwordMinLength": "Password must be at least 8 characters long",
       "passwordDigit": "Password must contain at least one digit",
       "passwordSpecialCharacter": "Password must contain at least one special character @ $ ! % * ? & #",
