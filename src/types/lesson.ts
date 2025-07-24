@@ -4,6 +4,7 @@ export interface ILessonData {
   description: string;
   videoUrl: string;
   videoDuration: number;
+  currentLessonId: string;
   subject: {
     _id: string;
     name: string;
