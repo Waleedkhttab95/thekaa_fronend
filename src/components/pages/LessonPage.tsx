@@ -17,8 +17,10 @@ import { ILessonData } from '@/types/lesson'
 import Loading from '../atoms/loading'
 import { useAxiosAuth } from '@/hooks/useAxiosAuth'
 import { AiAssistantMessage } from '@/services/content'
+import { useRouter } from 'next/navigation'
 
 const LessonPage = () => {
+  const router = useRouter()
   const t = useTranslations('lessonPage');
   const locale = useLocale() as Locales;
   const studentId = getCookie("current_user") as string;
@@ -68,8 +70,8 @@ const LessonPage = () => {
         lessonId: data?.currentLessonId || ''
       });
 
-      console.log('Lesson completed successfully:', response.data);
       setShowCompletionModal(false);
+      router.push('/dashboard') // TODO: Navigate to Dashboard
       // You might want to navigate to next lesson or dashboard
       // router.push('/dashboard') or router.push('/next-lesson')
     } catch (error) {
