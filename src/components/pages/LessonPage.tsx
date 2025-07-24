@@ -39,7 +39,7 @@ const LessonPage = () => {
   const defaultLesson = {
     name: t('defaultTitle'),
     description: t('defaultDescription'),
-    videoUrl: "https://www.youtube.com/embed/2dQDvJEpmMk",
+    videoUrl: "",
     videoDuration: 15,
     subject: {
       name: t('defaultSubject'),
@@ -50,8 +50,8 @@ const LessonPage = () => {
   const lessonData = data || defaultLesson;
   const lessonTitle = lessonData.name || defaultLesson.name;
   const lessonDescription = lessonData.description || defaultLesson.description;
-  const subjectName = lessonData.subject?.name || defaultLesson.subject.name;
-  const videoUrl = defaultLesson.videoUrl;
+  const subjectName =  lessonData.subject?.name || defaultLesson.subject.name;
+  const videoUrl = lessonData.videoUrl || defaultLesson.videoUrl;
   const videoDuration = lessonData?.videoDuration || defaultLesson.videoDuration;
 
   // Handle video end event
