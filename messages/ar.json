@@ -552,7 +552,10 @@
     "completeLesson": "إكمال الدرس",
     "congratulations": "تهانينا!",
     "lessonCompleted": "لقد أكملت الدرس بنجاح!، هل تريد المتابعة إلى الدرس التالي؟",
-    "stayInLesson": "البقاء في الدرس"
+    "stayInLesson": "البقاء في الدرس",
+    "waitingTitle": "الدرس قيد المعالجة",
+    "waitingMessage": "عذراً، درسك لا يزال قيد المعالجة، يمكنك العودة بعد 10 دقائق. شكراً لتفهمك.",
+    "backToDashboard": "العودة إلى لوحة التحكم"
   },
   "common": {
     "delete": "حذف",

@@ -645,7 +645,10 @@
     "completeLesson": "Complete Lesson",
     "congratulations": "Congratulations!",
     "lessonCompleted": "Lesson Completed Successfully, Do You Want to Go to the Next Lesson?",
-    "stayInLesson": "Stay in Lesson"
+    "stayInLesson": "Stay in Lesson",
+    "waitingTitle": "Lesson Under Process",
+    "waitingMessage": "Sorry but your lesson is still under process, please you can come back after 10 minutes. Thank you for understanding.",
+    "backToDashboard": "Back to Dashboard"
   },
   "aiChatPage": {
     "doICanHelp": "How can I help you?",

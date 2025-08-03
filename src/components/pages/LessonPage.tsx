@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 import { useLocale, useTranslations } from 'next-intl'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AiLessonChat from '../organisms/AiLessonChat'
 import LessonPlayer from '../molecules/LessonPlayer'
 import LessonInfo from '../molecules/LessonInfo'
 import LessonDescription from '../molecules/LessonDescription'
 import { Dialog, DialogContent } from '../atoms/dialog'
-import { MessageCircle, AlertCircle, GraduationCap, CheckCircle, X } from 'lucide-react'
+import { MessageCircle, AlertCircle, GraduationCap, CheckCircle, X, Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import { getLesson } from '@/services/lesson'
@@ -26,6 +26,7 @@ const LessonPage = () => {
   const studentId = getCookie("current_user") as string;
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [showCompletionModal, setShowCompletionModal] = useState(false)
+  const [showWaitingModal, setShowWaitingModal] = useState(false)
   const [isVideoEnded, setIsVideoEnded] = useState(false)
   const playerWrapperRef = React.useRef<HTMLDivElement>(null);
   const axiosAuth = useAxiosAuth();
@@ -36,6 +37,12 @@ const LessonPage = () => {
   })
   const [messages, setMessages] = useState<AiAssistantMessage[]>([]);
 
+  // Check for waiting status when data changes
+  useEffect(() => {
+    if (data?.videoStatus === 'waiting') {
+      setShowWaitingModal(true);
+    }
+  }, [data]);
 
   // Default values when data is not available
   const defaultLesson = {
@@ -90,6 +97,12 @@ const LessonPage = () => {
   // Handle manual complete button click
   const handleManualComplete = () => {
     setShowCompletionModal(true);
+  };
+
+  // Handle waiting modal close
+  const handleCloseWaiting = () => {
+    setShowWaitingModal(false);
+    router.push('/dashboard'); // Redirect to dashboard
   };
 
   // Handle loading state
@@ -231,6 +244,37 @@ const LessonPage = () => {
               >
                 <X className="w-4 h-4" />
                 {t("stayInLesson")}
+              </button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Waiting Modal */}
+      <Dialog open={showWaitingModal} onOpenChange={setShowWaitingModal}>
+        <DialogContent className="w-[90%] max-w-md p-0 border-none rounded-3xl overflow-hidden">
+          <div className="bg-gradient-to-br from-orange-50 to-amber-100 p-8 text-center">
+            <div className="flex justify-center mb-6">
+              <div className="w-20 h-20 bg-gradient-to-r from-orange-400 to-amber-500 rounded-full flex items-center justify-center animate-pulse">
+                <Clock className="w-12 h-12 text-white" />
+              </div>
+            </div>
+
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+              {t("waitingTitle")}
+            </h2>
+
+            <p className="text-gray-600 mb-8 leading-relaxed">
+              {t("waitingMessage")}
+            </p>
+
+            <div className="flex justify-center">
+              <button
+                onClick={handleCloseWaiting}
+                className="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+              >
+                <CheckCircle className="w-4 h-4" />
+                {t("backToDashboard")}
               </button>
             </div>
           </div>

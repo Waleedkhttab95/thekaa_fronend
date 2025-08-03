@@ -27,9 +27,7 @@ export const getSignUpSchema = (t: TFunctionType) =>
         .nonempty(t("formErrors.phoneNumberRequired")),
       password: z
         .string()
-        .min(8, t("formErrors.passwordMinLength"))
-        .regex(/\d/, t("formErrors.passwordDigit"))
-        .regex(/[@$!%*?&#]/, t("formErrors.passwordSpecialCharacter")),
+        .nonempty(t("formErrors.passwordRequired")),
       confirmPassword: z
         .string()
         .nonempty(t("formErrors.confirmPasswordRequired")),
@@ -52,9 +50,7 @@ export const getNewPasswordSchema = (t: (key: string) => string) =>
     .object({
       newPassword: z
         .string()
-        .min(8, t("formErrors.passwordMinLength"))
-        .regex(/\d/, t("formErrors.passwordDigit"))
-        .regex(/[@$!%*?&]/, t("formErrors.passwordSpecialCharacter")),
+        .nonempty(t("formErrors.passwordRequired")),
       confirmNewPassword: z
         .string()
         .nonempty(t("formErrors.confirmPasswordRequired")),
