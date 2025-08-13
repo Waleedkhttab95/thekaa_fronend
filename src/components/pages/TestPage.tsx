@@ -6,6 +6,7 @@ import { useTest } from "@/hooks/useTest";
 export default function TestPage() {
   const {
     currentQuestion,
+    choices,
     isLoading,
     isCompleted,
     isAnalyzing,
@@ -29,6 +30,7 @@ export default function TestPage() {
       isCompleted={isCompleted}
       isAnalyzing={isAnalyzing}
       report={report}
+      choices={choices}
       methods={methods}
       handleNext={handleNext}
     />

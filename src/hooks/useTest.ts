@@ -20,6 +20,7 @@ export const useTest = () => {
     []
   );
   const [currentQuestion, setCurrentQuestion] = useState<string>("");
+  const [choices, setChoices] = useState<string[]>([]);
   const [report, setReport] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -90,7 +91,8 @@ export const useTest = () => {
   const handleAIResponse = async (
     aiResponse: string,
     reportData: object | null,
-    newMessages: { role: string; content: string }[]
+    newMessages: { role: string; content: string }[],
+    responseChoices?: string[]
   ) => {
     let finalReportData = reportData;
     if (!finalReportData && containsReportKeyword(aiResponse)) {
@@ -102,6 +104,7 @@ export const useTest = () => {
 
     setMessages([...newMessages, { role: "interviewer", content: aiResponse }]);
     setCurrentQuestion(aiResponse);
+    setChoices(responseChoices || []);
     setReport(finalReportData ? JSON.stringify(finalReportData) : null);
 
     if (containsReportKeyword(aiResponse) && finalReportData) {
@@ -125,7 +128,8 @@ export const useTest = () => {
         const autoSubmitted = await handleAIResponse(
           data.response,
           data.report,
-          []
+          [],
+          data.choices
         );
 
         if (!autoSubmitted) {
@@ -140,15 +144,15 @@ export const useTest = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleNext = async () => {
-    const answer = methods.getValues("answer");
-    if (!answer.trim()) return;
+  const handleNext = async (answer?: string) => {
+    const studentAnswer = answer || methods.getValues("answer");
+    if (!studentAnswer.trim()) return;
 
     setIsLoading(true);
     setError(null);
 
     try {
-      const newMessages = [...messages, { role: "student", content: answer }];
+      const newMessages = [...messages, { role: "student", content: studentAnswer }];
       // console.log(messages);
       const data = await interviewStudent(
         axiosAuth,
@@ -163,7 +167,8 @@ export const useTest = () => {
       const autoSubmitted = await handleAIResponse(
         data.response,
         data.report,
-        newMessages
+        newMessages,
+        data.choices
       );
 
       if (!autoSubmitted) {
@@ -178,6 +183,7 @@ export const useTest = () => {
   return {
     methods,
     currentQuestion,
+    choices,
     isCompleted,
     isAnalyzing,
     report,
