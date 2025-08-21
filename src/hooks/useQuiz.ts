@@ -9,10 +9,24 @@ import {
 } from "@/hooks/rqs/quiz";
 import { mapQuizDataToTextChoices, isValidQuizData } from "@/utils/quizMapper";
 import { TextChoice } from "@/types/question.types";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "@/components/atoms/sooner";
 import { redirect, useRouter } from "next/navigation";
 import { ProtectedRoutes } from "@/config/routes";
+import { Locales } from "@/types/locales.enum";
+
+interface QuizResult {
+  quizId: string;
+  studentMarks: number;
+  totalMarks: number;
+  passMarks: number;
+  isPassed: boolean;
+  percentage: number;
+  status: string;
+  completedAt: string;
+  quizType: string;
+  timeLimit: number;
+}
 
 interface UseQuizState {
   questions: TextChoice[];
@@ -28,7 +42,7 @@ interface UseQuizState {
   isLoadingQuestions: boolean;
   isSubmitting: boolean;
   error: string | null;
-  result: string;
+  result: QuizResult | null;
 }
 
 interface UseQuizActions {
@@ -44,7 +58,6 @@ export function useQuiz(): UseQuizState & UseQuizActions {
   const router = useRouter();
   const t = useTranslations("quiz");
   const studentId = getCookie("current_user") as string;
-
   const [questions, setQuestions] = useState<TextChoice[]>([]);
   const [timeLimit, setTimeLimit] = useState<number>(30);
   const [totalMarks, setTotalMarks] = useState<number>(0);
@@ -57,12 +70,12 @@ export function useQuiz(): UseQuizState & UseQuizActions {
   const [startTime] = useState(Date.now());
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const locale = useLocale() as Locales;
   const {
     data: quizResponse,
     isLoading: isCreatingQuiz,
     error: quizCreationError,
-  } = useQuizMutation(axiosAuth, studentId);
+  } = useQuizMutation(axiosAuth, studentId, locale);
 
   const quizId = quizResponse?.quizId || null;
 

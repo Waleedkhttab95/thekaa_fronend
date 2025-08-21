@@ -155,12 +155,22 @@ const EditProfileForm = () => {
             <FormItem>
               <FormLabel>{t("ageLabel")}</FormLabel>
               <FormControl>
-                <Input
-                  placeholder={t("agePlaceholder")}
-                  value={isStudentLoading ? t("loadingData") : field.value}
-                  onChange={field.onChange}
+                <Select
+                  onValueChange={field.onChange}
+                  value={field.value}
                   disabled={isStudentLoading}
-                />
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder={t("agePlaceholder")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {[6, 7, 8, 9, 10, 11, 12].map((age) => (
+                      <SelectItem key={age} value={age.toString()}>
+                        {age}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>

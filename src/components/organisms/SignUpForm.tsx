@@ -56,7 +56,7 @@ const SignUpForm = () => {
       parentName: string;
       parentPhone: string;
     }) => {
-      // Add +966 country code if phone number doesn't start with +
+      // Add +966 country code to Saudi mobile numbers (format: 05xxxxxxxx)
       let phoneNumber = data.parentPhone;
       if (!phoneNumber.startsWith('+')) {
         phoneNumber = '+966' + phoneNumber;
@@ -162,15 +162,14 @@ const SignUpForm = () => {
         />
         {/*
           phone number rules:
-            ✅ May start with a + (optional).
-            ✅ Must start with a digit from 1 to 9 (i.e., cannot start with 0).
+            ✅ Must start with "05" (Saudi Arabia mobile format).
+            ✅ Must be exactly 10 digits long.
             ✅ Can only contain digits (no spaces, dashes, or special characters).
-            ✅ Must be at least 2 digits long (because it requires 1 digit after the initial [1-9]).
-            ✅ Maximum of 15 digits total (excluding + if present).
+            ✅ +966 country code will be automatically added before sending to backend.
             ❌ No letters allowed.
             ❌ No spaces, dashes (-), or parentheses.
             ❌ Cannot be empty (must be provided).
-            ❌ Cannot start with 0, even after a + (e.g., +012345... is invalid).
+            ❌ Cannot start with any other prefix than "05".
         */}
         <FormField
           control={form.control}

@@ -12,6 +12,7 @@ export interface IStudentData {
   gender: string;
   educationPlanId: string;
   parentId: string;
+  subjectId: string;
 }
 
 export interface INextLesson {

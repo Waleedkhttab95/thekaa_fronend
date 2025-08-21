@@ -507,6 +507,8 @@
   },
   "lessonPage": {
     "lessonName": "اسم الدرس",
+    "startLesson": "ابدأ الدرس",
+    "startVoiceChat": "ابدأ التحدث معي",
     "aiChat": {
       "askMe": "أسألني",
       "robot": "المساعد الذكي",
@@ -692,5 +694,34 @@
     "result": "درجتك هي:",
     "loadingResult": "جار تحميل النتيجة",
     "ok": "الذهاب للوحة التحكم"
+  },
+  "streamingAvatar": {
+    "title": "مساعد الأفاتار الذكي",
+    "startAvatar": "تشغيل الأفاتار",
+    "stopAvatar": "إيقاف الأفاتار",
+    "starting": "جارٍ التشغيل...",
+    "startLesson": "ابدأ الدرس",
+    "startVoiceChat": "بدء المحادثة الصوتية",
+    "stopVoiceChat": "إيقاف المحادثة الصوتية",
+    "mute": "كتم الصوت",
+    "unmute": "إلغاء كتم الصوت",
+    "connected": "متصل",
+    "disconnected": "غير متصل",
+    "voiceChatActive": "المحادثة الصوتية نشطة",
+    "avatarNotConnected": "الأفاتار غير متصل",
+    "clickToStart": "اضغط \"تشغيل الأفاتار\" للبدء",
+    "noMessages": "لا توجد رسائل بعد. ابدأ محادثة مع مساعدك الذكي!",
+    "typePlaceholder": "اكتب رسالتك هنا...",
+    "status": "الحالة",
+    "errorConfigureToken": "يرجى تكوين رمز الوصول الخاص بـ HeyGen",
+    "errorStartAvatar": "فشل في تشغيل الأفاتار",
+    "errorStopAvatar": "فشل في إيقاف الأفاتار",
+    "errorStartVoiceChat": "فشل في بدء المحادثة الصوتية",
+    "errorStopVoiceChat": "فشل في إيقاف المحادثة الصوتية",
+    "errorToggleMute": "فشل في تبديل كتم الصوت",
+    "errorSendMessage": "فشل في إرسال الرسالة",
+    "welcomeMessage": "مرحباً! أنا مساعدك الذكي. كيف يمكنني مساعدتك في درسك اليوم؟",
+    "voiceChatActivated": "تم تفعيل المحادثة الصوتية! يمكنك الآن التحدث معي مباشرة.",
+    "voiceChatDeactivated": "تم إلغاء تفعيل المحادثة الصوتية. يمكنك المتابعة بالرسائل النصية."
   }
 }

@@ -4,16 +4,18 @@ import {
   startQuiz,
   submitQuiz,
 } from "@/services/quiz";
+import { Locales } from "@/types/locales.enum";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosInstance } from "axios";
 
 export const useQuizMutation = (
   axiosClient: AxiosInstance,
-  studentId: string
+  studentId: string,
+  language: Locales
 ) => {
   const query = useQuery({
     queryKey: ["quiz", studentId],
-    queryFn: () => makeQuiz(axiosClient, studentId),
+    queryFn: () => makeQuiz(axiosClient, studentId, language),
   });
 
   return query;

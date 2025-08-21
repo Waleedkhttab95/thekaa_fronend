@@ -1,5 +1,6 @@
 import { API_BASE_URL } from "@/config/env.constant";
 import { AxiosInstance } from "axios";
+import { Locales } from "@/types/locales.enum";
 
 const QuizRoute = "/education_content/generate_lessons_questions";
 const StartQuizRoute = "/education_plan/education_plan/quiz";
@@ -11,11 +12,12 @@ const getQuizBody = {
 
 export const makeQuiz = async (
   axiosClient: AxiosInstance,
-  studentId: string
+  studentId: string,
+  language: Locales
 ) => {
   const { data } = await axiosClient.post(
     `${API_BASE_URL}${QuizRoute}/${studentId}`,
-    getQuizBody
+    { ...getQuizBody, language }
   );
   return data;
 };

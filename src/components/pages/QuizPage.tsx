@@ -62,12 +62,12 @@ export default function TestPage() {
 
   const currentQuestion = questions[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
-  const subject = "الرياضيات";
+  // const subject = "الرياضيات";
 
   return (
     <>
       {isCompleted ? (
-        <ResultBox open={isCompleted} score={Number(result)} />
+        <ResultBox open={isCompleted} score={result?.studentMarks} />
       ) : (
         <Card
           variant="default"
@@ -79,9 +79,9 @@ export default function TestPage() {
                 {t("question")} {currentQuestionIndex + 1} {t("of")}{" "}
                 {questions.length}
               </CardDescription>
-              <CardTitle className="font-pingar font-bold text-2xl">
+              {/* <CardTitle className="font-pingar font-bold text-2xl">
                 {t2("subject", { subject })}
-              </CardTitle>
+              </CardTitle> */}
             </div>
             <Timer minutes={timeLimit} onComplete={handleTimerComplete} />
           </CardHeader>

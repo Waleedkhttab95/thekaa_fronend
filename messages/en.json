@@ -601,6 +601,8 @@
   },
   "lessonPage": {
     "lessonName": "Lesson Name",
+    "startLesson": "Start Lesson",
+    "startVoiceChat": "Start Voice Chat",
     "aiChat": {
       "askMe": "Ask Me",
       "robot": "Ai Chat Bot",
@@ -682,5 +684,33 @@
     "result": "Your Score is:",
     "loadingResult": "Loading result...",
     "ok": "Go to Dashboard"
+  },
+  "streamingAvatar": {
+    "title": "AI Avatar Assistant",
+    "startAvatar": "Start Avatar",
+    "stopAvatar": "Stop Avatar",
+    "starting": "Starting...",
+    "startVoiceChat": "Start Voice Chat",
+    "stopVoiceChat": "Stop Voice Chat",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "voiceChatActive": "Voice Chat Active",
+    "avatarNotConnected": "Avatar not connected",
+    "clickToStart": "Click \"Start Avatar\" to begin",
+    "noMessages": "No messages yet. Start a conversation with your AI avatar!",
+    "typePlaceholder": "Type your message here...",
+    "status": "Status",
+    "errorConfigureToken": "Please configure your HeyGen access token",
+    "errorStartAvatar": "Failed to start avatar",
+    "errorStopAvatar": "Failed to stop avatar",
+    "errorStartVoiceChat": "Failed to start voice chat",
+    "errorStopVoiceChat": "Failed to stop voice chat",
+    "errorToggleMute": "Failed to toggle mute",
+    "errorSendMessage": "Failed to send message",
+    "welcomeMessage": "Hello! I'm your AI avatar assistant. How can I help you with your lesson today?",
+    "voiceChatActivated": "Voice chat activated! You can now speak to me directly.",
+    "voiceChatDeactivated": "Voice chat deactivated. You can continue with text messages."
   }
 }

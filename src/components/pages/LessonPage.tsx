@@ -3,11 +3,12 @@
 import { useLocale, useTranslations } from 'next-intl'
 import React, { useState, useEffect } from 'react'
 import AiLessonChat from '../organisms/AiLessonChat'
-import LessonPlayer from '../molecules/LessonPlayer'
+import StreamingAvatarChat from '../organisms/StreamingAvatarChat'
+// import LessonPlayer from '../molecules/LessonPlayer' // Removed - using interactive avatar instead
 import LessonInfo from '../molecules/LessonInfo'
 import LessonDescription from '../molecules/LessonDescription'
 import { Dialog, DialogContent } from '../atoms/dialog'
-import { MessageCircle, AlertCircle, GraduationCap, CheckCircle, X, Clock } from 'lucide-react'
+import { MessageCircle, GraduationCap, CheckCircle, X, Clock, MessageSquare } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useQuery } from '@tanstack/react-query'
 import { getLesson } from '@/services/lesson'
@@ -28,6 +29,7 @@ const LessonPage = () => {
   const [showCompletionModal, setShowCompletionModal] = useState(false)
   const [showWaitingModal, setShowWaitingModal] = useState(false)
   const [isVideoEnded, setIsVideoEnded] = useState(false)
+  // const [chatMode, setChatMode] = useState<'text' | 'avatar'>('text') // Removed - using avatar as primary interface
   const playerWrapperRef = React.useRef<HTMLDivElement>(null);
   const axiosAuth = useAxiosAuth();
   const { data, isLoading, error } = useQuery<ILessonData>({
@@ -39,7 +41,7 @@ const LessonPage = () => {
 
   // Check for waiting status when data changes
   useEffect(() => {
-    if (data?.videoStatus === 'waiting') {
+    if (data?.lesson?.videoStatus === 'waiting') {
       setShowWaitingModal(true);
     }
   }, [data]);
@@ -48,7 +50,6 @@ const LessonPage = () => {
   const defaultLesson = {
     name: t('defaultTitle'),
     description: t('defaultDescription'),
-    videoUrl: "",
     videoDuration: 15,
     subject: {
       name: t('defaultSubject'),
@@ -57,11 +58,14 @@ const LessonPage = () => {
 
   // Use API data if available, otherwise use defaults
   const lessonData = data || defaultLesson;
-  const lessonTitle = lessonData.name || defaultLesson.name;
-  const lessonDescription = lessonData.description || defaultLesson.description;
-  const subjectName =  lessonData.subject?.name || defaultLesson.subject.name;
-  const videoUrl = lessonData.videoUrl || defaultLesson.videoUrl;
-  const videoDuration = lessonData?.videoDuration || defaultLesson.videoDuration;
+  
+  // Map new API response structure to legacy properties
+  const lessonTitle = data?.lesson?.name || data?.name || defaultLesson.name;
+  const lessonDescription = data?.lesson?.description || data?.description || defaultLesson.description;
+  const subjectName = typeof data?.subject === 'string' ? data.subject : (typeof lessonData.subject === 'object' && lessonData.subject?.name || defaultLesson.subject.name);
+  // const videoUrl = data?.lesson?.videoUrl || lessonData.videoUrl || defaultLesson.videoUrl; // Not needed for interactive avatar
+  const videoDuration = data?.lesson?.videoDuration || lessonData?.videoDuration || defaultLesson.videoDuration;
+  const mergedContent = data?.mergedContent; // New merged content for avatar knowledge base
 
   // Handle video end event
   const handleVideoEnd = () => {
@@ -131,63 +135,44 @@ const LessonPage = () => {
         <span>{lessonTitle}</span>
       </h1>
 
-      {/* Main content area */}
-      <div className='flex flex-col  lg:flex-row gap-4 mb-5'>
-        {/* Video player takes full width on mobile, 65% on desktop */}
-        <div className='w-full xl:w-[65%] relative aspect-video ' ref={playerWrapperRef}>
-          {videoUrl && videoUrl !== defaultLesson.videoUrl ? (
-            <LessonPlayer
-              url={videoUrl}
-              title={lessonTitle}
-              poster=''
-              onVideoEnd={handleVideoEnd}
-            />
-          ) : data && !data.videoUrl ? (
-            // Show "lesson not available" when data is fetched but no video URL
-            <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg flex flex-col items-center justify-center p-8 border border-gray-700">
-              <div className="flex flex-col items-center text-center space-y-4">
-                <div className="relative">
-                  <div className="w-20 h-20 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center">
-                    <AlertCircle className="w-10 h-10 text-white" />
-                  </div>
-                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center">
-                    <span className="text-xs font-bold text-gray-900">!</span>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-white">
-                    {t("lessonNotFound")}
-                  </h3>
-                  <p className="text-gray-300 text-sm max-w-md">
-                    {t("lessonNotFoundDescription")}
-                  </p>
-                </div>
-
-                <div className="flex items-center space-x-2 pt-4">
-                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            // Show default video when no data is fetched yet or using fallback
-            <LessonPlayer
-              url={videoUrl}
-              title={lessonTitle}
-              poster=''
-              onVideoEnd={handleVideoEnd}
-            />
-          )}
+      {/* Main content area - Interactive Avatar Only */}
+      <div className='flex flex-col lg:flex-row gap-4 mb-5'>
+        {/* Interactive Avatar takes full width on mobile, 65% on desktop */}
+        <div className='w-full xl:w-[65%] relative' ref={playerWrapperRef}>
+          <StreamingAvatarChat 
+            className="h-[400px] lg:h-[500px]" 
+            lessonContent={mergedContent}
+            lessonTitle={lessonTitle}
+          />
         </div>
 
-        {/* Chat visible only on desktop screens */}
-        <div className='hidden  xl:block w-[35%]  '
-          style={{
-            height: playerWrapperRef.current ? playerWrapperRef.current.clientHeight : 'auto',
-          }}>
-          <AiLessonChat messages={messages} setMessages={setMessages} />
+        {/* Additional Chat Options for Desktop */}
+        <div className='hidden xl:block w-[35%]'>
+          <div className="space-y-4">
+            {/* Lesson Information Card */}
+            {/* <div className="bg-white rounded-lg border p-4 shadow-sm">
+              <h3 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                <GraduationCap className="w-5 h-5" />
+                Lesson Information
+              </h3>
+              <div className="space-y-2 text-sm text-gray-600">
+                <p><strong>Subject:</strong> {subjectName}</p>
+                <p><strong>Duration:</strong> {videoDuration} minutes</p>
+                <p><strong>Type:</strong> Interactive AI Lesson</p>
+              </div>
+            </div> */}
+
+            {/* Traditional Text Chat Option */}
+            <div className="bg-white rounded-lg border p-4 shadow-sm">
+              <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <MessageSquare className="w-5 h-5" />
+                Text Chat
+              </h3>
+              <div style={{ height: '300px' }}>
+                <AiLessonChat messages={messages} setMessages={setMessages} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -281,33 +266,41 @@ const LessonPage = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Floating chat button (visible only on mobile) */}
+      {/* Floating text chat button (visible only on mobile) */}
       <button
         onClick={() => setIsChatOpen(true)}
         className={cn(
-          'xl:hidden fixed bottom-6 right-6 z-10 bg-primary rounded-full p-3 shadow-lg',
-          'hover:bg-primary/90 transition-colors'
+          'xl:hidden fixed bottom-6 right-6 z-10 bg-blue-600 rounded-full p-3 shadow-lg',
+          'hover:bg-blue-700 transition-colors'
         )}
-        aria-label={t("aiChat.openChat")}
+        aria-label="Open Text Chat"
       >
-        <MessageCircle className="h-6 w-6 text-primary-foreground" />
+        <MessageCircle className="h-6 w-6 text-white" />
       </button>
 
-      {/* Chat dialog (mobile only) */}
+      {/* Additional Text Chat dialog (mobile only) */}
       <Dialog open={isChatOpen} onOpenChange={setIsChatOpen} >
         <DialogContent
-          className="w-[95%] h-[460px]  p-0 border-none rounded-[40px] overflow-hidden"
+          className="w-[95%] h-[460px] p-0 border-none rounded-[40px] overflow-hidden"
           hideCloseButton
         >
-          <div className="h-full">
-            <AiLessonChat className="rounded-none" setMessages={setMessages} messages={messages} />
-            {/* <button
-              onClick={() => setIsChatOpen(false)}
-              className="absolute top-[-30px] bg-[#23F6F0]/50 right-3  rounded-full p-2 shadow-md"
-              aria-label={t("aiChat.closeChat")}
-            >
-              <X className="h-5 w-5" />
-            </button> */}
+          <div className="h-full p-4">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+                <MessageSquare className="w-5 h-5" />
+                Text Chat Assistant
+              </h3>
+              <button
+                onClick={() => setIsChatOpen(false)}
+                className="p-2 hover:bg-gray-100 rounded-full"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            
+            <div className="h-[calc(100%-60px)]">
+              <AiLessonChat className="rounded-none h-full" setMessages={setMessages} messages={messages} />
+            </div>
           </div>
         </DialogContent>
       </Dialog>

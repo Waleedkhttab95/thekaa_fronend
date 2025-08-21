@@ -26,9 +26,17 @@ export const getFromSteps = (t: TFunctionType, content: Content) => [
     {
       name: "age",
       label: t("formData.age.label"),
-      type: "number",
+      type: "select",
       placeholder: t("formData.age.placeholder"),
-      options: [],
+      options: [
+        { _id: "6", name: "6" },
+        { _id: "7", name: "7" },
+        { _id: "8", name: "8" },
+        { _id: "9", name: "9" },
+        { _id: "10", name: "10" },
+        { _id: "11", name: "11" },
+        { _id: "12", name: "12" },
+      ],
     },
     {
       name: "gender",
@@ -91,7 +99,16 @@ export const getEditStudentFormFields = (t: TFunctionType) => [
   {
     name: "age",
     label: t("formData.age.label"),
-    type: "number",
+    type: "select",
     placeholder: t("formData.age.placeholder"),
+    options: [
+      { _id: "6", name: "6" },
+      { _id: "7", name: "7" },
+      { _id: "8", name: "8" },
+      { _id: "9", name: "9" },
+      { _id: "10", name: "10" },
+      { _id: "11", name: "11" },
+      { _id: "12", name: "12" },
+    ],
   },
 ];

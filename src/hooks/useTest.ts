@@ -11,6 +11,7 @@ import { toast } from "@/components/atoms/sooner";
 import { useLocale, useTranslations } from "next-intl";
 import { ProtectedRoutes } from "@/config/routes";
 import { Locales } from "@/types/locales.enum";
+import { IStudentData } from "@/types/student.type";
 
 export const useTest = () => {
   const locale = useLocale();
@@ -26,6 +27,8 @@ export const useTest = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [studentData, setStudentData] = useState<IStudentData | null>(null);
+  const [isLoadingStudentData, setIsLoadingStudentData] = useState(true);
   const t = useTranslations("testPage");
 
   const methods = useForm<{ answer: string }>({
@@ -55,7 +58,7 @@ export const useTest = () => {
     try {
       const studentId = getCookie("current_user") as string;
       const student = await getStudentById(axiosAuth, studentId);
-      const subjectId = student.subject;
+      const subjectId = student.subjectId;
 
       // Minimal AssessmentResult payload
       const assessmentResult = {
@@ -117,13 +120,45 @@ export const useTest = () => {
     return false;
   };
 
-  // Start interview on mount
+  // Fetch student data on mount
   useEffect(() => {
+    const fetchStudentData = async () => {
+      setIsLoadingStudentData(true);
+      setError(null);
+      try {
+        const studentId = getCookie("current_user") as string;
+        if (!studentId) {
+          throw new Error("No student ID found");
+        }
+        
+        const student = await getStudentById(axiosAuth, studentId);
+        setStudentData(student);
+        setIsLoadingStudentData(false);
+      } catch (err) {
+        setError(err + " Failed to fetch student data");
+        setIsLoadingStudentData(false);
+      }
+    };
+    
+    fetchStudentData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Start interview when student data is available
+  useEffect(() => {
+    if (!studentData || isLoadingStudentData) return;
+    
     const startInterview = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const data = await interviewStudent(axiosAuth, [],  locale, "math", "10");
+        const data = await interviewStudent(
+          axiosAuth, 
+          [], 
+          locale, 
+          studentData.subject, 
+          studentData.age.toString()
+        );
 
         const autoSubmitted = await handleAIResponse(
           data.response,
@@ -142,11 +177,16 @@ export const useTest = () => {
     };
     startInterview();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [studentData, isLoadingStudentData]);
 
   const handleNext = async (answer?: string) => {
     const studentAnswer = answer || methods.getValues("answer");
     if (!studentAnswer.trim()) return;
+
+    if (!studentData) {
+      setError("Student data not available");
+      return;
+    }
 
     setIsLoading(true);
     setError(null);
@@ -158,8 +198,8 @@ export const useTest = () => {
         axiosAuth,
         newMessages,
         locale,
-        "math",
-        "10"
+        studentData.subject,
+        studentData.age.toString()
       );
 
       methods.reset({ answer: "" });
@@ -187,8 +227,9 @@ export const useTest = () => {
     isCompleted,
     isAnalyzing,
     report,
-    isLoading,
+    isLoading: isLoading || isLoadingStudentData,
     error,
     handleNext,
+    studentData,
   };
 };
